@@ -599,7 +599,23 @@ body.dark-mode .next-card-preview {
 }
 
 .flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(0);
+}
+
+/* Hard fix: Physically hide the face that should be invisible halfway through rotate */
+.flip-card.flipped .flip-card-front {
+    visibility: hidden;
+    transition: visibility 0s 0.25s;
+    /* Hide at 50% of 0.5s flip */
+}
+
+.flip-card:not(.flipped) .flip-card-back {
+    visibility: hidden;
+    transition: visibility 0s 0.25s;
+}
+
+.flip-card-inner {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .flip-card-front,
@@ -607,8 +623,10 @@ body.dark-mode .next-card-preview {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     border-radius: 24px;
     display: flex;
     flex-direction: column;
@@ -626,20 +644,25 @@ body.dark-mode .next-card-preview {
     color: var(--text-main);
 }
 
-/* Dark Mode - Front */
+/* Dark Mode - Front - NO BLUR (breaks 3D flip on iOS) */
 body.dark-mode .flip-card-front {
-    background: rgba(31, 41, 55, 0.9);
+    background: #1f2937;
+    /* Solid for performance & compatibility */
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
 }
 
 /* Back - Always Dark for Better Readability */
 .flip-card-back {
     background: #1e293b;
     color: #fff;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(2px);
+    /* Separate in 3D space */
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.flip-card-front {
+    transform: translateZ(1px);
+    /* Base separation */
 }
 
 .card-header {
@@ -3336,35 +3359,49 @@ body.theme-midnight {
     .flip-card-inner {
         border-radius: 20px !important;
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+        background: transparent !important;
+        transform-style: preserve-3d !important;
+        -webkit-transform-style: preserve-3d !important;
     }
 
     /* Flashcard Front - Light Mode - NO blur for performance */
     .flip-card-front {
-        background: rgba(255, 255, 255, 0.9) !important;
+        background: #ffffff !important;
+        /* Solid white to avoid 3D flattening */
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         border: 1px solid rgba(0, 0, 0, 0.08) !important;
         border-radius: 20px !important;
         color: var(--text-main) !important;
+        z-index: 2;
+        transform: translateZ(2px);
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
     }
 
     /* Flashcard Front - Dark Mode */
     body.dark-mode .flip-card-front {
-        background: rgba(30, 30, 50, 0.85) !important;
+        background: #1e1e32 !important;
+        /* Solid background */
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         color: #fff !important;
+        z-index: 2;
+        transform: translateZ(2px);
     }
 
     /* Flashcard Back - Opaque for readability */
     .flip-card-back {
         background: #1e293b !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         border-radius: 20px !important;
         color: #fff !important;
+        z-index: 1;
+        transform: rotateY(180deg) translateZ(10px) !important;
+        /* Higher separation for Safari */
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
     }
 
     /* Kontrol butonları - Premium */
@@ -4865,13 +4902,12 @@ body.dark-mode .goal-item {
 
     /* Card flip optimizations for mobile */
     .flip-card-inner {
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.3);
-        background: #fff;
-    }
-
-    body.dark-mode .flip-card-inner {
-        background: #1e293b;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.4);
+        background: transparent !important;
+        /* Fix: parent MUST be transparent for 3D flip */
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
     }
 
     body.dark-mode .flip-card-front {
@@ -4880,14 +4916,20 @@ body.dark-mode .goal-item {
         background: rgba(31, 41, 55, 0.95);
     }
 
-    /* Ensure back card is fully opaque */
+    /* Ensure back card is fully opaque and correctly rotated */
     .flip-card-back {
         background: #1e293b !important;
+        transform: rotateY(180deg) translateZ(1px);
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
     }
 
-    /* Light mode front card - slightly transparent to show next card behind */
+    /* Light mode front card */
     .flip-card-front {
         background: rgba(255, 255, 255, 0.95) !important;
+        transform: translateZ(1px);
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
     }
 }
 
@@ -4974,14 +5016,19 @@ body.dark-mode .goal-item {
         transition: all 0.4s ease !important;
     }
 
-    /* PC ile aynı smooth transition */
+    /* Smooth transition for card resets */
     .flip-card-inner {
-        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        will-change: transform !important;
+        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Slight bounce back */
+        will-change: transform;
     }
 
     .flip-card {
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        perspective: 1200px !important;
+        /* Reinforce depth */
+        -webkit-perspective: 1200px !important;
+        transform-style: preserve-3d !important;
     }
 }
 

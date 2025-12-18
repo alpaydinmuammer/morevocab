@@ -1842,7 +1842,7 @@ function handleAnswer(known) {
 
         // İşlem bitti, yeni cevap kabul edilebilir
         isProcessingAnswer = false;
-    }, 700);
+    }, 550); // Reduced delay to match 0.5s animation better
 }
 
 function updateNavigationControls() {
@@ -1901,11 +1901,11 @@ function touchMove(e) {
     const diffX = currentX - startX;
     e.preventDefault();
 
-    // Smoother rotation calculation with easing
-    const rotation = diffX / 25;
-    const scale = 1 - Math.abs(diffX) / 2000;
+    // Smoother rotation calculation with easing and translate3d
+    const rotation = diffX / 15; // More sensitive
+    const scale = 1 - Math.abs(diffX) / 1500;
 
-    els.card.style.transform = `translateX(${diffX}px) rotateZ(${rotation}deg) scale(${scale})`;
+    els.card.style.transform = `translate3d(${diffX}px, 0, 0) rotateZ(${rotation}deg) scale(${scale})`;
 
     // Smoother opacity feedback
     const progress = Math.min(Math.abs(diffX) / swipeThreshold, 1);
