@@ -1,7 +1,9 @@
 // --- GLOBAL DEĞİŞKENLER ---
+window.splashStartTime = Date.now();
 let currentCard = null;
 let nextCard = null;
 let learnedCards = [];
+let learnedCardsByLevel = {}; // Seviye bazlı öğrenilen kelimeler
 let favCards = [];
 let errorCards = [];
 let earnedBadges = [];
@@ -32,7 +34,21 @@ let speedScore = 0;
 let speedTime = 60;
 let speedInterval = null;
 let speedHighScore = 0;
+let speedHighScoresByLevel = {}; // Scores per word level
 let totalSpeedScore = 0;
+
+// MODE STATS (for badges)
+let totalQuizCorrect = 0;
+let totalSentenceCorrect = 0;
+
+// TIME TRACKING
+let totalTimeSpent = 0; // Total seconds spent in app
+let dailyTimeRecord = {}; // { "YYYY-MM-DD": seconds }
+let sessionStartTime = null; // Current session start timestamp
+
+// --- LEVEL SELECTION DATA ---
+let currentWordData = []; // Dinamik olarak yüklenecek kelimeler
+
 
 // --- LEVEL SYSTEM ---
 let userXP = 0;
@@ -45,27 +61,9 @@ function getXPForLevel(level) {
     return level * 100;
 }
 
-const XP_REWARDS = {
-    correctAnswer: 10,
-    wordMastered: 25,
-    quizComplete: 15,
-    speedRunBonus: 5,
-    streakBonus: 20,
-    goalComplete: 100
-};
+// XP_REWARDS moved to config.js
 
-const LEVEL_TITLES = [
-    "Beginner", "Novice", "Apprentice", "Learner", "Student",
-    "Scholar", "Adept", "Expert", "Specialist", "Professional",
-    "Veteran", "Master", "Grandmaster", "Champion", "Legend",
-    "Mythic", "Divine", "Immortal", "Transcendent", "Ultimate",
-    "Sage", "Oracle", "Titan", "Demigod", "Deity",
-    "Celestial", "Cosmic", "Ethereal", "Infinite", "Absolute",
-    "Supreme", "Omega", "Prime", "Paramount", "Apex",
-    "Zenith", "Pinnacle", "Sovereign", "Emperor", "Monarch",
-    "Overlord", "Archmage", "Almighty", "Omniscient", "Eternal",
-    "Universal", "Galactic", "Stellar", "Astral", "GODLIKE"
-];
+// LEVEL_TITLES moved to config.js
 
 // --- DAILY GOALS ---
 let dailyGoals = {
@@ -73,11 +71,7 @@ let dailyGoals = {
     quizCompleted: 0,
     correctAnswers: 0
 };
-const DAILY_TARGETS = {
-    words: 10,
-    quiz: 5,
-    correct: 20
-};
+// DAILY_TARGETS moved to config.js
 let lastGoalDate = "";
 
 // --- SOUND SYSTEM (Web Audio API) ---
@@ -86,6 +80,8 @@ let audioContext = null;
 
 // --- THEME SYSTEM ---
 let currentTheme = "default";
+let userName = "Scholar";
+let userAvatar = "👤";
 
 // PERFORMANS OPTİMİZASYONU - Debounce fonksiyonu
 function debounce(func, wait) {
@@ -100,19 +96,8 @@ function debounce(func, wait) {
     };
 }
 
-// ROZET LİSTESİ
-const BADGES = [
-    { id: 'b1', name: 'Newbie', type: 'words', count: 10, icon: '👶' },
-    { id: 'b2', name: 'Student', type: 'words', count: 50, icon: '🤓' },
-    { id: 'b3', name: 'Scholar', type: 'words', count: 100, icon: '🎓' },
-    { id: 'b4', name: 'Wizard', type: 'words', count: 250, icon: '🧙‍♂️' },
-    { id: 'b5', name: 'King of YDS', type: 'words', count: 500, icon: '👑' },
-    { id: 'b6', name: 'Legend', type: 'words', count: 1000, icon: '🚀' },
-    { id: 's1', name: 'Quick Starter', type: 'score', count: 100, icon: '🥉' },
-    { id: 's2', name: 'Speed Racer', type: 'score', count: 200, icon: '🥈' },
-    { id: 's3', name: 'Velocity Guru', type: 'score', count: 300, icon: '🥇' },
-    { id: 's4', name: 'Time Lord', type: 'score', count: 500, icon: '⏱️' }
-];
+// ROZET LİSTESİ - Modern Achievements
+// BADGES moved to config.js
 
 // DOM ELEMENTLERİ
 const els = {
@@ -149,7 +134,13 @@ const els = {
     def: document.getElementById('wordDefinition'),
     syn: document.getElementById('wordSynonym'),
     ex: document.getElementById('wordExample'),
+
+    // Word ID (Required for setupFlashcard)
     id: document.getElementById('wordId'),
+
+    // Profile Elements
+    userNameDisplay: document.getElementById('userNameDisplay'),
+    userAvatarDisplay: document.getElementById('userAvatarDisplay'),
 
     // İstatistikler
     total: document.getElementById('totalWords'),
@@ -209,6 +200,8 @@ const els = {
     badgeList: document.getElementById('badgeList'),
     filterFavs: document.getElementById('filterFavs'),
     filterErrors: document.getElementById('filterErrors'),
+    errorCount: document.getElementById('errorCount'),
+    errorModeBtn: document.getElementById('errorModeBtn'),
 
     // Bildirim
     toast: document.getElementById('toast'),
@@ -221,6 +214,12 @@ const els = {
     xpBar: document.getElementById('xpBar'),
     xpText: document.getElementById('xpText'),
 
+    // Profile
+    userNameDisplay: document.getElementById('userNameDisplay'),
+    userAvatarDisplay: document.getElementById('userAvatarDisplay'),
+    profileModal: document.getElementById('profileModal'),
+    closeProfile: document.getElementById('closeProfile'),
+
     // Daily Goals
     goalsToggle: document.getElementById('goalsToggle'),
     goalsModal: document.getElementById('goalsModal'),
@@ -231,123 +230,538 @@ const els = {
     themeSelector: document.getElementById('themeSelector'),
 
     // Sound Toggle
-    menuSoundToggle: document.getElementById('menuSoundToggle')
+    menuSoundToggle: document.getElementById('menuSoundToggle'),
+
+    // Time Stats
+    btnTimeStats: document.getElementById('btnTimeStats'),
+    timeStatsModal: document.getElementById('timeStatsModal'),
+    closeTimeStats: document.getElementById('closeTimeStats'),
+    statsTodayTime: document.getElementById('statsTodayTime'),
+    statsTotalTime: document.getElementById('statsTotalTime'),
+    statsTrend: document.getElementById('statsTrend'), // NEW
+    timeBarChart: document.getElementById('timeBarChart'),
+    timeChartDates: document.getElementById('timeChartDates')
 };
 
 let nextCardEl = null;
 
-// --- BAŞLANGIÇ (INIT) ---
-function init() {
-    loadData();
-    preloadVoices();
+// --- TIME TRACKING FUNCTIONS ---
+let timeTrackingInterval = null;
 
-    // 1. Ana Menü Butonları
-    els.btnStartGame.addEventListener('click', startGame);
+function startTimeTracking() {
+    sessionStartTime = Date.now();
 
-    // Options Modal (Ana Menüden)
-    els.btnOpenOptions.addEventListener('click', () => {
-        els.menuOptionsModal.classList.remove('hidden');
-    });
+    // Update time every 30 seconds
+    timeTrackingInterval = setInterval(() => {
+        if (sessionStartTime) {
+            const sessionSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
+            totalTimeSpent += sessionSeconds;
 
-    // Options Modal (Header'dan - Oyun içinden)
-    if (els.btnHeaderOptions) {
-        els.btnHeaderOptions.addEventListener('click', () => {
-            els.menuOptionsModal.classList.remove('hidden');
-        });
-    }
+            // Update Daily Record
+            const today = new Date().toISOString().split('T')[0];
+            if (!dailyTimeRecord[today]) dailyTimeRecord[today] = 0;
+            dailyTimeRecord[today] += sessionSeconds;
 
-    // Mobile Options Button
-    const btnHeaderOptionsMobile = document.getElementById('btnHeaderOptionsMobile');
-    if (btnHeaderOptionsMobile) {
-        btnHeaderOptionsMobile.addEventListener('click', () => {
-            els.menuOptionsModal.classList.remove('hidden');
-        });
-    }
+            sessionStartTime = Date.now();
+            saveTimeData();
+        }
+    }, 1000); // Live Update every second for smoother UI
 
-    // Mobile Badges Button
-    const badgeToggleMobile = document.getElementById('badgeToggleMobile');
-    if (badgeToggleMobile) {
-        badgeToggleMobile.addEventListener('click', () => {
-            els.badgeModal.classList.remove('hidden');
-            renderBadges();
-        });
-    }
+    // Handle visibility change (pause when app is hidden)
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+}
 
-    // Mobile Dictionary Button  
-    const dictToggleMobile = document.getElementById('dictToggleMobile');
-    if (dictToggleMobile) {
-        dictToggleMobile.addEventListener('click', () => openDict());
-    }
-
-    // Modalı Kapatma
-    els.closeMenuOptions.addEventListener('click', () => {
-        els.menuOptionsModal.classList.add('hidden');
-    });
-
-    // Credits Modal
-    els.btnOpenCredits.addEventListener('click', () => els.creditsModal.classList.remove('hidden'));
-    els.closeCredits.addEventListener('click', () => els.creditsModal.classList.add('hidden'));
-
-    // 2. Ayarlar (Options) İçindeki İşlevler
-    // Dark Mode Toggle
-    if (els.menuThemeToggleCheckbox) {
-        els.menuThemeToggleCheckbox.addEventListener('change', toggleTheme);
-    }
-
-    // Reset Butonu
-    els.menuResetBtn.addEventListener('click', resetAll);
-
-    // Ana Menüye Dön Butonu
-    if (els.menuReturnHome) {
-        els.menuReturnHome.addEventListener('click', () => {
-            els.menuOptionsModal.classList.add('hidden');
-            returnToMenu();
-        });
-    }
-
-    // 3. Modal Dışına Tıklayınca Kapatma
-    window.addEventListener('click', (e) => {
-        if (e.target === els.menuOptionsModal) els.menuOptionsModal.classList.add('hidden');
-        if (e.target === els.creditsModal) els.creditsModal.classList.add('hidden');
-        if (e.target === els.badgeModal) els.badgeModal.classList.add('hidden');
-        if (e.target === els.dictModal) els.dictModal.classList.add('hidden');
-        if (e.target === els.goalsModal) els.goalsModal.classList.add('hidden');
-    });
-
-    // 4. Goals Modal
-    if (els.goalsToggle) {
-        els.goalsToggle.addEventListener('click', openGoalsModal);
-    }
-    if (els.closeGoals) {
-        els.closeGoals.addEventListener('click', () => els.goalsModal.classList.add('hidden'));
-    }
-
-    // 5. Theme Selector
-    if (els.themeSelector) {
-        els.themeSelector.addEventListener('change', (e) => setColorTheme(e.target.value));
-    }
-
-    // 6. Sound Toggle
-    if (els.menuSoundToggle) {
-        els.menuSoundToggle.addEventListener('change', toggleSound);
+function handleVisibilityChange() {
+    if (document.hidden) {
+        // Save time when app goes to background
+        if (sessionStartTime) {
+            const sessionSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
+            totalTimeSpent += sessionSeconds;
+            sessionStartTime = null;
+            saveTimeData();
+        }
+    } else {
+        // Resume tracking when app becomes visible
+        sessionStartTime = Date.now();
     }
 }
 
-function startGame() {
-    els.mainMenu.classList.add('hidden');
-    els.gameInterface.classList.remove('hidden');
+function saveTimeData() {
+    localStorage.setItem('ydspro_time_spent', totalTimeSpent.toString());
 
-    // Eğer oyun ilk kez başlıyorsa veya kart yoksa başlat
-    if (!currentCard) {
-        createNextCardPreview();
-        setupGameEventListeners(); // Oyun içi eventleri sadece oyun başlayınca ekle
-        pickNewCard();
+    // Save Daily Record
+    const today = new Date().toISOString().split('T')[0];
+    localStorage.setItem('ydspro_daily_time', JSON.stringify(dailyTimeRecord));
+
+    updateTimeDisplay();
+    // If stats modal is open, update it live
+    if (!els.timeStatsModal.classList.contains('hidden')) {
+        updateTimeStatsUI();
     }
+}
+
+function updateTimeDisplay() {
+    const display = document.getElementById('timeSpentDisplay');
+    if (!display) return;
+
+    const hours = Math.floor(totalTimeSpent / 3600);
+    const minutes = Math.floor((totalTimeSpent % 3600) / 60);
+    display.textContent = `${hours}h ${minutes}m`;
+}
+
+function formatTimeSpent() {
+    const hours = Math.floor(totalTimeSpent / 3600);
+    const minutes = Math.floor((totalTimeSpent % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+}
+
+// --- TIME STATS UI ---
+function updateTimeStatsUI() {
+    const today = new Date().toISOString().split('T')[0];
+    const todaySeconds = dailyTimeRecord[today] || 0;
+
+    // Overview Cards
+    if (els.statsTodayTime) els.statsTodayTime.textContent = formatTimeDetail(todaySeconds);
+    if (els.statsTotalTime) els.statsTotalTime.textContent = formatTimeDetail(totalTimeSpent);
+
+    // Generate Chart Data (Last 7 Days)
+    const dates = [];
+    const values = [];
+    let thisWeekTotal = 0;
+
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = d.toISOString().split('T')[0];
+        dates.push(d.toLocaleDateString('en-US', { weekday: 'short' }));
+        const val = dailyTimeRecord[dateStr] || 0;
+        values.push(val);
+        thisWeekTotal += val;
+    }
+
+    // Calculate Previous Week Total (Days 8-14 ago)
+    let prevWeekTotal = 0;
+    for (let i = 13; i >= 7; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = d.toISOString().split('T')[0];
+        prevWeekTotal += (dailyTimeRecord[dateStr] || 0);
+    }
+
+    // Update Trend Text
+    if (els.statsTrend) {
+        if (prevWeekTotal === 0) {
+            els.statsTrend.innerHTML = '<span style="color:var(--success)">🌟 Starting strong! Keep it up!</span>';
+        } else {
+            const diff = thisWeekTotal - prevWeekTotal;
+            const pct = Math.round((diff / prevWeekTotal) * 100);
+            if (pct > 0) {
+                els.statsTrend.innerHTML = `<span style="color:var(--success)">📈 Trending Up! <strong>+${pct}%</strong> vs last week</span>`;
+            } else if (pct < 0) {
+                els.statsTrend.innerHTML = `<span style="color:var(--text-sub)">📉 Cooling Down. <strong>${pct}%</strong> vs last week</span>`;
+            } else {
+                els.statsTrend.innerHTML = `<span style="color:var(--primary)">⚖️ Consistent Pace. Same as last week.</span>`;
+            }
+        }
+    }
+
+    // Render Chart
+    const maxVal = Math.max(...values, 60); // Min scale 60s
+    if (els.timeBarChart) {
+        els.timeBarChart.innerHTML = values.map((val, index) => {
+            const heightPct = (val / maxVal) * 100;
+            const timeLabel = val > 60 ? Math.round(val / 60) + 'm' : val + 's';
+            return `
+                <div class="chart-col">
+                    <div class="bar" style="height: ${heightPct}%; transition-delay: ${index * 0.1}s;">
+                        <span class="bar-tooltip">${formatTimeDetail(val)}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    if (els.timeChartDates) {
+        els.timeChartDates.innerHTML = dates.map(d => `<span>${d}</span>`).join('');
+    }
+}
+
+function formatTimeDetail(seconds) {
+    if (seconds < 60) return `${seconds}s`;
+    const m = Math.floor(seconds / 60);
+    if (m < 60) return `${m}m`;
+    const h = Math.floor(m / 60);
+    const remM = m % 60;
+    return `${h}h ${remM}m`;
+}
+
+// --- MODAL HELPERS ---
+function openModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('hidden');
+
+    // Overlay Animation (Fade)
+    modal.classList.remove('overlay-animate-out');
+    modal.classList.add('overlay-animate-in');
+
+    // Content Animation (Scale)
+    const content = modal.querySelector('.modal-content');
+    if (content) {
+        content.classList.remove('content-animate-out');
+        content.classList.add('content-animate-in');
+    }
+}
+
+function closeModal(modal) {
+    if (!modal) return;
+
+    // Overlay Animation (Fade Out)
+    modal.classList.remove('overlay-animate-in');
+    modal.classList.add('overlay-animate-out');
+
+    // Content Animation (Scale Out)
+    const content = modal.querySelector('.modal-content');
+    if (content) {
+        content.classList.remove('content-animate-in');
+        content.classList.add('content-animate-out');
+    }
+
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('overlay-animate-out');
+        if (content) {
+            content.classList.remove('content-animate-out');
+        }
+    }, 200);
+}
+
+// --- BAŞLANGIÇ (INIT) ---
+async function init() {
+    try {
+        loadData();
+        updateLevelUI();
+        initLevelSelection(); // Level seçim butonlarını dinle
+        initProfileCustomization();
+        preloadVoices();
+
+        // Hide splash after load
+        hideSplashScreen();
+
+        // 1. Ana Menü Butonları
+        els.btnStartGame.addEventListener('click', startGame);
+
+        // Options Modal (Ana Menüden)
+        els.btnOpenOptions.addEventListener('click', () => {
+            openModal(els.menuOptionsModal);
+        });
+
+        // Options Modal (Header'dan - Oyun içinden)
+        if (els.btnHeaderOptions) {
+            els.btnHeaderOptions.addEventListener('click', () => {
+                openModal(els.menuOptionsModal);
+            });
+        }
+
+        // Mobile Options Button
+        const btnHeaderOptionsMobile = document.getElementById('btnHeaderOptionsMobile');
+        if (btnHeaderOptionsMobile) {
+            btnHeaderOptionsMobile.addEventListener('click', () => {
+                openModal(els.menuOptionsModal);
+            });
+        }
+
+        // Mobile Badges Button
+        const badgeToggleMobile = document.getElementById('badgeToggleMobile');
+        if (badgeToggleMobile) {
+            badgeToggleMobile.addEventListener('click', () => {
+                openModal(els.badgeModal);
+                renderBadges();
+            });
+        }
+
+        // Mobile Dictionary Button  
+        const dictToggleMobile = document.getElementById('dictToggleMobile');
+        if (dictToggleMobile) {
+            dictToggleMobile.addEventListener('click', () => openDict());
+        }
+
+        // Modalı Kapatma
+        if (els.closeMenuOptions) {
+            els.closeMenuOptions.addEventListener('click', () => {
+                closeModal(els.menuOptionsModal);
+            });
+        }
+
+        // Credits Modal
+        if (els.btnOpenCredits) els.btnOpenCredits.addEventListener('click', () => openModal(els.creditsModal));
+        if (els.closeCredits) els.closeCredits.addEventListener('click', () => closeModal(els.creditsModal));
+
+        // 2. Ayarlar (Options) İçindeki İşlevler
+        // Dark Mode Toggle
+        if (els.menuThemeToggleCheckbox) {
+            els.menuThemeToggleCheckbox.addEventListener('change', toggleTheme);
+        }
+
+        // Reset Butonu
+        if (els.menuResetBtn) els.menuResetBtn.addEventListener('click', resetAll);
+
+        // Ana Menüye Dön Butonu
+        if (els.menuReturnHome) {
+            els.menuReturnHome.addEventListener('click', () => {
+                closeModal(els.menuOptionsModal);
+                returnToMenu();
+            });
+        }
+
+        // Change Level Butonu
+        const menuChangeLevelBtn = document.getElementById('menuChangeLevelBtn');
+        if (menuChangeLevelBtn) {
+            menuChangeLevelBtn.addEventListener('click', () => {
+                localStorage.removeItem('ydspro_user_level_group');
+                closeModal(els.menuOptionsModal); // Close options
+
+                // Reload yerine modalı göster
+                const levelModal = document.getElementById('levelSelectionModal');
+                if (levelModal) {
+                    levelModal.classList.remove('hidden');
+                    levelModal.style.zIndex = "10000";
+                }
+
+                // Return to menu meanwhile
+                returnToMenu();
+            });
+        }
+
+        if (els.btnTimeStats) {
+            els.btnTimeStats.addEventListener('click', () => {
+                updateTimeStatsUI();
+                openModal(els.timeStatsModal);
+            });
+        }
+        if (els.closeTimeStats) {
+            els.closeTimeStats.addEventListener('click', () => {
+                closeModal(els.timeStatsModal);
+            });
+        }
+
+        // 3. Modal Dışına Tıklayınca Kapatma
+        window.addEventListener('click', (e) => {
+            if (e.target === els.menuOptionsModal) closeModal(els.menuOptionsModal);
+            if (e.target === els.creditsModal) closeModal(els.creditsModal);
+            if (e.target === els.badgeModal) closeModal(els.badgeModal);
+            if (e.target === els.dictModal) closeModal(els.dictModal);
+            if (e.target === els.goalsModal) closeModal(els.goalsModal);
+
+            // New modals for outside click
+            const levelModal = document.getElementById('levelSelectionModal');
+            const progressModal = document.getElementById('progressModal');
+            if (e.target === levelModal) levelModal.classList.add('hidden');
+            if (e.target === progressModal) closeModal(progressModal);
+        });
+
+        // 4. Goals Modal
+        if (els.goalsToggle) {
+            els.goalsToggle.addEventListener('click', openGoalsModal);
+        }
+        if (els.closeGoals) {
+            els.closeGoals.addEventListener('click', () => closeModal(els.goalsModal));
+        }
+
+        // 5. Theme Selector
+        if (els.themeSelector) {
+            els.themeSelector.addEventListener('change', (e) => setColorTheme(e.target.value));
+        }
+
+        // 6. Sound Toggle
+        if (els.menuSoundToggle) {
+            els.menuSoundToggle.addEventListener('change', toggleSound);
+        }
+
+        // 7. Word Level Badge - Opens Level Selection
+        const wordLevelBadge = document.getElementById('wordLevelBadge');
+        if (wordLevelBadge) {
+            wordLevelBadge.addEventListener('click', () => {
+                const levelModal = document.getElementById('levelSelectionModal');
+                if (levelModal) {
+                    levelModal.classList.remove('hidden');
+                    levelModal.style.zIndex = "10000";
+                }
+            });
+        }
+
+        // 8. Level Selection Close Button
+        const closeLevelSelection = document.getElementById('closeLevelSelection');
+        if (closeLevelSelection) {
+            closeLevelSelection.addEventListener('click', () => {
+                const levelModal = document.getElementById('levelSelectionModal');
+                if (levelModal) {
+                    levelModal.classList.add('hidden');
+                }
+            });
+        }
+
+        // 9. Progress Modal (Combined Badges + Goals)
+        const progressToggle = document.getElementById('progressToggle');
+        const progressModal = document.getElementById('progressModal');
+        const closeProgress = document.getElementById('closeProgress');
+
+        if (progressToggle && progressModal) {
+            progressToggle.addEventListener('click', () => {
+                openModal(progressModal);
+                renderBadges();
+                updateGoalsDisplay();
+            });
+        }
+
+        if (closeProgress && progressModal) {
+            closeProgress.addEventListener('click', () => closeModal(progressModal));
+        }
+
+        // Tab switching
+        const progressTabs = document.querySelectorAll('.progress-tab');
+        progressTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active from all tabs
+                progressTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show corresponding pane
+                const tabName = tab.dataset.tab;
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                document.getElementById(tabName === 'badges' ? 'badgesPane' : 'goalsPane').classList.add('active');
+            });
+        });
+
+        // 10. Homepage Enhancements - Particles, Quotes & Stats
+        initHomepageEnhancements();
+
+        // 11. Start Time Tracking
+        startTimeTracking();
+        updateTimeDisplay();
+    } catch (err) {
+        console.error("Initialization Failed:", err);
+        hideSplashScreen();
+    }
+}
+
+// --- HOMEPAGE ENHANCEMENTS ---
+// MOTIVATION_QUOTES moved to config.js
+
+function initHomepageEnhancements() {
+    createFloatingParticles();
+    setRandomQuote();
+    updateMenuStats();
+}
+
+// Create floating particles effect - DISABLED for performance
+function createFloatingParticles() {
+    // Particles disabled for better performance
+    return;
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // Random position and animation delay
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (12 + Math.random() * 8) + 's';
+
+        // Random size
+        const size = 4 + Math.random() * 6;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+
+        container.appendChild(particle);
+    }
+}
+
+// Set random motivation quote
+function setRandomQuote() {
+    const quoteText = document.getElementById('quoteText');
+    if (!quoteText) return;
+
+    const randomIndex = Math.floor(Math.random() * MOTIVATION_QUOTES.length);
+    quoteText.textContent = MOTIVATION_QUOTES[randomIndex];
+}
+
+// Update menu stats display
+function updateMenuStats() {
+    const menuStreakCount = document.getElementById('menuStreakCount');
+    const menuXPCount = document.getElementById('menuXPCount');
+    const menuWordsCount = document.getElementById('menuWordsCount');
+
+    if (menuStreakCount) {
+        menuStreakCount.textContent = streakCount || 0;
+    }
+    if (menuXPCount) {
+        menuXPCount.textContent = userXP || 0;
+    }
+    if (menuWordsCount) {
+        menuWordsCount.textContent = learnedCards.length || 0;
+    }
+}
+
+function startGame(instant = false) {
+    // 0. Level Seçimi Yapılmış mı Kontrol Et
+    if (!localStorage.getItem('ydspro_user_level_group')) {
+        const levelModal = document.getElementById('levelSelectionModal');
+        if (levelModal) {
+            levelModal.classList.remove('hidden');
+            // Z-index ayarı ile en üste gelmesini garantiye alalım (CSS'te var ama JS ile pekiştirelim)
+            levelModal.style.zIndex = "10000";
+        }
+        return; // Oyunu başlatma, modalı göster
+    }
+
+    if (instant) {
+        // İsimsiz geçiş (Level seçiminden sonra)
+        els.mainMenu.classList.add('hidden');
+        els.mainMenu.classList.remove('fade-out');
+        els.gameInterface.classList.remove('hidden');
+
+        // Eğer oyun ilk kez başlıyorsa veya kart yoksa başlat
+        if (!currentCard) {
+            createNextCardPreview();
+            setupGameEventListeners();
+            pickNewCard();
+        }
+        return;
+    }
+
+    // Add fade-out animation to menu
+    els.mainMenu.classList.add('fade-out');
+
+    // Wait for animation to complete, then switch screens
+    setTimeout(() => {
+        els.mainMenu.classList.add('hidden');
+        els.mainMenu.classList.remove('fade-out');
+
+        // Show game interface with fade-in
+        els.gameInterface.classList.remove('hidden');
+        els.gameInterface.classList.add('fade-in');
+
+        // Remove fade-in class after animation
+        setTimeout(() => {
+            els.gameInterface.classList.remove('fade-in');
+        }, 400);
+
+        // Eğer oyun ilk kez başlıyorsa veya kart yoksa başlat
+        if (!currentCard) {
+            createNextCardPreview();
+            setupGameEventListeners();
+            pickNewCard();
+        }
+    }, 300);
 }
 
 function returnToMenu() {
     els.gameInterface.classList.add('hidden');
     els.mainMenu.classList.remove('hidden');
+
+    // Update menu stats when returning
+    updateMenuStats();
+    setRandomQuote();
 }
 
 function createNextCardPreview() {
@@ -358,10 +772,10 @@ function createNextCardPreview() {
     nextCardEl.innerHTML = `
         <div class="card-header">
             <span class="word-id" id="nextWordId">#--</span>
-            <button class="fav-btn"><i class="far fa-star"></i></button>
+            <button class="fav-btn neon-icon-container neon-purple"><i class="far fa-star"></i></button>
         </div>
         <h1 id="nextWordEnglish">Loading...</h1>
-        <button class="speak-btn"><i class="fas fa-volume-up"></i></button>
+        <button class="speak-btn neon-icon-container neon-blue"><i class="fas fa-volume-up"></i></button>
         <p class="tap-hint">TAP TO FLIP</p>
     `;
 
@@ -385,9 +799,33 @@ function setupGameEventListeners() {
     if (els.card.getAttribute('data-listeners-added')) return;
     els.card.setAttribute('data-listeners-added', 'true');
 
-    // Flashcard Butonları
-    els.btnFail.addEventListener('click', () => handleAnswer(false));
-    els.btnPass.addEventListener('click', () => handleAnswer(true));
+    // Flashcard Butonları - Spam önleme için güçlü cooldown
+    let isAnswerBlocked = false;
+    const answerCooldown = 700; // 700ms cooldown (animasyon süresiyle uyumlu)
+
+    const safeHandleAnswer = (isCorrect) => {
+        if (isAnswerBlocked) return;
+        isAnswerBlocked = true;
+
+        // Butonları görsel olarak devre dışı bırak
+        els.btnFail.style.opacity = '0.5';
+        els.btnPass.style.opacity = '0.5';
+        els.btnFail.style.pointerEvents = 'none';
+        els.btnPass.style.pointerEvents = 'none';
+
+        handleAnswer(isCorrect);
+
+        setTimeout(() => {
+            isAnswerBlocked = false;
+            els.btnFail.style.opacity = '1';
+            els.btnPass.style.opacity = '1';
+            els.btnFail.style.pointerEvents = 'auto';
+            els.btnPass.style.pointerEvents = 'auto';
+        }, answerCooldown);
+    };
+
+    els.btnFail.addEventListener('click', () => safeHandleAnswer(false));
+    els.btnPass.addEventListener('click', () => safeHandleAnswer(true));
     els.card.addEventListener('click', (e) => {
         if (!e.target.closest('button')) els.card.classList.toggle('flipped');
     });
@@ -399,44 +837,65 @@ function setupGameEventListeners() {
     els.quizFavBtn.addEventListener('click', toggleFav);
     els.sentFavBtn.addEventListener('click', toggleFav);
 
-    // Mod Değiştirme
-    els.modeToggle.addEventListener('click', toggleMode);
+    // Mod Değiştirme - Dropdown Menu
+    els.modeToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = els.modeToggle.closest('.mode-dropdown');
+        dropdown.classList.toggle('active');
+    });
+
+    // Mode seçeneklerine tıklama
+    document.querySelectorAll('.mode-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            const selectedMode = e.currentTarget.dataset.mode;
+            switchToMode(selectedMode);
+            // Dropdown'u kapat
+            els.modeToggle.closest('.mode-dropdown').classList.remove('active');
+        });
+    });
+
+    // Dropdown dışına tıklayınca kapat
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.mode-dropdown')) {
+            document.querySelector('.mode-dropdown')?.classList.remove('active');
+        }
+    });
 
     // Modal Açma Butonları (Oyun İçi)
-    els.dictToggle.addEventListener('click', openDict);
-    els.badgeToggle.addEventListener('click', openBadges);
-    els.errorModeBtn.addEventListener('click', () => toggleErrorReviewMode(false));
+    if (els.dictToggle) els.dictToggle.addEventListener('click', openDict);
+    if (els.badgeToggle) els.badgeToggle.addEventListener('click', openBadges);
+    if (els.errorModeBtn) els.errorModeBtn.addEventListener('click', () => toggleErrorReviewMode(false));
 
     // Modal Kapatma Butonları
-    els.closeDict.addEventListener('click', () => els.dictModal.classList.add('hidden'));
-    els.closeBadge.addEventListener('click', () => els.badgeModal.classList.add('hidden'));
+    if (els.closeDict) els.closeDict.addEventListener('click', () => els.dictModal.classList.add('hidden'));
+    if (els.closeBadge && els.badgeModal) els.closeBadge.addEventListener('click', () => els.badgeModal.classList.add('hidden'));
 
     // Sözlük Arama ve Filtreleme (Debounced)
     const debouncedRenderDict = debounce(renderDict, 150);
-    els.searchInput.addEventListener('input', debouncedRenderDict);
-    els.filterFavs.addEventListener('click', () => {
+    if (els.searchInput) els.searchInput.addEventListener('input', debouncedRenderDict);
+    if (els.filterFavs) els.filterFavs.addEventListener('click', () => {
         isFilterFav = !isFilterFav;
         els.filterFavs.classList.toggle('active-fav', isFilterFav);
         renderDict();
     });
-    els.filterErrors.addEventListener('click', () => {
+    if (els.filterErrors) els.filterErrors.addEventListener('click', () => {
         isFilterError = !isFilterError;
         els.filterErrors.classList.toggle('active-error', isFilterError);
         renderDict();
     });
 
     // Speed Run Kontrolleri
-    els.startSpeedBtn.addEventListener('click', startSpeedRun);
-    els.exitSpeedMode.addEventListener('click', exitSpeedGame);
+    if (els.startSpeedBtn) els.startSpeedBtn.addEventListener('click', startSpeedRun);
+    if (els.exitSpeedMode) els.exitSpeedMode.addEventListener('click', exitSpeedGame);
 
     // Navigasyon Kontrolleri (Quiz & Sentence)
-    els.prevBtnQuiz.addEventListener('click', () => navigateHistory('prev'));
-    els.nextBtnQuiz.addEventListener('click', () => navigateHistory('next'));
-    els.prevBtnSent.addEventListener('click', () => navigateHistory('prev'));
-    els.nextBtnSent.addEventListener('click', () => navigateHistory('next'));
+    if (els.prevBtnQuiz) els.prevBtnQuiz.addEventListener('click', () => navigateHistory('prev'));
+    if (els.nextBtnQuiz) els.nextBtnQuiz.addEventListener('click', () => navigateHistory('next'));
+    if (els.prevBtnSent) els.prevBtnSent.addEventListener('click', () => navigateHistory('prev'));
+    if (els.nextBtnSent) els.nextBtnSent.addEventListener('click', () => navigateHistory('next'));
 
     // Swipe (Dokunmatik) Kontrolleri - Passive listeners for better performance
-    if ('ontouchstart' in window) {
+    if ('ontouchstart' in window && els.card) {
         els.card.addEventListener('touchstart', touchStart, { passive: true });
         els.card.addEventListener('touchmove', touchMove, { passive: false });
         els.card.addEventListener('touchend', touchEnd, { passive: true });
@@ -447,6 +906,10 @@ function setupGameEventListeners() {
         // Menüdeyken veya modal açıkken tuşları dinleme
         if (!els.mainMenu.classList.contains('hidden')) return;
         if (!els.menuOptionsModal.classList.contains('hidden')) return;
+
+        // Profile Modal açıkken kısayolları iptal et
+        const profileModal = document.getElementById('profileModal');
+        if (profileModal && !profileModal.classList.contains('hidden')) return;
 
         // Arama kutusundaysan kısayolları iptal et
         if (document.activeElement === els.searchInput) {
@@ -459,11 +922,21 @@ function setupGameEventListeners() {
             els.card.classList.toggle('flipped');
         }
         else if (e.key === 'ArrowRight') {
-            if (activeMode === 'flashcard') handleAnswer(true);
+            if (activeMode === 'flashcard') {
+                // Spam koruması - buton tıklamasını simüle et
+                if (!els.btnPass.style.pointerEvents || els.btnPass.style.pointerEvents !== 'none') {
+                    els.btnPass.click();
+                }
+            }
             else if (activeMode === 'quiz' || activeMode === 'sentence') navigateHistory('next');
         }
         else if (e.key === 'ArrowLeft') {
-            if (activeMode === 'flashcard') handleAnswer(false);
+            if (activeMode === 'flashcard') {
+                // Spam koruması - buton tıklamasını simüle et
+                if (!els.btnFail.style.pointerEvents || els.btnFail.style.pointerEvents !== 'none') {
+                    els.btnFail.click();
+                }
+            }
             else if (activeMode === 'quiz' || activeMode === 'sentence') navigateHistory('prev');
         }
         else if (e.key === 'ArrowDown') {
@@ -493,6 +966,51 @@ function setupGameEventListeners() {
     });
 }
 
+
+
+// --- LEVEL SELECTION LOGIC ---
+function initLevelSelection() {
+    const levelBtns = document.querySelectorAll('.level-btn');
+    levelBtns.forEach(btn => {
+        const levelKey = btn.dataset.level;
+        if (LEVEL_DATA[levelKey]) {
+            const count = LEVEL_DATA[levelKey].length;
+            const descSpan = btn.querySelector('.lvl-desc');
+            if (descSpan) {
+                descSpan.textContent += ` (${count.toLocaleString()} words)`;
+            }
+        }
+
+        btn.addEventListener('click', (e) => {
+            const selectedLevel = e.currentTarget.dataset.level;
+
+            // BUG PREVENTION: Save current status before switch
+            saveData();
+
+            // Seçimi kaydet
+            localStorage.setItem('ydspro_user_level_group', selectedLevel);
+
+            // Update current highscore for the selected level
+            speedHighScore = speedHighScoresByLevel[selectedLevel] || 0;
+            if (els.highScoreDisplay) els.highScoreDisplay.textContent = speedHighScore;
+
+            // Modalı kapat
+            const modal = document.getElementById('levelSelectionModal');
+            modal.classList.add('hidden');
+
+            // Level değiştirirken eski kartları temizle
+            currentCard = null;
+            nextCard = null;
+            cardHistory = [];
+            historyIndex = -1;
+
+            // Sayfayı yenilemek yerine veriyi yükle ve oyunu başlat
+            loadData();
+            startGame(true); // Instant start
+        });
+    });
+}
+
 // --- VERİ YÖNETİMİ ---
 function loadData() {
     if (localStorage.getItem('ydspro_theme') === 'dark') {
@@ -501,18 +1019,52 @@ function loadData() {
         // Checkbox'ı da güncelle
         if (els.menuThemeToggleCheckbox) els.menuThemeToggleCheckbox.checked = true;
     }
+    learnedCardsByLevel = JSON.parse(localStorage.getItem('ydspro_learned_by_level') || '{}');
     learnedCards = JSON.parse(localStorage.getItem('ydspro_learned') || '[]');
     favCards = JSON.parse(localStorage.getItem('ydspro_favs') || '[]');
     earnedBadges = JSON.parse(localStorage.getItem('ydspro_badges') || '[]');
     errorCards = JSON.parse(localStorage.getItem('ydspro_errors') || '[]');
     streakCount = parseInt(localStorage.getItem('ydspro_streak_count') || '0');
     lastStreakDate = localStorage.getItem('ydspro_streak_date') || '';
-    speedHighScore = parseInt(localStorage.getItem('ydspro_speed_highscore') || '0');
+
+    // Level Group Loading Logic
+    const currentLevelGroup = localStorage.getItem('ydspro_user_level_group') || 'A1-A2';
+
+    // Migration logic for learnedCards
+    if (learnedCards.length > 0 && Object.keys(learnedCardsByLevel).length === 0) {
+        learnedCardsByLevel[currentLevelGroup] = learnedCards;
+    }
+    learnedCards = learnedCardsByLevel[currentLevelGroup] || [];
+
+    // Low High Scores (Combined for legacy, but prioritized per level)
+    const savedLevelScores = localStorage.getItem('ydspro_speed_highscores_by_level');
+    if (savedLevelScores) {
+        speedHighScoresByLevel = JSON.parse(savedLevelScores);
+    }
+
+    const legacyHighScore = parseInt(localStorage.getItem('ydspro_speed_highscore') || '0');
+
+    // Migration logic
+    if (Object.keys(speedHighScoresByLevel).length === 0 && legacyHighScore > 0) {
+        speedHighScoresByLevel[currentLevelGroup] = legacyHighScore;
+    }
+
+    speedHighScore = speedHighScoresByLevel[currentLevelGroup] || 0;
     totalSpeedScore = parseInt(localStorage.getItem('ydspro_total_speed_score') || '0');
 
-    // Level System
+    // Mode Stats (for badges)
+    totalQuizCorrect = parseInt(localStorage.getItem('ydspro_quiz_correct') || '0');
+    totalSentenceCorrect = parseInt(localStorage.getItem('ydspro_sentence_correct') || '0');
+
+    // Time Tracking
+    totalTimeSpent = parseInt(localStorage.getItem('ydspro_time_spent') || '0');
+    dailyTimeRecord = JSON.parse(localStorage.getItem('ydspro_daily_time') || '{}');
+
+    // Level System & Profile
     userXP = parseInt(localStorage.getItem('ydspro_xp') || '0');
     userLevel = parseInt(localStorage.getItem('ydspro_level') || '1');
+    userName = localStorage.getItem('ydspro_username') || 'Scholar';
+    userAvatar = localStorage.getItem('ydspro_avatar') || '👤';
 
     // Daily Goals
     lastGoalDate = localStorage.getItem('ydspro_goal_date') || '';
@@ -530,8 +1082,35 @@ function loadData() {
     soundEnabled = localStorage.getItem('ydspro_sound') !== 'false';
     if (els.menuSoundToggle) els.menuSoundToggle.checked = soundEnabled;
 
+    // Level Group Loading Logic
+    const savedLevelGroup = localStorage.getItem('ydspro_user_level_group');
+
+    // Eğer veritabanında (levels.js) bu grup varsa onu yükle
+    if (savedLevelGroup && typeof LEVEL_DATA !== 'undefined' && LEVEL_DATA[savedLevelGroup]) {
+        currentWordData = LEVEL_DATA[savedLevelGroup];
+
+        // Başlık güncellemeleri veya UI bildirimleri eklenebilir
+        console.log("Loaded Level Group:", savedLevelGroup);
+    } else {
+        // Kayıtlı level yoksa fallback: LEVEL_DATA'dan ilk mevcut level
+        const levelKeys = Object.keys(LEVEL_DATA);
+        if (levelKeys.length > 0) {
+            currentWordData = LEVEL_DATA[levelKeys[0]];
+            console.log("Fallback to first level:", levelKeys[0]);
+        } else {
+            currentWordData = [];
+            console.warn("No level data available!");
+        }
+    }
+
     if (els.highScoreDisplay) els.highScoreDisplay.textContent = speedHighScore;
-    cardPool = wordData.filter(w => !learnedCards.includes(w.id));
+    cardPool = currentWordData.filter(w => !learnedCards.includes(w.id));
+
+    // Update word level badge in dashboard
+    const wordLevelText = document.getElementById('wordLevelText');
+    if (wordLevelText && savedLevelGroup) {
+        wordLevelText.textContent = savedLevelGroup;
+    }
 
     updateStats();
     checkStreak();
@@ -540,18 +1119,36 @@ function loadData() {
 }
 
 function saveData() {
-    localStorage.setItem('ydspro_learned', JSON.stringify(learnedCards));
+    const currentLevelGroup = localStorage.getItem('ydspro_user_level_group') || 'A1-A2';
+    learnedCardsByLevel[currentLevelGroup] = learnedCards;
+
+    localStorage.setItem('ydspro_learned_by_level', JSON.stringify(learnedCardsByLevel));
+    localStorage.setItem('ydspro_learned', JSON.stringify(learnedCards)); // Keep legacy for safety
     localStorage.setItem('ydspro_favs', JSON.stringify(favCards));
     localStorage.setItem('ydspro_badges', JSON.stringify(earnedBadges));
     localStorage.setItem('ydspro_errors', JSON.stringify(errorCards));
     localStorage.setItem('ydspro_streak_count', streakCount.toString());
     localStorage.setItem('ydspro_streak_date', lastStreakDate);
-    localStorage.setItem('ydspro_speed_highscore', speedHighScore.toString());
+
+    // Save per-level highscores
+    speedHighScoresByLevel[currentLevelGroup] = speedHighScore;
+    localStorage.setItem('ydspro_speed_highscores_by_level', JSON.stringify(speedHighScoresByLevel));
+
+    localStorage.setItem('ydspro_speed_highscore', speedHighScore.toString()); // Keep legacy for safety
     localStorage.setItem('ydspro_total_speed_score', totalSpeedScore.toString());
 
-    // Level System
+    // Mode Stats (for badges)
+    localStorage.setItem('ydspro_quiz_correct', totalQuizCorrect.toString());
+    localStorage.setItem('ydspro_sentence_correct', totalSentenceCorrect.toString());
+
+    // Time Tracking
+    localStorage.setItem('ydspro_time_spent', totalTimeSpent.toString());
+
+    // Level System & Profile
     localStorage.setItem('ydspro_xp', userXP.toString());
     localStorage.setItem('ydspro_level', userLevel.toString());
+    localStorage.setItem('ydspro_username', userName);
+    localStorage.setItem('ydspro_avatar', userAvatar);
 
     // Daily Goals
     localStorage.setItem('ydspro_daily_goals', JSON.stringify(dailyGoals));
@@ -584,7 +1181,7 @@ function startSpeedRun() {
 }
 
 function nextSpeedQuestion() {
-    const randomPool = wordData;
+    const randomPool = currentWordData;
     currentCard = randomPool[Math.floor(Math.random() * randomPool.length)];
     els.speedWord.textContent = currentCard.word;
     generateOptions(els.speedOptions, 'definition', currentCard.definition);
@@ -649,6 +1246,70 @@ function exitSpeedGame() {
     pickNewCard();
 }
 
+// --- PROFILE CUSTOMIZATION LOGIC ---
+function initProfileCustomization() {
+    // Open Modal Triggers
+    const openProfile = () => {
+        // Populate current values
+        document.getElementById('profileNameInput').value = userName;
+        document.querySelectorAll('.avatar-opt').forEach(btn => {
+            btn.classList.toggle('selected', btn.dataset.avatar === userAvatar);
+        });
+        document.getElementById('profileModal').classList.remove('hidden');
+    };
+
+    if (els.userNameDisplay) els.userNameDisplay.parentElement.addEventListener('click', openProfile);
+    if (els.userAvatarDisplay) els.userAvatarDisplay.parentElement.addEventListener('click', openProfile);
+
+    // Close Modal
+    const closeProfile = () => document.getElementById('profileModal').classList.add('hidden');
+    document.getElementById('closeProfileModal').addEventListener('click', closeProfile);
+
+    // Close on outside click
+    document.getElementById('profileModal').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('profileModal')) closeProfile();
+    });
+
+    // Avatar Selection
+    document.querySelectorAll('.avatar-opt').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.avatar-opt').forEach(b => b.classList.remove('selected'));
+            e.currentTarget.classList.add('selected');
+        });
+    });
+
+    // Save Changes
+    document.getElementById('saveProfileBtn').addEventListener('click', () => {
+        const newName = document.getElementById('profileNameInput').value.trim();
+        const selectedAvatarBtn = document.querySelector('.avatar-opt.selected');
+        const newAvatar = selectedAvatarBtn ? selectedAvatarBtn.dataset.avatar : userAvatar;
+
+        if (newName) {
+            userName = newName;
+            userAvatar = newAvatar;
+
+            // Save to LocalStorage
+            saveData();
+
+            // Update UI
+            updateLevelUI();
+
+            // Show Success Notification
+            showToast("Profile updated successfully!", "SAVED");
+
+            // Close Modal
+            closeProfile();
+        } else {
+            alert("Please enter a valid name!");
+        }
+    });
+}
+
+// Ensure this is initialized!
+document.addEventListener('DOMContentLoaded', () => {
+    initProfileCustomization();
+});
+
 // --- SES VE STREAK ---
 function preloadVoices() {
     availableVoices = window.speechSynthesis.getVoices();
@@ -698,9 +1359,9 @@ function updateStreakUI() {
 }
 
 function updateStats() {
-    if (els.total) els.total.textContent = wordData.length;
+    if (els.total) els.total.textContent = currentWordData.length;
     if (els.learned) els.learned.textContent = learnedCards.length;
-    if (els.progressBar) els.progressBar.style.width = `${(learnedCards.length / wordData.length) * 100}%`;
+    if (els.progressBar) els.progressBar.style.width = `${(learnedCards.length / currentWordData.length) * 100}%`;
     if (els.errorCount) els.errorCount.textContent = errorCards.length;
     if (els.errorModeBtn) els.errorModeBtn.style.opacity = errorCards.length > 0 ? '1' : '0.5';
 }
@@ -716,7 +1377,7 @@ function toggleErrorReviewMode(forceExit = false) {
     document.body.classList.toggle('error-mode-active', isErrorReviewMode);
     if (isErrorReviewMode) {
         els.errorModeBtn.classList.add('active-mode');
-        els.errorModeBtn.innerHTML = '<i class="fas fa-times"></i> EXIT';
+        els.errorModeBtn.innerHTML = '<i class="fas fa-times" style="font-size:1.2rem;"></i>';
     } else {
         els.errorModeBtn.classList.remove('active-mode');
         els.errorModeBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> <span class="badge-count" id="errorCount">' + errorCards.length + '</span>';
@@ -729,11 +1390,19 @@ function toggleErrorReviewMode(forceExit = false) {
 }
 
 function checkBadges() {
-    const wordCount = learnedCards.length;
-    const score = totalSpeedScore;
     let newBadge = false;
     BADGES.forEach(badge => {
-        let currentProgress = badge.type === 'words' ? wordCount : score;
+        let currentProgress = 0;
+
+        switch (badge.type) {
+            case 'words': currentProgress = learnedCards.length; break;
+            case 'score': currentProgress = totalSpeedScore; break;
+            case 'level': currentProgress = userLevel; break;
+            case 'quiz': currentProgress = totalQuizCorrect; break;
+            case 'sentence': currentProgress = totalSentenceCorrect; break;
+            case 'streak': currentProgress = streakCount; break;
+        }
+
         if (currentProgress >= badge.count && !earnedBadges.includes(badge.id)) {
             earnedBadges.push(badge.id);
             showToast(`${badge.icon} ${badge.name} Badge Unlocked!`, "NEW ACHIEVEMENT!");
@@ -744,29 +1413,227 @@ function checkBadges() {
 }
 
 function showToast(message, title = "Notification") {
-    const titleEl = els.toast.querySelector('h4');
-    if (titleEl) titleEl.textContent = title;
-    els.toastMessage.textContent = message;
-    els.toast.classList.remove('hidden');
-    setTimeout(() => els.toast.classList.add('hidden'), 3000);
+    // Create toast dynamically if it doesn't exist
+    let toast = document.querySelector('.achievement-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'achievement-toast';
+        document.body.appendChild(toast);
+    }
+
+    // Determine if it's an achievement notification
+    const isAchievement = title.includes('ACHIEVEMENT');
+    const icon = isAchievement ? '🏆' : '🔔';
+
+    toast.innerHTML = `
+        <div class="toast-icon">${icon}</div>
+        <div class="toast-body">
+            <span class="toast-title">${title}</span>
+            <span class="toast-message">${message}</span>
+        </div>
+    `;
+
+    // Add styles if not present
+    if (!document.querySelector('#toast-styles')) {
+        const style = document.createElement('style');
+        style.id = 'toast-styles';
+        style.textContent = `
+            .achievement-toast {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-120px) scale(0.9);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                color: #1f2937;
+                padding: 14px 20px;
+                border-radius: 16px;
+                box-shadow: 
+                    0 20px 50px rgba(0, 0, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+                    0 0 30px rgba(245, 158, 11, 0.2);
+                border: 2px solid rgba(245, 158, 11, 0.3);
+                z-index: 99999;
+                opacity: 0;
+                transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                min-width: 280px;
+                max-width: 90%;
+            }
+            .achievement-toast.show {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            .toast-icon {
+                font-size: 2em;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+                animation: bounce 0.6s ease;
+            }
+            @keyframes bounce {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.2); }
+            }
+            .toast-body {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+            .toast-title {
+                font-size: 0.7em;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #f59e0b;
+            }
+            .toast-message {
+                font-size: 0.95em;
+                font-weight: 600;
+                color: #374151;
+            }
+            /* Dark Mode */
+            body.dark-mode .achievement-toast {
+                background: rgba(30, 30, 50, 0.95);
+                border: 2px solid rgba(245, 158, 11, 0.4);
+                box-shadow: 
+                    0 20px 50px rgba(0, 0, 0, 0.4),
+                    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+                    0 0 30px rgba(245, 158, 11, 0.3);
+            }
+            body.dark-mode .toast-message {
+                color: #e5e7eb;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Play achievement sound if applicable
+    if (isAchievement) {
+        playSound('levelup');
+    }
+
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 50);
+
+    // Hide after 3.5 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3500);
 }
 
 function openBadges() {
     els.badgeList.innerHTML = '';
     BADGES.forEach(badge => {
         const isUnlocked = earnedBadges.includes(badge.id);
-        const progress = badge.type === 'words' ? learnedCards.length : totalSpeedScore;
+
+        // Get progress based on badge type
+        let progress = 0;
+        let goalLabel = '';
+        switch (badge.type) {
+            case 'words':
+                progress = learnedCards.length;
+                goalLabel = 'words';
+                break;
+            case 'score':
+                progress = totalSpeedScore;
+                goalLabel = 'Speed pts';
+                break;
+            case 'level':
+                progress = userLevel;
+                goalLabel = 'Level';
+                break;
+            case 'quiz':
+                progress = totalQuizCorrect;
+                goalLabel = 'Quiz ✓';
+                break;
+            case 'sentence':
+                progress = totalSentenceCorrect;
+                goalLabel = 'Context ✓';
+                break;
+            case 'streak':
+                progress = streakCount;
+                goalLabel = 'days';
+                break;
+        }
+
         const div = document.createElement('div');
         div.className = `badge-item ${isUnlocked ? 'unlocked' : ''}`;
-        let progressText = isUnlocked ? 'Unlocked!' : `Goal: ${badge.count}`;
+        let progressText = isUnlocked ? '✓ Unlocked!' : `${progress}/${badge.count} ${goalLabel}`;
         div.innerHTML = `
             <span class="badge-icon">${badge.icon}</span>
             <span class="badge-name">${badge.name}</span>
-            <span style="font-size:0.7em; color:var(--text-sub)">${progressText}</span>
+            <span style="font-size:0.65em; color:var(--text-sub)">${progressText}</span>
         `;
         els.badgeList.appendChild(div);
     });
-    els.badgeModal.classList.remove('hidden');
+    openModal(els.badgeModal);
+}
+
+// Render badges for Progress Modal (without opening old modal)
+function renderBadges() {
+    console.log('renderBadges called');
+    const badgeList = document.getElementById('badgeList');
+    console.log('badgeList element:', badgeList);
+    console.log('BADGES array:', BADGES, 'length:', BADGES?.length);
+
+    if (!badgeList) {
+        console.error('badgeList element not found!');
+        return;
+    }
+
+    badgeList.innerHTML = '';
+    BADGES.forEach(badge => {
+        const isUnlocked = earnedBadges.includes(badge.id);
+
+        let progress = 0;
+        let goalLabel = '';
+        switch (badge.type) {
+            case 'words': progress = learnedCards.length; goalLabel = 'words'; break;
+            case 'score': progress = totalSpeedScore; goalLabel = 'pts'; break;
+            case 'level': progress = userLevel; goalLabel = 'lvl'; break;
+            case 'quiz': progress = totalQuizCorrect; goalLabel = '✓'; break;
+            case 'sentence': progress = totalSentenceCorrect; goalLabel = '✓'; break;
+            case 'streak': progress = streakCount; goalLabel = 'days'; break;
+        }
+
+        const div = document.createElement('div');
+        div.className = `badge-item ${isUnlocked ? 'unlocked' : 'locked'}`;
+        const progressText = isUnlocked ? '✓' : `${progress}/${badge.count}`;
+        div.innerHTML = `
+            <span class="badge-icon">${badge.icon}</span>
+            <span class="badge-name">${badge.name}</span>
+            <span class="badge-desc">${badge.desc}</span>
+            <span class="badge-progress">${progressText}</span>
+        `;
+        badgeList.appendChild(div);
+    });
+}
+
+// Update goals display in Progress Modal
+function updateGoalsDisplay() {
+    const wordsProgress = document.getElementById('wordsGoalProgress');
+    const quizProgress = document.getElementById('quizGoalProgress');
+    const correctProgress = document.getElementById('correctGoalProgress');
+
+    const wordsStudied = document.getElementById('wordsStudied');
+    const quizCompleted = document.getElementById('quizCompleted');
+    const correctAnswers = document.getElementById('correctAnswers');
+
+    if (!wordsProgress || !dailyGoals) return;
+
+    const wordsPercent = Math.min((dailyGoals.wordsLearned / DAILY_TARGETS.words) * 100, 100);
+    const quizPercent = Math.min((dailyGoals.quizCompleted / DAILY_TARGETS.quiz) * 100, 100);
+    const correctPercent = Math.min((dailyGoals.correctAnswers / DAILY_TARGETS.correct) * 100, 100);
+
+    wordsProgress.style.width = wordsPercent + '%';
+    quizProgress.style.width = quizPercent + '%';
+    correctProgress.style.width = correctPercent + '%';
+
+    if (wordsStudied) wordsStudied.textContent = dailyGoals.wordsLearned;
+    if (quizCompleted) quizCompleted.textContent = dailyGoals.quizCompleted;
+    if (correctAnswers) correctAnswers.textContent = dailyGoals.correctAnswers;
 }
 
 function toggleMode() {
@@ -806,24 +1673,76 @@ function toggleMode() {
     pickNewCard();
 }
 
+// Doğrudan mod seçimi için yeni fonksiyon
+function switchToMode(mode) {
+    if (activeMode === mode) return; // Zaten bu moddaysa bir şey yapma
+
+    clearInterval(speedInterval);
+    activeMode = mode;
+
+    // Tüm modları gizle
+    els.flashcardMode.classList.add('hidden');
+    els.quizMode.classList.add('hidden');
+    els.sentenceMode.classList.add('hidden');
+    els.speedMode.classList.add('hidden');
+
+    cardHistory = [];
+    historyIndex = -1;
+    nextCard = null;
+
+    if (nextCardEl) nextCardEl.style.display = (activeMode === 'flashcard') ? 'flex' : 'none';
+
+    // Dropdown menüdeki aktif öğeyi güncelle
+    document.querySelectorAll('.mode-option').forEach(opt => {
+        opt.classList.remove('active');
+        if (opt.dataset.mode === mode) {
+            opt.classList.add('active');
+        }
+    });
+
+    // Modu aktif et ve ikonu güncelle
+    if (activeMode === 'flashcard') {
+        els.modeToggle.innerHTML = '<i class="fas fa-clone"></i>';
+        els.flashcardMode.classList.remove('hidden');
+    } else if (activeMode === 'quiz') {
+        els.modeToggle.innerHTML = '<i class="fas fa-question-circle"></i>';
+        els.quizMode.classList.remove('hidden');
+    } else if (activeMode === 'sentence') {
+        els.modeToggle.innerHTML = '<i class="fas fa-align-left"></i>';
+        els.sentenceMode.classList.remove('hidden');
+    } else if (activeMode === 'speed') {
+        els.modeToggle.innerHTML = '<i class="fas fa-stopwatch"></i>';
+        els.speedMode.classList.remove('hidden');
+        els.speedStartScreen.classList.remove('hidden');
+        return;
+    }
+    pickNewCard();
+}
+
 function pickNewCard() {
-    // Use requestAnimationFrame for smoother DOM updates
+    // Perform DOM updates in the next frame to ensure the browser is ready
     requestAnimationFrame(() => {
+        els.card.style.transition = 'none';
         els.card.style.transform = '';
-        els.card.style.transition = '';
         els.card.classList.remove('swipe-right', 'swipe-left', 'flipped');
 
         if (nextCardEl) {
             nextCardEl.style.transition = 'none';
             nextCardEl.classList.remove('promote-card');
-            void nextCardEl.offsetWidth;
-            nextCardEl.style.transition = 'all 0.25s ease';
+
+            // Double rAF pattern to ensure reflow happens naturally without blocking
+            requestAnimationFrame(() => {
+                els.card.style.transition = '';
+                if (nextCardEl) {
+                    nextCardEl.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                }
+            });
         }
     });
 
     let activePool = [];
     if (isErrorReviewMode) {
-        activePool = wordData.filter(w => errorCards.includes(w.id));
+        activePool = currentWordData.filter(w => errorCards.includes(w.id));
         if (activePool.length === 0) {
             toggleErrorReviewMode(true);
             showToast("All errors cleared! Returning to normal mode.", "Great Job!");
@@ -839,7 +1758,7 @@ function pickNewCard() {
 
     if (historyIndex < cardHistory.length - 1) {
         historyIndex++;
-        currentCard = wordData.find(w => w.id === cardHistory[historyIndex]);
+        currentCard = currentWordData.find(w => w.id === cardHistory[historyIndex]);
         nextCard = activePool[Math.floor(Math.random() * activePool.length)];
     } else {
         if (nextCard && !isErrorReviewMode) {
@@ -877,8 +1796,16 @@ function pickNewCard() {
     updateNavigationControls();
 }
 
+// Global processing flag - spam önleme
+let isProcessingAnswer = false;
+
 function handleAnswer(known) {
     if (activeMode !== 'flashcard') return;
+
+    // SPAM KORUMASI - İşlem devam ediyorsa çık
+    if (isProcessingAnswer) return;
+    isProcessingAnswer = true;
+
     if (known) {
         updateStreak(true);
         playSound('correct');
@@ -912,6 +1839,9 @@ function handleAnswer(known) {
         }
         saveData();
         pickNewCard();
+
+        // İşlem bitti, yeni cevap kabul edilebilir
+        isProcessingAnswer = false;
     }, 700);
 }
 
@@ -934,7 +1864,7 @@ function navigateHistory(direction) {
     if (direction === 'prev') {
         if (historyIndex > 0) {
             historyIndex--;
-            currentCard = wordData.find(w => w.id === cardHistory[historyIndex]);
+            currentCard = currentWordData.find(w => w.id === cardHistory[historyIndex]);
             const isFav = favCards.includes(currentCard.id);
             if (activeMode === 'quiz') setupQuiz(isFav);
             else if (activeMode === 'sentence') setupSentence(isFav);
@@ -945,7 +1875,7 @@ function navigateHistory(direction) {
     } else if (direction === 'next') {
         if (historyIndex < cardHistory.length - 1) {
             historyIndex++;
-            currentCard = wordData.find(w => w.id === cardHistory[historyIndex]);
+            currentCard = currentWordData.find(w => w.id === cardHistory[historyIndex]);
             const isFav = favCards.includes(currentCard.id);
             if (activeMode === 'quiz') setupQuiz(isFav);
             else if (activeMode === 'sentence') setupSentence(isFav);
@@ -960,6 +1890,7 @@ function touchStart(e) {
     if (activeMode !== 'flashcard' || els.card.classList.contains('flipped')) return;
     isDragging = true;
     startX = e.touches[0].clientX;
+    startTime = Date.now();
     els.card.style.transition = 'none';
     els.card.querySelector('.flip-card-inner').style.transition = 'none';
 }
@@ -969,36 +1900,78 @@ function touchMove(e) {
     const currentX = e.touches[0].clientX;
     const diffX = currentX - startX;
     e.preventDefault();
-    els.card.style.transform = `translateX(${diffX}px) rotateY(0deg) rotateZ(${diffX / 20}deg)`;
-    const opacity = Math.min(Math.abs(diffX) / swipeThreshold, 1);
+
+    // Smoother rotation calculation with easing
+    const rotation = diffX / 25;
+    const scale = 1 - Math.abs(diffX) / 2000;
+
+    els.card.style.transform = `translateX(${diffX}px) rotateZ(${rotation}deg) scale(${scale})`;
+
+    // Smoother opacity feedback
+    const progress = Math.min(Math.abs(diffX) / swipeThreshold, 1);
+    const easeProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
+
     if (diffX > 0) {
-        els.btnPass.style.opacity = opacity;
-        els.btnFail.style.opacity = 0.5;
+        els.btnPass.style.opacity = 0.5 + easeProgress * 0.5;
+        els.btnPass.style.transform = `scale(${1 + easeProgress * 0.1})`;
+        els.btnFail.style.opacity = 0.3;
+        els.btnFail.style.transform = 'scale(1)';
     } else {
-        els.btnFail.style.opacity = opacity;
-        els.btnPass.style.opacity = 0.5;
+        els.btnFail.style.opacity = 0.5 + easeProgress * 0.5;
+        els.btnFail.style.transform = `scale(${1 + easeProgress * 0.1})`;
+        els.btnPass.style.opacity = 0.3;
+        els.btnPass.style.transform = 'scale(1)';
     }
 }
+
+let startTime = 0;
 
 function touchEnd(e) {
     if (!isDragging) return;
     isDragging = false;
+
     const endX = e.changedTouches[0].clientX;
     const diffX = endX - startX;
-    els.card.style.transition = 'transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    els.card.querySelector('.flip-card-inner').style.transition = 'transform 0.6s';
+    const duration = Date.now() - startTime;
+
+    // Calculate velocity for momentum
+    const velocity = Math.abs(diffX) / duration;
+    const isSwipe = velocity > 0.5 || Math.abs(diffX) > swipeThreshold;
+
+    // Reset button styles smoothly
+    els.btnPass.style.transition = 'all 0.3s ease';
+    els.btnFail.style.transition = 'all 0.3s ease';
     els.btnPass.style.opacity = 1;
     els.btnFail.style.opacity = 1;
+    els.btnPass.style.transform = 'scale(1)';
+    els.btnFail.style.transform = 'scale(1)';
+
+    // Smooth card transition
+    els.card.querySelector('.flip-card-inner').style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+
     let answer = null;
-    if (diffX > swipeThreshold) answer = true;
-    else if (diffX < -swipeThreshold) answer = false;
+    if (diffX > 0 && isSwipe) answer = true;
+    else if (diffX < 0 && isSwipe) answer = false;
 
     if (answer !== null) {
-        els.card.style.transform = `translateX(${diffX > 0 ? 300 : -300}px) rotateZ(${diffX / 10}deg)`;
+        // Momentum-based fly out animation
+        const flyDistance = diffX > 0 ? 400 : -400;
+        const rotation = diffX > 0 ? 15 : -15;
+
+        els.card.style.transition = 'transform 0.5s cubic-bezier(0.32, 0, 0.67, 0)';
+        els.card.style.transform = `translateX(${flyDistance}px) rotateZ(${rotation}deg) scale(0.9)`;
         handleAnswer(answer);
     } else {
-        els.card.style.transform = 'translateX(0) rotateZ(0)';
+        // Elastic bounce back animation
+        els.card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        els.card.style.transform = 'translateX(0) rotateZ(0) scale(1)';
     }
+
+    // Reset button transitions after animation
+    setTimeout(() => {
+        els.btnPass.style.transition = '';
+        els.btnFail.style.transition = '';
+    }, 300);
 }
 
 function setupFlashcard(isFav) {
@@ -1027,7 +2000,7 @@ function setupSentence(isFav) {
 function generateOptions(container, type, correctAnswer) {
     let options = [currentCard];
     while (options.length < 4) {
-        let randomW = wordData[Math.floor(Math.random() * wordData.length)];
+        let randomW = currentWordData[Math.floor(Math.random() * currentWordData.length)];
         if (!options.includes(randomW)) options.push(randomW);
     }
     options.sort(() => Math.random() - 0.5);
@@ -1055,6 +2028,11 @@ function checkAnswer(btn, isCorrect, container) {
         addXP(XP_REWARDS.correctAnswer, 'Correct!');
         updateGoalProgress('correct');
         updateGoalProgress('quiz');
+
+        // Increment mode-specific counters for badges
+        if (activeMode === 'quiz') totalQuizCorrect++;
+        else if (activeMode === 'sentence') totalSentenceCorrect++;
+
         if (isErrorReviewMode) errorCards = errorCards.filter(id => id !== currentCard.id);
         if (errorCards.includes(currentCard.id)) errorCards = errorCards.filter(id => id !== currentCard.id);
         saveData();
@@ -1085,14 +2063,14 @@ function updateFavIcon(btn, isFav) {
 }
 
 function openDict() {
-    els.dictModal.classList.remove('hidden');
+    openModal(els.dictModal);
     renderDict();
 }
 
 function renderDict() {
     const term = els.searchInput.value.toLowerCase();
     els.wordList.innerHTML = '';
-    const filtered = wordData.filter(w => {
+    const filtered = currentWordData.filter(w => {
         const matchesSearch = w.word.toLowerCase().includes(term) || w.definition.toLowerCase().includes(term);
         const matchesFav = isFilterFav ? favCards.includes(w.id) : true;
         const matchesError = isFilterError ? errorCards.includes(w.id) : true;
@@ -1211,6 +2189,21 @@ function updateLevelUI() {
     const xpNeeded = getXPForLevel(userLevel + 1);
     if (els.levelNumber) els.levelNumber.textContent = userLevel;
     if (els.levelTitle) els.levelTitle.textContent = getLevelTitle();
+
+    // Profile Updates
+    if (els.userNameDisplay) els.userNameDisplay.textContent = userName;
+    if (els.userAvatarDisplay) {
+        if (userAvatar && userAvatar.startsWith('data:image')) {
+            els.userAvatarDisplay.innerHTML = `<img src="${userAvatar}" alt="User Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">`;
+            // Remove any default background char styling if needed, though img covers it
+            els.userAvatarDisplay.style.fontSize = '0'; // Hide any leakage
+        } else {
+            els.userAvatarDisplay.textContent = userAvatar;
+            els.userAvatarDisplay.style.fontSize = ''; // Reset
+            els.userAvatarDisplay.innerHTML = userAvatar; // Ensure no stale img
+        }
+    }
+
     if (els.xpBar) {
         const progress = (userXP / xpNeeded) * 100;
         els.xpBar.style.width = `${progress}%`;
@@ -1328,7 +2321,7 @@ function openGoalsModal() {
         `;
     }
 
-    els.goalsModal.classList.remove('hidden');
+    openModal(els.goalsModal);
 }
 
 // --- SOUND SYSTEM (Web Audio API) ---
@@ -1412,6 +2405,61 @@ function playSound(type) {
     }
 }
 
+// --- SPLASH SCREEN LOGIC ---
+function hideSplashScreen() {
+    const splash = document.getElementById('splashScreen');
+    const statusText = splash?.querySelector('.splash-status');
+    const progressBar = splash?.querySelector('.progress-bar');
+
+    if (!splash) return;
+
+    // Minimum delay (8.5s) for a premium theatrical feel
+    const startTime = window.splashStartTime || Date.now();
+    const elapsedTime = Date.now() - startTime;
+    const minDelay = 8500;
+
+    // SMART PROGRESS BAR LOGIC - Milestones and Speed variations
+    if (progressBar && statusText) {
+        // Step 1: Initialization
+        setTimeout(() => {
+            progressBar.style.transition = 'width 1.5s ease-out';
+            progressBar.style.width = '25%';
+            statusText.textContent = "Initializing cognitive engines...";
+        }, 100);
+
+        // Step 2: Database Scan (Slower)
+        setTimeout(() => {
+            progressBar.style.transition = 'width 2.5s ease-in-out';
+            progressBar.style.width = '55%';
+            statusText.textContent = "Scanning word database...";
+        }, 2000);
+
+        // Step 3: Synch (Variable speed)
+        setTimeout(() => {
+            progressBar.style.transition = 'width 2s cubic-bezier(0.4, 0, 0.2, 1)';
+            progressBar.style.width = '85%';
+            statusText.textContent = "Synchronizing progress data...";
+        }, 5000);
+
+        // Step 4: Ready
+        setTimeout(() => {
+            progressBar.style.transition = 'width 1s ease-out';
+            progressBar.style.width = '100%';
+            statusText.textContent = "Boarding complete. Ready!";
+        }, 7500);
+    }
+
+    const delay = Math.max(0, minDelay - elapsedTime);
+
+    setTimeout(() => {
+        splash.classList.add('fade-out');
+        // Clean up DOM after transition
+        setTimeout(() => splash.remove(), 1000);
+    }, delay);
+}
+
+// SplashScreen logic definitions...
+
 function toggleSound() {
     soundEnabled = !soundEnabled;
     saveData();
@@ -1429,6 +2477,141 @@ function setColorTheme(themeName) {
 
     currentTheme = themeName;
     saveData();
+}
+
+// --- PROFILE CUSTOMIZATION & AVATAR UPLOAD ---
+function initProfileCustomization() {
+    const avatarGrid = document.getElementById('avatarGrid');
+    const uploadBtn = document.getElementById('uploadAvatarBtn');
+    const fileInput = document.getElementById('avatarUpload');
+    const nameInput = document.getElementById('profileNameInput');
+    const saveBtn = document.getElementById('saveProfileBtn');
+    const modal = document.getElementById('profileModal');
+
+    if (!avatarGrid || !modal) return;
+
+    // Hotfix: Refresh input value whenever initialization runs
+    if (nameInput) {
+        nameInput.value = userName || '';
+        // Ensure input is interactive
+        nameInput.onmousedown = (e) => e.stopPropagation();
+    }
+
+    // Header Interaction (Open Modal) - Click anywhere on the level card
+    if (els.levelDisplay) {
+        els.levelDisplay.style.cursor = 'pointer';
+        els.levelDisplay.title = "Click to Edit Profile";
+        els.levelDisplay.onclick = () => openModal(modal);
+    }
+
+    // Explicit Close Button Listener
+    if (els.closeProfile) {
+        els.closeProfile.onclick = () => closeModal(modal);
+    }
+
+    // Close on outside click
+    modal.onclick = (e) => {
+        if (e.target === modal) closeModal(modal);
+    };
+
+    // Render Avatars from Config
+    avatarGrid.innerHTML = '';
+    AVATAR_COLLECTION.forEach(av => {
+        const isLocked = userLevel < av.level;
+        const div = document.createElement('div');
+        div.className = `avatar-opt ${userAvatar === av.char ? 'selected' : ''} ${isLocked ? 'locked' : ''}`;
+        div.textContent = av.char;
+        div.title = isLocked ? `Unlocks at Level ${av.level}` : av.name;
+
+        div.onclick = () => {
+            if (isLocked) {
+                showToast(`🔒 Reach Level ${av.level} to unlock!`, "Avatar Locked");
+                playSound('wrong');
+                return;
+            }
+            // Deselect all
+            document.querySelectorAll('.avatar-opt').forEach(el => el.classList.remove('selected'));
+            div.classList.add('selected');
+
+            // Remember selection
+            avatarGrid.dataset.selected = av.char;
+        };
+        avatarGrid.appendChild(div);
+    });
+
+    // Custom Avatar Handling
+    if (uploadBtn && fileInput) {
+        uploadBtn.onclick = () => fileInput.click();
+        fileInput.onchange = (e) => handleAvatarUpload(e);
+    }
+
+    if (saveBtn) {
+        saveBtn.onclick = () => {
+            const newName = nameInput.value.trim().substring(0, 15);
+            const selectedEl = avatarGrid.querySelector('.selected');
+            const newAvatar = avatarGrid.dataset.selected || (selectedEl ? selectedEl.textContent : userAvatar);
+
+            if (newName || userAvatar !== newAvatar) {
+                if (newName) userName = newName;
+                userAvatar = newAvatar;
+                saveData();
+                updateLevelUI();
+                closeModal(modal);
+                showToast("Profile Updated!", "Success");
+                playSound('correct');
+            } else {
+                closeModal(modal);
+            }
+        };
+    }
+}
+
+function handleAvatarUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) { // 2MB limit check
+        showToast("Image too large. Max 2MB.", "Upload Failed");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const img = new Image();
+        img.onload = function () {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const MAX_SIZE = 150;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_SIZE) {
+                    height *= MAX_SIZE / width;
+                    width = MAX_SIZE;
+                }
+            } else {
+                if (height > MAX_SIZE) {
+                    width *= MAX_SIZE / height;
+                    height = MAX_SIZE;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+
+            // Set as selected in UI
+            const avatarGrid = document.getElementById('avatarGrid');
+            if (avatarGrid) avatarGrid.dataset.selected = dataUrl;
+
+            showToast("Photo processed! Click 'Save' to apply.", "Upload Success");
+        };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
 }
 
 init();
