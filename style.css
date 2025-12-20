@@ -3126,6 +3126,393 @@ body.theme-midnight {
 }
 
 /* ===================================== */
+/* ===== THEME CARD DECORATIONS ===== */
+/* ===================================== */
+
+/* Hide decorations when toggle is off */
+body.hide-card-decorations .flip-card-front::before,
+body.hide-card-decorations .flip-card-front::after,
+body.hide-card-decorations .theme-decoration-br,
+body.hide-card-decorations .next-card-preview::before,
+body.hide-card-decorations .next-card-preview::after,
+body.hide-card-decorations .next-card-preview .theme-decoration-br {
+    display: none !important;
+}
+
+/* Forest Theme - 3D Vine decoration */
+body.theme-forest .flip-card-front::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 95px;
+    height: 95px;
+    background: url('themes/forest/foresttheme.png') no-repeat top left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+/* Dark mode adjustment */
+body.dark-mode.theme-forest .flip-card-front::after {
+    opacity: 0.9;
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Forest Theme - Bottom left vine decoration */
+body.theme-forest .flip-card-front::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 140px;
+    height: 140px;
+    background: url('themes/forest/foresttheme2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+/* Dark mode adjustment for bottom vine */
+body.dark-mode.theme-forest .flip-card-front::before {
+    opacity: 0.9;
+    filter: drop-shadow(3px -3px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Forest Theme - Bottom right vine decoration (dedicated element) */
+body.theme-forest .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 140px;
+    height: 140px;
+    background: url('themes/forest/foresttheme3.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+/* Dark mode adjustment for bottom right vine */
+body.dark-mode.theme-forest .theme-decoration-br {
+    opacity: 0.9;
+    filter: drop-shadow(-3px -3px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* ========== NEXT CARD PREVIEW - Same decorations ========== */
+
+/* Forest Theme - Top left vine for next card */
+body.theme-forest .next-card-preview::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 95px;
+    height: 95px;
+    background: url('themes/forest/foresttheme.png') no-repeat top left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+/* Forest Theme - Bottom left vine for next card */
+body.theme-forest .next-card-preview::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 140px;
+    height: 140px;
+    background: url('themes/forest/foresttheme2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+/* Dark mode adjustments for next card */
+body.dark-mode.theme-forest .next-card-preview::after,
+body.dark-mode.theme-forest .next-card-preview::before {
+    opacity: 0.9;
+}
+
+/* Forest Theme - Bottom right vine for next card */
+body.theme-forest .next-card-preview .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 140px;
+    height: 140px;
+    background: url('themes/forest/foresttheme3.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+body.dark-mode.theme-forest .next-card-preview .theme-decoration-br {
+    opacity: 0.9;
+}
+
+/* ===================================== */
+/* ===== SUNSET THEME DECORATIONS ===== */
+/* ===================================== */
+
+/* Sunset Theme - Bottom right decoration */
+body.theme-sunset .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/sunset/sunset1.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+/* Sunset Theme - Bottom left decoration */
+body.theme-sunset .flip-card-front::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/sunset/sunset2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+/* Dark mode adjustments for sunset */
+body.dark-mode.theme-sunset .theme-decoration-br,
+body.dark-mode.theme-sunset .flip-card-front::before {
+    opacity: 0.9;
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Sunset Theme - Next card preview decorations */
+body.theme-sunset .next-card-preview .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/sunset/sunset1.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+body.theme-sunset .next-card-preview::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/sunset/sunset2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+body.dark-mode.theme-sunset .next-card-preview .theme-decoration-br,
+body.dark-mode.theme-sunset .next-card-preview::before {
+    opacity: 0.9;
+}
+
+/* ===================================== */
+/* ===== OCEAN THEME DECORATIONS ===== */
+/* ===================================== */
+
+/* Ocean Theme - Bottom right decoration */
+body.theme-ocean .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/ocean/ocean1.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+/* Ocean Theme - Bottom left decoration */
+body.theme-ocean .flip-card-front::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/ocean/ocean2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+/* Dark mode adjustments for ocean */
+body.dark-mode.theme-ocean .theme-decoration-br,
+body.dark-mode.theme-ocean .flip-card-front::before {
+    opacity: 0.9;
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Ocean Theme - Next card preview decorations */
+body.theme-ocean .next-card-preview .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/ocean/ocean1.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+body.theme-ocean .next-card-preview::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 150px;
+    height: 150px;
+    background: url('themes/ocean/ocean2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+body.dark-mode.theme-ocean .next-card-preview .theme-decoration-br,
+body.dark-mode.theme-ocean .next-card-preview::before {
+    opacity: 0.9;
+}
+
+/* ===================================== */
+/* ===== MIDNIGHT THEME DECORATIONS ===== */
+/* ===================================== */
+
+/* Midnight Theme - Bottom right decoration */
+body.theme-midnight .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 130px;
+    height: 130px;
+    background: url('themes/midnight/midnight1.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+/* Midnight Theme - Bottom left decoration */
+body.theme-midnight .flip-card-front::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 130px;
+    height: 130px;
+    background: url('themes/midnight/midnight2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+/* Dark mode adjustments for midnight */
+body.dark-mode.theme-midnight .theme-decoration-br,
+body.dark-mode.theme-midnight .flip-card-front::before {
+    opacity: 0.9;
+    filter: drop-shadow(3px 3px 8px rgba(0, 0, 0, 0.5));
+}
+
+/* Midnight Theme - Next card preview decorations */
+body.theme-midnight .next-card-preview .theme-decoration-br {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 130px;
+    height: 130px;
+    background: url('themes/midnight/midnight1.png') no-repeat bottom right;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(-2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(-5deg);
+}
+
+body.theme-midnight .next-card-preview::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -15px;
+    width: 130px;
+    height: 130px;
+    background: url('themes/midnight/midnight2.png') no-repeat bottom left;
+    background-size: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 100;
+    filter: drop-shadow(2px -2px 5px rgba(0, 0, 0, 0.3));
+    transform: rotate(5deg);
+}
+
+body.dark-mode.theme-midnight .next-card-preview .theme-decoration-br,
+body.dark-mode.theme-midnight .next-card-preview::before {
+    opacity: 0.9;
+}
+
+/* ===================================== */
 /* ===== SETTINGS ADDITIONS ===== */
 /* ===================================== */
 

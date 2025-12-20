@@ -113,6 +113,7 @@ let audioContext = null;
 
 // --- THEME SYSTEM ---
 let currentTheme = "default";
+let cardDecorationsEnabled = true;
 let userName = "Scholar";
 let userAvatar = "👤";
 
@@ -612,6 +613,16 @@ async function init() {
             els.menuSoundToggle.addEventListener('change', toggleSound);
         }
 
+        // 7. Card Decorations Toggle
+        const decorToggle = document.getElementById('cardDecorationsToggle');
+        if (decorToggle) {
+            decorToggle.addEventListener('change', (e) => {
+                cardDecorationsEnabled = e.target.checked;
+                document.body.classList.toggle('hide-card-decorations', !cardDecorationsEnabled);
+                saveData();
+            });
+        }
+
         // 7. Word Level Badge - Opens Level Selection
         const wordLevelBadge = document.getElementById('wordLevelBadge');
         if (wordLevelBadge) {
@@ -824,6 +835,8 @@ function createNextCardPreview() {
     nextCardEl = document.createElement('div');
     nextCardEl.className = 'next-card-preview';
     nextCardEl.innerHTML = `
+        <!-- Theme decoration element -->
+        <div class="theme-decoration-br"></div>
         <div class="card-header">
             <span class="word-id" id="nextWordId">#--</span>
             <button class="fav-btn"><i class="far fa-star"></i></button>
@@ -1123,6 +1136,8 @@ function loadData() {
 
     // Theme
     currentTheme = localStorage.getItem('ydspro_color_theme') || 'default';
+    // Clear any existing theme classes first
+    document.body.classList.remove('theme-ocean', 'theme-forest', 'theme-sunset', 'theme-midnight');
     if (currentTheme !== 'default') {
         document.body.classList.add(`theme-${currentTheme}`);
     }
@@ -1131,6 +1146,12 @@ function loadData() {
     // Sound
     soundEnabled = localStorage.getItem('ydspro_sound') !== 'false';
     if (els.menuSoundToggle) els.menuSoundToggle.checked = soundEnabled;
+
+    // Card Decorations
+    cardDecorationsEnabled = localStorage.getItem('ydspro_card_decorations') !== 'false';
+    const decorToggle = document.getElementById('cardDecorationsToggle');
+    if (decorToggle) decorToggle.checked = cardDecorationsEnabled;
+    document.body.classList.toggle('hide-card-decorations', !cardDecorationsEnabled);
 
     // Level Group Loading Logic
     const savedLevelGroup = localStorage.getItem('ydspro_user_level_group');
@@ -1204,9 +1225,10 @@ function saveData() {
     localStorage.setItem('ydspro_daily_goals', JSON.stringify(dailyGoals));
     localStorage.setItem('ydspro_goal_date', lastGoalDate);
 
-    // Theme & Sound
+    // Theme & Sound & Decorations
     localStorage.setItem('ydspro_color_theme', currentTheme);
     localStorage.setItem('ydspro_sound', soundEnabled.toString());
+    localStorage.setItem('ydspro_card_decorations', cardDecorationsEnabled.toString());
 
     updateStats();
     checkBadges();
