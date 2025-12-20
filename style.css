@@ -2157,6 +2157,7 @@ body.dark-mode .dict-item {
 @media (max-width: 768px) {
     body {
         padding: 0;
+        background-attachment: scroll;
     }
 
     .dashboard {
