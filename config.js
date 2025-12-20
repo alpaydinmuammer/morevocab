@@ -105,3 +105,30 @@ const AVATAR_COLLECTION = [
     { char: '🦸', level: 45, name: 'Hero' },
     { char: '👑', level: 50, name: 'King/Queen' }
 ];
+
+// 6. Animation Timing (ms)
+const ANIMATION_TIMING = {
+    cardSwipe: 700,          // Card swipe out animation
+    cardFlip: 500,           // Card flip animation
+    modalTransition: 300,    // Modal open/close
+    toastDuration: 3500,     // Toast notification display time
+    splashMinimum: 8500,     // Minimum splash screen display time
+    buttonCooldown: 700      // Button spam prevention cooldown
+};
+
+// 7. Splash Screen Settings
+const SPLASH_CONFIG = {
+    skipIfWithinHours: 4,    // Skip splash if visited within X hours
+    skipIfSameDay: true      // Skip splash on same day visit
+};
+
+// 8. Swipe Configuration
+const SWIPE_CONFIG = {
+    threshold: 100,          // Minimum swipe distance (px)
+    velocityThreshold: 0.5   // Minimum velocity (px/ms)
+};
+
+// 9. Card History Settings
+const HISTORY_CONFIG = {
+    maxSize: 50              // Maximum cards to keep in history
+};

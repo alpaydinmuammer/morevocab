@@ -1,5 +1,34 @@
 // --- GLOBAL DEĞİŞKENLER ---
 window.splashStartTime = Date.now();
+
+// --- SMART SPLASH SCREEN SKIP ---
+// Skip splash if: same day OR visited within last 4 hours
+(function checkSplashSkip() {
+    const SPLASH_SKIP_HOURS = 4; // Skip splash if visited within X hours
+    const lastVisit = localStorage.getItem('lastVisitTimestamp');
+    const now = Date.now();
+
+    if (lastVisit) {
+        const lastVisitTime = parseInt(lastVisit, 10);
+        const hoursSinceVisit = (now - lastVisitTime) / (1000 * 60 * 60);
+        const lastVisitDate = new Date(lastVisitTime).toDateString();
+        const todayDate = new Date(now).toDateString();
+
+        // Skip splash if same day OR visited within SPLASH_SKIP_HOURS
+        if (lastVisitDate === todayDate || hoursSinceVisit < SPLASH_SKIP_HOURS) {
+            window.skipSplashScreen = true;
+            // Immediately hide splash via CSS
+            const splash = document.getElementById('splashScreen');
+            if (splash) {
+                splash.style.display = 'none';
+                splash.remove();
+            }
+        }
+    }
+
+    // Save current visit timestamp
+    localStorage.setItem('lastVisitTimestamp', now.toString());
+})();
 let currentCard = null;
 let nextCard = null;
 let learnedCards = [];
@@ -17,12 +46,16 @@ let isErrorReviewMode = false;
 // SWIPE (KAYDIRMA) DEĞİŞKENLERİ
 let startX = 0;
 let isDragging = false;
-const swipeThreshold = 100;
+// swipeThreshold now uses SWIPE_CONFIG.threshold from config.js
+
+// GLOBAL ANIMATION LOCK - prevents any new card action while animating
+let isCardAnimating = false;
+// CARD_ANIMATION_DURATION now uses ANIMATION_TIMING.cardSwipe from config.js
 
 // GEÇMİŞ YÖNETİMİ (Quiz ve Sentence için)
 let cardHistory = [];
 let historyIndex = -1;
-let maxHistorySize = 50;
+// maxHistorySize now uses HISTORY_CONFIG.maxSize from config.js
 
 // STREAK & SES & DİĞERLERİ
 let streakCount = 0;
@@ -399,6 +432,7 @@ function formatTimeDetail(seconds) {
 function openModal(modal) {
     if (!modal) return;
     modal.classList.remove('hidden');
+    playSound('pop'); // Modal open sound
 
     // Overlay Animation (Fade)
     modal.classList.remove('overlay-animate-out');
@@ -414,6 +448,7 @@ function openModal(modal) {
 
 function closeModal(modal) {
     if (!modal) return;
+    playSound('whoosh'); // Modal close sound
 
     // Overlay Animation (Fade Out)
     modal.classList.remove('overlay-animate-in');
@@ -520,10 +555,10 @@ async function init() {
                 localStorage.removeItem('ydspro_user_level_group');
                 closeModal(els.menuOptionsModal); // Close options
 
-                // Reload yerine modalı göster
+                // Show level selection modal with animation
                 const levelModal = document.getElementById('levelSelectionModal');
                 if (levelModal) {
-                    levelModal.classList.remove('hidden');
+                    openModal(levelModal);
                     levelModal.style.zIndex = "10000";
                 }
 
@@ -555,7 +590,7 @@ async function init() {
             // New modals for outside click
             const levelModal = document.getElementById('levelSelectionModal');
             const progressModal = document.getElementById('progressModal');
-            if (e.target === levelModal) levelModal.classList.add('hidden');
+            if (e.target === levelModal) closeModal(levelModal);
             if (e.target === progressModal) closeModal(progressModal);
         });
 
@@ -583,7 +618,7 @@ async function init() {
             wordLevelBadge.addEventListener('click', () => {
                 const levelModal = document.getElementById('levelSelectionModal');
                 if (levelModal) {
-                    levelModal.classList.remove('hidden');
+                    openModal(levelModal);
                     levelModal.style.zIndex = "10000";
                 }
             });
@@ -595,7 +630,7 @@ async function init() {
             closeLevelSelection.addEventListener('click', () => {
                 const levelModal = document.getElementById('levelSelectionModal');
                 if (levelModal) {
-                    levelModal.classList.add('hidden');
+                    closeModal(levelModal);
                 }
             });
         }
@@ -685,21 +720,41 @@ function setRandomQuote() {
     quoteText.textContent = MOTIVATION_QUOTES[randomIndex];
 }
 
-// Update menu stats display
+// Update menu stats display with counter animation
 function updateMenuStats() {
     const menuStreakCount = document.getElementById('menuStreakCount');
     const menuXPCount = document.getElementById('menuXPCount');
     const menuWordsCount = document.getElementById('menuWordsCount');
 
-    if (menuStreakCount) {
-        menuStreakCount.textContent = streakCount || 0;
+    // Animate counters (slower for premium feel)
+    animateCounter(menuStreakCount, streakCount || 0, 2500);
+    animateCounter(menuXPCount, userXP || 0, 3500);
+    animateCounter(menuWordsCount, learnedCards.length || 0, 3000);
+}
+
+// Smooth counter animation
+function animateCounter(element, target, duration) {
+    if (!element) return;
+
+    const start = 0;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease out cubic for smooth deceleration
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(start + (target - start) * eased);
+
+        element.textContent = current.toLocaleString();
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
     }
-    if (menuXPCount) {
-        menuXPCount.textContent = userXP || 0;
-    }
-    if (menuWordsCount) {
-        menuWordsCount.textContent = learnedCards.length || 0;
-    }
+
+    requestAnimationFrame(update);
 }
 
 function startGame(instant = false) {
@@ -707,8 +762,7 @@ function startGame(instant = false) {
     if (!localStorage.getItem('ydspro_user_level_group')) {
         const levelModal = document.getElementById('levelSelectionModal');
         if (levelModal) {
-            levelModal.classList.remove('hidden');
-            // Z-index ayarı ile en üste gelmesini garantiye alalım (CSS'te var ama JS ile pekiştirelim)
+            openModal(levelModal);
             levelModal.style.zIndex = "10000";
         }
         return; // Oyunu başlatma, modalı göster
@@ -772,7 +826,7 @@ function createNextCardPreview() {
     nextCardEl.innerHTML = `
         <div class="card-header">
             <span class="word-id" id="nextWordId">#--</span>
-            <button class="fav-btn neon-icon-container neon-purple"><i class="far fa-star"></i></button>
+            <button class="fav-btn"><i class="far fa-star"></i></button>
         </div>
         <h1 id="nextWordEnglish">Loading...</h1>
         <button class="speak-btn neon-icon-container neon-blue"><i class="fas fa-volume-up"></i></button>
@@ -799,15 +853,11 @@ function setupGameEventListeners() {
     if (els.card.getAttribute('data-listeners-added')) return;
     els.card.setAttribute('data-listeners-added', 'true');
 
-    // Flashcard Butonları - Spam önleme için güçlü cooldown
-    let isAnswerBlocked = false;
-    const answerCooldown = 700; // 700ms cooldown (animasyon süresiyle uyumlu)
-
+    // Flashcard Butonları - Use global animation lock
     const safeHandleAnswer = (isCorrect) => {
-        if (isAnswerBlocked) return;
-        isAnswerBlocked = true;
+        if (isCardAnimating) return; // Global lock check
 
-        // Butonları görsel olarak devre dışı bırak
+        // Visual feedback - disable buttons during animation
         els.btnFail.style.opacity = '0.5';
         els.btnPass.style.opacity = '0.5';
         els.btnFail.style.pointerEvents = 'none';
@@ -815,13 +865,13 @@ function setupGameEventListeners() {
 
         handleAnswer(isCorrect);
 
+        // Re-enable buttons after animation (synced with global lock release)
         setTimeout(() => {
-            isAnswerBlocked = false;
             els.btnFail.style.opacity = '1';
             els.btnPass.style.opacity = '1';
             els.btnFail.style.pointerEvents = 'auto';
             els.btnPass.style.pointerEvents = 'auto';
-        }, answerCooldown);
+        }, ANIMATION_TIMING.cardSwipe);
     };
 
     els.btnFail.addEventListener('click', () => safeHandleAnswer(false));
@@ -994,9 +1044,9 @@ function initLevelSelection() {
             speedHighScore = speedHighScoresByLevel[selectedLevel] || 0;
             if (els.highScoreDisplay) els.highScoreDisplay.textContent = speedHighScore;
 
-            // Modalı kapat
+            // Modalı kapat with animation
             const modal = document.getElementById('levelSelectionModal');
-            modal.classList.add('hidden');
+            closeModal(modal);
 
             // Level değiştirirken eski kartları temizle
             currentCard = null;
@@ -1174,7 +1224,10 @@ function startSpeedRun() {
     speedInterval = setInterval(() => {
         speedTime--;
         els.speedTimer.textContent = speedTime;
-        if (speedTime <= 10) els.speedTimer.style.color = "#e74c3c";
+        if (speedTime <= 10) {
+            els.speedTimer.style.color = "#e74c3c";
+            playSound('tick'); // Tick-tock for last 10 seconds
+        }
         else els.speedTimer.style.color = "#e67e22";
         if (speedTime <= 0) endSpeedGame();
     }, 1000);
@@ -1720,25 +1773,22 @@ function switchToMode(mode) {
 }
 
 function pickNewCard() {
-    // Perform DOM updates in the next frame to ensure the browser is ready
-    requestAnimationFrame(() => {
-        els.card.style.transition = 'none';
-        els.card.style.transform = '';
-        els.card.classList.remove('swipe-right', 'swipe-left', 'flipped');
+    // Reset main card state immediately for next round
+    els.card.style.transition = 'none';
+    els.card.style.transform = '';
+    els.card.classList.remove('swipe-right', 'swipe-left', 'flipped');
 
-        if (nextCardEl) {
-            nextCardEl.style.transition = 'none';
-            nextCardEl.classList.remove('promote-card');
+    // Force a small layout update before reenabling transitions
+    void els.card.offsetWidth;
 
-            // Double rAF pattern to ensure reflow happens naturally without blocking
-            requestAnimationFrame(() => {
-                els.card.style.transition = '';
-                if (nextCardEl) {
-                    nextCardEl.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                }
-            });
-        }
-    });
+    if (nextCardEl) {
+        nextCardEl.style.transition = 'none';
+        nextCardEl.classList.remove('promote-card');
+        void nextCardEl.offsetWidth;
+        nextCardEl.style.transition = ''; // Restore CSS-defined transitions
+    }
+
+    els.card.style.transition = '';
 
     let activePool = [];
     if (isErrorReviewMode) {
@@ -1776,7 +1826,7 @@ function pickNewCard() {
         historyIndex++;
         cardHistory = cardHistory.slice(0, historyIndex);
         cardHistory.push(currentCard.id);
-        if (cardHistory.length > maxHistorySize) {
+        if (cardHistory.length > HISTORY_CONFIG.maxSize) {
             cardHistory.shift();
             historyIndex--;
         }
@@ -1796,21 +1846,18 @@ function pickNewCard() {
     updateNavigationControls();
 }
 
-// Global processing flag - spam önleme
-let isProcessingAnswer = false;
-
 function handleAnswer(known) {
     if (activeMode !== 'flashcard') return;
 
-    // SPAM KORUMASI - İşlem devam ediyorsa çık
-    if (isProcessingAnswer) return;
-    isProcessingAnswer = true;
+    // GLOBAL ANIMATION LOCK - Block if animation in progress
+    if (isCardAnimating) return;
+    isCardAnimating = true;
+
+    // Play swipe sound for card transition (both directions)
+    playSound('swipe');
 
     if (known) {
         updateStreak(true);
-        playSound('correct');
-    } else {
-        playSound('wrong');
     }
     els.card.classList.add(known ? 'swipe-right' : 'swipe-left');
 
@@ -1840,9 +1887,9 @@ function handleAnswer(known) {
         saveData();
         pickNewCard();
 
-        // İşlem bitti, yeni cevap kabul edilebilir
-        isProcessingAnswer = false;
-    }, 550); // Reduced delay to match 0.5s animation better
+        // Release global animation lock
+        isCardAnimating = false;
+    }, ANIMATION_TIMING.cardSwipe); // Uses config constant
 }
 
 function updateNavigationControls() {
@@ -1888,6 +1935,7 @@ function navigateHistory(direction) {
 
 function touchStart(e) {
     if (activeMode !== 'flashcard' || els.card.classList.contains('flipped')) return;
+    if (isCardAnimating) return; // Block touch if animation in progress
     isDragging = true;
     startX = e.touches[0].clientX;
     startTime = Date.now();
@@ -1908,7 +1956,7 @@ function touchMove(e) {
     els.card.style.transform = `translate3d(${diffX}px, 0, 0) rotateZ(${rotation}deg) scale(${scale})`;
 
     // Smoother opacity feedback
-    const progress = Math.min(Math.abs(diffX) / swipeThreshold, 1);
+    const progress = Math.min(Math.abs(diffX) / SWIPE_CONFIG.threshold, 1);
     const easeProgress = 1 - Math.pow(1 - progress, 3); // Cubic ease out
 
     if (diffX > 0) {
@@ -1928,6 +1976,7 @@ let startTime = 0;
 
 function touchEnd(e) {
     if (!isDragging) return;
+    if (isCardAnimating) { isDragging = false; return; } // Block if animating
     isDragging = false;
 
     const endX = e.changedTouches[0].clientX;
@@ -1936,7 +1985,7 @@ function touchEnd(e) {
 
     // Calculate velocity for momentum
     const velocity = Math.abs(diffX) / duration;
-    const isSwipe = velocity > 0.5 || Math.abs(diffX) > swipeThreshold;
+    const isSwipe = velocity > SWIPE_CONFIG.velocityThreshold || Math.abs(diffX) > SWIPE_CONFIG.threshold;
 
     // Reset button styles smoothly
     els.btnPass.style.transition = 'all 0.3s ease';
@@ -2050,7 +2099,10 @@ function checkAnswer(btn, isCorrect, container) {
 
 function toggleFav() {
     if (favCards.includes(currentCard.id)) favCards = favCards.filter(id => id !== currentCard.id);
-    else favCards.push(currentCard.id);
+    else {
+        favCards.push(currentCard.id);
+        playSound('sparkle'); // Favorite added sound
+    }
     saveData();
     const isFav = favCards.includes(currentCard.id);
     updateFavIcon(els.favBtn, isFav);
@@ -2151,6 +2203,9 @@ function addXP(amount, reason = '') {
 }
 
 function showXPGain(amount, reason) {
+    // Mobilde performansı artırmak için XP animasyonunu atla
+    if (window.innerWidth <= 768) return;
+
     const xpFloat = document.createElement('div');
     xpFloat.className = 'xp-float';
     xpFloat.innerHTML = `+${amount} XP`;
@@ -2399,6 +2454,67 @@ function playSound(type) {
                 oscillator.start(ctx.currentTime);
                 oscillator.stop(ctx.currentTime + 0.05);
                 break;
+
+            case 'swipe':
+                // Play actual MP3 file for paper sound
+                const swipeAudio = new Audio('voices/swipe.mp3');
+                swipeAudio.volume = 0.5;
+                swipeAudio.play().catch(e => console.log('Swipe audio error:', e));
+                return;
+
+            case 'tick':
+                // Tick-tock for speed mode countdown
+                oscillator.frequency.setValueAtTime(1200, ctx.currentTime);
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.08);
+                break;
+
+            case 'pop':
+                // Modal open sound - soft pop
+                oscillator.frequency.setValueAtTime(400, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.05);
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.1);
+                break;
+
+            case 'whoosh':
+                // Modal close sound - soft whoosh down
+                oscillator.frequency.setValueAtTime(500, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.12);
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.12);
+                break;
+
+            case 'sparkle':
+                // Favorite/star sound - twinkle
+                oscillator.frequency.setValueAtTime(1047, ctx.currentTime); // C6
+                oscillator.frequency.setValueAtTime(1319, ctx.currentTime + 0.08); // E6
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.2);
+                break;
+
+            case 'flip':
+                // Card flip sound
+                oscillator.frequency.setValueAtTime(300, ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(450, ctx.currentTime + 0.08);
+                oscillator.type = 'triangle';
+                gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+                oscillator.start(ctx.currentTime);
+                oscillator.stop(ctx.currentTime + 0.1);
+                break;
         }
     } catch (e) {
         console.log('Audio error:', e);
@@ -2413,10 +2529,10 @@ function hideSplashScreen() {
 
     if (!splash) return;
 
-    // Minimum delay (8.5s) for a premium theatrical feel
+    // Minimum delay for premium theatrical feel (uses config)
     const startTime = window.splashStartTime || Date.now();
     const elapsedTime = Date.now() - startTime;
-    const minDelay = 8500;
+    const minDelay = ANIMATION_TIMING.splashMinimum;
 
     // SMART PROGRESS BAR LOGIC - Milestones and Speed variations
     if (progressBar && statusText) {
