@@ -310,42 +310,4 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
     );
   }
 
-  void _showCreateDeckDialog(BuildContext context) {
-    final controller = TextEditingController();
-    final l10n = AppLocalizations.of(context)!;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.nameYourDeck),
-        content: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            hintText: l10n.deckNameHint,
-            border: const OutlineInputBorder(),
-          ),
-          autofocus: true,
-          textCapitalization: TextCapitalization.sentences,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancel),
-          ),
-          FilledButton(
-            onPressed: () {
-              final name = controller.text.trim();
-              if (name.isNotEmpty) {
-                Navigator.pop(context);
-                // Navigate to empty custom deck page immediately
-                // Or just refresh list (it won't show yet as it has 0 words)
-                // Better: Go to "Add Word" page for this new deck
-                context.push('/custom-deck', extra: name);
-              }
-            },
-            child: Text(l10n.create),
-          ),
-        ],
-      ),
-    );
-  }
 }
