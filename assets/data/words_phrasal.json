@@ -1,0 +1,362 @@
+[
+    {
+        "id": 4001,
+        "word": "Give up",
+        "meanings": {
+            "tr": "Vazgeçmek, bırakmak",
+            "en": "Stop trying"
+        },
+        "exampleSentence": "Never give up on your dreams.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_giveup.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4002,
+        "word": "Look after",
+        "meanings": {
+            "tr": "İlgilenmek, bakmak",
+            "en": "Take care of"
+        },
+        "exampleSentence": "Can you look after my dog?",
+        "localAsset": "assets/images/words/phrasal_verbs/word_lookafter.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4003,
+        "word": "Break down",
+        "meanings": {
+            "tr": "Bozulmak, arızalanmak",
+            "en": "Stop working"
+        },
+        "exampleSentence": "My car broke down on the highway.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_breakdown.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4004,
+        "word": "Come across",
+        "meanings": {
+            "tr": "Rastlamak, karşılaşmak",
+            "en": "Find by chance"
+        },
+        "exampleSentence": "I came across an old photo.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_comeacross.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4005,
+        "word": "Figure out",
+        "meanings": {
+            "tr": "Çözmek, anlamak",
+            "en": "Understand or solve"
+        },
+        "exampleSentence": "I can't figure out this puzzle.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_figureout.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4006,
+        "word": "Get along",
+        "meanings": {
+            "tr": "İyi geçinmek",
+            "en": "Have a good relationship"
+        },
+        "exampleSentence": "We get along very well.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_getalong.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4007,
+        "word": "Put off",
+        "meanings": {
+            "tr": "Ertelemek",
+            "en": "Postpone"
+        },
+        "exampleSentence": "Don't put off until tomorrow.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_putoff.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4008,
+        "word": "Turn down",
+        "meanings": {
+            "tr": "Reddetmek",
+            "en": "Reject or refuse"
+        },
+        "exampleSentence": "She turned down the job offer.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_turndown.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4009,
+        "word": "Work out",
+        "meanings": {
+            "tr": "Spor yapmak / Çözmek",
+            "en": "Exercise or solve"
+        },
+        "exampleSentence": "I work out every morning.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_workout.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4010,
+        "word": "Run into",
+        "meanings": {
+            "tr": "Tesadüfen karşılaşmak",
+            "en": "Meet unexpectedly"
+        },
+        "exampleSentence": "I ran into my teacher at the mall.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_runinto.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4011,
+        "word": "Bring up",
+        "meanings": {
+            "tr": "Gündeme getirmek / Büyütmek",
+            "en": "Mention a topic / Raise a child"
+        },
+        "exampleSentence": "Don't bring up that topic again.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_bringup_1768581821552.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4012,
+        "word": "Carry on",
+        "meanings": {
+            "tr": "Devam etmek",
+            "en": "Continue doing something"
+        },
+        "exampleSentence": "Carry on with your work.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_carryon_1768581836122.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4013,
+        "word": "Catch up",
+        "meanings": {
+            "tr": "Yetişmek, son gelişmeleri öğrenmek",
+            "en": "Reach someone ahead / Get updated"
+        },
+        "exampleSentence": "Let's catch up over coffee.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_catchup_1768581850828.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4014,
+        "word": "Drop off",
+        "meanings": {
+            "tr": "Bırakmak, indirmek",
+            "en": "Leave someone or something at a place"
+        },
+        "exampleSentence": "I'll drop you off at the station.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_dropoff_1768581866472.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4015,
+        "word": "Hold on",
+        "meanings": {
+            "tr": "Beklemek, tutunmak",
+            "en": "Wait / Grip tightly"
+        },
+        "exampleSentence": "Hold on, I'll be right back.",
+        "localAsset": "assets/images/words/phrasal_verbs/word_holdon_1768581879506.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4016,
+        "word": "Set up",
+        "meanings": {
+            "tr": "Kurmak, hazırlamak",
+            "en": "Establish or arrange"
+        },
+        "exampleSentence": "Can you help me set up the equipment?",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_setup_1768859624854.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4017,
+        "word": "Take off",
+        "meanings": {
+            "tr": "Havalanmak, çıkarmak",
+            "en": "Leave the ground / Remove"
+        },
+        "exampleSentence": "The plane will take off in ten minutes.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_takeoff_1768859639751.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4018,
+        "word": "Look forward to",
+        "meanings": {
+            "tr": "Dört gözle beklemek",
+            "en": "Anticipate with pleasure"
+        },
+        "exampleSentence": "I look forward to seeing you.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_lookforwardto_1768859653624.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4019,
+        "word": "Give in",
+        "meanings": {
+            "tr": "Boyun eğmek, teslim olmak",
+            "en": "Surrender, yield"
+        },
+        "exampleSentence": "She finally gave in to his request.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_givein_1768859667118.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4020,
+        "word": "Pass out",
+        "meanings": {
+            "tr": "Bayılmak",
+            "en": "Faint, lose consciousness"
+        },
+        "exampleSentence": "He passed out from the heat.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_passout_1768859681931.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4021,
+        "word": "Hang out",
+        "meanings": {
+            "tr": "Takılmak, vakit geçirmek",
+            "en": "Spend time casually"
+        },
+        "exampleSentence": "Let's hang out this weekend.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_hangout_1768859706930.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4022,
+        "word": "Make up",
+        "meanings": {
+            "tr": "Uydurmak, barışmak",
+            "en": "Invent / Reconcile"
+        },
+        "exampleSentence": "They made up after the argument.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_makeup_1768859719905.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4023,
+        "word": "Show off",
+        "meanings": {
+            "tr": "Hava atmak, gösteriş yapmak",
+            "en": "Display proudly"
+        },
+        "exampleSentence": "He loves to show off his new car.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_showoff_1768859734657.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4024,
+        "word": "Back up",
+        "meanings": {
+            "tr": "Desteklemek, yedeklemek",
+            "en": "Support / Make a copy"
+        },
+        "exampleSentence": "Always back up your files.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_backup_1768859748781.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4025,
+        "word": "Cheer up",
+        "meanings": {
+            "tr": "Neşelenmek, moral vermek",
+            "en": "Become happier"
+        },
+        "exampleSentence": "Cheer up! Things will get better.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_cheerup_1768859763004.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4026,
+        "word": "Slow down",
+        "meanings": {
+            "tr": "Yavaşlamak",
+            "en": "Reduce speed"
+        },
+        "exampleSentence": "Slow down, you're driving too fast!",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_slowdown_1768859788775.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4027,
+        "word": "Stand out",
+        "meanings": {
+            "tr": "Öne çıkmak, göze çarpmak",
+            "en": "Be noticeable"
+        },
+        "exampleSentence": "Her red dress made her stand out.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_standout_1768859803368.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4028,
+        "word": "Turn up",
+        "meanings": {
+            "tr": "Ortaya çıkmak, sesi açmak",
+            "en": "Appear / Increase volume"
+        },
+        "exampleSentence": "He turned up late to the meeting.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_turnup_1768859817028.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4029,
+        "word": "Cut off",
+        "meanings": {
+            "tr": "Kesmek, bağlantısını koparmak",
+            "en": "Disconnect, interrupt"
+        },
+        "exampleSentence": "The storm cut off the power.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_cutoff_1768859831391.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4030,
+        "word": "Settle down",
+        "meanings": {
+            "tr": "Sakinleşmek, yerleşmek",
+            "en": "Calm down / Establish a home"
+        },
+        "exampleSentence": "They settled down in a small town.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_settledown_1768859845600.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    }
+]

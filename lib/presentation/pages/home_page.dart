@@ -1,0 +1,375 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import '../providers/word_providers.dart';
+import '../providers/settings_provider.dart';
+import '../providers/pet_provider.dart';
+import '../widgets/premium_background.dart';
+import '../widgets/deck_stats_carousel.dart';
+import '../widgets/credits_modal.dart';
+import '../widgets/pet/pet_widgets.dart';
+import '../../l10n/app_localizations.dart';
+
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
+
+  /// Returns time-based greeting based on current hour
+  String _getGreeting(AppLocalizations l10n) {
+    final hour = DateTime.now().hour;
+    if (hour >= 5 && hour < 12) {
+      return l10n.goodMorning; // 05:00 - 11:59 → Günaydın
+    } else if (hour >= 12 && hour < 18) {
+      return l10n.goodAfternoon; // 12:00 - 17:59 → İyi Günler
+    } else if (hour >= 18 && hour < 22) {
+      return l10n.goodEvening; // 18:00 - 21:59 → İyi Akşamlar
+    } else {
+      return l10n.goodNight; // 22:00 - 04:59 → İyi Geceler
+    }
+  }
+
+  /// Returns day-based motivational phrase (with special late night override)
+  String _getMotivationalPhrase(AppLocalizations l10n) {
+    final now = DateTime.now();
+    final hour = now.hour;
+    final weekday = now.weekday;
+
+    // Special message for 02:00-02:59 on Monday, Thursday, Sunday
+    if (hour == 2 &&
+        (weekday == DateTime.monday ||
+            weekday == DateTime.thursday ||
+            weekday == DateTime.sunday)) {
+      return l10n.motive2am;
+    }
+
+    // Special message for 03:00-04:59 (late night)
+    if (hour >= 3 && hour < 5) {
+      return l10n.motiveLateNight;
+    }
+
+    // Day-based phrases
+    switch (weekday) {
+      case DateTime.monday:
+        return l10n.motiveMon;
+      case DateTime.tuesday:
+        return l10n.motiveTue;
+      case DateTime.wednesday:
+        return l10n.motiveWed;
+      case DateTime.thursday:
+        return l10n.motiveThu;
+      case DateTime.friday:
+        return l10n.motiveFri;
+      case DateTime.saturday:
+        return l10n.motiveSat;
+      case DateTime.sunday:
+        return l10n.motiveSun;
+      default:
+        return l10n.letsLearn;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final settings = ref.watch(settingsProvider);
+
+    return Scaffold(
+      body: PremiumBackground(
+        showTypo: true, // User updated: Keep original letters AND add G/M
+        child: Stack(
+          children: [
+            // ... decorative letters ...
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+                child: Column(
+                  children: [
+                    // Header
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Greeting + name - tap to edit name
+                              GestureDetector(
+                                onTap: () => _showUserNameDialog(context, ref),
+                                child: FittedBox(
+                                  alignment: Alignment.centerLeft,
+                                  fit: BoxFit.scaleDown,
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: theme.textTheme.headlineMedium
+                                          ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: theme.colorScheme.primary,
+                                          ),
+                                      children: [
+                                        TextSpan(
+                                          text: _getGreeting(
+                                            AppLocalizations.of(context)!,
+                                          ),
+                                        ),
+                                        if (settings.userName.isNotEmpty) ...[
+                                          const TextSpan(text: ', '),
+                                          TextSpan(text: settings.userName),
+                                        ],
+                                      ],
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                _getMotivationalPhrase(
+                                  AppLocalizations.of(context)!,
+                                ),
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                  fontStyle: FontStyle.italic,
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: theme.brightness == Brightness.dark
+                                        ? 0.8
+                                        : 0.6,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surfaceContainerHighest
+                                .withValues(alpha: 0.5),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.settings_suggest_rounded,
+                              color: Colors.indigo,
+                            ),
+                            onPressed: () => context.push('/settings'),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const Spacer(),
+
+                    // Pet Widget
+                    _buildPetSection(context, ref),
+
+                    const SizedBox(height: 16),
+
+                    // Main Deck Carousel
+                    const DeckStatsCarousel(),
+
+                    const Spacer(),
+
+                    // Start Study Button
+                    _buildStartButton(context, ref),
+
+                    const SizedBox(height: 16),
+
+                    // Credits button
+                    TextButton.icon(
+                      onPressed: () => _showCredits(context),
+                      icon: Icon(
+                        Icons.info_outline_rounded,
+                        size: 18,
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.5,
+                        ),
+                      ),
+                      label: Text(
+                        AppLocalizations.of(context)!.credits,
+                        style: TextStyle(
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPetSection(BuildContext context, WidgetRef ref) {
+    final petState = ref.watch(petProvider);
+
+    // Show loading state
+    if (petState.isLoading) {
+      return const SizedBox(height: 180);
+    }
+
+    // Show egg if no pet exists
+    if (!petState.hasPet) {
+      return PetEggWidget(
+        onTap: () => _showPetSelection(context),
+      );
+    }
+
+    // Show pet display
+    return const PetDisplayWidget();
+  }
+
+  void _showPetSelection(BuildContext context) async {
+    final result = await PetSelectionModal.show(context);
+    if (result == true) {
+      // Pet was created successfully
+    }
+  }
+
+  Widget _buildStartButton(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+
+    return AnimatedPressable(
+      onTap: () async {
+        await context.push('/decks');
+        ref.invalidate(wordStatsProvider);
+      },
+      child: Container(
+        width: double.infinity,
+        height: 80, // Taller button for card feel
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: LinearGradient(
+            colors: [
+              theme.colorScheme.primary,
+              theme.colorScheme.primary.withValues(alpha: 0.8),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: theme.colorScheme.primary.withValues(alpha: 0.3),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Stack(
+          alignment: Alignment
+              .center, // CRITICAL FIX: Center content vertically/horizontally
+          children: [
+            // Background Icon Decoration
+            Positioned(
+              right: -10,
+              bottom: -10,
+              child: Icon(
+                Icons.rocket_launch_rounded,
+                size: 80,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
+            ),
+
+            // Content
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // Center everything
+                children: [
+                  // Icon (Cleaner, no box)
+                  const Icon(
+                    Icons.play_arrow_rounded,
+                    color: Colors.white,
+                    size: 32,
+                  ),
+                  const SizedBox(width: 16),
+
+                  // Text ONLY (No subtitle, no column needed)
+                  Text(
+                    AppLocalizations.of(context)!.start.toUpperCase(),
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.5,
+                      fontSize: 24, // Slightly bigger since it's alone
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showCredits(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      enableDrag: true,
+      transitionAnimationController: AnimationController(
+        vsync: Navigator.of(context),
+        duration: const Duration(milliseconds: 350),
+      ),
+      builder: (context) => const CreditsModal(),
+    );
+  }
+
+  void _showUserNameDialog(BuildContext context, WidgetRef ref) {
+    final controller = TextEditingController();
+    final theme = Theme.of(context);
+    final settings = ref.read(settingsProvider);
+
+    controller.text = settings.userName;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: theme.colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text(
+          'İsimni Düzenle',
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        content: TextField(
+          controller: controller,
+          maxLength: 9,
+          decoration: InputDecoration(
+            hintText: 'Adınızı girin',
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            prefixIcon: const Icon(Icons.person_rounded),
+          ),
+          autofocus: true,
+          textCapitalization: TextCapitalization.words,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'İptal',
+              style: TextStyle(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+          ),
+          FilledButton(
+            onPressed: () {
+              final name = controller.text.trim();
+              ref.read(settingsProvider.notifier).setUserName(name);
+              Navigator.pop(context);
+            },
+            child: const Text('Kaydet'),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -1,0 +1,242 @@
+[
+    {
+        "id": 5001,
+        "word": "Piece of cake",
+        "meanings": {
+            "tr": "Çocuk oyuncağı",
+            "en": "Something very easy"
+        },
+        "exampleSentence": "The exam was a piece of cake.",
+        "localAsset": "assets/images/words/idioms/word_pieceofcake_1768557020357.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5002,
+        "word": "Break the ice",
+        "meanings": {
+            "tr": "Buzları kırmak",
+            "en": "Start a conversation in a social setting"
+        },
+        "exampleSentence": "His joke helped break the ice.",
+        "localAsset": "assets/images/words/idioms/word_breaktheice_1768557037328.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5003,
+        "word": "Hit the road",
+        "meanings": {
+            "tr": "Yola çıkmak",
+            "en": "Start a journey"
+        },
+        "exampleSentence": "We should hit the road early.",
+        "localAsset": "assets/images/words/idioms/word_hittheroad_1768557052056.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5004,
+        "word": "Under the weather",
+        "meanings": {
+            "tr": "Hasta / keyifsiz",
+            "en": "Feeling ill"
+        },
+        "exampleSentence": "I'm feeling under the weather today.",
+        "localAsset": "assets/images/words/idioms/word_undertheweather_1768557067532.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5005,
+        "word": "Cost an arm and a leg",
+        "meanings": {
+            "tr": "Çok pahalı",
+            "en": "Very expensive"
+        },
+        "exampleSentence": "That car costs an arm and a leg.",
+        "localAsset": "assets/images/words/idioms/word_costarmleg_1768557084469.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5006,
+        "word": "Once in a blue moon",
+        "meanings": {
+            "tr": "Nadiren",
+            "en": "Very rarely"
+        },
+        "exampleSentence": "I only see him once in a blue moon.",
+        "localAsset": "assets/images/words/idioms/word_oncebluemoon_1768557116282.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5007,
+        "word": "Bite the bullet",
+        "meanings": {
+            "tr": "Dişini sıkmak",
+            "en": "Face a difficult situation bravely"
+        },
+        "exampleSentence": "You just have to bite the bullet.",
+        "localAsset": "assets/images/words/idioms/word_bitethebullet_1768557130922.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5008,
+        "word": "Spill the beans",
+        "meanings": {
+            "tr": "Sır vermek",
+            "en": "Reveal a secret"
+        },
+        "exampleSentence": "Who spilled the beans about the party?",
+        "localAsset": "assets/images/words/idioms/word_spillbeans_1768557145372.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5009,
+        "word": "Beat around the bush",
+        "meanings": {
+            "tr": "Lafı dolandırmak",
+            "en": "Avoid the main topic"
+        },
+        "exampleSentence": "Stop beating around the bush!",
+        "localAsset": "assets/images/words/idioms/word_beataroundbush_1768557161583.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5010,
+        "word": "Call it a day",
+        "meanings": {
+            "tr": "Bugünlük yeterli",
+            "en": "Stop working for the day"
+        },
+        "exampleSentence": "Let's call it a day.",
+        "localAsset": "assets/images/words/idioms/word_callitaday_1768557178555.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5011,
+        "word": "A blessing in disguise",
+        "meanings": {
+            "tr": "Gizli bir nimet",
+            "en": "Something good that seemed bad at first"
+        },
+        "exampleSentence": "Losing that job was a blessing in disguise.",
+        "localAsset": "assets/images/words/idioms/word_blessingdisguise_1768581915298.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5012,
+        "word": "The best of both worlds",
+        "meanings": {
+            "tr": "Her iki dünyanın en iyisi",
+            "en": "Having two good things at the same time"
+        },
+        "exampleSentence": "Working from home gives me the best of both worlds.",
+        "localAsset": "assets/images/words/idioms/word_bestbothworlds_1768599843051.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5013,
+        "word": "When pigs fly",
+        "meanings": {
+            "tr": "Asla, kıyamet kopunca",
+            "en": "Something that will never happen"
+        },
+        "exampleSentence": "He'll clean his room when pigs fly.",
+        "localAsset": "assets/images/words/idioms/word_whenpigfly_1768599857572.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5014,
+        "word": "Speak of the devil",
+        "meanings": {
+            "tr": "İti an çomağı hazırla, İyi insan lafının üstüne gelirmiş.",
+            "en": "Said when the person you are talking about arrives"
+        },
+        "exampleSentence": "Speak of the devil! We were just talking about you.",
+        "localAsset": "assets/images/words/idioms/word_speakdevil_1768599872397.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5015,
+        "word": "Let the cat out of the bag",
+        "meanings": {
+            "tr": "Ağzından kaçırmak",
+            "en": "Accidentally reveal a secret"
+        },
+        "exampleSentence": "She let the cat out of the bag about the surprise party.",
+        "localAsset": "assets/images/words/idioms/word_catoutbag_1768599886911.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5016,
+        "word": "Kill two birds with one stone",
+        "meanings": {
+            "tr": "Bir taşla iki kuş vurmak",
+            "en": "Accomplish two things with a single action"
+        },
+        "exampleSentence": "By cycling to work, I kill two birds with one stone - I save money and stay fit.",
+        "localAsset": "assets/images/words/idioms/word_killtwobirds.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5017,
+        "word": "Back to square one",
+        "meanings": {
+            "tr": "Başa dönmek, sıfırdan başlamak",
+            "en": "Start over from the beginning"
+        },
+        "exampleSentence": "The project failed, so we're back to square one.",
+        "localAsset": "assets/images/words/idioms/word_squareone.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5018,
+        "word": "Barking up the wrong tree",
+        "meanings": {
+            "tr": "Yanlış kapı çalmak, yanlış yerde aramak",
+            "en": "Looking in the wrong place or pursuing the wrong course"
+        },
+        "exampleSentence": "If you think I took your book, you're barking up the wrong tree.",
+        "localAsset": "assets/images/words/idioms/word_barkingwrongtree.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5019,
+        "word": "Burning the midnight oil",
+        "meanings": {
+            "tr": "Gece geç saatlere kadar çalışmak",
+            "en": "Working late into the night"
+        },
+        "exampleSentence": "She was burning the midnight oil to finish her thesis.",
+        "localAsset": "assets/images/words/idioms/word_burningmidnightoil.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5020,
+        "word": "The elephant in the room",
+        "meanings": {
+            "tr": "Herkesin bildiği ama konuşmadığı sorun",
+            "en": "An obvious problem that no one wants to discuss"
+        },
+        "exampleSentence": "The elephant in the room was the company's declining sales.",
+        "localAsset": "assets/images/words/idioms/word_elephantinroom.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    }
+]

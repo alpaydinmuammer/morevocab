@@ -1,0 +1,213 @@
+{
+  "@@locale": "tr",
+  "hello": "Merhaba",
+  "@hello": {
+    "description": "Greeting"
+  },
+  "goodMorning": "Günaydın",
+  "goodAfternoon": "İyi Günler",
+  "goodEvening": "İyi Akşamlar",
+  "goodNight": "İyi Geceler",
+  "motiveLateNight": "Unutma; kelimeler önemli, uyku düzeni daha önemli.",
+  "motive2am": "O geri dönmeyecek ama kelimeler seni terketmez.",
+  "motiveMon": "Haftaya yeni kelimelerle başlamak gibisi yok!",
+  "motiveTue": "Kelime öğren, kahve iç, tekrarla!",
+  "motiveWed": "Hava Durumu: Kelime öğrenmeye müsait.",
+  "motiveThu": "Kelimelerin biterse, susmak zorunda kalırsın.",
+  "motiveFri": "Tartışmada 'şey' dememek için yeni kelimeler öğren.",
+  "motiveSat": "Kelimelere yatırım yap, enflasyondan etkilenmez.",
+  "motiveSun": "Bugün dünyayı kurtaramazsın ama birkaç kelime öğrenebilirsin.",
+  "letsLearn": "Hadi biraz kelime öğrenelim",
+  "progressStatus": "İlerleme Durumu",
+  "learned": "Öğrenildi",
+  "newWord": "Yeni",
+  "review": "Tekrar",
+  "start": "BAŞLA",
+  "settings": "Ayarlar",
+  "credits": "Emeği Geçenler",
+  "idontknow": "Bilmiyorum",
+  "flip": "Çevir",
+  "iknow": "Biliyorum",
+  "theme": "Tema",
+  "system": "Sistem",
+  "light": "Açık",
+  "dark": "Koyu",
+  "language": "Dil",
+  "turkish": "Türkçe",
+  "english": "İngilizce",
+  "spanish": "İspanyolca",
+  "french": "Fransızca",
+  "german": "Almanca",
+  "italian": "İtalyanca",
+  "soundSettings": "Ses Ayarları",
+  "speed": "Hız",
+  "volume": "Ses Seviyesi",
+  "pitch": "Perde",
+  "testSound": "Sesi Test Et",
+  "resetProgress": "İlerlemeyi Sıfırla",
+  "resetConfirmMessage": "İlerlemeyi sıfırlamak istediğinize emin misiniz?",
+  "resetSuccess": "İlerleme sıfırlandı",
+  "dailyGoalCompleted": "Günlük hedefini tamamladın.",
+  "congratulations": "Tebrikler!",
+  "continueText": "Devam Et",
+  "returnHome": "Ana Sayfaya Dön",
+  "conceptVision": "KONSEPT VE VİZYON",
+  "developmentCode": "GELİŞTİRME VE KOD",
+  "design": "TASARIM (UI/UX)",
+  "aiArchitecture": "YAPAY ZEKA MİMARİSİ",
+  "feedbackContact": "FEEDBACK & CONTACT",
+  "emailJobOffers": "E-POSTA / İŞ TEKLİFLERİ",
+  "cancel": "İptal",
+  "reset": "Sıfırla",
+  "close": "Kapat",
+  "tapToSeeMeaning": "Anlamı görmek için dokun",
+  "tapToReturn": "Geri dönmek için dokun",
+  "data": "Veri",
+  "resetDescription": "Öğrenilen kelimeler sıfırlanır.",
+  "loadingWords": "Kelimeler yükleniyor...",
+  "retry": "Tekrar Dene",
+  "wordsRemaining": "{count} kelime kaldı",
+  "iKnow": "Biliyorum",
+  "iDontKnow": "Bilmiyorum",
+  "congratulations": "Tebrikler!",
+  "sessionCompleted": "Bu oturumu tamamladınız",
+  "known": "Bilinen",
+  "review": "Tekrar",
+  "studyAgain": "Tekrar Çalış",
+  "backToHome": "Ana Sayfaya Dön",
+  "credits": "Emeği Geçenler",
+  "conceptAndVision": "Konsept ve Vizyon",
+  "developmentAndCode": "Geliştirme ve Kod",
+  "design": "Tasarım (UI/UX)",
+  "feedbackAndContact": "Geri Bildirim & İletişim",
+  "emailJobOffers": "E-Posta / İş Teklifleri",
+  "@wordsRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectDeck": "Deste Seç",
+  "whichDeckIntro": "Hangi desteyle çalışmak istersin?",
+  "newLabel": "YENİ",
+  "comingSoon": "Çok Yakında...",
+  "strategiesCount": "{count} strateji",
+  "@strategiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deckWordCount": "{count} kelime",
+  "@deckWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "total": "Toplam",
+  "unknown": "Bilinmeyen",
+  "learning": "Öğreniliyor",
+  "mastered": "Uzmanlaşıldı",
+  "deckMixed": "Karışık",
+  "deckYdsYdt": "YDS/YDT Kelimeler",
+  "deckBeginner": "Başlangıç Seviyesi",
+  "deckSurvival": "Survival English",
+  "deckPhrasalVerbs": "Phrasal Verbs",
+  "deckIdioms": "Deyimler ve Argo",
+  "deckExamStrategies": "Sınav Stratejileri",
+  "wordsRemainingLabel": "kelime kaldı",
+  "deckMixedDesc": "Tüm kelimelerden karışık",
+  "deckYdsYdtDesc": "Akademik sınav kelimeleri",
+  "deckBeginnerDesc": "Başlangıç seviyesi",
+  "deckSurvivalDesc": "Günlük hayat ve seyahat",
+  "deckPhrasalVerbsDesc": "Yaygın phrasal verb'ler",
+  "deckIdiomsDesc": "Deyimler ve argo ifadeler",
+  "deckExamStrategiesDesc": "Sınav taktikleri ve ipuçları",
+  "allWords": "Tüm Kelimeler",
+  "unknownWords": "Bilinmeyen Kelimeler",
+  "learningWords": "Öğrenilen Kelimeler",
+  "masteredWords": "Uzmanlaşılan Kelimeler",
+  "addNewWord": "Yeni Kelime Ekle",
+  "enterWordPrompt": "İngilizce bir kelime gir. Yapay zeka gerisini oluşturacak!",
+  "wordExample": "örn., Serendipity",
+  "generateAndAdd": "Oluştur ve Ekle",
+  "noWordsYet": "Henüz kelime yok!",
+  "tapToAddWords": "Yapay zeka ile kelime eklemek için + işaretine dokun.",
+  "addWord": "Kelime Ekle",
+  "failedToGenerate": "İçerik oluşturulamadı. İnternet bağlantısını/API anahtarını kontrol edin.",
+  "wordAdded": "{word} kelimesi {deck} destesine eklendi!",
+  "@wordAdded": {
+    "placeholders": {
+      "word": {"type": "String"},
+      "deck": {"type": "String"}
+    }
+  },
+  "errorOccurred": "Hata: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "createDeck": "Deste Oluştur",
+  "nameYourDeck": "Destene bir isim ver",
+  "deckNameHint": "örn., Favoriler, Zor Kelimeler",
+  "create": "Oluştur",
+  "examples": "Örnekler",
+  "moreVocab": "More Vocab",
+  "loadingError": "Kelimeler yüklenemedi",
+  "noWordsInDeck": "Bu destede kelime yok",
+  "motivationalExcellent": "Mükemmel! Harikasın!",
+  "motivationalGreat": "Harika iş! Böyle devam!",
+  "motivationalGood": "İyi gidiyorsun! Öğreniyorsun!",
+  "motivationalKeepPracticing": "Pratik yapmaya devam et, başaracaksın!",
+
+  "petSelectTitle": "Yumurtandan Ne Çıksın?",
+  "petSelectSubtitle": "Öğrenme yolculuğunda sana eşlik edecek",
+  "petNameTitle": "Petine İsim Ver",
+  "petNameHint": "İsim gir...",
+  "petDragon": "Ejderha",
+  "petDragonDesc": "Ateşli ve güçlü",
+  "petEagle": "Kartal",
+  "petEagleDesc": "Özgür ve keskin",
+  "petWolf": "Kurt",
+  "petWolfDesc": "Sadık ve cesur",
+  "petFox": "Tilki",
+  "petFoxDesc": "Zeki ve çevik",
+  "petLevelUp": "Level Atladın!",
+  "petEvolved": "{name} evrimleşti!",
+  "@petEvolved": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "petXpGained": "+{xp} XP",
+  "@petXpGained": {
+    "placeholders": {
+      "xp": {"type": "int"}
+    }
+  },
+  "petLevel": "Level {level}",
+  "@petLevel": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  },
+  "petStageBaby": "Yavru",
+  "petStageYoung": "Genç",
+  "petStageAdult": "Yetişkin",
+  "petStageLegendary": "Efsanevi",
+  "petTapToHatch": "Dokun",
+  "petContinue": "Devam Et",
+  "petLetsStart": "Başlayalım!",
+  "petEvolution": "EVRİM!",
+  "petNextEvolution": "Level {level} evrim",
+  "@petNextEvolution": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  }
+}

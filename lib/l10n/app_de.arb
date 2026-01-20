@@ -1,0 +1,205 @@
+{
+  "@@locale": "de",
+  "hello": "Hallo",
+  "goodMorning": "Guten Morgen",
+  "goodAfternoon": "Guten Tag",
+  "goodEvening": "Guten Abend",
+  "goodNight": "Gute Nacht",
+  "motiveLateNight": "Denk daran; Wörter sind wichtig, aber der Schlafrhythmus ist wichtiger.",
+  "motive2am": "Sie kommt nicht zurück, aber Wörter werden dich nie verlassen.",
+  "motiveMon": "Nichts geht über einen Wochenstart mit neuen Wörtern!",
+  "motiveTue": "Wörter lernen, Kaffee trinken, wiederholen!",
+  "motiveWed": "Wetterbericht: Perfekt zum Wörterlernen.",
+  "motiveThu": "Wenn dir die Wörter ausgehen, musst du schweigen.",
+  "motiveFri": "Lerne neue Wörter, damit du nicht 'Dings' sagst.",
+  "motiveSat": "Investiere in Wörter, sie sind inflationssicher.",
+  "motiveSun": "Du kannst die Welt heute nicht retten, aber ein paar Wörter lernen.",
+  "letsLearn": "Lass uns Wörter lernen",
+  "progressStatus": "Fortschritt",
+  "learned": "Gelernt",
+  "newWord": "Neu",
+  "review": "Wiederholung",
+  "start": "START",
+  "settings": "Einstellungen",
+  "credits": "Credits",
+  "idontknow": "Ich weiß nicht",
+  "flip": "Umdrehen",
+  "iknow": "Ich weiß",
+  "theme": "Thema",
+  "system": "System",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "language": "Sprache",
+  "turkish": "Türkisch",
+  "english": "Englisch",
+  "spanish": "Spanisch",
+  "french": "Französisch",
+  "german": "Deutsch",
+  "italian": "Italienisch",
+  "soundSettings": "Toneinstellungen",
+  "speed": "Geschwindigkeit",
+  "volume": "Lautstärke",
+  "pitch": "Tonhöhe",
+  "testSound": "Ton testen",
+  "resetProgress": "Fortschritt zurücksetzen",
+  "resetConfirmMessage": "Möchtest du deinen Fortschritt wirklich zurücksetzen?",
+  "resetSuccess": "Fortschritt zurückgesetzt",
+  "dailyGoalCompleted": "Tagesziel erreicht.",
+  "congratulations": "Glückwunsch!",
+  "continueText": "Weiter",
+  "returnHome": "Zurück zum Start",
+  "conceptVision": "KONZEPT UND VISION",
+  "developmentCode": "ENTWICKLUNG UND CODE",
+  "design": "DESIGN (UI/UX)",
+  "aiArchitecture": "KI-ARCHITEKTUR",
+  "feedbackContact": "FEEDBACK & KONTAKT",
+  "emailJobOffers": "E-MAIL / JOBANGEBOTE",
+  "cancel": "Abbrechen",
+  "reset": "Zurücksetzen",
+  "close": "Schließen",
+  "tapToSeeMeaning": "Tippen für Bedeutung",
+  "tapToReturn": "Tippen zum Zurückkehren",
+  "data": "Daten",
+  "resetDescription": "Gelernte Wörter werden zurückgesetzt.",
+  "loadingWords": "Wörter werden geladen...",
+  "retry": "Wiederholen",
+  "wordsRemaining": "{count} Wörter übrig",
+  "iKnow": "Ich weiß",
+  "iDontKnow": "Ich weiß nicht",
+  "sessionCompleted": "Du hast diese Sitzung abgeschlossen",
+  "known": "Bekannt",
+  "studyAgain": "Noch einmal lernen",
+  "backToHome": "Zurück zum Start",
+  "conceptAndVision": "Konzept und Vision",
+  "developmentAndCode": "Entwicklung und Code",
+  "feedbackAndContact": "Feedback & Kontakt",
+  "selectDeck": "Deck auswählen",
+  "whichDeckIntro": "Welches Deck möchtest du lernen?",
+  "newLabel": "NEU",
+  "comingSoon": "Demnächst...",
+  "strategiesCount": "{count} Strategien",
+  "@strategiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deckWordCount": "{count} Wörter",
+  "@deckWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "total": "Gesamt",
+  "unknown": "Unbekannt",
+  "learning": "Lernen",
+  "mastered": "Gemeistert",
+  "deckMixed": "Gemischt",
+  "deckYdsYdt": "YDS/YDT Wörter",
+  "deckBeginner": "Anfänger Wörter",
+  "deckSurvival": "Überlebens-Englisch",
+  "deckPhrasalVerbs": "Phrasal Verbs",
+  "deckIdioms": "Redewendungen & Slang",
+  "deckExamStrategies": "Prüfungsstrategien",
+  "wordsRemainingLabel": "Wörter übrig",
+  "deckMixedDesc": "Mischung aller Wörter",
+  "deckYdsYdtDesc": "Akademischer Prüfungswortschatz",
+  "deckBeginnerDesc": "Wörter für Anfänger",
+  "deckSurvivalDesc": "Alltag und Reisen",
+  "deckPhrasalVerbsDesc": "Gängige Phrasal Verbs",
+  "deckIdiomsDesc": "Redewendungen und Slang-Ausdrücke",
+  "deckExamStrategiesDesc": "Prüfungstaktiken und Tipps",
+  "@wordsRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allWords": "Alle Wörter",
+  "unknownWords": "Unbekannte Wörter",
+  "learningWords": "Lernende Wörter",
+  "masteredWords": "Beherrschte Wörter",
+  "addNewWord": "Neues Wort hinzufügen",
+  "enterWordPrompt": "Geben Sie ein englisches Wort ein. Die KI generiert den Rest!",
+  "wordExample": "z.B., Serendipity",
+  "generateAndAdd": "Generieren & Hinzufügen",
+  "noWordsYet": "Noch keine Wörter!",
+  "tapToAddWords": "Tippen Sie auf +, um Wörter mit KI hinzuzufügen.",
+  "addWord": "Wort hinzufügen",
+  "failedToGenerate": "Inhalt konnte nicht generiert werden. Überprüfen Sie Internet/API-Schlüssel.",
+  "wordAdded": "{word} wurde zu {deck} hinzugefügt!",
+  "@wordAdded": {
+    "placeholders": {
+      "word": {"type": "String"},
+      "deck": {"type": "String"}
+    }
+  },
+  "errorOccurred": "Fehler: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "createDeck": "Deck erstellen",
+  "nameYourDeck": "Benennen Sie Ihr Deck",
+  "deckNameHint": "z.B., Favoriten, Schwere Wörter",
+  "create": "Erstellen",
+  "examples": "Beispiele",
+  "moreVocab": "More Vocab",
+  "loadingError": "Wörter konnten nicht geladen werden",
+  "noWordsInDeck": "Keine Wörter in diesem Deck",
+  "motivationalExcellent": "Ausgezeichnet! Du bist auf Feuer!",
+  "motivationalGreat": "Großartige Arbeit! Weiter so!",
+  "motivationalGood": "Gute Arbeit! Du lernst!",
+  "motivationalKeepPracticing": "Übe weiter, du schaffst das!",
+
+  "petSelectTitle": "Was schlüpft heraus?",
+  "petSelectSubtitle": "Dein Begleiter auf der Lernreise",
+  "petNameTitle": "Gib deinem Haustier einen Namen",
+  "petNameHint": "Name eingeben...",
+  "petDragon": "Drache",
+  "petDragonDesc": "Wild und mächtig",
+  "petEagle": "Adler",
+  "petEagleDesc": "Frei und scharf",
+  "petWolf": "Wolf",
+  "petWolfDesc": "Treu und mutig",
+  "petFox": "Fuchs",
+  "petFoxDesc": "Clever und wendig",
+  "petLevelUp": "Level Up!",
+  "petEvolved": "{name} hat sich entwickelt!",
+  "@petEvolved": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "petXpGained": "+{xp} XP",
+  "@petXpGained": {
+    "placeholders": {
+      "xp": {"type": "int"}
+    }
+  },
+  "petLevel": "Level {level}",
+  "@petLevel": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  },
+  "petStageBaby": "Baby",
+  "petStageYoung": "Jung",
+  "petStageAdult": "Erwachsen",
+  "petStageLegendary": "Legendär",
+  "petTapToHatch": "Tippen",
+  "petContinue": "Weiter",
+  "petLetsStart": "Los geht's!",
+  "petEvolution": "ENTWICKLUNG!",
+  "petNextEvolution": "Level {level} Entwicklung",
+  "@petNextEvolution": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "@@locale": "fr",
+  "hello": "Bonjour",
+  "goodMorning": "Bonjour",
+  "goodAfternoon": "Bon après-midi",
+  "goodEvening": "Bonsoir",
+  "goodNight": "Bonne nuit",
+  "motiveLateNight": "Rappelle-toi; les mots sont importants, mais le rythme de sommeil est plus important.",
+  "motive2am": "Elle ne reviendra pas, mais les mots ne t'abandonneront jamais.",
+  "motiveMon": "Rien de tel que de commencer la semaine avec de nouveaux mots !",
+  "motiveTue": "Apprends des mots, bois du café, recommence !",
+  "motiveWed": "Météo : Parfait pour apprendre des mots.",
+  "motiveThu": "Si tu manques de mots, tu devras te taire.",
+  "motiveFri": "Apprends de nouveaux mots pour ne pas dire 'truc' dans les disputes.",
+  "motiveSat": "Investis dans les mots, ils résistent à l'inflation.",
+  "motiveSun": "Tu ne peux pas sauver le monde aujourd'hui, mais tu peux apprendre quelques mots.",
+  "letsLearn": "Apprenons des mots",
+  "progressStatus": "Statut de Progrès",
+  "learned": "Appris",
+  "newWord": "Nouveau",
+  "review": "Révision",
+  "start": "COMMENCER",
+  "settings": "Paramètres",
+  "credits": "Crédits",
+  "idontknow": "Je ne sais pas",
+  "flip": "Retourner",
+  "iknow": "Je sais",
+  "theme": "Thème",
+  "system": "Système",
+  "light": "Clair",
+  "dark": "Sombre",
+  "language": "Langue",
+  "turkish": "Turc",
+  "english": "Anglais",
+  "spanish": "Espagnol",
+  "french": "Français",
+  "german": "Allemand",
+  "italian": "Italien",
+  "soundSettings": "Paramètres Sonores",
+  "speed": "Vitesse",
+  "volume": "Volume",
+  "pitch": "Hauteur",
+  "testSound": "Tester le Son",
+  "resetProgress": "Réinitialiser le Progrès",
+  "resetConfirmMessage": "Êtes-vous sûr de vouloir réinitialiser votre progrès ?",
+  "resetSuccess": "Progrès réinitialisé",
+  "dailyGoalCompleted": "Objectif quotidien atteint.",
+  "congratulations": "Félicitations !",
+  "continueText": "Continuer",
+  "returnHome": "Retour à l'Accueil",
+  "conceptVision": "CONCEPT ET VISION",
+  "developmentCode": "DÉVELOPPEMENT ET CODE",
+  "design": "DESIGN (UI/UX)",
+  "aiArchitecture": "ARCHITECTURE IA",
+  "feedbackContact": "FEEDBACK & CONTACT",
+  "emailJobOffers": "EMAIL / OFFRES D'EMPLOI",
+  "cancel": "Annuler",
+  "reset": "Réinitialiser",
+  "close": "Fermer",
+  "tapToSeeMeaning": "Appuyez pour voir la signification",
+  "tapToReturn": "Appuyez pour revenir",
+  "data": "Données",
+  "resetDescription": "Les mots appris seront réinitialisés.",
+  "loadingWords": "Chargement des mots...",
+  "retry": "Réessayer",
+  "wordsRemaining": "{count} mots restants",
+  "iKnow": "Je sais",
+  "iDontKnow": "Je ne sais pas",
+  "sessionCompleted": "Vous avez terminé cette session",
+  "known": "Connu",
+  "studyAgain": "Étudier à nouveau",
+  "backToHome": "Retour à l'Accueil",
+  "conceptAndVision": "Concept et Vision",
+  "developmentAndCode": "Développement et Code",
+  "feedbackAndContact": "Feedback et Contact",
+  "selectDeck": "Sélectionner un Deck",
+  "whichDeckIntro": "Quel deck souhaitez-vous étudier ?",
+  "newLabel": "NOUVEAU",
+  "comingSoon": "Bientôt...",
+  "strategiesCount": "{count} stratégies",
+  "@strategiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deckWordCount": "{count} mots",
+  "@deckWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "total": "Total",
+  "unknown": "Inconnu",
+  "learning": "En apprentissage",
+  "mastered": "Maîtrisé",
+  "deckMixed": "Mélangé",
+  "deckYdsYdt": "Mots YDS/YDT",
+  "deckBeginner": "Mots pour Débutants",
+  "deckSurvival": "Anglais de Survie",
+  "deckPhrasalVerbs": "Verbes à Particule",
+  "deckIdioms": "Idiomes & Argot",
+  "deckExamStrategies": "Stratégies d'Examen",
+  "wordsRemainingLabel": "mots restants",
+  "deckMixedDesc": "Mélange de tous les mots",
+  "deckYdsYdtDesc": "Vocabulaire d'examen académique",
+  "deckBeginnerDesc": "Mots de niveau débutant",
+  "deckSurvivalDesc": "Vie quotidienne et voyage",
+  "deckPhrasalVerbsDesc": "Verbes à particule courants",
+  "deckIdiomsDesc": "Idiomes et expressions d'argot",
+  "deckExamStrategiesDesc": "Tactiques et conseils d'examen",
+  "@wordsRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allWords": "Tous les Mots",
+  "unknownWords": "Mots Inconnus",
+  "learningWords": "Mots en Apprentissage",
+  "masteredWords": "Mots Maîtrisés",
+  "addNewWord": "Ajouter un Nouveau Mot",
+  "enterWordPrompt": "Entrez un mot en anglais. L'IA générera le reste!",
+  "wordExample": "par ex., Serendipity",
+  "generateAndAdd": "Générer et Ajouter",
+  "noWordsYet": "Pas encore de mots!",
+  "tapToAddWords": "Appuyez sur + pour ajouter des mots avec l'IA.",
+  "addWord": "Ajouter un Mot",
+  "failedToGenerate": "Échec de la génération du contenu. Vérifiez internet/clé API.",
+  "wordAdded": "{word} ajouté à {deck}!",
+  "@wordAdded": {
+    "placeholders": {
+      "word": {"type": "String"},
+      "deck": {"type": "String"}
+    }
+  },
+  "errorOccurred": "Erreur: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "createDeck": "Créer un Paquet",
+  "nameYourDeck": "Nommez votre paquet",
+  "deckNameHint": "par ex., Favoris, Mots Difficiles",
+  "create": "Créer",
+  "examples": "Exemples",
+  "moreVocab": "More Vocab",
+  "loadingError": "Échec du chargement des mots",
+  "noWordsInDeck": "Aucun mot dans ce paquet",
+  "motivationalExcellent": "Excellent ! Tu es en feu !",
+  "motivationalGreat": "Excellent travail ! Continue comme ça !",
+  "motivationalGood": "Bon travail ! Tu apprends !",
+  "motivationalKeepPracticing": "Continue à pratiquer, tu vas y arriver !",
+
+  "petSelectTitle": "Qu'est-ce qui va éclore ?",
+  "petSelectSubtitle": "Ton compagnon dans le voyage d'apprentissage",
+  "petNameTitle": "Nomme ton animal",
+  "petNameHint": "Entre un nom...",
+  "petDragon": "Dragon",
+  "petDragonDesc": "Féroce et puissant",
+  "petEagle": "Aigle",
+  "petEagleDesc": "Libre et perçant",
+  "petWolf": "Loup",
+  "petWolfDesc": "Loyal et courageux",
+  "petFox": "Renard",
+  "petFoxDesc": "Rusé et agile",
+  "petLevelUp": "Niveau supérieur !",
+  "petEvolved": "{name} a évolué !",
+  "@petEvolved": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "petXpGained": "+{xp} XP",
+  "@petXpGained": {
+    "placeholders": {
+      "xp": {"type": "int"}
+    }
+  },
+  "petLevel": "Niveau {level}",
+  "@petLevel": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  },
+  "petStageBaby": "Bébé",
+  "petStageYoung": "Jeune",
+  "petStageAdult": "Adulte",
+  "petStageLegendary": "Légendaire",
+  "petTapToHatch": "Touche",
+  "petContinue": "Continuer",
+  "petLetsStart": "C'est parti !",
+  "petEvolution": "ÉVOLUTION !",
+  "petNextEvolution": "Évolution niveau {level}",
+  "@petNextEvolution": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  }
+}

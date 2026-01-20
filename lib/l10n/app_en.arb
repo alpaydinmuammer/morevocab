@@ -1,0 +1,210 @@
+{
+  "@@locale": "en",
+  "hello": "Hello",
+  "goodMorning": "Good Morning",
+  "goodAfternoon": "Good Afternoon",
+  "goodEvening": "Good Evening",
+  "goodNight": "Good Night",
+  "motiveLateNight": "Remember; words are important, but sleep schedule is more important.",
+  "motive2am": "They won't come back, but words will never leave you.",
+  "motiveMon": "Nothing like starting the week with new words!",
+  "motiveTue": "Learn words, drink coffee, repeat!",
+  "motiveWed": "Weather Forecast: Perfect for learning words.",
+  "motiveThu": "If you run out of words, you'll have to stay silent.",
+  "motiveFri": "Learn new words so you don't say 'thingy' in arguments.",
+  "motiveSat": "Invest in words, they're inflation-proof.",
+  "motiveSun": "You can't save the world today, but you can learn a few words.",
+  "letsLearn": "Let's learn some words",
+  "progressStatus": "Progress Status",
+  "learned": "Learned",
+  "newWord": "New",
+  "review": "Review",
+  "start": "START",
+  "settings": "Settings",
+  "credits": "Credits",
+  "idontknow": "I Don't Know",
+  "flip": "Flip",
+  "iknow": "I Know",
+  "theme": "Theme",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+  "language": "Language",
+  "turkish": "Turkish",
+  "english": "English",
+  "spanish": "Spanish",
+  "french": "French",
+  "german": "German",
+  "italian": "Italian",
+  "soundSettings": "Sound Settings",
+  "speed": "Speed",
+  "volume": "Volume",
+  "pitch": "Pitch",
+  "testSound": "Test Sound",
+  "resetProgress": "Reset Progress",
+  "resetConfirmMessage": "Are you sure you want to reset your progress?",
+  "resetSuccess": "Progress reset",
+  "dailyGoalCompleted": "Daily goal completed.",
+  "congratulations": "Congratulations!",
+  "continueText": "Continue",
+  "returnHome": "Return to Home",
+  "conceptVision": "CONCEPT AND VISION",
+  "developmentCode": "DEVELOPMENT AND CODE",
+  "design": "DESIGN (UI/UX)",
+  "aiArchitecture": "AI ARCHITECTURE",
+  "feedbackContact": "FEEDBACK & CONTACT",
+  "emailJobOffers": "EMAIL / JOB OFFERS",
+  "cancel": "Cancel",
+  "reset": "Reset",
+  "close": "Close",
+  "tapToSeeMeaning": "Tap to see meaning",
+  "tapToReturn": "Tap to go back",
+  "data": "Data",
+  "resetDescription": "Learned words will be reset.",
+  "loadingWords": "Loading words...",
+  "retry": "Retry",
+  "wordsRemaining": "{count} words remaining",
+  "iKnow": "I Know",
+  "iDontKnow": "I Don't Know",
+  "congratulations": "Congratulations!",
+  "sessionCompleted": "You have completed this session",
+  "known": "Known",
+  "review": "Review",
+  "studyAgain": "Study Again",
+  "backToHome": "Back to Home",
+  "credits": "Credits",
+  "conceptAndVision": "Concept & Vision",
+  "developmentAndCode": "Development & Code",
+  "design": "Design (UI/UX)",
+  "feedbackAndContact": "Feedback & Contact",
+  "emailJobOffers": "Email / Job Offers",
+  "@wordsRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectDeck": "Select Deck",
+  "whichDeckIntro": "Which deck would you like to study?",
+  "newLabel": "NEW",
+  "comingSoon": "Coming Soon...",
+  "strategiesCount": "{count} strategies",
+  "@strategiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deckWordCount": "{count} words",
+  "@deckWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "total": "Total",
+  "unknown": "Unknown",
+  "learning": "Learning",
+  "mastered": "Mastered",
+  "deckMixed": "Mixed",
+  "deckYdsYdt": "YDS/YDT Words",
+  "deckBeginner": "Beginner Words",
+  "deckSurvival": "Survival English",
+  "deckPhrasalVerbs": "Phrasal Verbs",
+  "deckIdioms": "Idioms & Slang",
+  "deckExamStrategies": "Exam Strategies",
+  "wordsRemainingLabel": "words remaining",
+  "deckMixedDesc": "Mix of all words",
+  "deckYdsYdtDesc": "Academic exam vocabulary",
+  "deckBeginnerDesc": "Beginner level words",
+  "deckSurvivalDesc": "Daily life and travel",
+  "deckPhrasalVerbsDesc": "Common phrasal verbs",
+  "deckIdiomsDesc": "Idioms and slang expressions",
+  "deckExamStrategiesDesc": "Exam tactics and tips",
+  "allWords": "All Words",
+  "unknownWords": "Unknown Words",
+  "learningWords": "Learning Words",
+  "masteredWords": "Mastered Words",
+  "addNewWord": "Add New Word",
+  "enterWordPrompt": "Enter a word in English. AI will generate the rest!",
+  "wordExample": "e.g., Serendipity",
+  "generateAndAdd": "Generate & Add",
+  "noWordsYet": "No words yet!",
+  "tapToAddWords": "Tap + to add words with AI.",
+  "addWord": "Add Word",
+  "failedToGenerate": "Failed to generate content. Check internet/API key.",
+  "wordAdded": "Added {word} to {deck}!",
+  "@wordAdded": {
+    "placeholders": {
+      "word": {"type": "String"},
+      "deck": {"type": "String"}
+    }
+  },
+  "errorOccurred": "Error: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "createDeck": "Create Deck",
+  "nameYourDeck": "Name your deck",
+  "deckNameHint": "e.g., Favorites, Hard Words",
+  "create": "Create",
+  "examples": "Examples",
+  "moreVocab": "More Vocab",
+  "loadingError": "Failed to load words",
+  "noWordsInDeck": "No words in this deck",
+  "motivationalExcellent": "Excellent! You're on fire!",
+  "motivationalGreat": "Great job! Keep it up!",
+  "motivationalGood": "Good work! You're learning!",
+  "motivationalKeepPracticing": "Keep practicing, you'll get there!",
+
+  "petSelectTitle": "What Will Hatch?",
+  "petSelectSubtitle": "Your companion on the learning journey",
+  "petNameTitle": "Name Your Pet",
+  "petNameHint": "Enter a name...",
+  "petDragon": "Dragon",
+  "petDragonDesc": "Fierce and powerful",
+  "petEagle": "Eagle",
+  "petEagleDesc": "Free and sharp",
+  "petWolf": "Wolf",
+  "petWolfDesc": "Loyal and brave",
+  "petFox": "Fox",
+  "petFoxDesc": "Clever and agile",
+  "petLevelUp": "Level Up!",
+  "petEvolved": "{name} evolved!",
+  "@petEvolved": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "petXpGained": "+{xp} XP",
+  "@petXpGained": {
+    "placeholders": {
+      "xp": {"type": "int"}
+    }
+  },
+  "petLevel": "Level {level}",
+  "@petLevel": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  },
+  "petStageBaby": "Baby",
+  "petStageYoung": "Young",
+  "petStageAdult": "Adult",
+  "petStageLegendary": "Legendary",
+  "petTapToHatch": "Tap",
+  "petContinue": "Continue",
+  "petLetsStart": "Let's Start!",
+  "petEvolution": "EVOLUTION!",
+  "petNextEvolution": "Level {level} evolution",
+  "@petNextEvolution": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  }
+}

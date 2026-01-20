@@ -1,0 +1,362 @@
+[
+    {
+        "id": 3001,
+        "word": "Where is...?",
+        "meanings": {
+            "tr": "... nerede?",
+            "en": "Asking for location"
+        },
+        "exampleSentence": "Where is the bathroom?",
+        "localAsset": "assets/images/words/survival/word_whereis_1768513619768.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3002,
+        "word": "How much?",
+        "meanings": {
+            "tr": "Ne kadar?",
+            "en": "Asking for price"
+        },
+        "exampleSentence": "How much does this cost?",
+        "localAsset": "assets/images/words/survival/word_howmuch_1768556834428.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3003,
+        "word": "I need...",
+        "meanings": {
+            "tr": "... ihtiyacım var",
+            "en": "Expressing a need"
+        },
+        "exampleSentence": "I need a doctor.",
+        "localAsset": "assets/images/words/survival/word_ineed_1768556849631.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3004,
+        "word": "Emergency",
+        "meanings": {
+            "tr": "Acil durum",
+            "en": "A serious, unexpected situation"
+        },
+        "exampleSentence": "This is an emergency!",
+        "localAsset": "assets/images/words/survival/word_emergency_1768556865364.webp",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3005,
+        "word": "Hospital",
+        "meanings": {
+            "tr": "Hastane",
+            "en": "A place for medical treatment"
+        },
+        "exampleSentence": "Take me to the hospital.",
+        "localAsset": "assets/images/words/survival/word_hospital_1768556879270.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3006,
+        "word": "Police",
+        "meanings": {
+            "tr": "Polis",
+            "en": "Law enforcement"
+        },
+        "exampleSentence": "Call the police!",
+        "localAsset": "assets/images/words/survival/word_police_1768556908834.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3007,
+        "word": "Airport",
+        "meanings": {
+            "tr": "Havalimanı",
+            "en": "Place for air travel"
+        },
+        "exampleSentence": "How do I get to the airport?",
+        "localAsset": "assets/images/words/survival/word_airport_1768556938746.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3008,
+        "word": "Hotel",
+        "meanings": {
+            "tr": "Otel",
+            "en": "A place to stay"
+        },
+        "exampleSentence": "I have a reservation at this hotel.",
+        "localAsset": "assets/images/words/survival/word_hotel_1768556954214.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3009,
+        "word": "Restaurant",
+        "meanings": {
+            "tr": "Restoran",
+            "en": "A place to eat"
+        },
+        "exampleSentence": "Is there a restaurant nearby?",
+        "localAsset": "assets/images/words/survival/word_restaurant_1768556968116.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3010,
+        "word": "Taxi",
+        "meanings": {
+            "tr": "Taksi",
+            "en": "A car for hire"
+        },
+        "exampleSentence": "I need a taxi, please.",
+        "localAsset": "assets/images/words/survival/word_taxi_1768556985107.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3011,
+        "word": "Excuse me",
+        "meanings": {
+            "tr": "Afedersiniz, pardon",
+            "en": "Used to politely get attention"
+        },
+        "exampleSentence": "Excuse me, can you help me?",
+        "localAsset": "assets/images/words/survival/word_excuseme_1768581716140.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3012,
+        "word": "Sorry",
+        "meanings": {
+            "tr": "Özür dilerim",
+            "en": "Used to express apology"
+        },
+        "exampleSentence": "Sorry, I didn't mean to bump into you.",
+        "localAsset": "assets/images/words/survival/word_sorry_1768581730438.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3013,
+        "word": "I don't understand",
+        "meanings": {
+            "tr": "Anlamıyorum",
+            "en": "Unable to comprehend"
+        },
+        "exampleSentence": "I don't understand. Can you repeat?",
+        "localAsset": "assets/images/words/survival/word_dontunderstand_1768581745197.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3014,
+        "word": "Pharmacy",
+        "meanings": {
+            "tr": "Eczane",
+            "en": "A place where medicines are sold"
+        },
+        "exampleSentence": "Where is the nearest pharmacy?",
+        "localAsset": "assets/images/words/survival/word_pharmacy_1768581761568.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3015,
+        "word": "Train station",
+        "meanings": {
+            "tr": "Tren istasyonu",
+            "en": "A place where trains stop for passengers"
+        },
+        "exampleSentence": "How do I get to the train station?",
+        "localAsset": "assets/images/words/survival/word_trainstation_1768581776741.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3016,
+        "word": "Ticket",
+        "meanings": {
+            "tr": "Bilet",
+            "en": "A paper for travel/admission"
+        },
+        "exampleSentence": "I need a ticket to London.",
+        "localAsset": "assets/images/words/survival/word_ticket.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3017,
+        "word": "Passport",
+        "meanings": {
+            "tr": "Pasaport",
+            "en": "Official travel document"
+        },
+        "exampleSentence": "I lost my passport.",
+        "localAsset": "assets/images/words/survival/word_passport.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3018,
+        "word": "Toilet",
+        "meanings": {
+            "tr": "Tuvalet",
+            "en": "Restroom / Lavatory"
+        },
+        "exampleSentence": "Where is the toilet?",
+        "localAsset": "assets/images/words/survival/word_toilet.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3019,
+        "word": "Entrance",
+        "meanings": {
+            "tr": "Giriş",
+            "en": "Way in"
+        },
+        "exampleSentence": "The entrance is around the corner.",
+        "localAsset": "assets/images/words/survival/word_entrance.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3020,
+        "word": "Exit",
+        "meanings": {
+            "tr": "Çıkış",
+            "en": "Way out"
+        },
+        "exampleSentence": "Where is the emergency exit?",
+        "localAsset": "assets/images/words/survival/word_exit.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3021,
+        "word": "Bus",
+        "meanings": {
+            "tr": "Otobüs",
+            "en": "Public transport vehicle"
+        },
+        "exampleSentence": "What time does the bus leave?",
+        "localAsset": "assets/images/words/survival/word_bus.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3022,
+        "word": "Map",
+        "meanings": {
+            "tr": "Harita",
+            "en": "Diagram of an area"
+        },
+        "exampleSentence": "Can you show me on the map?",
+        "localAsset": "assets/images/words/survival/word_map.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3023,
+        "word": "Reservation",
+        "meanings": {
+            "tr": "Rezervasyon",
+            "en": "Booking"
+        },
+        "exampleSentence": "I have a reservation for two.",
+        "localAsset": "assets/images/words/survival/word_reservation.webp",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3024,
+        "word": "ATM",
+        "meanings": {
+            "tr": "Bankamatik",
+            "en": "Cash machine"
+        },
+        "exampleSentence": "I need to find an ATM.",
+        "localAsset": "assets/images/words/survival/word_atm.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3025,
+        "word": "Currency Exchange",
+        "meanings": {
+            "tr": "Döviz Bürosu",
+            "en": "Place to change money"
+        },
+        "exampleSentence": "Is there a currency exchange nearby?",
+        "localAsset": "assets/images/words/survival/word_currency_exchange.webp",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3026,
+        "word": "Embassy",
+        "meanings": {
+            "tr": "Büyükelçilik",
+            "en": "Diplomatic mission"
+        },
+        "exampleSentence": "I need to go to the embassy.",
+        "localAsset": "assets/images/words/survival/word_embassy.webp",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3027,
+        "word": "Wifi",
+        "meanings": {
+            "tr": "Kablosuz İnternet",
+            "en": "Wireless internet"
+        },
+        "exampleSentence": "What is the Wifi password?",
+        "localAsset": "assets/images/words/survival/word_wifi.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3028,
+        "word": "Menu",
+        "meanings": {
+            "tr": "Menü",
+            "en": "Food list"
+        },
+        "exampleSentence": "Can I see the menu, please?",
+        "localAsset": "assets/images/words/survival/word_menu.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3029,
+        "word": "The Bill",
+        "meanings": {
+            "tr": "Hesap (Restoran)",
+            "en": "Statement of charges"
+        },
+        "exampleSentence": "Can we have the bill, please?",
+        "localAsset": "assets/images/words/survival/word_the_bill.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3030,
+        "word": "Metro",
+        "meanings": {
+            "tr": "Metro",
+            "en": "Underground train"
+        },
+        "exampleSentence": "The metro is the fastest way.",
+        "localAsset": "assets/images/words/survival/word_metro.webp",
+        "difficulty": 1,
+        "deck": "survival"
+    }
+]

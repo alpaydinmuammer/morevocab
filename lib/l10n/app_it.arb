@@ -1,0 +1,205 @@
+{
+  "@@locale": "it",
+  "hello": "Ciao",
+  "goodMorning": "Buongiorno",
+  "goodAfternoon": "Buon pomeriggio",
+  "goodEvening": "Buonasera",
+  "goodNight": "Buonanotte",
+  "motiveLateNight": "Ricorda; le parole sono importanti, ma il ritmo del sonno è più importante.",
+  "motive2am": "Lei non tornerà, ma le parole non ti abbandoneranno mai.",
+  "motiveMon": "Niente di meglio che iniziare la settimana con nuove parole!",
+  "motiveTue": "Impara parole, bevi caffè, ripeti!",
+  "motiveWed": "Previsioni meteo: Perfette per imparare parole.",
+  "motiveThu": "Se finisci le parole, dovrai stare zitto.",
+  "motiveFri": "Impara nuove parole per non dire 'coso' nelle discussioni.",
+  "motiveSat": "Investi in parole, sono a prova di inflazione.",
+  "motiveSun": "Oggi non puoi salvare il mondo, ma puoi imparare qualche parola.",
+  "letsLearn": "Impariamo parole",
+  "progressStatus": "Stato di Avanzamento",
+  "learned": "Imparato",
+  "newWord": "Nuovo",
+  "review": "Revisione",
+  "start": "INIZIA",
+  "settings": "Impostazioni",
+  "credits": "Crediti",
+  "idontknow": "Non lo so",
+  "flip": "Gira",
+  "iknow": "Lo so",
+  "theme": "Tema",
+  "system": "Sistema",
+  "light": "Chiaro",
+  "dark": "Scuro",
+  "language": "Lingua",
+  "turkish": "Turco",
+  "english": "Inglese",
+  "spanish": "Spagnolo",
+  "french": "Francese",
+  "german": "Tedesco",
+  "italian": "Italiano",
+  "soundSettings": "Impostazioni Audio",
+  "speed": "Velocità",
+  "volume": "Volume",
+  "pitch": "Tono",
+  "testSound": "Prova Audio",
+  "resetProgress": "Reimposta Progresso",
+  "resetConfirmMessage": "Sei sicuro di voler reimpostare i tuoi progressi?",
+  "resetSuccess": "Progresso reimpostato",
+  "dailyGoalCompleted": "Obiettivo giornaliero completato.",
+  "congratulations": "Congratulazioni!",
+  "continueText": "Continua",
+  "returnHome": "Torna alla Home",
+  "conceptVision": "CONCETTO E VISIONE",
+  "developmentCode": "SVILUPPO E CODICE",
+  "design": "DESIGN (UI/UX)",
+  "aiArchitecture": "ARCHITETTURA IA",
+  "feedbackContact": "FEEDBACK E CONTATTI",
+  "emailJobOffers": "E-MAIL / OFFERTE DI LAVORO",
+  "cancel": "Annulla",
+  "reset": "Reimposta",
+  "close": "Chiudi",
+  "tapToSeeMeaning": "Tocca per vedere il significato",
+  "tapToReturn": "Tocca per tornare indietro",
+  "data": "Dati",
+  "resetDescription": "Le parole imparate verranno cancellate.",
+  "loadingWords": "Caricamento parole...",
+  "retry": "Riprova",
+  "wordsRemaining": "{count} parole rimanenti",
+  "iKnow": "Lo so",
+  "iDontKnow": "Non lo so",
+  "sessionCompleted": "Hai completato questa sessione",
+  "known": "Conosciuto",
+  "studyAgain": "Studia di nuovo",
+  "backToHome": "Torna alla Home",
+  "conceptAndVision": "Concetto e Visione",
+  "developmentAndCode": "Sviluppo e Codice",
+  "feedbackAndContact": "Feedback e Contatti",
+  "selectDeck": "Seleziona Mazzo",
+  "whichDeckIntro": "Quale mazzo vorresti studiare?",
+  "newLabel": "NUOVO",
+  "comingSoon": "Presto disponibile...",
+  "strategiesCount": "{count} strategie",
+  "@strategiesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deckWordCount": "{count} parole",
+  "@deckWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "total": "Totale",
+  "unknown": "Sconosciuto",
+  "learning": "In apprendimento",
+  "mastered": "Padroneggiato",
+  "deckMixed": "Misto",
+  "deckYdsYdt": "Parole YDS/YDT",
+  "deckBeginner": "Parole per Principianti",
+  "deckSurvival": "Inglese di Sopravvivenza",
+  "deckPhrasalVerbs": "Verbi Frasali",
+  "deckIdioms": "Modi di Dire & Slang",
+  "deckExamStrategies": "Strategie d'Esame",
+  "wordsRemainingLabel": "parole rimanenti",
+  "deckMixedDesc": "Mix di tutte le parole",
+  "deckYdsYdtDesc": "Vocabolario per esami accademici",
+  "deckBeginnerDesc": "Parole di livello principiante",
+  "deckSurvivalDesc": "Vita quotidiana e viaggi",
+  "deckPhrasalVerbsDesc": "Verbi frasali comuni",
+  "deckIdiomsDesc": "Modi di dire ed espressioni slang",
+  "deckExamStrategiesDesc": "Tattiche e consigli per l'esame",
+  "@wordsRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allWords": "Tutte le Parole",
+  "unknownWords": "Parole Sconosciute",
+  "learningWords": "Parole in Apprendimento",
+  "masteredWords": "Parole Padroneggiate",
+  "addNewWord": "Aggiungi Nuova Parola",
+  "enterWordPrompt": "Inserisci una parola in inglese. L'IA genererà il resto!",
+  "wordExample": "es., Serendipity",
+  "generateAndAdd": "Genera e Aggiungi",
+  "noWordsYet": "Nessuna parola ancora!",
+  "tapToAddWords": "Tocca + per aggiungere parole con l'IA.",
+  "addWord": "Aggiungi Parola",
+  "failedToGenerate": "Impossibile generare il contenuto. Controlla internet/chiave API.",
+  "wordAdded": "{word} aggiunta a {deck}!",
+  "@wordAdded": {
+    "placeholders": {
+      "word": {"type": "String"},
+      "deck": {"type": "String"}
+    }
+  },
+  "errorOccurred": "Errore: {error}",
+  "@errorOccurred": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "createDeck": "Crea Mazzo",
+  "nameYourDeck": "Dai un nome al tuo mazzo",
+  "deckNameHint": "es., Preferiti, Parole Difficili",
+  "create": "Crea",
+  "examples": "Esempi",
+  "moreVocab": "More Vocab",
+  "loadingError": "Impossibile caricare le parole",
+  "noWordsInDeck": "Nessuna parola in questo mazzo",
+  "motivationalExcellent": "Eccellente! Sei in fiamme!",
+  "motivationalGreat": "Ottimo lavoro! Continua così!",
+  "motivationalGood": "Buon lavoro! Stai imparando!",
+  "motivationalKeepPracticing": "Continua a praticare, ce la farai!",
+
+  "petSelectTitle": "Cosa nascerà?",
+  "petSelectSubtitle": "Il tuo compagno nel viaggio di apprendimento",
+  "petNameTitle": "Dai un nome al tuo animale",
+  "petNameHint": "Inserisci un nome...",
+  "petDragon": "Drago",
+  "petDragonDesc": "Feroce e potente",
+  "petEagle": "Aquila",
+  "petEagleDesc": "Libero e acuto",
+  "petWolf": "Lupo",
+  "petWolfDesc": "Fedele e coraggioso",
+  "petFox": "Volpe",
+  "petFoxDesc": "Furbo e agile",
+  "petLevelUp": "Livello aumentato!",
+  "petEvolved": "{name} si è evoluto!",
+  "@petEvolved": {
+    "placeholders": {
+      "name": {"type": "String"}
+    }
+  },
+  "petXpGained": "+{xp} XP",
+  "@petXpGained": {
+    "placeholders": {
+      "xp": {"type": "int"}
+    }
+  },
+  "petLevel": "Livello {level}",
+  "@petLevel": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  },
+  "petStageBaby": "Cucciolo",
+  "petStageYoung": "Giovane",
+  "petStageAdult": "Adulto",
+  "petStageLegendary": "Leggendario",
+  "petTapToHatch": "Tocca",
+  "petContinue": "Continua",
+  "petLetsStart": "Iniziamo!",
+  "petEvolution": "EVOLUZIONE!",
+  "petNextEvolution": "Evoluzione livello {level}",
+  "@petNextEvolution": {
+    "placeholders": {
+      "level": {"type": "int"}
+    }
+  }
+}

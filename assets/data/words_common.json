@@ -1,0 +1,962 @@
+[
+    {
+        "id": 1,
+        "word": "Abundant",
+        "meanings": {
+            "tr": "Bol, çok miktarda",
+            "en": "Present in large quantities"
+        },
+        "exampleSentence": "The garden has an abundant supply of vegetables.",
+        "localAsset": "assets/images/words/mixed/word_abundant_1768243445816.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 2,
+        "word": "Brave",
+        "meanings": {
+            "tr": "Cesur, yiğit",
+            "en": "Ready to face and endure danger or pain"
+        },
+        "exampleSentence": "The brave firefighter saved the child from the fire.",
+        "localAsset": "assets/images/words/mixed/word_brave_1768243459688.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 3,
+        "word": "Curious",
+        "meanings": {
+            "tr": "Meraklı",
+            "en": "Eager to know or learn something"
+        },
+        "exampleSentence": "The curious cat explored every corner of the house.",
+        "localAsset": "assets/images/words/mixed/word_curious_1768243473647.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 4,
+        "word": "Delicious",
+        "meanings": {
+            "tr": "Lezzetli, nefis",
+            "en": "Highly pleasant to the taste"
+        },
+        "exampleSentence": "This homemade cake is absolutely delicious.",
+        "localAsset": "assets/images/words/mixed/word_delicious_1768243487314.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 5,
+        "word": "Enormous",
+        "meanings": {
+            "tr": "Devasa, çok büyük",
+            "en": "Very large in size, quantity, or extent"
+        },
+        "exampleSentence": "The elephant is an enormous animal.",
+        "localAsset": "assets/images/words/mixed/word_enormous_1768243500892.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 6,
+        "word": "Familiar",
+        "meanings": {
+            "tr": "Tanıdık, aşina",
+            "en": "Well known from long or close association"
+        },
+        "exampleSentence": "This song sounds very familiar to me.",
+        "localAsset": "assets/images/words/mixed/word_familiar_1768243527074.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 7,
+        "word": "Gentle",
+        "meanings": {
+            "tr": "Nazik, yumuşak",
+            "en": "Mild in temperament or behavior"
+        },
+        "exampleSentence": "She has a gentle personality and never raises her voice.",
+        "localAsset": "assets/images/words/mixed/word_gentle_1768243541016.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 8,
+        "word": "Honest",
+        "meanings": {
+            "tr": "Dürüst, samimi",
+            "en": "Free of deceit and untruthfulness"
+        },
+        "exampleSentence": "He is an honest person who never tells lies.",
+        "localAsset": "assets/images/words/mixed/word_honest_1768243553269.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 9,
+        "word": "Intelligent",
+        "meanings": {
+            "tr": "Zeki, akıllı",
+            "en": "Having or showing ability to learn and understand"
+        },
+        "exampleSentence": "She is very intelligent and always gets good grades.",
+        "localAsset": "assets/images/words/mixed/word_intelligent_1768243567534.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 10,
+        "word": "Jealous",
+        "meanings": {
+            "tr": "Kıskanç",
+            "en": "Feeling or showing envy of someone"
+        },
+        "exampleSentence": "He felt jealous when he saw her talking to another man.",
+        "localAsset": "assets/images/words/mixed/word_jealous_1768243582807.webp",
+        "difficulty": 1,
+        "deck": "mixed"
+    },
+    {
+        "id": 11,
+        "word": "Accomplish",
+        "meanings": {
+            "tr": "Başarmak, gerçekleştirmek",
+            "en": "Achieve or complete successfully"
+        },
+        "exampleSentence": "She accomplished her goal of running a marathon.",
+        "localAsset": "assets/images/words/mixed/word_accomplish_1768243614439.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 12,
+        "word": "Beneficial",
+        "meanings": {
+            "tr": "Faydalı, yararlı",
+            "en": "Resulting in good; favorable or advantageous"
+        },
+        "exampleSentence": "Exercise is beneficial for both physical and mental health.",
+        "localAsset": "assets/images/words/mixed/word_beneficial_1768243629464.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 13,
+        "word": "Circumstance",
+        "meanings": {
+            "tr": "Durum, koşul",
+            "en": "A fact or condition connected with or relevant to an event or action"
+        },
+        "exampleSentence": "Under the circumstances, we had to cancel the event.",
+        "localAsset": "assets/images/words/mixed/word_circumstance_1768243643999.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 14,
+        "word": "Demonstrate",
+        "meanings": {
+            "tr": "Göstermek, kanıtlamak",
+            "en": "Clearly show the existence or truth of something"
+        },
+        "exampleSentence": "The scientist demonstrated the experiment to the students.",
+        "localAsset": "assets/images/words/mixed/word_demonstrate_1768243658395.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 15,
+        "word": "Enthusiasm",
+        "meanings": {
+            "tr": "Coşku, heves",
+            "en": "Intense and eager enjoyment, interest, or approval"
+        },
+        "exampleSentence": "She showed great enthusiasm for the new project.",
+        "localAsset": "assets/images/words/mixed/word_enthusiasm_1768243672127.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 16,
+        "word": "Frustration",
+        "meanings": {
+            "tr": "Hayal kırıklığı, sinir",
+            "en": "The feeling of being upset or annoyed as a result of being unable to change or achieve something"
+        },
+        "exampleSentence": "He expressed his frustration with the slow progress.",
+        "localAsset": "assets/images/words/mixed/word_frustration_1768243703283.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 17,
+        "word": "Generosity",
+        "meanings": {
+            "tr": "Cömertlik",
+            "en": "The quality of being kind and generous"
+        },
+        "exampleSentence": "Her generosity touched everyone at the charity event.",
+        "localAsset": "assets/images/words/mixed/word_generosity_1768243718340.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 18,
+        "word": "Hesitate",
+        "meanings": {
+            "tr": "Tereddüt etmek, duraksamak",
+            "en": "Pause in indecision before saying or doing something"
+        },
+        "exampleSentence": "Don't hesitate to ask if you need any help.",
+        "localAsset": "assets/images/words/mixed/word_hesitate_1768243732997.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 19,
+        "word": "Inevitable",
+        "meanings": {
+            "tr": "Kaçınılmaz",
+            "en": "Certain to happen; unavoidable"
+        },
+        "exampleSentence": "Change is inevitable in today's fast-paced world.",
+        "localAsset": "assets/images/words/mixed/word_inevitable_1768243746388.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 20,
+        "word": "Jeopardize",
+        "meanings": {
+            "tr": "Tehlikeye atmak",
+            "en": "Put (someone or something) into a situation in which there is a danger of loss, harm, or failure"
+        },
+        "exampleSentence": "Don't jeopardize your health by working too hard.",
+        "localAsset": "assets/images/words/mixed/word_jeopardize_1768243761210.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 21,
+        "word": "Serendipity",
+        "meanings": {
+            "tr": "Şans eseri güzel bir keşif yapmak",
+            "en": "The occurrence of events by chance in a happy or beneficial way"
+        },
+        "exampleSentence": "Finding that book was pure serendipity.",
+        "localAsset": "assets/images/words/mixed/word_serendipity_1768243793958.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 22,
+        "word": "Eloquent",
+        "meanings": {
+            "tr": "Güzel konuşan, belagatlı",
+            "en": "Fluent or persuasive in speaking or writing"
+        },
+        "exampleSentence": "She gave an eloquent speech at the conference.",
+        "localAsset": "assets/images/words/mixed/word_eloquent_1768293269619.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 23,
+        "word": "Meticulous",
+        "meanings": {
+            "tr": "Titiz, dikkatli",
+            "en": "Showing great attention to detail; very careful and precise"
+        },
+        "exampleSentence": "He is meticulous about his work.",
+        "localAsset": "assets/images/words/mixed/word_meticulous_1768293284537.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 24,
+        "word": "Pragmatic",
+        "meanings": {
+            "tr": "Pragmatik, pratik düşünen",
+            "en": "Dealing with things sensibly and realistically"
+        },
+        "exampleSentence": "We need a pragmatic approach to solve this problem.",
+        "localAsset": "assets/images/words/mixed/word_pragmatic_1768293300256.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 25,
+        "word": "Tenacious",
+        "meanings": {
+            "tr": "Azimli, inatçı",
+            "en": "Tending to keep a firm hold of something; clinging or adhering closely"
+        },
+        "exampleSentence": "The tenacious athlete never gave up.",
+        "localAsset": "assets/images/words/mixed/word_tenacious_1768293315675.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 26,
+        "word": "Resilience",
+        "meanings": {
+            "tr": "Dayanıklılık, esneklik",
+            "en": "The capacity to recover quickly from difficulties; toughness"
+        },
+        "exampleSentence": "Her resilience helped her overcome many challenges.",
+        "localAsset": "assets/images/words/mixed/word_resilience_1768293331172.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 27,
+        "word": "Benevolent",
+        "meanings": {
+            "tr": "Hayırsever, iyiliksever",
+            "en": "Well meaning and kindly"
+        },
+        "exampleSentence": "Her generosity touched everyone at the charity event.",
+        "localAsset": "assets/images/words/mixed/word_benevolent_1768293371157.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 28,
+        "word": "Enigma",
+        "meanings": {
+            "tr": "Bilmece, gizem",
+            "en": "A person or thing that is mysterious, puzzling, or difficult to understand"
+        },
+        "exampleSentence": "Her disappearance remains an enigma.",
+        "localAsset": "assets/images/words/mixed/word_enigma_1768293386462.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 29,
+        "word": "Versatile",
+        "meanings": {
+            "tr": "Çok yönlü, becerikli",
+            "en": "Able to adapt or be adapted to many different functions or activities"
+        },
+        "exampleSentence": "She is a versatile artist who works in many mediums.",
+        "localAsset": "assets/images/words/mixed/word_versatile_1768293407981.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 30,
+        "word": "Nostalgia",
+        "meanings": {
+            "tr": "Özlem, hasret",
+            "en": "A sentimental longing or wistful affection for the past"
+        },
+        "exampleSentence": "Looking at old photos fills me with nostalgia.",
+        "localAsset": "assets/images/words/mixed/word_nostalgia_1768293426509.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 31,
+        "word": "Scrutinize",
+        "meanings": {
+            "tr": "Dikkatle incelemek",
+            "en": "Examine or inspect closely and thoroughly"
+        },
+        "exampleSentence": "The detective scrutinized every piece of evidence.",
+        "localAsset": "assets/images/words/mixed/word_scrutinize_1768293442119.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 32,
+        "word": "Vindicate",
+        "meanings": {
+            "tr": "Haklı çıkarmak, aklamak",
+            "en": "Clear (someone) of blame or suspicion"
+        },
+        "exampleSentence": "The new evidence will vindicate the accused.",
+        "localAsset": "assets/images/words/mixed/word_vindicate_1768293481166.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 33,
+        "word": "Wary",
+        "meanings": {
+            "tr": "Temkinli, dikkatli",
+            "en": "Feeling or showing caution about possible dangers or problems"
+        },
+        "exampleSentence": "Be wary of strangers offering free gifts.",
+        "localAsset": "assets/images/words/mixed/word_wary_1768293499345.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 34,
+        "word": "Zealous",
+        "meanings": {
+            "tr": "Şevkli, gayretli",
+            "en": "Having or showing zeal"
+        },
+        "exampleSentence": "She is a zealous advocate for human rights.",
+        "localAsset": "assets/images/words/mixed/word_zealous_1768293514365.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 35,
+        "word": "Candid",
+        "meanings": {
+            "tr": "Samimi, açık sözlü",
+            "en": "Truthful and straightforward; frank"
+        },
+        "exampleSentence": "I appreciate your candid feedback.",
+        "localAsset": "assets/images/words/mixed/word_candid_1768293531166.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 36,
+        "word": "Ephemeral",
+        "meanings": {
+            "tr": "Geçici, kısa ömürlü",
+            "en": "Lasting for a very short time"
+        },
+        "exampleSentence": "The beauty of cherry blossoms is ephemeral.",
+        "localAsset": "assets/images/words/mixed/word_ephemeral_1768293547679.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 37,
+        "word": "Ubiquitous",
+        "meanings": {
+            "tr": "Her yerde bulunan, yaygın",
+            "en": "Present, appearing, or found everywhere"
+        },
+        "exampleSentence": "Smartphones have become ubiquitous in modern life.",
+        "localAsset": "assets/images/words/mixed/word_ubiquitous_1768293596400.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 38,
+        "word": "Conundrum",
+        "meanings": {
+            "tr": "Çözülmesi güç problem, bilmece",
+            "en": "A confusing and difficult problem or question"
+        },
+        "exampleSentence": "The mystery remained a conundrum for years.",
+        "localAsset": "assets/images/words/mixed/word_conundrum_1768293616486.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 39,
+        "word": "Pernicious",
+        "meanings": {
+            "tr": "Zararlı, tehlikeli",
+            "en": "Having a harmful effect, especially in a gradual or subtle way"
+        },
+        "exampleSentence": "The pernicious effects of pollution are well documented.",
+        "localAsset": "assets/images/words/mixed/word_pernicious_1768293635866.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 40,
+        "word": "Sycophant",
+        "meanings": {
+            "tr": "Dalkavuk, yağcı",
+            "en": "A person who acts obsequiously toward someone important in order to gain advantage"
+        },
+        "exampleSentence": "The boss was surrounded by sycophants who agreed with everything.",
+        "localAsset": "assets/images/words/mixed/word_sycophant_1768293651057.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 41,
+        "word": "Quintessential",
+        "meanings": {
+            "tr": "Mükemmel örnek, özünü temsil eden",
+            "en": "Representing the most perfect or typical example of a quality or class"
+        },
+        "exampleSentence": "She is the quintessential professional.",
+        "localAsset": "assets/images/words/mixed/word_quintessential_1768293670685.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 42,
+        "word": "Recalcitrant",
+        "meanings": {
+            "tr": "İnatçı, söz dinlemez",
+            "en": "Having an obstinately uncooperative attitude toward authority"
+        },
+        "exampleSentence": "The recalcitrant student refused to follow the rules.",
+        "localAsset": "assets/images/words/mixed/word_recalcitrant_1768293724936.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 43,
+        "word": "Ameliorate",
+        "meanings": {
+            "tr": "İyileştirmek, düzeltmek",
+            "en": "Make (something bad or unsatisfactory) better"
+        },
+        "exampleSentence": "The new policy aims to ameliorate working conditions.",
+        "localAsset": "assets/images/words/mixed/word_ameliorate_1768478512360.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 44,
+        "word": "Cacophony",
+        "meanings": {
+            "tr": "Kulak tırmalayan ses, gürültü",
+            "en": "A harsh, discordant mixture of sounds"
+        },
+        "exampleSentence": "The cacophony of car horns filled the busy street.",
+        "localAsset": "assets/images/words/mixed/word_cacophony_1768312871185.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 45,
+        "word": "Delineate",
+        "meanings": {
+            "tr": "Tasvir etmek, ana hatlarını çizmek",
+            "en": "Describe or portray (something) precisely"
+        },
+        "exampleSentence": "The report delineates the main issues clearly.",
+        "localAsset": "assets/images/words/mixed/word_delineate_1768312890045.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 46,
+        "word": "Ebullient",
+        "meanings": {
+            "tr": "Coşkulu, neşeli",
+            "en": "Cheerful and full of energy"
+        },
+        "exampleSentence": "Her ebullient personality lights up every room.",
+        "localAsset": "assets/images/words/mixed/word_ebullient_1768312906015.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 47,
+        "word": "Fastidious",
+        "meanings": {
+            "tr": "Titiz, seçici",
+            "en": "Very attentive to and concerned about accuracy and detail"
+        },
+        "exampleSentence": "He is fastidious about cleanliness.",
+        "localAsset": "assets/images/words/mixed/word_fastidious_1768312932542.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 48,
+        "word": "Gregarious",
+        "meanings": {
+            "tr": "Sosyal, cana yakın",
+            "en": "Fond of company; sociable"
+        },
+        "exampleSentence": "He is a gregarious person who loves parties.",
+        "localAsset": "assets/images/words/mixed/word_gregarious_1768478743238.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 49,
+        "word": "Hackneyed",
+        "meanings": {
+            "tr": "Basmakalıp, çok kullanılmış",
+            "en": "Lacking significance through having been overused"
+        },
+        "exampleSentence": "Avoid hackneyed phrases in your writing.",
+        "localAsset": "assets/images/words/mixed/word_hackneyed_1768312966993.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 50,
+        "word": "Impetuous",
+        "meanings": {
+            "tr": "Fevri, düşüncesiz",
+            "en": "Acting or done quickly and without thought or care"
+        },
+        "exampleSentence": "His impetuous decision cost him dearly.",
+        "localAsset": "assets/images/words/mixed/word_impetuous_1768478621825.webp",
+        "difficulty": 4,
+        "deck": "mixed"
+    },
+    {
+        "id": 51,
+        "word": "Obsequious",
+        "meanings": {
+            "tr": "Aşırı itaatkar, yaltakçı",
+            "en": "Obedient or attentive to an excessive or servile degree"
+        },
+        "exampleSentence": "The obsequious waiter was overly attentive.",
+        "localAsset": "assets/images/words/mixed/word_obsequious_1768313027033.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 52,
+        "word": "Perfunctory",
+        "meanings": {
+            "tr": "Özensiz, gelişigüzel",
+            "en": "(of an action or gesture) carried out with a minimum of effort or reflection"
+        },
+        "exampleSentence": "He gave a perfunctory nod and continued working.",
+        "localAsset": "assets/images/words/mixed/word_perfunctory_1768478539807.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 53,
+        "word": "Quixotic",
+        "meanings": {
+            "tr": "Hayalperest, gerçekdışı idealler peşinde koşan",
+            "en": "Exceedingly idealistic; unrealistic and impractical"
+        },
+        "exampleSentence": "His quixotic quest to end all wars was admirable but impractical.",
+        "localAsset": "assets/images/words/mixed/word_quixotic_1768313063044.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 54,
+        "word": "Sanguine",
+        "meanings": {
+            "tr": "İyimser, umutlu",
+            "en": "Optimistic or positive, especially in an apparently bad or difficult situation"
+        },
+        "exampleSentence": "Despite the challenges, she remained sanguine about the future.",
+        "localAsset": "assets/images/words/mixed/word_sanguine_1768313077796.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 55,
+        "word": "Truculent",
+        "meanings": {
+            "tr": "Kavgacı, saldırgan",
+            "en": "Eager or quick to argue or fight; aggressively defiant"
+        },
+        "exampleSentence": "His truculent behavior made negotiations difficult.",
+        "localAsset": "assets/images/words/mixed/word_truculent_1768313122031.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 56,
+        "word": "Unctuous",
+        "meanings": {
+            "tr": "Yağlı, ikiyüzlü nazik",
+            "en": "(of a person) excessively or ingratiatingly flattering; oily"
+        },
+        "exampleSentence": "His unctuous manner made everyone uncomfortable.",
+        "localAsset": "assets/images/words/mixed/word_unctuous_1768313145322.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 57,
+        "word": "Vicissitude",
+        "meanings": {
+            "tr": "Değişkenlik, iniş çıkış",
+            "en": "A change of circumstances or fortune, typically one that is unwelcome or unpleasant"
+        },
+        "exampleSentence": "Life is full of vicissitudes.",
+        "localAsset": "assets/images/words/mixed/word_vicissitude_1768478554407.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 58,
+        "word": "Anachronism",
+        "meanings": {
+            "tr": "Zamana uymayan şey, çağdışılık",
+            "en": "A thing belonging or appropriate to a period other than that in which it exists"
+        },
+        "exampleSentence": "The typewriter is an anachronism in the digital age.",
+        "localAsset": "assets/images/words/mixed/word_anachronism_1768313182773.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 59,
+        "word": "Belligerent",
+        "meanings": {
+            "tr": "Savaşçı, kavgacı",
+            "en": "Hostile and aggressive"
+        },
+        "exampleSentence": "The belligerent nations refused to negotiate.",
+        "localAsset": "assets/images/words/mixed/word_belligerent_1768478484690.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 60,
+        "word": "Circumlocution",
+        "meanings": {
+            "tr": "Dolambaçlı anlatım",
+            "en": "The use of many words where fewer would do, especially in a deliberate attempt to be vague or evasive"
+        },
+        "exampleSentence": "His circumlocution made it hard to understand his point.",
+        "localAsset": "assets/images/words/mixed/word_circumlocution_1768313239056.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 61,
+        "word": "Deleterious",
+        "meanings": {
+            "tr": "Zararlı, yıkıcı",
+            "en": "Causing harm or damage"
+        },
+        "exampleSentence": "Smoking has deleterious effects on health.",
+        "localAsset": "assets/images/words/mixed/word_deleterious_1768313286646.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 62,
+        "word": "Enervate",
+        "meanings": {
+            "tr": "Güçten düşürmek, halsiz bırakmak",
+            "en": "Cause (someone) to feel drained of energy or vitality; weaken"
+        },
+        "exampleSentence": "The hot weather enervated everyone.",
+        "localAsset": "assets/images/words/mixed/word_enervate_1768313305193.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 63,
+        "word": "Grandiloquent",
+        "meanings": {
+            "tr": "Tumturaklı, gösterişli konuşan",
+            "en": "Pompous or extravagant in language, style, or manner"
+        },
+        "exampleSentence": "His grandiloquent speech impressed no one.",
+        "localAsset": "assets/images/words/mixed/word_grandiloquent_1768313322268.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 64,
+        "word": "Halcyon",
+        "meanings": {
+            "tr": "Huzurlu, sakin (dönem)",
+            "en": "Denoting a period of time in the past that was idly happy and peaceful"
+        },
+        "exampleSentence": "She often reminisced about those halcyon days of youth.",
+        "localAsset": "assets/images/words/mixed/word_halcyon_1768478569946.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 65,
+        "word": "Inexorable",
+        "meanings": {
+            "tr": "Amansız, durdurulamaz",
+            "en": "Impossible to stop or prevent"
+        },
+        "exampleSentence": "The inexorable march of time waits for no one.",
+        "localAsset": "assets/images/words/mixed/word_inexorable_1768478695896.webp",
+        "difficulty": 5,
+        "deck": "mixed"
+    },
+    {
+        "id": 66,
+        "word": "Ambiguous",
+        "meanings": {
+            "tr": "Belirsiz, çok anlamlı",
+            "en": "Open to more than one interpretation; having a double meaning"
+        },
+        "exampleSentence": "The instructions were ambiguous and confusing.",
+        "localAsset": "assets/images/words/mixed/word_ambiguous_1768478469896.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 67,
+        "word": "Profound",
+        "meanings": {
+            "tr": "Derin, etkili",
+            "en": "(of a state, quality, or emotion) very great or intense"
+        },
+        "exampleSentence": "The book had a profound impact on my life.",
+        "localAsset": "assets/images/words/mixed/word_profound_1768331729024.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 68,
+        "word": "Diligent",
+        "meanings": {
+            "tr": "Çalışkan, gayretli",
+            "en": "Having or showing care and conscientiousness in one's work"
+        },
+        "exampleSentence": "Diligent students often achieve their goals.",
+        "localAsset": "assets/images/words/mixed/word_diligent_1768478728758.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 69,
+        "word": "Authentic",
+        "meanings": {
+            "tr": "Özgün, gerçek",
+            "en": "Of undisputed origin; genuine"
+        },
+        "exampleSentence": "This restaurant serves authentic Italian cuisine.",
+        "localAsset": "assets/images/words/mixed/word_authentic_1768478804443.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 70,
+        "word": "Compelling",
+        "meanings": {
+            "tr": "Zorlayıcı, ikna edici",
+            "en": "Evoking interest, attention, or admiration in a powerfully irresistible way"
+        },
+        "exampleSentence": "She presented a compelling argument.",
+        "localAsset": "assets/images/words/mixed/word_compelling_1768478666382.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 71,
+        "word": "Elaborate",
+        "meanings": {
+            "tr": "Ayrıntılı, karmaşık",
+            "en": "Involving many carefully arranged parts or details; detailed and complicated in design and planning"
+        },
+        "exampleSentence": "They planned an elaborate wedding ceremony.",
+        "localAsset": "assets/images/words/mixed/word_elaborate_1768478585147.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 72,
+        "word": "Impeccable",
+        "meanings": {
+            "tr": "Kusursuz, mükemmel",
+            "en": "(of behavior, performance, or appearance) in accordance with the highest standards of propriety; faultless"
+        },
+        "exampleSentence": "Her sense of style is impeccable.",
+        "localAsset": "assets/images/words/mixed/word_impeccable_1768478713631.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 73,
+        "word": "Intriguing",
+        "meanings": {
+            "tr": "İlgi çekici, merak uyandıran",
+            "en": "Arousing one's curiosity or interest; fascinating"
+        },
+        "exampleSentence": "The mystery novel had an intriguing plot.",
+        "localAsset": "assets/images/words/mixed/word_intriguing_1768331833271.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 74,
+        "word": "Lucrative",
+        "meanings": {
+            "tr": "Kârlı, kazançlı",
+            "en": "Producing a great deal of profit"
+        },
+        "exampleSentence": "She found a lucrative career in technology.",
+        "localAsset": "assets/images/words/mixed/word_lucrative_1768478637904.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 75,
+        "word": "Negligent",
+        "meanings": {
+            "tr": "İhmalkar, dikkatsiz",
+            "en": "Failing to take proper care in doing something"
+        },
+        "exampleSentence": "The negligent driver caused the accident.",
+        "localAsset": "assets/images/words/mixed/word_negligent_1768478497274.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    },
+    {
+        "id": 76,
+        "word": "Obsolete",
+        "meanings": {
+            "tr": "Eskimiş, modası geçmiş",
+            "en": "No longer produced or used; out of date"
+        },
+        "exampleSentence": "Floppy disks are now obsolete.",
+        "localAsset": "assets/images/words/mixed/word_obsolete_1768478790335.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 77,
+        "word": "Peculiar",
+        "meanings": {
+            "tr": "Tuhaf, garip",
+            "en": "Strange or odd; unusual"
+        },
+        "exampleSentence": "There was something peculiar about his behavior.",
+        "localAsset": "assets/images/words/mixed/word_peculiar_1768478651262.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 78,
+        "word": "Reluctant",
+        "meanings": {
+            "tr": "İsteksiz, gönülsüz",
+            "en": "Unwilling and hesitant; disinclined"
+        },
+        "exampleSentence": "He was reluctant to admit his mistake.",
+        "localAsset": "assets/images/words/mixed/word_reluctant_1768331924455.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 79,
+        "word": "Spontaneous",
+        "meanings": {
+            "tr": "Kendiliğinden, doğal",
+            "en": "Performed or occurring as a result of a sudden inner impulse or inclination and without premeditation or external stimulus"
+        },
+        "exampleSentence": "Their spontaneous trip to Paris was memorable.",
+        "localAsset": "assets/images/words/mixed/word_spontaneous_1768331938281.webp",
+        "difficulty": 2,
+        "deck": "mixed"
+    },
+    {
+        "id": 80,
+        "word": "Turbulent",
+        "meanings": {
+            "tr": "Çalkantılı, hareketli",
+            "en": "Characterized by conflict, disorder, or confusion; not controlled or calm"
+        },
+        "exampleSentence": "The company went through a turbulent period.",
+        "localAsset": "assets/images/words/mixed/word_turbulent_1768478775603.webp",
+        "difficulty": 3,
+        "deck": "mixed"
+    }
+]

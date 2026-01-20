@@ -1,0 +1,290 @@
+[
+    {
+        "id": 2001,
+        "word": "Hello",
+        "meanings": {
+            "tr": "Merhaba",
+            "en": "A greeting"
+        },
+        "exampleSentence": "Hello! How are you?",
+        "localAsset": "assets/images/words/beginner/word_hello_1768513437800.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2002,
+        "word": "Goodbye",
+        "meanings": {
+            "tr": "Hoşça kal",
+            "en": "A parting word"
+        },
+        "exampleSentence": "Goodbye! See you tomorrow.",
+        "localAsset": "assets/images/words/beginner/word_goodbye_1768513451339.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2003,
+        "word": "Please",
+        "meanings": {
+            "tr": "Lütfen",
+            "en": "Used to make a polite request"
+        },
+        "exampleSentence": "Please help me.",
+        "localAsset": "assets/images/words/beginner/word_please_1768513465694.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2004,
+        "word": "Thank you",
+        "meanings": {
+            "tr": "Teşekkür ederim",
+            "en": "Expression of gratitude"
+        },
+        "exampleSentence": "Thank you for your help!",
+        "localAsset": "assets/images/words/beginner/word_thankyou_1768513480132.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2005,
+        "word": "Yes",
+        "meanings": {
+            "tr": "Evet",
+            "en": "Affirmative response"
+        },
+        "exampleSentence": "Yes, I understand.",
+        "localAsset": "assets/images/words/beginner/word_yes_1768513493920.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2006,
+        "word": "No",
+        "meanings": {
+            "tr": "Hayır",
+            "en": "Negative response"
+        },
+        "exampleSentence": "No, thank you.",
+        "localAsset": "assets/images/words/beginner/word_no_1768513523066.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2007,
+        "word": "Water",
+        "meanings": {
+            "tr": "Su",
+            "en": "A clear liquid for drinking"
+        },
+        "exampleSentence": "Can I have some water?",
+        "localAsset": "assets/images/words/beginner/word_water_1768513539015.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2008,
+        "word": "Food",
+        "meanings": {
+            "tr": "Yiyecek",
+            "en": "Something to eat"
+        },
+        "exampleSentence": "The food here is delicious.",
+        "localAsset": "assets/images/words/beginner/word_food_1768513555057.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2009,
+        "word": "Help",
+        "meanings": {
+            "tr": "Yardım",
+            "en": "Assistance"
+        },
+        "exampleSentence": "I need help!",
+        "localAsset": "assets/images/words/beginner/word_help_1768513569799.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2010,
+        "word": "Friend",
+        "meanings": {
+            "tr": "Arkadaş",
+            "en": "A person you like and trust"
+        },
+        "exampleSentence": "She is my best friend.",
+        "localAsset": "assets/images/words/beginner/word_friend_1768513585527.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2011,
+        "word": "Happy",
+        "meanings": {
+            "tr": "Mutlu",
+            "en": "Feeling or showing pleasure"
+        },
+        "exampleSentence": "I am so happy today!",
+        "localAsset": "assets/images/words/beginner/word_happy_1768581620671.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2012,
+        "word": "Sad",
+        "meanings": {
+            "tr": "Üzgün",
+            "en": "Feeling sorrow or unhappiness"
+        },
+        "exampleSentence": "She looks sad today.",
+        "localAsset": "assets/images/words/beginner/word_sad_1768581634867.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2013,
+        "word": "Good",
+        "meanings": {
+            "tr": "İyi",
+            "en": "Of a high quality or standard"
+        },
+        "exampleSentence": "This is a good book.",
+        "localAsset": "assets/images/words/beginner/word_good_1768581649125.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2014,
+        "word": "Bad",
+        "meanings": {
+            "tr": "Kötü",
+            "en": "Of poor quality or low standard"
+        },
+        "exampleSentence": "The weather is bad today.",
+        "localAsset": "assets/images/words/beginner/word_bad_1768581665855.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2015,
+        "word": "Love",
+        "meanings": {
+            "tr": "Sevgi, aşk",
+            "en": "A strong feeling of affection"
+        },
+        "exampleSentence": "I love my family.",
+        "localAsset": "assets/images/words/beginner/word_love_1768581679884.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2016,
+        "word": "Chair",
+        "meanings": {
+            "tr": "Sandalye",
+            "en": "A seat with a back"
+        },
+        "exampleSentence": "Please sit on the chair.",
+        "localAsset": "assets/images/words/beginner/word_chair_1768735181536.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2017,
+        "word": "Table",
+        "meanings": {
+            "tr": "Masa",
+            "en": "A piece of furniture with a flat top"
+        },
+        "exampleSentence": "Put the book on the table.",
+        "localAsset": "assets/images/words/beginner/word_table_1768735195407.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2018,
+        "word": "Door",
+        "meanings": {
+            "tr": "Kapı",
+            "en": "An entrance to a room or building"
+        },
+        "exampleSentence": "Open the door, please.",
+        "localAsset": "assets/images/words/beginner/word_door_1768735208855.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2019,
+        "word": "Window",
+        "meanings": {
+            "tr": "Pencere",
+            "en": "An opening in a wall to let in light"
+        },
+        "exampleSentence": "Look out the window.",
+        "localAsset": "assets/images/words/beginner/word_window_1768735223004.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2020,
+        "word": "Computer",
+        "meanings": {
+            "tr": "Bilgisayar",
+            "en": "An electronic device for processing data"
+        },
+        "exampleSentence": "I use a computer for work.",
+        "localAsset": "assets/images/words/beginner/word_computer_1768735237139.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2021,
+        "word": "Phone",
+        "meanings": {
+            "tr": "Telefon",
+            "en": "A device used for communication"
+        },
+        "exampleSentence": "Can I use your phone?",
+        "localAsset": "assets/images/words/beginner/word_phone_1768735263794.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2022,
+        "word": "Bag",
+        "meanings": {
+            "tr": "Çanta",
+            "en": "A container made of flexible material"
+        },
+        "exampleSentence": "Where is my bag?",
+        "localAsset": "assets/images/words/beginner/word_bag_1768735279010.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2023,
+        "word": "Shoe",
+        "meanings": {
+            "tr": "Ayakkabı",
+            "en": "A covering for the foot"
+        },
+        "exampleSentence": "I lost my shoe.",
+        "localAsset": "assets/images/words/beginner/word_shoe_1768735297290.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2024,
+        "word": "Hat",
+        "meanings": {
+            "tr": "Şapka",
+            "en": "A covering for the head"
+        },
+        "exampleSentence": "He is wearing a hat.",
+        "localAsset": "assets/images/words/beginner/word_hat_1768735311623.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    }
+]

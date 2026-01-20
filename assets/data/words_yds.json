@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1001,
+        "word": "Ambivalent",
+        "meanings": {
+            "tr": "Kararsız, iki değerli",
+            "en": "Having mixed feelings"
+        },
+        "exampleSentence": "She felt ambivalent about the job offer.",
+        "localAsset": "assets/images/words/yds_ydt/word_ambivalent_1768513258324.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1002,
+        "word": "Cognizant",
+        "meanings": {
+            "tr": "Farkında, bilincinde",
+            "en": "Having knowledge or awareness"
+        },
+        "exampleSentence": "He was cognizant of the risks involved.",
+        "localAsset": "assets/images/words/yds_ydt/word_cognizant_1768513273036.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1003,
+        "word": "Discrepancy",
+        "meanings": {
+            "tr": "Tutarsızlık, uyuşmazlık",
+            "en": "A difference between things that should be the same"
+        },
+        "exampleSentence": "There was a discrepancy in the accounts.",
+        "localAsset": "assets/images/words/yds_ydt/word_discrepancy_1768513288346.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1004,
+        "word": "Exacerbate",
+        "meanings": {
+            "tr": "Kötüleştirmek",
+            "en": "Make a problem worse"
+        },
+        "exampleSentence": "The treatment only exacerbated the condition.",
+        "localAsset": "assets/images/words/yds_ydt/word_exacerbate_1768513302843.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1005,
+        "word": "Feasible",
+        "meanings": {
+            "tr": "Uygulanabilir, mümkün",
+            "en": "Possible and practical to do"
+        },
+        "exampleSentence": "The plan seems feasible.",
+        "localAsset": "assets/images/words/yds_ydt/word_feasible_1768513316888.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1006,
+        "word": "Gullible",
+        "meanings": {
+            "tr": "Kolay kandırılan, saf",
+            "en": "Easily deceived"
+        },
+        "exampleSentence": "He was too gullible to see through the scam.",
+        "localAsset": "assets/images/words/yds_ydt/word_gullible_1768513347606.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1007,
+        "word": "Hypothetical",
+        "meanings": {
+            "tr": "Varsayımsal, kuramsal",
+            "en": "Based on a hypothesis, not real"
+        },
+        "exampleSentence": "Let's consider a hypothetical situation.",
+        "localAsset": "assets/images/words/yds_ydt/word_hypothetical_1768513361484.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1008,
+        "word": "Innate",
+        "meanings": {
+            "tr": "Doğuştan, içsel",
+            "en": "Inborn, natural"
+        },
+        "exampleSentence": "She has an innate talent for music.",
+        "localAsset": "assets/images/words/yds_ydt/word_innate_1768513379753.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1009,
+        "word": "Juxtapose",
+        "meanings": {
+            "tr": "Yan yana koymak",
+            "en": "Place side by side for comparison"
+        },
+        "exampleSentence": "The artist juxtaposed old and new styles.",
+        "localAsset": "assets/images/words/yds_ydt/word_juxtapose_1768513394961.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1010,
+        "word": "Kudos",
+        "meanings": {
+            "tr": "Övgü, takdir",
+            "en": "Praise and honor"
+        },
+        "exampleSentence": "Kudos to you for finishing the project!",
+        "localAsset": "assets/images/words/yds_ydt/word_kudos_1768513409985.webp",
+        "difficulty": 2,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1011,
+        "word": "Prevalent",
+        "meanings": {
+            "tr": "Yaygın, hakim",
+            "en": "Widespread in a particular area or at a particular time"
+        },
+        "exampleSentence": "Smartphones are prevalent in modern society.",
+        "localAsset": "assets/images/words/yds_ydt/word_prevalent_1768581529912.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1012,
+        "word": "Retrospect",
+        "meanings": {
+            "tr": "Geriye bakış, geçmişe bakma",
+            "en": "A review of past events"
+        },
+        "exampleSentence": "In retrospect, I should have studied harder.",
+        "localAsset": "assets/images/words/yds_ydt/word_retrospect_1768581543957.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1013,
+        "word": "Subsequent",
+        "meanings": {
+            "tr": "Sonraki, müteakip",
+            "en": "Coming after something in time; following"
+        },
+        "exampleSentence": "The subsequent events proved him right.",
+        "localAsset": "assets/images/words/yds_ydt/word_subsequent_1768581559028.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1014,
+        "word": "Ambiguity",
+        "meanings": {
+            "tr": "Belirsizlik, muğlaklık",
+            "en": "The quality of being open to more than one interpretation"
+        },
+        "exampleSentence": "The contract was full of ambiguity.",
+        "localAsset": "assets/images/words/yds_ydt/word_ambiguity_1768581573606.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1015,
+        "word": "Inference",
+        "meanings": {
+            "tr": "Çıkarım, sonuç çıkarma",
+            "en": "A conclusion reached on the basis of evidence and reasoning"
+        },
+        "exampleSentence": "The detective made an inference from the clues.",
+        "localAsset": "assets/images/words/yds_ydt/word_inference_1768581587950.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1016,
+        "word": "Proliferate",
+        "meanings": {
+            "tr": "Çoğalmak, türemek",
+            "en": "Increase rapidly in number"
+        },
+        "exampleSentence": "Cells proliferate rapidly.",
+        "localAsset": "assets/images/words/yds_ydt/word_proliferate_1768735029737.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1017,
+        "word": "Paradigm",
+        "meanings": {
+            "tr": "Paradigma, model, örnek",
+            "en": "A typical example or pattern"
+        },
+        "exampleSentence": "This is a new paradigm in science.",
+        "localAsset": "assets/images/words/yds_ydt/word_paradigm_1768735044441.webp",
+        "difficulty": 5,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1018,
+        "word": "Plausible",
+        "meanings": {
+            "tr": "Makul, akla yatkın",
+            "en": "Seeming reasonable or probable"
+        },
+        "exampleSentence": "His explanation seems plausible.",
+        "localAsset": "assets/images/words/yds_ydt/word_plausible_1768734985114.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1019,
+        "word": "Unprecedented",
+        "meanings": {
+            "tr": "Eşi görülmemiş",
+            "en": "Never done or known before"
+        },
+        "exampleSentence": "This is an unprecedented event.",
+        "localAsset": "assets/images/words/yds_ydt/word_unprecedented_1768735058991.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1020,
+        "word": "Viable",
+        "meanings": {
+            "tr": "Uygulanabilir, yaşayabilir",
+            "en": "Capable of working successfully"
+        },
+        "exampleSentence": "We need a viable solution.",
+        "localAsset": "assets/images/words/yds_ydt/word_viable_1768735073374.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1021,
+        "word": "Empirical",
+        "meanings": {
+            "tr": "Deneysel, tecrübi",
+            "en": "Based on observation or experience"
+        },
+        "exampleSentence": "Empirical evidence supports this theory.",
+        "localAsset": "assets/images/words/yds_ydt/word_empirical_1768735098720.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1022,
+        "word": "Tentative",
+        "meanings": {
+            "tr": "Geçici, kesin olmayan",
+            "en": "Not certain or fixed"
+        },
+        "exampleSentence": "We made a tentative plan.",
+        "localAsset": "assets/images/words/yds_ydt/word_tentative_1768735116497.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1023,
+        "word": "Consensus",
+        "meanings": {
+            "tr": "Fikir birliği, uzlaşma",
+            "en": "General agreement"
+        },
+        "exampleSentence": "They reached a consensus.",
+        "localAsset": "assets/images/words/yds_ydt/word_consensus_1768735130868.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1024,
+        "word": "Advocate",
+        "meanings": {
+            "tr": "Savunmak, desteklemek",
+            "en": "Publicly support or recommend"
+        },
+        "exampleSentence": "He advocates for human rights.",
+        "localAsset": "assets/images/words/yds_ydt/word_advocate_1768735143989.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1025,
+        "word": "Hierarchy",
+        "meanings": {
+            "tr": "Hiyerarşi",
+            "en": "A system of ranking"
+        },
+        "exampleSentence": "There is a strict hierarchy in the company.",
+        "localAsset": "assets/images/words/yds_ydt/word_hierarchy_1768735158973.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    }
+]
