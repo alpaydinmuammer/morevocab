@@ -57,4 +57,4 @@ flutter:
     - assets/animations/pets/
     - assets/data/
     - assets/images/pets/
-    - .env
+    - .env.example
