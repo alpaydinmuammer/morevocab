@@ -1,0 +1,19 @@
+flutter_native_splash:
+  # Dark background color matching app theme (no image)
+  color: "#001B2C"
+
+  # Android 12+ specific
+  android_12:
+    color: "#001B2C"
+
+  # Fullscreen
+  fullscreen: true
+
+  # Android specific
+  android: true
+
+  # iOS specific
+  ios: true
+
+  # Web specific
+  web: false

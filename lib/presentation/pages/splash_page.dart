@@ -4,7 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/exceptions/app_exceptions.dart';
+import '../../core/constants/app_constants.dart';
+import '../../domain/models/auth_state.dart';
 import '../providers/word_providers.dart';
+import '../providers/auth_provider.dart';
+import '../providers/settings_provider.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
@@ -44,7 +48,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
     // Main animation controller - optimized for faster transition
     _mainController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 3000),
+      duration: AppConstants.splashMainAnimationDuration,
     );
 
     _setupAnimations();
@@ -61,12 +65,12 @@ class _SplashPageState extends ConsumerState<SplashPage>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Start main animation quickly
-      Future.delayed(const Duration(milliseconds: 100), () {
+      Future.delayed(AppConstants.splashInitialDelay, () {
         if (mounted) _mainController.forward();
       });
 
       // Delay heavy data loading slightly
-      Future.delayed(const Duration(milliseconds: 400), () {
+      Future.delayed(AppConstants.splashDataLoadDelay, () {
         _initializeData();
       });
     });
@@ -99,7 +103,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
       ),
     );
 
-    // Card 2 (Middle) - Enhanced with scale
+    // Card 2 (Middle)
     _card2Slide = Tween<double>(begin: 0.0, end: -120.0).animate(
       CurvedAnimation(
         parent: _mainController,
@@ -125,7 +129,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
       ),
     );
 
-    // Card 3 (Bottom) - Enhanced with scale
+    // Card 3 (Bottom)
     _card3Slide = Tween<double>(begin: 0.0, end: 120.0).animate(
       CurvedAnimation(
         parent: _mainController,
@@ -151,7 +155,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
       ),
     );
 
-    // More Vocab text animation - fade in at 0.55, fade out at 1.0
+    // More Vocab text animation
     _moreVocabOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _mainController,
@@ -190,22 +194,52 @@ class _SplashPageState extends ConsumerState<SplashPage>
     if (!mounted || _isNavigating) return;
 
     // Navigate when cards animation is done and More Vocab text is shown
-    // Kartlar 0.9'da bitmiş, yazı 0.85-1.0 aralığında fade in/out
     bool animationFinished = _mainController.value >= 1.0;
 
     if (animationFinished && _isDataReady) {
       _isNavigating = true;
-      // Navigate immediately for seamless transition
-      context.go('/');
+      _navigateBasedOnAuthState();
     } else if (animationFinished && !_isDataReady) {
       _animationFinishTime ??= DateTime.now();
       final waitTime = DateTime.now().difference(_animationFinishTime!);
       // Reduced wait time for faster fallback
       if (waitTime.inMilliseconds >= 1500) {
         _isNavigating = true;
-        context.go('/');
+        _navigateBasedOnAuthState();
       }
     }
+  }
+
+  void _navigateBasedOnAuthState() {
+    final authState = ref.read(authStateProvider);
+    final isGuest = ref.read(guestModeProvider);
+    final settings = ref.read(settingsProvider);
+
+    authState.when(
+      data: (state) {
+        final isAuthenticated = state is AuthAuthenticated;
+        final canAccess = isAuthenticated || isGuest;
+
+        if (!canAccess) {
+          // Not logged in -> go to auth
+          context.go('/auth');
+        } else if (!settings.hasSeenOnboarding) {
+          // Logged in but first time -> go to onboarding
+          context.go('/onboarding');
+        } else {
+          // Logged in and returning user -> go to home
+          context.go('/');
+        }
+      },
+      loading: () {
+        // Auth still loading, go to auth page
+        context.go('/auth');
+      },
+      error: (_, _) {
+        // On error, go to auth page
+        context.go('/auth');
+      },
+    );
   }
 
   @override
@@ -230,20 +264,16 @@ class _SplashPageState extends ConsumerState<SplashPage>
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    // More Vocab text (appears behind cards)
+                    // Logo (appears behind cards)
                     Opacity(
                       opacity: _moreVocabOpacity.value,
-                      child: const Text(
-                        'More Vocab',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1,
-                        ),
+                      child: Image.asset(
+                        AppConstants.logoAssetPath,
+                        width: 280,
+                        height: 280,
                       ),
                     ),
-                    
+
                     // Card Stack Area (in front)
                     _buildCardStack(),
                   ],
@@ -257,9 +287,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
   }
 
   Widget _buildAnimatedBackground() {
-    return Container(
-      color: AppTheme.darkBackground,
-    );
+    return Container(color: AppTheme.darkBackground);
   }
 
   Widget _buildCardStack() {
@@ -325,7 +353,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
         offset: Offset(slide.value, 0),
         child: Transform.rotate(
           angle: rotate.value + staticTilt,
-            child: Transform.scale(
+          child: Transform.scale(
             scale: scale.value,
             child: Container(
               width: 90,
@@ -336,7 +364,11 @@ class _SplashPageState extends ConsumerState<SplashPage>
               ),
               child: Center(
                 child: Text(
-                  index == 0 ? 'get' : index == 1 ? 'more' : 'vocab',
+                  index == 0
+                      ? 'get'
+                      : index == 1
+                      ? 'more'
+                      : 'vocab',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,

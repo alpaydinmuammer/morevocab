@@ -201,5 +201,53 @@
     "placeholders": {
       "level": {"type": "int"}
     }
-  }
+  },
+  "editName": "Modifica Nome",
+  "save": "Salva",
+  "enterYourName": "Inserisci il tuo nome",
+  "totalXp": "XP Totale",
+  "nextEvolution": "Prossima Evoluzione",
+  "status": "Stato",
+  "maximum": "Massimo!",
+  "ok": "OK",
+  "becameStage": "È diventato {stage}!",
+  "@becameStage": {
+    "placeholders": {
+      "stage": {"type": "String"}
+    }
+  },
+
+  "authTagline": "Apprendimento intelligente del vocabolario",
+  "authTermsNotice": "Accedendo, accetti i nostri Termini di Servizio",
+  "continueWithGoogle": "Continua con Google",
+  "continueWithApple": "Continua con Apple",
+  "signOut": "Esci",
+  "signOutConfirm": "Sei sicuro di voler uscire?",
+  "authErrorNetwork": "Errore di connessione. Controlla la tua connessione internet.",
+  "authErrorCancelled": "Accesso annullato.",
+  "authErrorGeneric": "Accesso fallito. Riprova.",
+  "continueAsGuest": "Continua come Ospite",
+  "signIn": "Accedi",
+  "orText": "o",
+  
+  "onboardingSkip": "Salta",
+  "onboardingNext": "Avanti",
+  "onboardingStart": "Iniziamo!",
+  "onboardingWelcomeTitle": "More Vocab",
+  "onboardingWelcomeSubtitle": "Impara le parole scorrendo.",
+  "onboardingSwipeTitle": "Scorri per Imparare",
+  "onboardingSwipeSubtitle": "Scorri a destra se conosci la parola, a sinistra se no. È così semplice!",
+  "onboardingSrsTitle": "Ripetizione Intelligente",
+  "onboardingSrsSubtitle": "Il nostro algoritmo mostra le parole a intervalli intelligenti per assicurarsi che le impari.",
+  "onboardingPetTitle": "Il Tuo Compagno",
+  "onboardingPetSubtitle": "Scegli un animale che ti accompagnerà nel tuo viaggio di apprendimento. Impara nuove parole. Guardalo crescere ed evolversi.",
+  "onboardingDecksTitle": "Mazzi di Parole",
+  "onboardingDecksSubtitle": "Scegli tra i mazzi creati appositamente per te.",
+  "onboardingReadyTitle": "Pronto per Iniziare!",
+  "onboardingReadySubtitle": "10 minuti al giorno fanno una grande differenza. Inizia il tuo viaggio!",
+
+  "creditsDevelopment": "Sviluppo",
+  "creditsDesign": "Design UI / UX",
+  "creditsTechnology": "Tecnologia Core",
+  "creditsVersion": "Versione"
 }

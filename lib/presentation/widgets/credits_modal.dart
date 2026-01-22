@@ -149,7 +149,7 @@ class CreditsModal extends StatelessWidget {
                   children: [
                     _buildCreditCard(
                       context,
-                      title: 'Development',
+                      title: AppLocalizations.of(context)!.creditsDevelopment,
                       name: 'Muammer Alpaydın',
                       icon: Icons.code_rounded,
                       color: Colors.blue,
@@ -157,7 +157,7 @@ class CreditsModal extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildCreditCard(
                       context,
-                      title: 'UI / UX Design',
+                      title: AppLocalizations.of(context)!.creditsDesign,
                       name: 'Muammer Alpaydın',
                       icon: Icons.auto_awesome_rounded,
                       color: Colors.purple,
@@ -165,7 +165,7 @@ class CreditsModal extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildCreditCard(
                       context,
-                      title: 'Core Technology',
+                      title: AppLocalizations.of(context)!.creditsTechnology,
                       name: 'Flutter & Dart',
                       icon: Icons.bolt_rounded,
                       color: Colors.cyan,
@@ -173,7 +173,7 @@ class CreditsModal extends StatelessWidget {
                     const SizedBox(height: 12),
                     _buildCreditCard(
                       context,
-                      title: 'Version',
+                      title: AppLocalizations.of(context)!.creditsVersion,
                       name: '1.0.0',
                       icon: Icons.info_outline_rounded,
                       color: Colors.teal,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../core/constants/app_constants.dart';
 
 /// Widget that displays an egg that the user can tap to select their pet
 class PetEggWidget extends StatefulWidget {
@@ -21,7 +23,7 @@ class _PetEggWidgetState extends State<PetEggWidget>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 2000),
+      duration: AppConstants.petEggAnimationDuration,
       vsync: this,
     )..repeat(reverse: true);
 
@@ -130,18 +132,18 @@ class _PetEggWidgetState extends State<PetEggWidget>
                             ),
                           ],
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.touch_app_rounded,
                               size: 16,
                               color: Colors.white,
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text(
-                              'Dokun',
-                              style: TextStyle(
+                              AppLocalizations.of(context)!.petTapToHatch,
+                              style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,

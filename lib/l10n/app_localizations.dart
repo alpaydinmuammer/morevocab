@@ -853,7 +853,7 @@ abstract class AppLocalizations {
   /// No description provided for @petSelectTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Yumurtandan Ne Çıksın?'**
+  /// **'Evcil Hayvanını Seç'**
   String get petSelectTitle;
 
   /// No description provided for @petSelectSubtitle.
@@ -907,7 +907,7 @@ abstract class AppLocalizations {
   /// No description provided for @petWolfDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Sadık ve cesur'**
+  /// **'Yediği ayazı unutmaz'**
   String get petWolfDesc;
 
   /// No description provided for @petFox.
@@ -999,6 +999,474 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Level {level} evrim'**
   String petNextEvolution(int level);
+
+  /// No description provided for @editName.
+  ///
+  /// In tr, this message translates to:
+  /// **'İsmini Düzenle'**
+  String get editName;
+
+  /// No description provided for @save.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydet'**
+  String get save;
+
+  /// No description provided for @enterYourName.
+  ///
+  /// In tr, this message translates to:
+  /// **'Adınızı girin'**
+  String get enterYourName;
+
+  /// No description provided for @totalXp.
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam XP'**
+  String get totalXp;
+
+  /// No description provided for @nextEvolution.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sonraki Evrim'**
+  String get nextEvolution;
+
+  /// No description provided for @status.
+  ///
+  /// In tr, this message translates to:
+  /// **'Durum'**
+  String get status;
+
+  /// No description provided for @maximum.
+  ///
+  /// In tr, this message translates to:
+  /// **'Maksimum!'**
+  String get maximum;
+
+  /// No description provided for @ok.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tamam'**
+  String get ok;
+
+  /// No description provided for @becameStage.
+  ///
+  /// In tr, this message translates to:
+  /// **'{stage} oldu!'**
+  String becameStage(String stage);
+
+  /// No description provided for @authTagline.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı kelime öğrenme'**
+  String get authTagline;
+
+  /// No description provided for @authTermsNotice.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş yaparak Kullanım Koşullarını kabul etmiş olursunuz'**
+  String get authTermsNotice;
+
+  /// No description provided for @continueWithGoogle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Google ile Devam Et'**
+  String get continueWithGoogle;
+
+  /// No description provided for @continueWithApple.
+  ///
+  /// In tr, this message translates to:
+  /// **'Apple ile Devam Et'**
+  String get continueWithApple;
+
+  /// No description provided for @signOut.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çıkış Yap'**
+  String get signOut;
+
+  /// No description provided for @signOutConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çıkış yapmak istediğinize emin misiniz?'**
+  String get signOutConfirm;
+
+  /// No description provided for @authErrorNetwork.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bağlantı hatası. İnternet bağlantınızı kontrol edin.'**
+  String get authErrorNetwork;
+
+  /// No description provided for @authErrorCancelled.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş iptal edildi.'**
+  String get authErrorCancelled;
+
+  /// No description provided for @authErrorGeneric.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş başarısız. Lütfen tekrar deneyin.'**
+  String get authErrorGeneric;
+
+  /// No description provided for @continueAsGuest.
+  ///
+  /// In tr, this message translates to:
+  /// **'Misafir Olarak Devam Et'**
+  String get continueAsGuest;
+
+  /// No description provided for @signIn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Giriş Yap'**
+  String get signIn;
+
+  /// No description provided for @orText.
+  ///
+  /// In tr, this message translates to:
+  /// **'veya'**
+  String get orText;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In tr, this message translates to:
+  /// **'Atla'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In tr, this message translates to:
+  /// **'İleri'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingStart.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlayalım!'**
+  String get onboardingStart;
+
+  /// No description provided for @onboardingWelcomeTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'More Vocab'**
+  String get onboardingWelcomeTitle;
+
+  /// No description provided for @onboardingWelcomeSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelimeleri kaydırarak öğren.'**
+  String get onboardingWelcomeSubtitle;
+
+  /// No description provided for @onboardingSwipeTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kaydır ve Öğren'**
+  String get onboardingSwipeTitle;
+
+  /// No description provided for @onboardingSwipeSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Biliyorsan sağa, bilmiyorsan sola kaydır. Bu kadar basit!'**
+  String get onboardingSwipeSubtitle;
+
+  /// No description provided for @onboardingSrsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Akıllı Tekrar'**
+  String get onboardingSrsTitle;
+
+  /// No description provided for @onboardingSrsSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Algoritmamız kelimeleri akıllı aralıklarla tekrar göstererek öğrendiğinizden emin olur.'**
+  String get onboardingSrsSubtitle;
+
+  /// No description provided for @onboardingPetTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Pet Arkadaşın'**
+  String get onboardingPetTitle;
+
+  /// No description provided for @onboardingPetSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme yolculuğunda sana yoldaş olacak bir evcil hayvan seç. Sen yeni kelimeler öğren. O da büyüyüp evrimleşsin.'**
+  String get onboardingPetSubtitle;
+
+  /// No description provided for @onboardingDecksTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime Desteleri'**
+  String get onboardingDecksTitle;
+
+  /// No description provided for @onboardingDecksSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senin için özel oluşturulmuş destelerden istediğini seç.'**
+  String get onboardingDecksSubtitle;
+
+  /// No description provided for @onboardingReadyTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hazırsın!'**
+  String get onboardingReadyTitle;
+
+  /// No description provided for @onboardingReadySubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her gün 10 dakika, büyük fark yaratır. Yolculuğuna başla!'**
+  String get onboardingReadySubtitle;
+
+  /// No description provided for @creditsDevelopment.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geliştirme'**
+  String get creditsDevelopment;
+
+  /// No description provided for @creditsDesign.
+  ///
+  /// In tr, this message translates to:
+  /// **'UI / UX Tasarım'**
+  String get creditsDesign;
+
+  /// No description provided for @creditsTechnology.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temel Teknoloji'**
+  String get creditsTechnology;
+
+  /// No description provided for @creditsVersion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sürüm'**
+  String get creditsVersion;
+
+  /// No description provided for @arcadeMode.
+  ///
+  /// In tr, this message translates to:
+  /// **'ARCADE MODU'**
+  String get arcadeMode;
+
+  /// No description provided for @arcadeModeSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eğlenceli kelime oyunları!'**
+  String get arcadeModeSubtitle;
+
+  /// No description provided for @arcadeLibraryTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oyun Kütüphanesi'**
+  String get arcadeLibraryTitle;
+
+  /// No description provided for @arcadeLibrarySubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oynamak istediğin oyunu seç'**
+  String get arcadeLibrarySubtitle;
+
+  /// No description provided for @gameWordChain.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime Zinciri'**
+  String get gameWordChain;
+
+  /// No description provided for @gameWordChainDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son harflerle zincir oluştur'**
+  String get gameWordChainDesc;
+
+  /// No description provided for @gameAnagram.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime Çorbası'**
+  String get gameAnagram;
+
+  /// No description provided for @gameAnagramDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Karışık harflerden kelime bul'**
+  String get gameAnagramDesc;
+
+  /// No description provided for @gameWordBuilder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime İnşaatı'**
+  String get gameWordBuilder;
+
+  /// No description provided for @gameWordBuilderDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hecelerden kelime yap'**
+  String get gameWordBuilderDesc;
+
+  /// No description provided for @gameEmojiQuiz.
+  ///
+  /// In tr, this message translates to:
+  /// **'Emoji Bulmaca'**
+  String get gameEmojiQuiz;
+
+  /// No description provided for @gameEmojiQuizDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Emojilerden kelime tahmin et'**
+  String get gameEmojiQuizDesc;
+
+  /// No description provided for @gameOddOneOut.
+  ///
+  /// In tr, this message translates to:
+  /// **'Farklı Olanı Bul'**
+  String get gameOddOneOut;
+
+  /// No description provided for @gameOddOneOutDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gruba uymayan kelimeyi bul'**
+  String get gameOddOneOutDesc;
+
+  /// No description provided for @gameScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Skor'**
+  String get gameScore;
+
+  /// No description provided for @gameStreak.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seri'**
+  String get gameStreak;
+
+  /// No description provided for @gameCorrect.
+  ///
+  /// In tr, this message translates to:
+  /// **'Doğru!'**
+  String get gameCorrect;
+
+  /// No description provided for @gameWrong.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yanlış!'**
+  String get gameWrong;
+
+  /// No description provided for @gameSkip.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geç'**
+  String get gameSkip;
+
+  /// No description provided for @gameHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'İpucu'**
+  String get gameHint;
+
+  /// No description provided for @gameNext.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sonraki'**
+  String get gameNext;
+
+  /// No description provided for @gamePlayAgain.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tekrar Oyna'**
+  String get gamePlayAgain;
+
+  /// No description provided for @gameOver.
+  ///
+  /// In tr, this message translates to:
+  /// **'Oyun Bitti'**
+  String get gameOver;
+
+  /// No description provided for @gamePaused.
+  ///
+  /// In tr, this message translates to:
+  /// **'Durduruldu'**
+  String get gamePaused;
+
+  /// No description provided for @gameResume.
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam Et'**
+  String get gameResume;
+
+  /// No description provided for @gameQuit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çık'**
+  String get gameQuit;
+
+  /// No description provided for @gameYourTurn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senin Sıran'**
+  String get gameYourTurn;
+
+  /// No description provided for @gameEnterWord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bir kelime gir...'**
+  String get gameEnterWord;
+
+  /// No description provided for @gameInvalidWord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geçersiz kelime!'**
+  String get gameInvalidWord;
+
+  /// No description provided for @gameWordUsed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu kelime zaten kullanıldı!'**
+  String get gameWordUsed;
+
+  /// No description provided for @gameMustStartWith.
+  ///
+  /// In tr, this message translates to:
+  /// **'\'{letter}\' harfiyle başlamalı'**
+  String gameMustStartWith(String letter);
+
+  /// No description provided for @gameWordsFound.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} kelime bulundu'**
+  String gameWordsFound(int count);
+
+  /// No description provided for @gameTimeUp.
+  ///
+  /// In tr, this message translates to:
+  /// **'Süre Doldu!'**
+  String get gameTimeUp;
+
+  /// No description provided for @gameFinalScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Final Skoru: {score}'**
+  String gameFinalScore(int score);
+
+  /// No description provided for @gameBestScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'En İyi: {score}'**
+  String gameBestScore(int score);
+
+  /// No description provided for @gameNewRecord.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yeni Rekor!'**
+  String get gameNewRecord;
+
+  /// No description provided for @gameExplanation.
+  ///
+  /// In tr, this message translates to:
+  /// **'Açıklama'**
+  String get gameExplanation;
+
+  /// No description provided for @gameCategory.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kategori: {category}'**
+  String gameCategory(String category);
 }
 
 class _AppLocalizationsDelegate

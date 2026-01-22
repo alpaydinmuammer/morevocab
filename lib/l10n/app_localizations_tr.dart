@@ -399,7 +399,7 @@ class AppLocalizationsTr extends AppLocalizations {
       'Pratik yapmaya devam et, başaracaksın!';
 
   @override
-  String get petSelectTitle => 'Yumurtandan Ne Çıksın?';
+  String get petSelectTitle => 'Evcil Hayvanını Seç';
 
   @override
   String get petSelectSubtitle => 'Öğrenme yolculuğunda sana eşlik edecek';
@@ -426,7 +426,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get petWolf => 'Kurt';
 
   @override
-  String get petWolfDesc => 'Sadık ve cesur';
+  String get petWolfDesc => 'Yediği ayazı unutmaz';
 
   @override
   String get petFox => 'Tilki';
@@ -479,5 +479,258 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String petNextEvolution(int level) {
     return 'Level $level evrim';
+  }
+
+  @override
+  String get editName => 'İsmini Düzenle';
+
+  @override
+  String get save => 'Kaydet';
+
+  @override
+  String get enterYourName => 'Adınızı girin';
+
+  @override
+  String get totalXp => 'Toplam XP';
+
+  @override
+  String get nextEvolution => 'Sonraki Evrim';
+
+  @override
+  String get status => 'Durum';
+
+  @override
+  String get maximum => 'Maksimum!';
+
+  @override
+  String get ok => 'Tamam';
+
+  @override
+  String becameStage(String stage) {
+    return '$stage oldu!';
+  }
+
+  @override
+  String get authTagline => 'Akıllı kelime öğrenme';
+
+  @override
+  String get authTermsNotice =>
+      'Giriş yaparak Kullanım Koşullarını kabul etmiş olursunuz';
+
+  @override
+  String get continueWithGoogle => 'Google ile Devam Et';
+
+  @override
+  String get continueWithApple => 'Apple ile Devam Et';
+
+  @override
+  String get signOut => 'Çıkış Yap';
+
+  @override
+  String get signOutConfirm => 'Çıkış yapmak istediğinize emin misiniz?';
+
+  @override
+  String get authErrorNetwork =>
+      'Bağlantı hatası. İnternet bağlantınızı kontrol edin.';
+
+  @override
+  String get authErrorCancelled => 'Giriş iptal edildi.';
+
+  @override
+  String get authErrorGeneric => 'Giriş başarısız. Lütfen tekrar deneyin.';
+
+  @override
+  String get continueAsGuest => 'Misafir Olarak Devam Et';
+
+  @override
+  String get signIn => 'Giriş Yap';
+
+  @override
+  String get orText => 'veya';
+
+  @override
+  String get onboardingSkip => 'Atla';
+
+  @override
+  String get onboardingNext => 'İleri';
+
+  @override
+  String get onboardingStart => 'Başlayalım!';
+
+  @override
+  String get onboardingWelcomeTitle => 'More Vocab';
+
+  @override
+  String get onboardingWelcomeSubtitle => 'Kelimeleri kaydırarak öğren.';
+
+  @override
+  String get onboardingSwipeTitle => 'Kaydır ve Öğren';
+
+  @override
+  String get onboardingSwipeSubtitle =>
+      'Biliyorsan sağa, bilmiyorsan sola kaydır. Bu kadar basit!';
+
+  @override
+  String get onboardingSrsTitle => 'Akıllı Tekrar';
+
+  @override
+  String get onboardingSrsSubtitle =>
+      'Algoritmamız kelimeleri akıllı aralıklarla tekrar göstererek öğrendiğinizden emin olur.';
+
+  @override
+  String get onboardingPetTitle => 'Pet Arkadaşın';
+
+  @override
+  String get onboardingPetSubtitle =>
+      'Öğrenme yolculuğunda sana yoldaş olacak bir evcil hayvan seç. Sen yeni kelimeler öğren. O da büyüyüp evrimleşsin.';
+
+  @override
+  String get onboardingDecksTitle => 'Kelime Desteleri';
+
+  @override
+  String get onboardingDecksSubtitle =>
+      'Senin için özel oluşturulmuş destelerden istediğini seç.';
+
+  @override
+  String get onboardingReadyTitle => 'Hazırsın!';
+
+  @override
+  String get onboardingReadySubtitle =>
+      'Her gün 10 dakika, büyük fark yaratır. Yolculuğuna başla!';
+
+  @override
+  String get creditsDevelopment => 'Geliştirme';
+
+  @override
+  String get creditsDesign => 'UI / UX Tasarım';
+
+  @override
+  String get creditsTechnology => 'Temel Teknoloji';
+
+  @override
+  String get creditsVersion => 'Sürüm';
+
+  @override
+  String get arcadeMode => 'ARCADE MODU';
+
+  @override
+  String get arcadeModeSubtitle => 'Eğlenceli kelime oyunları!';
+
+  @override
+  String get arcadeLibraryTitle => 'Oyun Kütüphanesi';
+
+  @override
+  String get arcadeLibrarySubtitle => 'Oynamak istediğin oyunu seç';
+
+  @override
+  String get gameWordChain => 'Kelime Zinciri';
+
+  @override
+  String get gameWordChainDesc => 'Son harflerle zincir oluştur';
+
+  @override
+  String get gameAnagram => 'Kelime Çorbası';
+
+  @override
+  String get gameAnagramDesc => 'Karışık harflerden kelime bul';
+
+  @override
+  String get gameWordBuilder => 'Kelime İnşaatı';
+
+  @override
+  String get gameWordBuilderDesc => 'Hecelerden kelime yap';
+
+  @override
+  String get gameEmojiQuiz => 'Emoji Bulmaca';
+
+  @override
+  String get gameEmojiQuizDesc => 'Emojilerden kelime tahmin et';
+
+  @override
+  String get gameOddOneOut => 'Farklı Olanı Bul';
+
+  @override
+  String get gameOddOneOutDesc => 'Gruba uymayan kelimeyi bul';
+
+  @override
+  String get gameScore => 'Skor';
+
+  @override
+  String get gameStreak => 'Seri';
+
+  @override
+  String get gameCorrect => 'Doğru!';
+
+  @override
+  String get gameWrong => 'Yanlış!';
+
+  @override
+  String get gameSkip => 'Geç';
+
+  @override
+  String get gameHint => 'İpucu';
+
+  @override
+  String get gameNext => 'Sonraki';
+
+  @override
+  String get gamePlayAgain => 'Tekrar Oyna';
+
+  @override
+  String get gameOver => 'Oyun Bitti';
+
+  @override
+  String get gamePaused => 'Durduruldu';
+
+  @override
+  String get gameResume => 'Devam Et';
+
+  @override
+  String get gameQuit => 'Çık';
+
+  @override
+  String get gameYourTurn => 'Senin Sıran';
+
+  @override
+  String get gameEnterWord => 'Bir kelime gir...';
+
+  @override
+  String get gameInvalidWord => 'Geçersiz kelime!';
+
+  @override
+  String get gameWordUsed => 'Bu kelime zaten kullanıldı!';
+
+  @override
+  String gameMustStartWith(String letter) {
+    return '\'$letter\' harfiyle başlamalı';
+  }
+
+  @override
+  String gameWordsFound(int count) {
+    return '$count kelime bulundu';
+  }
+
+  @override
+  String get gameTimeUp => 'Süre Doldu!';
+
+  @override
+  String gameFinalScore(int score) {
+    return 'Final Skoru: $score';
+  }
+
+  @override
+  String gameBestScore(int score) {
+    return 'En İyi: $score';
+  }
+
+  @override
+  String get gameNewRecord => 'Yeni Rekor!';
+
+  @override
+  String get gameExplanation => 'Açıklama';
+
+  @override
+  String gameCategory(String category) {
+    return 'Kategori: $category';
   }
 }

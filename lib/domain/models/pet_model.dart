@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
+import '../../core/constants/pet_constants.dart';
+
 /// Pet types available for selection
 enum PetType { dragon, eagle, wolf, fox }
 
@@ -6,6 +10,22 @@ enum PetStage { egg, baby, young, adult, legendary }
 
 /// Extension methods for PetType
 extension PetTypeExtension on PetType {
+  /// Get localized display name (requires BuildContext)
+  String getLocalizedName(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (this) {
+      case PetType.dragon:
+        return l10n.petDragon;
+      case PetType.eagle:
+        return l10n.petEagle;
+      case PetType.wolf:
+        return l10n.petWolf;
+      case PetType.fox:
+        return l10n.petFox;
+    }
+  }
+
+  /// Fallback display name (Turkish, used for debugging/logging only)
   String get displayName {
     switch (this) {
       case PetType.dragon:
@@ -19,6 +39,22 @@ extension PetTypeExtension on PetType {
     }
   }
 
+  /// Get localized description (requires BuildContext)
+  String getLocalizedDescription(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (this) {
+      case PetType.dragon:
+        return l10n.petDragonDesc;
+      case PetType.eagle:
+        return l10n.petEagleDesc;
+      case PetType.wolf:
+        return l10n.petWolfDesc;
+      case PetType.fox:
+        return l10n.petFoxDesc;
+    }
+  }
+
+  /// Fallback description (Turkish, used for debugging/logging only)
   String get description {
     switch (this) {
       case PetType.dragon:
@@ -62,6 +98,24 @@ extension PetTypeExtension on PetType {
 
 /// Extension methods for PetStage
 extension PetStageExtension on PetStage {
+  /// Get localized display name (requires BuildContext)
+  String getLocalizedName(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (this) {
+      case PetStage.egg:
+        return l10n.petTapToHatch; // "Yumurta" is not in ARB, use tap to hatch context
+      case PetStage.baby:
+        return l10n.petStageBaby;
+      case PetStage.young:
+        return l10n.petStageYoung;
+      case PetStage.adult:
+        return l10n.petStageAdult;
+      case PetStage.legendary:
+        return l10n.petStageLegendary;
+    }
+  }
+
+  /// Fallback display name (Turkish, used for debugging/logging only)
   String get displayName {
     switch (this) {
       case PetStage.egg:
@@ -81,15 +135,15 @@ extension PetStageExtension on PetStage {
   int get minLevel {
     switch (this) {
       case PetStage.egg:
-        return 0;
+        return PetConstants.stageEggMinLevel;
       case PetStage.baby:
-        return 1;
+        return PetConstants.stageBabyMinLevel;
       case PetStage.young:
-        return 5;
+        return PetConstants.stageYoungMinLevel;
       case PetStage.adult:
-        return 15;
+        return PetConstants.stageAdultMinLevel;
       case PetStage.legendary:
-        return 30;
+        return PetConstants.stageLegendaryMinLevel;
     }
   }
 }
@@ -117,7 +171,7 @@ class PetModel {
   });
 
   /// XP required to reach the next level
-  int get xpForNextLevel => level * 100;
+  int get xpForNextLevel => level * PetConstants.xpMultiplierForNextLevel;
 
   /// Progress percentage towards next level (0.0 to 1.0)
   double get progressToNextLevel {
@@ -127,9 +181,9 @@ class PetModel {
 
   /// Current evolution stage based on level
   PetStage get stage {
-    if (level >= 30) return PetStage.legendary;
-    if (level >= 15) return PetStage.adult;
-    if (level >= 5) return PetStage.young;
+    if (level >= PetConstants.stageLegendaryMinLevel) return PetStage.legendary;
+    if (level >= PetConstants.stageAdultMinLevel) return PetStage.adult;
+    if (level >= PetConstants.stageYoungMinLevel) return PetStage.young;
     return PetStage.baby;
   }
 
@@ -183,8 +237,8 @@ class PetModel {
     PetStage? previousStage = stage;
 
     // Handle level ups
-    while (newExperience >= newLevel * 100) {
-      newExperience -= newLevel * 100;
+    while (newExperience >= newLevel * PetConstants.xpPerLevelBase) {
+      newExperience -= newLevel * PetConstants.xpPerLevelBase;
       newLevel++;
       didLevelUp = true;
     }
@@ -297,17 +351,12 @@ class PetGainResult {
 
 /// XP values for different actions
 class PetXpValues {
-  static const int correctSwipe = 10;
-  static const int hardWordBonus = 5; // Extra XP for difficulty >= 4
-  static const int dailyLoginBonus = 25;
-  static const int weekStreakBonus = 100;
+  static int get correctSwipe => PetConstants.xpCorrectSwipe;
+  static int get dailyLoginBonus => PetConstants.xpDailyLoginBonus;
+  static int get weekStreakBonus => PetConstants.xpWeekStreakBonus;
 
   /// Calculate XP for a correct answer
   static int forCorrectAnswer({int difficulty = 1}) {
-    int xp = correctSwipe;
-    if (difficulty >= 4) {
-      xp += hardWordBonus;
-    }
-    return xp;
+    return correctSwipe;
   }
 }

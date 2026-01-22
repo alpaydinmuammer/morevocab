@@ -201,5 +201,53 @@
     "placeholders": {
       "level": {"type": "int"}
     }
-  }
+  },
+  "editName": "Name bearbeiten",
+  "save": "Speichern",
+  "enterYourName": "Gib deinen Namen ein",
+  "totalXp": "Gesamt-XP",
+  "nextEvolution": "Nächste Entwicklung",
+  "status": "Status",
+  "maximum": "Maximum!",
+  "ok": "OK",
+  "becameStage": "Wurde {stage}!",
+  "@becameStage": {
+    "placeholders": {
+      "stage": {"type": "String"}
+    }
+  },
+
+  "authTagline": "Intelligentes Vokabellernen",
+  "authTermsNotice": "Mit der Anmeldung stimmen Sie unseren Nutzungsbedingungen zu",
+  "continueWithGoogle": "Mit Google fortfahren",
+  "continueWithApple": "Mit Apple fortfahren",
+  "signOut": "Abmelden",
+  "signOutConfirm": "Möchten Sie sich wirklich abmelden?",
+  "authErrorNetwork": "Verbindungsfehler. Überprüfen Sie Ihre Internetverbindung.",
+  "authErrorCancelled": "Anmeldung abgebrochen.",
+  "authErrorGeneric": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+  "continueAsGuest": "Als Gast fortfahren",
+  "signIn": "Anmelden",
+  "orText": "oder",
+  
+  "onboardingSkip": "Überspringen",
+  "onboardingNext": "Weiter",
+  "onboardingStart": "Los geht's!",
+  "onboardingWelcomeTitle": "More Vocab",
+  "onboardingWelcomeSubtitle": "Lerne Wörter durch Wischen.",
+  "onboardingSwipeTitle": "Wischen zum Lernen",
+  "onboardingSwipeSubtitle": "Wische nach rechts, wenn du das Wort kennst, nach links, wenn nicht. So einfach ist das!",
+  "onboardingSrsTitle": "Intelligente Wiederholung",
+  "onboardingSrsSubtitle": "Unser Algorithmus zeigt Wörter in intelligenten Abständen, um sicherzustellen, dass du sie lernst.",
+  "onboardingPetTitle": "Dein Haustier",
+  "onboardingPetSubtitle": "Wähle ein Haustier als Begleiter auf deiner Lernreise. Lerne neue Wörter. Sieh zu, wie es wächst und sich entwickelt.",
+  "onboardingDecksTitle": "Wort-Decks",
+  "onboardingDecksSubtitle": "Wähle aus speziell für dich erstellten Decks.",
+  "onboardingReadyTitle": "Bereit zu starten!",
+  "onboardingReadySubtitle": "10 Minuten am Tag machen einen großen Unterschied. Beginne deine Reise!",
+
+  "creditsDevelopment": "Entwicklung",
+  "creditsDesign": "UI / UX Design",
+  "creditsTechnology": "Kerntechnologie",
+  "creditsVersion": "Version"
 }

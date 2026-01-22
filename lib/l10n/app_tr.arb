@@ -165,7 +165,7 @@
   "motivationalGood": "İyi gidiyorsun! Öğreniyorsun!",
   "motivationalKeepPracticing": "Pratik yapmaya devam et, başaracaksın!",
 
-  "petSelectTitle": "Yumurtandan Ne Çıksın?",
+  "petSelectTitle": "Evcil Hayvanını Seç",
   "petSelectSubtitle": "Öğrenme yolculuğunda sana eşlik edecek",
   "petNameTitle": "Petine İsim Ver",
   "petNameHint": "İsim gir...",
@@ -174,7 +174,7 @@
   "petEagle": "Kartal",
   "petEagleDesc": "Özgür ve keskin",
   "petWolf": "Kurt",
-  "petWolfDesc": "Sadık ve cesur",
+  "petWolfDesc": "Yediği ayazı unutmaz",
   "petFox": "Tilki",
   "petFoxDesc": "Zeki ve çevik",
   "petLevelUp": "Level Atladın!",
@@ -209,5 +209,53 @@
     "placeholders": {
       "level": {"type": "int"}
     }
-  }
+  },
+  "editName": "İsmini Düzenle",
+  "save": "Kaydet",
+  "enterYourName": "Adınızı girin",
+  "totalXp": "Toplam XP",
+  "nextEvolution": "Sonraki Evrim",
+  "status": "Durum",
+  "maximum": "Maksimum!",
+  "ok": "Tamam",
+  "becameStage": "{stage} oldu!",
+  "@becameStage": {
+    "placeholders": {
+      "stage": {"type": "String"}
+    }
+  },
+
+  "authTagline": "Akıllı kelime öğrenme",
+  "authTermsNotice": "Giriş yaparak Kullanım Koşullarını kabul etmiş olursunuz",
+  "continueWithGoogle": "Google ile Devam Et",
+  "continueWithApple": "Apple ile Devam Et",
+  "signOut": "Çıkış Yap",
+  "signOutConfirm": "Çıkış yapmak istediğinize emin misiniz?",
+  "authErrorNetwork": "Bağlantı hatası. İnternet bağlantınızı kontrol edin.",
+  "authErrorCancelled": "Giriş iptal edildi.",
+  "authErrorGeneric": "Giriş başarısız. Lütfen tekrar deneyin.",
+  "continueAsGuest": "Misafir Olarak Devam Et",
+  "signIn": "Giriş Yap",
+  "orText": "veya",
+  
+  "onboardingSkip": "Atla",
+  "onboardingNext": "İleri",
+  "onboardingStart": "Başlayalım!",
+  "onboardingWelcomeTitle": "More Vocab",
+  "onboardingWelcomeSubtitle": "Kelimeleri kaydırarak öğren.",
+  "onboardingSwipeTitle": "Kaydır ve Öğren",
+  "onboardingSwipeSubtitle": "Biliyorsan sağa, bilmiyorsan sola kaydır. Bu kadar basit!",
+  "onboardingSrsTitle": "Akıllı Tekrar",
+  "onboardingSrsSubtitle": "Algoritmamız kelimeleri akıllı aralıklarla tekrar göstererek öğrendiğinizden emin olur.",
+  "onboardingPetTitle": "Pet Arkadaşın",
+  "onboardingPetSubtitle": "Öğrenme yolculuğunda sana yoldaş olacak bir evcil hayvan seç. Sen yeni kelimeler öğren. O da büyüyüp evrimleşsin.",
+  "onboardingDecksTitle": "Kelime Desteleri",
+  "onboardingDecksSubtitle": "Senin için özel oluşturulmuş destelerden istediğini seç.",
+  "onboardingReadyTitle": "Hazırsın!",
+  "onboardingReadySubtitle": "Her gün 10 dakika, büyük fark yaratır. Yolculuğuna başla!",
+
+  "creditsDevelopment": "Geliştirme",
+  "creditsDesign": "UI / UX Tasarım",
+  "creditsTechnology": "Temel Teknoloji",
+  "creditsVersion": "Sürüm"
 }

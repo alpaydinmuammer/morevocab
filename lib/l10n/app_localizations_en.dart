@@ -481,4 +481,257 @@ class AppLocalizationsEn extends AppLocalizations {
   String petNextEvolution(int level) {
     return 'Level $level evolution';
   }
+
+  @override
+  String get editName => 'Edit Name';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get enterYourName => 'Enter your name';
+
+  @override
+  String get totalXp => 'Total XP';
+
+  @override
+  String get nextEvolution => 'Next Evolution';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get maximum => 'Maximum!';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String becameStage(String stage) {
+    return 'Became $stage!';
+  }
+
+  @override
+  String get authTagline => 'Smart vocabulary learning';
+
+  @override
+  String get authTermsNotice =>
+      'By signing in, you agree to our Terms of Service';
+
+  @override
+  String get continueWithGoogle => 'Continue with Google';
+
+  @override
+  String get continueWithApple => 'Continue with Apple';
+
+  @override
+  String get signOut => 'Sign Out';
+
+  @override
+  String get signOutConfirm => 'Are you sure you want to sign out?';
+
+  @override
+  String get authErrorNetwork =>
+      'Connection error. Please check your internet.';
+
+  @override
+  String get authErrorCancelled => 'Sign in was cancelled.';
+
+  @override
+  String get authErrorGeneric => 'Sign in failed. Please try again.';
+
+  @override
+  String get continueAsGuest => 'Continue as Guest';
+
+  @override
+  String get signIn => 'Sign In';
+
+  @override
+  String get orText => 'or';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingStart => 'Let\'s Start!';
+
+  @override
+  String get onboardingWelcomeTitle => 'More Vocab';
+
+  @override
+  String get onboardingWelcomeSubtitle => 'Learn words by swiping.';
+
+  @override
+  String get onboardingSwipeTitle => 'Swipe to Learn';
+
+  @override
+  String get onboardingSwipeSubtitle =>
+      'Swipe right if you know the word, left if you don\'t. It\'s that simple!';
+
+  @override
+  String get onboardingSrsTitle => 'Smart Repetition';
+
+  @override
+  String get onboardingSrsSubtitle =>
+      'Our algorithm shows words at smart intervals to ensure you learn them.';
+
+  @override
+  String get onboardingPetTitle => 'Your Pet Companion';
+
+  @override
+  String get onboardingPetSubtitle =>
+      'Choose a pet to accompany you on your learning journey. Learn new words. Watch it grow and evolve.';
+
+  @override
+  String get onboardingDecksTitle => 'Word Decks';
+
+  @override
+  String get onboardingDecksSubtitle =>
+      'Choose from decks specially created for you.';
+
+  @override
+  String get onboardingReadyTitle => 'Ready to Start!';
+
+  @override
+  String get onboardingReadySubtitle =>
+      '10 minutes a day makes a big difference. Let\'s begin your journey!';
+
+  @override
+  String get creditsDevelopment => 'Development';
+
+  @override
+  String get creditsDesign => 'UI / UX Design';
+
+  @override
+  String get creditsTechnology => 'Core Technology';
+
+  @override
+  String get creditsVersion => 'Version';
+
+  @override
+  String get arcadeMode => 'ARCADE MODE';
+
+  @override
+  String get arcadeModeSubtitle => 'Fun word games!';
+
+  @override
+  String get arcadeLibraryTitle => 'Game Library';
+
+  @override
+  String get arcadeLibrarySubtitle => 'Choose a game to play';
+
+  @override
+  String get gameWordChain => 'Word Chain';
+
+  @override
+  String get gameWordChainDesc => 'Create a chain with last letters';
+
+  @override
+  String get gameAnagram => 'Anagram';
+
+  @override
+  String get gameAnagramDesc => 'Find words from scrambled letters';
+
+  @override
+  String get gameWordBuilder => 'Word Builder';
+
+  @override
+  String get gameWordBuilderDesc => 'Build words from syllables';
+
+  @override
+  String get gameEmojiQuiz => 'Emoji Quiz';
+
+  @override
+  String get gameEmojiQuizDesc => 'Guess words from emojis';
+
+  @override
+  String get gameOddOneOut => 'Odd One Out';
+
+  @override
+  String get gameOddOneOutDesc => 'Find the word that doesn\'t belong';
+
+  @override
+  String get gameScore => 'Score';
+
+  @override
+  String get gameStreak => 'Streak';
+
+  @override
+  String get gameCorrect => 'Correct!';
+
+  @override
+  String get gameWrong => 'Wrong!';
+
+  @override
+  String get gameSkip => 'Skip';
+
+  @override
+  String get gameHint => 'Hint';
+
+  @override
+  String get gameNext => 'Next';
+
+  @override
+  String get gamePlayAgain => 'Play Again';
+
+  @override
+  String get gameOver => 'Game Over';
+
+  @override
+  String get gamePaused => 'Paused';
+
+  @override
+  String get gameResume => 'Resume';
+
+  @override
+  String get gameQuit => 'Quit';
+
+  @override
+  String get gameYourTurn => 'Your Turn';
+
+  @override
+  String get gameEnterWord => 'Enter a word...';
+
+  @override
+  String get gameInvalidWord => 'Invalid word!';
+
+  @override
+  String get gameWordUsed => 'Word already used!';
+
+  @override
+  String gameMustStartWith(String letter) {
+    return 'Must start with \'$letter\'';
+  }
+
+  @override
+  String gameWordsFound(int count) {
+    return '$count words found';
+  }
+
+  @override
+  String get gameTimeUp => 'Time\'s Up!';
+
+  @override
+  String gameFinalScore(int score) {
+    return 'Final Score: $score';
+  }
+
+  @override
+  String gameBestScore(int score) {
+    return 'Best: $score';
+  }
+
+  @override
+  String get gameNewRecord => 'New Record!';
+
+  @override
+  String get gameExplanation => 'Explanation';
+
+  @override
+  String gameCategory(String category) {
+    return 'Category: $category';
+  }
 }

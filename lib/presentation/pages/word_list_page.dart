@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/models/word_card.dart';
 import '../../domain/repositories/word_repository.dart';
+import '../providers/settings_provider.dart';
 import '../providers/word_providers.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -36,6 +37,7 @@ class WordListPage extends ConsumerWidget {
     final repository = ref.watch(wordRepositoryProvider);
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
+    final langCode = ref.watch(settingsProvider).locale.languageCode;
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +87,7 @@ class WordListPage extends ConsumerWidget {
             separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
               final word = words[index];
-              return _buildWordCard(context, word);
+              return _buildWordCard(context, word, langCode);
             },
           );
         },
@@ -107,7 +109,7 @@ class WordListPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildWordCard(BuildContext context, WordCard word) {
+  Widget _buildWordCard(BuildContext context, WordCard word, String langCode) {
     final theme = Theme.of(context);
 
     Color statusColor;
@@ -169,7 +171,7 @@ class WordListPage extends ConsumerWidget {
                   ),
                 ),
                 Text(
-                  word.getMeaning('tr'), // Default to Turkish for now
+                  word.getMeaning(langCode),
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   ),

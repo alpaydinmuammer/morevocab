@@ -12,15 +12,34 @@ final wordRepositoryProvider = Provider<WordRepository>((ref) {
   return WordRepositoryImpl();
 });
 
-/// Provider for TTS engine
-final ttsProvider = Provider<FlutterTts>((ref) {
+/// Provider for TTS settings only (to avoid recreating TTS on unrelated settings changes)
+final _ttsSettingsProvider = Provider<({double rate, double volume, double pitch})>((ref) {
   final settings = ref.watch(settingsProvider);
+  return (rate: settings.ttsRate, volume: settings.ttsVolume, pitch: settings.ttsPitch);
+});
+
+/// Provider for TTS engine with proper lifecycle management
+final ttsProvider = Provider<FlutterTts>((ref) {
   final tts = FlutterTts();
 
+  // Set initial language
   tts.setLanguage('en-US');
-  tts.setSpeechRate(settings.ttsRate);
-  tts.setVolume(settings.ttsVolume);
-  tts.setPitch(settings.ttsPitch);
+
+  // Listen to TTS settings changes and update accordingly
+  ref.listen<({double rate, double volume, double pitch})>(
+    _ttsSettingsProvider,
+    (previous, next) {
+      tts.setSpeechRate(next.rate);
+      tts.setVolume(next.volume);
+      tts.setPitch(next.pitch);
+    },
+    fireImmediately: true,
+  );
+
+  // Cleanup when provider is disposed
+  ref.onDispose(() {
+    tts.stop();
+  });
 
   return tts;
 });

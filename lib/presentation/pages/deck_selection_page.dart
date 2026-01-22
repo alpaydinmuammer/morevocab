@@ -17,8 +17,6 @@ class DeckSelectionPage extends ConsumerStatefulWidget {
 
 class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
   late Map<WordDeck, int> _deckCounts;
-  List<String> _customDecks = [];
-  Map<String, int> _customDeckCounts = {};
 
   @override
   void initState() {
@@ -26,33 +24,12 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
     _refreshData();
   }
 
-  void _refreshData() async {
+  void _refreshData() {
     final repository = ref.read(wordRepositoryProvider);
-
     final deckCountsResult = repository.getAllDeckCounts();
-    final customDecksResult = repository.getCustomDeckNames();
-
-    final customDecks = customDecksResult.valueOrNull ?? [];
-
-    // Calculate custom deck counts
-    final customDeckCounts = <String, int>{};
-    if (customDecks.isNotEmpty) {
-      final wordsResult = await repository.getWordsByDeck(WordDeck.custom);
-      wordsResult.when(
-        success: (words) {
-          for (final deckName in customDecks) {
-            customDeckCounts[deckName] =
-                words.where((w) => w.customDeckName == deckName).length;
-          }
-        },
-        failure: (_) {},
-      );
-    }
 
     setState(() {
       _deckCounts = deckCountsResult.valueOrNull ?? {};
-      _customDecks = customDecks;
-      _customDeckCounts = customDeckCounts;
     });
   }
 
@@ -60,13 +37,13 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // 1. Standard decks (excluding custom placeholder)
+    // Standard decks (excluding custom placeholder)
     final standardDecks = WordDeck.values
         .where((d) => d != WordDeck.custom)
         .toList();
 
-    // Total items: Standard Decks + Custom Decks + Create Button
-    final totalItems = standardDecks.length + _customDecks.length + 1;
+    // Total items: Standard Decks + Create Button (Coming Soon)
+    final totalItems = standardDecks.length + 1;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -113,7 +90,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                         ),
                     itemCount: totalItems,
                     itemBuilder: (context, index) {
-                      // Case 1: Standard Decks
+                      // Standard Decks
                       if (index < standardDecks.length) {
                         final deck = standardDecks[index];
                         return DeckCard(
@@ -128,29 +105,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                         );
                       }
 
-                      // Case 2: Custom Decks
-                      final customIndex = index - standardDecks.length;
-                      if (customIndex < _customDecks.length) {
-                        final deckName = _customDecks[customIndex];
-                        final customCount = _customDeckCounts[deckName] ?? 0;
-
-                        return DeckCard(
-                          deck: WordDeck.custom, // Base style
-                          customTitle: deckName, // NEW param needed in DeckCard
-                          showProgress: false,
-                          showDescription: false,
-                          showWordCount: true,
-                          wordCount: customCount,
-                          onTap: () {
-                            // Pass custom logic.
-                            // We might need to change /swipe to accept a generic object or extra params
-                            // For now, let's pass a Map or special object
-                            context.push('/custom-deck', extra: deckName);
-                          },
-                        );
-                      }
-
-                      // Case 3: Create New Deck Button
+                      // Create New Deck Button (Coming Soon)
                       return _buildCreateDeckCard(theme);
                     },
                   ),

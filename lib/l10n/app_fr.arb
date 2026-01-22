@@ -201,5 +201,53 @@
     "placeholders": {
       "level": {"type": "int"}
     }
-  }
+  },
+  "editName": "Modifier le Nom",
+  "save": "Enregistrer",
+  "enterYourName": "Entre ton nom",
+  "totalXp": "XP Total",
+  "nextEvolution": "Prochaine Évolution",
+  "status": "Statut",
+  "maximum": "Maximum !",
+  "ok": "OK",
+  "becameStage": "Devenu {stage} !",
+  "@becameStage": {
+    "placeholders": {
+      "stage": {"type": "String"}
+    }
+  },
+
+  "authTagline": "Apprentissage intelligent du vocabulaire",
+  "authTermsNotice": "En vous connectant, vous acceptez nos Conditions d'utilisation",
+  "continueWithGoogle": "Continuer avec Google",
+  "continueWithApple": "Continuer avec Apple",
+  "signOut": "Se Déconnecter",
+  "signOutConfirm": "Êtes-vous sûr de vouloir vous déconnecter ?",
+  "authErrorNetwork": "Erreur de connexion. Vérifiez votre internet.",
+  "authErrorCancelled": "Connexion annulée.",
+  "authErrorGeneric": "Échec de la connexion. Veuillez réessayer.",
+  "continueAsGuest": "Continuer en tant qu'invité",
+  "signIn": "Se Connecter",
+  "orText": "ou",
+  
+  "onboardingSkip": "Passer",
+  "onboardingNext": "Suivant",
+  "onboardingStart": "C'est parti !",
+  "onboardingWelcomeTitle": "More Vocab",
+  "onboardingWelcomeSubtitle": "Apprenez des mots en glissant.",
+  "onboardingSwipeTitle": "Glissez pour Apprendre",
+  "onboardingSwipeSubtitle": "Glissez à droite si vous connaissez le mot, à gauche sinon. C'est aussi simple !",
+  "onboardingSrsTitle": "Répétition Intelligente",
+  "onboardingSrsSubtitle": "Notre algorithme affiche les mots à intervalles intelligents pour s'assurer que vous les apprenez.",
+  "onboardingPetTitle": "Votre Compagnon",
+  "onboardingPetSubtitle": "Choisissez un animal pour vous accompagner dans votre voyage d'apprentissage. Apprenez de nouveaux mots. Regardez-le grandir et évoluer.",
+  "onboardingDecksTitle": "Paquets de Mots",
+  "onboardingDecksSubtitle": "Choisissez parmi les paquets créés spécialement pour vous.",
+  "onboardingReadyTitle": "Prêt à Commencer !",
+  "onboardingReadySubtitle": "10 minutes par jour font une grande différence. Commencez votre voyage !",
+
+  "creditsDevelopment": "Développement",
+  "creditsDesign": "Design UI / UX",
+  "creditsTechnology": "Technologie de Base",
+  "creditsVersion": "Version"
 }

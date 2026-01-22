@@ -206,5 +206,53 @@
     "placeholders": {
       "level": {"type": "int"}
     }
-  }
+  },
+  "editName": "Edit Name",
+  "save": "Save",
+  "enterYourName": "Enter your name",
+  "totalXp": "Total XP",
+  "nextEvolution": "Next Evolution",
+  "status": "Status",
+  "maximum": "Maximum!",
+  "ok": "OK",
+  "becameStage": "Became {stage}!",
+  "@becameStage": {
+    "placeholders": {
+      "stage": {"type": "String"}
+    }
+  },
+
+  "authTagline": "Smart vocabulary learning",
+  "authTermsNotice": "By signing in, you agree to our Terms of Service",
+  "continueWithGoogle": "Continue with Google",
+  "continueWithApple": "Continue with Apple",
+  "signOut": "Sign Out",
+  "signOutConfirm": "Are you sure you want to sign out?",
+  "authErrorNetwork": "Connection error. Please check your internet.",
+  "authErrorCancelled": "Sign in was cancelled.",
+  "authErrorGeneric": "Sign in failed. Please try again.",
+  "continueAsGuest": "Continue as Guest",
+  "signIn": "Sign In",
+  "orText": "or",
+  
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingStart": "Let's Start!",
+  "onboardingWelcomeTitle": "More Vocab",
+  "onboardingWelcomeSubtitle": "Learn words by swiping.",
+  "onboardingSwipeTitle": "Swipe to Learn",
+  "onboardingSwipeSubtitle": "Swipe right if you know the word, left if you don't. It's that simple!",
+  "onboardingSrsTitle": "Smart Repetition",
+  "onboardingSrsSubtitle": "Our algorithm shows words at smart intervals to ensure you learn them.",
+  "onboardingPetTitle": "Your Pet Companion",
+  "onboardingPetSubtitle": "Choose a pet to accompany you on your learning journey. Learn new words. Watch it grow and evolve.",
+  "onboardingDecksTitle": "Word Decks",
+  "onboardingDecksSubtitle": "Choose from decks specially created for you.",
+  "onboardingReadyTitle": "Ready to Start!",
+  "onboardingReadySubtitle": "10 minutes a day makes a big difference. Let's begin your journey!",
+
+  "creditsDevelopment": "Development",
+  "creditsDesign": "UI / UX Design",
+  "creditsTechnology": "Core Technology",
+  "creditsVersion": "Version"
 }

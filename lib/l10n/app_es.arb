@@ -201,5 +201,53 @@
     "placeholders": {
       "level": {"type": "int"}
     }
-  }
+  },
+  "editName": "Editar Nombre",
+  "save": "Guardar",
+  "enterYourName": "Ingresa tu nombre",
+  "totalXp": "XP Total",
+  "nextEvolution": "Próxima Evolución",
+  "status": "Estado",
+  "maximum": "¡Máximo!",
+  "ok": "Aceptar",
+  "becameStage": "¡Se convirtió en {stage}!",
+  "@becameStage": {
+    "placeholders": {
+      "stage": {"type": "String"}
+    }
+  },
+
+  "authTagline": "Aprendizaje inteligente de vocabulario",
+  "authTermsNotice": "Al iniciar sesión, aceptas nuestros Términos de Servicio",
+  "continueWithGoogle": "Continuar con Google",
+  "continueWithApple": "Continuar con Apple",
+  "signOut": "Cerrar Sesión",
+  "signOutConfirm": "¿Estás seguro de que quieres cerrar sesión?",
+  "authErrorNetwork": "Error de conexión. Verifica tu internet.",
+  "authErrorCancelled": "Inicio de sesión cancelado.",
+  "authErrorGeneric": "Error al iniciar sesión. Inténtalo de nuevo.",
+  "continueAsGuest": "Continuar como Invitado",
+  "signIn": "Iniciar Sesión",
+  "orText": "o",
+  
+  "onboardingSkip": "Saltar",
+  "onboardingNext": "Siguiente",
+  "onboardingStart": "¡Empecemos!",
+  "onboardingWelcomeTitle": "More Vocab",
+  "onboardingWelcomeSubtitle": "Aprende palabras deslizando.",
+  "onboardingSwipeTitle": "Desliza para Aprender",
+  "onboardingSwipeSubtitle": "Desliza a la derecha si conoces la palabra, a la izquierda si no. ¡Así de simple!",
+  "onboardingSrsTitle": "Repetición Inteligente",
+  "onboardingSrsSubtitle": "Nuestro algoritmo muestra palabras en intervalos inteligentes para asegurar que las aprendas.",
+  "onboardingPetTitle": "Tu Mascota",
+  "onboardingPetSubtitle": "Elige una mascota que te acompañe en tu viaje de aprendizaje. Aprende nuevas palabras. Mírala crecer y evolucionar.",
+  "onboardingDecksTitle": "Mazos de Palabras",
+  "onboardingDecksSubtitle": "Elige entre los mazos creados especialmente para ti.",
+  "onboardingReadyTitle": "¡Listo para Comenzar!",
+  "onboardingReadySubtitle": "10 minutos al día hacen una gran diferencia. ¡Comienza tu viaje!",
+
+  "creditsDevelopment": "Desarrollo",
+  "creditsDesign": "Diseño UI / UX",
+  "creditsTechnology": "Tecnología Principal",
+  "creditsVersion": "Versión"
 }

@@ -9,6 +9,8 @@ import '../widgets/deck_stats_carousel.dart';
 import '../widgets/credits_modal.dart';
 import '../widgets/pet/pet_widgets.dart';
 import '../../l10n/app_localizations.dart';
+import '../../core/constants/app_constants.dart';
+import '../../core/constants/time_constants.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -16,11 +18,14 @@ class HomePage extends ConsumerWidget {
   /// Returns time-based greeting based on current hour
   String _getGreeting(AppLocalizations l10n) {
     final hour = DateTime.now().hour;
-    if (hour >= 5 && hour < 12) {
+    if (hour >= TimeConstants.morningStartHour &&
+        hour < TimeConstants.morningEndHour) {
       return l10n.goodMorning; // 05:00 - 11:59 → Günaydın
-    } else if (hour >= 12 && hour < 18) {
+    } else if (hour >= TimeConstants.afternoonStartHour &&
+        hour < TimeConstants.afternoonEndHour) {
       return l10n.goodAfternoon; // 12:00 - 17:59 → İyi Günler
-    } else if (hour >= 18 && hour < 22) {
+    } else if (hour >= TimeConstants.eveningStartHour &&
+        hour < TimeConstants.eveningEndHour) {
       return l10n.goodEvening; // 18:00 - 21:59 → İyi Akşamlar
     } else {
       return l10n.goodNight; // 22:00 - 04:59 → İyi Geceler
@@ -34,7 +39,7 @@ class HomePage extends ConsumerWidget {
     final weekday = now.weekday;
 
     // Special message for 02:00-02:59 on Monday, Thursday, Sunday
-    if (hour == 2 &&
+    if (hour == TimeConstants.specialMotivationalHour &&
         (weekday == DateTime.monday ||
             weekday == DateTime.thursday ||
             weekday == DateTime.sunday)) {
@@ -42,7 +47,8 @@ class HomePage extends ConsumerWidget {
     }
 
     // Special message for 03:00-04:59 (late night)
-    if (hour >= 3 && hour < 5) {
+    if (hour >= TimeConstants.lateNightStartHour &&
+        hour < TimeConstants.lateNightEndHour) {
       return l10n.motiveLateNight;
     }
 
@@ -85,7 +91,7 @@ class HomePage extends ConsumerWidget {
                   children: [
                     // Header
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Column(
@@ -94,31 +100,42 @@ class HomePage extends ConsumerWidget {
                               // Greeting + name - tap to edit name
                               GestureDetector(
                                 onTap: () => _showUserNameDialog(context, ref),
-                                child: FittedBox(
-                                  alignment: Alignment.centerLeft,
-                                  fit: BoxFit.scaleDown,
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: theme.textTheme.headlineMedium
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: theme.colorScheme.primary,
-                                          ),
-                                      children: [
-                                        TextSpan(
-                                          text: _getGreeting(
-                                            AppLocalizations.of(context)!,
-                                          ),
-                                        ),
-                                        if (settings.userName.isNotEmpty) ...[
-                                          const TextSpan(text: ', '),
-                                          TextSpan(text: settings.userName),
-                                        ],
-                                      ],
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        settings.userName.isNotEmpty
+                                            ? '${_getGreeting(AppLocalizations.of(context)!)}, ${settings.userName}'
+                                            : _getGreeting(
+                                                AppLocalizations.of(context)!,
+                                              ),
+                                        style: theme.textTheme.headlineMedium
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: theme.colorScheme.primary,
+                                              fontSize:
+                                                  settings.userName.length > 6
+                                                  ? AppConstants
+                                                        .greetingFontSizeLongName
+                                                  : AppConstants
+                                                        .greetingFontSizeShortName,
+                                            ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.visible,
-                                  ),
+                                    // Edit icon - only show if no name entered yet
+                                    if (settings.userName.isEmpty) ...[
+                                      const SizedBox(width: 8),
+                                      Icon(
+                                        Icons.edit_rounded,
+                                        size: 20,
+                                        color: theme.colorScheme.primary
+                                            .withValues(alpha: 0.7),
+                                      ),
+                                    ],
+                                  ],
                                 ),
                               ),
                               const SizedBox(height: 4),
@@ -138,6 +155,7 @@ class HomePage extends ConsumerWidget {
                             ],
                           ),
                         ),
+                        const SizedBox(width: 8),
                         Container(
                           decoration: BoxDecoration(
                             color: theme.colorScheme.surfaceContainerHighest
@@ -207,14 +225,12 @@ class HomePage extends ConsumerWidget {
 
     // Show loading state
     if (petState.isLoading) {
-      return const SizedBox(height: 180);
+      return const SizedBox(height: AppConstants.petSectionHeight);
     }
 
     // Show egg if no pet exists
     if (!petState.hasPet) {
-      return PetEggWidget(
-        onTap: () => _showPetSelection(context),
-      );
+      return PetEggWidget(onTap: () => _showPetSelection(context));
     }
 
     // Show pet display
@@ -238,7 +254,7 @@ class HomePage extends ConsumerWidget {
       },
       child: Container(
         width: double.infinity,
-        height: 80, // Taller button for card feel
+        height: AppConstants.startButtonHeight, // Taller button for card feel
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: LinearGradient(
@@ -315,7 +331,7 @@ class HomePage extends ConsumerWidget {
       enableDrag: true,
       transitionAnimationController: AnimationController(
         vsync: Navigator.of(context),
-        duration: const Duration(milliseconds: 350),
+        duration: AppConstants.creditsModalTransition,
       ),
       builder: (context) => const CreditsModal(),
     );
@@ -334,16 +350,16 @@ class HomePage extends ConsumerWidget {
         backgroundColor: theme.colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
-          'İsimni Düzenle',
+          AppLocalizations.of(context)!.editName,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         content: TextField(
           controller: controller,
-          maxLength: 9,
+          maxLength: AppConstants.maxUserNameLength,
           decoration: InputDecoration(
-            hintText: 'Adınızı girin',
+            hintText: AppLocalizations.of(context)!.enterYourName,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             prefixIcon: const Icon(Icons.person_rounded),
           ),
@@ -354,7 +370,7 @@ class HomePage extends ConsumerWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'İptal',
+              AppLocalizations.of(context)!.cancel,
               style: TextStyle(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
               ),
@@ -366,7 +382,7 @@ class HomePage extends ConsumerWidget {
               ref.read(settingsProvider.notifier).setUserName(name);
               Navigator.pop(context);
             },
-            child: const Text('Kaydet'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),

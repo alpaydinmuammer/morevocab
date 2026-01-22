@@ -9,6 +9,7 @@ class SettingsState {
   final double ttsPitch;
   final Locale locale;
   final String userName;
+  final bool hasSeenOnboarding;
 
   const SettingsState({
     this.themeMode = ThemeMode.system,
@@ -17,6 +18,7 @@ class SettingsState {
     this.ttsPitch = 1.0,
     this.locale = const Locale('tr'),
     this.userName = '',
+    this.hasSeenOnboarding = false,
   });
 
   SettingsState copyWith({
@@ -26,6 +28,7 @@ class SettingsState {
     double? ttsPitch,
     Locale? locale,
     String? userName,
+    bool? hasSeenOnboarding,
   }) {
     return SettingsState(
       themeMode: themeMode ?? this.themeMode,
@@ -34,6 +37,7 @@ class SettingsState {
       ttsPitch: ttsPitch ?? this.ttsPitch,
       locale: locale ?? this.locale,
       userName: userName ?? this.userName,
+      hasSeenOnboarding: hasSeenOnboarding ?? this.hasSeenOnboarding,
     );
   }
 }
@@ -46,6 +50,7 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
   static const String _ttsVolumeKey = 'tts_volume';
   static const String _ttsPitchKey = 'tts_pitch';
   static const String _userNameKey = 'user_name';
+  static const String _hasSeenOnboardingKey = 'has_seen_onboarding';
 
   SettingsNotifier() : super(const SettingsState()) {
     _loadSettings();
@@ -56,6 +61,7 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     final themeModeIndex = prefs.getInt(_themeModeKey) ?? 0;
     final localeCode = prefs.getString(_localeKey);
     final userName = prefs.getString(_userNameKey) ?? '';
+    final hasSeenOnboarding = prefs.getBool(_hasSeenOnboardingKey) ?? false;
 
     state = SettingsState(
       themeMode: ThemeMode.values[themeModeIndex],
@@ -64,6 +70,7 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
       ttsPitch: prefs.getDouble(_ttsPitchKey) ?? 1.0,
       locale: localeCode != null ? Locale(localeCode) : const Locale('tr'),
       userName: userName,
+      hasSeenOnboarding: hasSeenOnboarding,
     );
   }
 
@@ -101,6 +108,12 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_userNameKey, name);
     state = state.copyWith(userName: name);
+  }
+
+  Future<void> setHasSeenOnboarding(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_hasSeenOnboardingKey, value);
+    state = state.copyWith(hasSeenOnboarding: value);
   }
 }
 

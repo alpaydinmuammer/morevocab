@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import '../../core/theme/app_theme.dart';
+import '../../data/datasources/firebase_auth_datasource.dart';
 import '../../l10n/app_localizations.dart';
+import '../providers/auth_provider.dart';
 import '../providers/pet_provider.dart';
 import '../providers/settings_provider.dart';
 import '../providers/word_providers.dart';
+import '../widgets/auth/sign_in_button.dart';
 import '../widgets/premium_background.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -92,6 +97,10 @@ class SettingsPage extends ConsumerWidget {
                 onTap: () => _showResetConfirmation(context, ref),
               ),
             ),
+
+            const SizedBox(height: 32),
+            // Show Sign In for guests, Sign Out for authenticated users
+            _buildAuthSection(context, ref),
             const SizedBox(height: 40),
           ],
         ),
@@ -392,6 +401,97 @@ class SettingsPage extends ConsumerWidget {
     );
   }
 
+  Widget _buildAuthSection(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final isGuest = ref.watch(guestModeProvider);
+    final isAuthenticated = ref.watch(isAuthenticatedProvider);
+
+    // Guest user - show Sign In option
+    if (isGuest && !isAuthenticated) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildSectionHeader(
+            context,
+            AppLocalizations.of(context)!.signIn,
+            Icons.login_rounded,
+          ),
+          _buildGlassCard(
+            context,
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.login_rounded,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              title: Text(
+                AppLocalizations.of(context)!.signIn,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              onTap: () => _signInFromGuest(context, ref),
+            ),
+          ),
+        ],
+      );
+    }
+
+    // Authenticated user - show Sign Out option
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildSectionHeader(
+          context,
+          AppLocalizations.of(context)!.signOut,
+          Icons.logout_rounded,
+        ),
+        _buildGlassCard(
+          context,
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.error.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.logout_rounded,
+                color: theme.colorScheme.error,
+              ),
+            ),
+            title: Text(
+              AppLocalizations.of(context)!.signOut,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.error,
+              ),
+            ),
+            onTap: () => _showSignOutConfirmation(context, ref),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _signInFromGuest(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const _SignInModal(),
+    );
+  }
+
   Future<void> _showResetConfirmation(
     BuildContext context,
     WidgetRef ref,
@@ -457,5 +557,217 @@ class SettingsPage extends ConsumerWidget {
         );
       }
     }
+  }
+
+  Future<void> _showSignOutConfirmation(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final theme = Theme.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: theme.colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        title: Text(
+          AppLocalizations.of(context)!.signOut,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: Text(AppLocalizations.of(context)!.signOutConfirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(
+              AppLocalizations.of(context)!.cancel,
+              style: TextStyle(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 8),
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: theme.colorScheme.error,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(AppLocalizations.of(context)!.signOut),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      final success = await ref.read(authNotifierProvider.notifier).signOut();
+
+      if (success && context.mounted) {
+        context.go('/auth');
+      }
+    }
+  }
+}
+
+/// Sign-in modal for guest users
+class _SignInModal extends ConsumerStatefulWidget {
+  const _SignInModal();
+
+  @override
+  ConsumerState<_SignInModal> createState() => _SignInModalState();
+}
+
+class _SignInModalState extends ConsumerState<_SignInModal> {
+  bool _isGoogleLoading = false;
+  bool _isAppleLoading = false;
+
+  Future<void> _signInWithGoogle() async {
+    setState(() => _isGoogleLoading = true);
+
+    final success =
+        await ref.read(authNotifierProvider.notifier).signInWithGoogle();
+
+    if (mounted) {
+      setState(() => _isGoogleLoading = false);
+
+      if (success) {
+        // Clear guest mode and close modal
+        await ref.read(guestModeProvider.notifier).clearGuestMode();
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      } else {
+        _showErrorSnackBar();
+      }
+    }
+  }
+
+  Future<void> _signInWithApple() async {
+    setState(() => _isAppleLoading = true);
+
+    final success =
+        await ref.read(authNotifierProvider.notifier).signInWithApple();
+
+    if (mounted) {
+      setState(() => _isAppleLoading = false);
+
+      if (success) {
+        // Clear guest mode and close modal
+        await ref.read(guestModeProvider.notifier).clearGuestMode();
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      } else {
+        _showErrorSnackBar();
+      }
+    }
+  }
+
+  void _showErrorSnackBar() {
+    final l10n = AppLocalizations.of(context)!;
+    final authState = ref.read(authNotifierProvider);
+
+    String message = l10n.authErrorGeneric;
+    if (authState.hasError) {
+      final error = authState.error.toString();
+      if (error.contains('cancelled') || error.contains('canceled')) {
+        message = l10n.authErrorCancelled;
+      } else if (error.contains('network') || error.contains('connection')) {
+        message = l10n.authErrorNetwork;
+      }
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.error_outline, color: Colors.white, size: 20),
+            const SizedBox(width: 12),
+            Expanded(child: Text(message)),
+          ],
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.red.shade700,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 4),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final isAppleAvailable = FirebaseAuthDatasource.isAppleSignInAvailable;
+    final theme = Theme.of(context);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.brightness == Brightness.dark
+            ? AppTheme.darkBackground
+            : theme.colorScheme.surface,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Handle bar
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.3),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Title
+              Text(
+                l10n.signIn,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Sign-in buttons
+              SignInButton(
+                type: SignInButtonType.google,
+                onPressed: _signInWithGoogle,
+                isLoading: _isGoogleLoading,
+              ),
+              if (isAppleAvailable) ...[
+                const SizedBox(height: 16),
+                SignInButton(
+                  type: SignInButtonType.apple,
+                  onPressed: _signInWithApple,
+                  isLoading: _isAppleLoading,
+                ),
+              ],
+              const SizedBox(height: 16),
+
+              // Cancel button
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(
+                  l10n.cancel,
+                  style: TextStyle(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

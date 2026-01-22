@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../domain/models/word_card.dart';
 import '../../domain/models/word_deck.dart';
+import '../../l10n/app_localizations.dart';
+import '../providers/settings_provider.dart';
 import '../providers/word_providers.dart';
 import 'premium_background.dart';
 
@@ -15,6 +17,8 @@ class DeckWordListModal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
+    final langCode = ref.watch(settingsProvider).locale.languageCode;
 
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
@@ -166,7 +170,7 @@ class DeckWordListModal extends ConsumerWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Bu destede kelime yok',
+                            l10n.noWordsInDeck,
                             style: theme.textTheme.bodyLarge?.copyWith(
                               color: theme.colorScheme.onSurface.withValues(
                                 alpha: 0.5,
@@ -268,7 +272,7 @@ class DeckWordListModal extends ConsumerWidget {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          word.getMeaning('tr'),
+                                          word.getMeaning(langCode),
                                           style: theme.textTheme.bodyMedium
                                               ?.copyWith(
                                                 color: isDark

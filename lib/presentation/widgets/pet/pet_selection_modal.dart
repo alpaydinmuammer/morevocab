@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../domain/models/pet_model.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../providers/pet_provider.dart';
 
 /// Modal for selecting a pet type and giving it a name
@@ -91,14 +93,14 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
 
           // Title
           Text(
-            'Yumurtandan Ne Çıksın?',
+            AppLocalizations.of(context)!.petSelectTitle,
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Öğrenme yolculuğunda sana eşlik edecek',
+            AppLocalizations.of(context)!.petSelectSubtitle,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
@@ -132,9 +134,9 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
               onPressed: _selectedType != null
                   ? () => setState(() => _currentStep = 1)
                   : null,
-              child: const Text(
-                'Devam Et',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              child: Text(
+                AppLocalizations.of(context)!.petContinue,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
           ),
@@ -172,7 +174,7 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'Petine İsim Ver',
+                  AppLocalizations.of(context)!.petNameTitle,
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -211,7 +213,7 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
                       child: Center(
                         child: Text(
                           _selectedType!.emoji,
-                          style: const TextStyle(fontSize: 48),
+                          style: const TextStyle(fontSize: AppConstants.petEmojiSizeLarge),
                         ),
                       ),
                     );
@@ -221,7 +223,7 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
             ),
             const SizedBox(height: 8),
             Text(
-              _selectedType!.displayName,
+              _selectedType!.getLocalizedName(context),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
@@ -235,7 +237,7 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
             autofocus: true,
             textCapitalization: TextCapitalization.words,
             decoration: InputDecoration(
-              hintText: 'İsim gir...',
+              hintText: AppLocalizations.of(context)!.petNameHint,
               filled: true,
               fillColor: theme.colorScheme.surfaceContainerHighest,
               border: OutlineInputBorder(
@@ -260,9 +262,9 @@ class _PetSelectionModalState extends ConsumerState<PetSelectionModal> {
                       height: 24,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                  : const Text(
-                      'Başlayalım!',
-                      style: TextStyle(
+                  : Text(
+                      AppLocalizations.of(context)!.petLetsStart,
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -286,6 +288,20 @@ class _PetOptionCard extends StatelessWidget {
     required this.isSelected,
     required this.onTap,
   });
+
+  String _getDescription(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (type) {
+      case PetType.dragon:
+        return l10n.petDragonDesc;
+      case PetType.eagle:
+        return l10n.petEagleDesc;
+      case PetType.wolf:
+        return l10n.petWolfDesc;
+      case PetType.fox:
+        return l10n.petFoxDesc;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -325,14 +341,14 @@ class _PetOptionCard extends StatelessWidget {
                 height: 56,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return Text(type.emoji, style: const TextStyle(fontSize: 40));
+                  return Text(type.emoji, style: const TextStyle(fontSize: AppConstants.petSelectionEmojiSize));
                 },
               ),
             ),
             const SizedBox(height: 8),
             // Name
             Text(
-              type.displayName,
+              type.getLocalizedName(context),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: isSelected
@@ -343,7 +359,7 @@ class _PetOptionCard extends StatelessWidget {
             const SizedBox(height: 4),
             // Description
             Text(
-              type.description,
+              _getDescription(context),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: isSelected
                     ? theme.colorScheme.onPrimaryContainer.withValues(

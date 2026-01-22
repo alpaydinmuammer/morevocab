@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../domain/models/pet_model.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../core/constants/app_constants.dart';
+import '../../../core/constants/pet_constants.dart';
 import '../../providers/pet_provider.dart';
 
 /// Compact pet widget for HomePage - just shows the pet avatar
@@ -21,7 +24,7 @@ class _PetDisplayWidgetState extends ConsumerState<PetDisplayWidget>
   void initState() {
     super.initState();
     _bounceController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: AppConstants.petInteractionDuration,
       vsync: this,
     )..repeat(reverse: true);
 
@@ -105,7 +108,7 @@ class _PetDisplayWidgetState extends ConsumerState<PetDisplayWidget>
                   child: Center(
                     child: Text(
                       pet.type.emoji,
-                      style: const TextStyle(fontSize: 48),
+                      style: const TextStyle(fontSize: AppConstants.petEmojiSizeLarge),
                     ),
                   ),
                 );
@@ -178,6 +181,7 @@ class PetDetailModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final petState = ref.watch(petProvider);
     final pet = petState.pet;
 
@@ -247,7 +251,7 @@ class PetDetailModal extends ConsumerWidget {
                         child: Center(
                           child: Text(
                             pet.type.emoji,
-                            style: const TextStyle(fontSize: 56),
+                            style: const TextStyle(fontSize: AppConstants.petEmojiSizeXLarge),
                           ),
                         ),
                       );
@@ -280,7 +284,7 @@ class PetDetailModal extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
-                      pet.type.displayName,
+                      pet.type.getLocalizedName(context),
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: theme.colorScheme.onPrimaryContainer,
                         fontWeight: FontWeight.w600,
@@ -298,7 +302,7 @@ class PetDetailModal extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
-                      pet.stage.displayName,
+                      pet.stage.getLocalizedName(context),
                       style: theme.textTheme.labelMedium?.copyWith(
                         color: _getStageColor(pet.stage),
                         fontWeight: FontWeight.w600,
@@ -333,7 +337,7 @@ class PetDetailModal extends ConsumerWidget {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              'Level ${pet.level}',
+                              l10n.petLevel(pet.level),
                               style: theme.textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -372,7 +376,7 @@ class PetDetailModal extends ConsumerWidget {
                         _buildStatItem(
                           context,
                           Icons.bolt_rounded,
-                          'Toplam XP',
+                          l10n.totalXp,
                           '${pet.totalExperience}',
                           Colors.amber,
                         ),
@@ -380,16 +384,16 @@ class PetDetailModal extends ConsumerWidget {
                           _buildStatItem(
                             context,
                             Icons.auto_awesome_rounded,
-                            'Sonraki Evrim',
-                            'Level ${_getNextEvolutionLevel(pet)}',
+                            l10n.nextEvolution,
+                            l10n.petLevel(_getNextEvolutionLevel(pet)!),
                             Colors.purple,
                           )
                         else
                           _buildStatItem(
                             context,
                             Icons.emoji_events_rounded,
-                            'Durum',
-                            'Maksimum!',
+                            l10n.status,
+                            l10n.maximum,
                             Colors.orange,
                           ),
                       ],
@@ -404,7 +408,7 @@ class PetDetailModal extends ConsumerWidget {
                 width: double.infinity,
                 child: FilledButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Tamam'),
+                  child: Text(l10n.ok),
                 ),
               ),
             ],
@@ -460,9 +464,9 @@ class PetDetailModal extends ConsumerWidget {
 
   int? _getNextEvolutionLevel(PetModel pet) {
     final currentLevel = pet.level;
-    if (currentLevel < 5) return 5;
-    if (currentLevel < 15) return 15;
-    if (currentLevel < 30) return 30;
+    if (currentLevel < PetConstants.stageYoungMinLevel) return PetConstants.stageYoungMinLevel;
+    if (currentLevel < PetConstants.stageAdultMinLevel) return PetConstants.stageAdultMinLevel;
+    if (currentLevel < PetConstants.stageLegendaryMinLevel) return PetConstants.stageLegendaryMinLevel;
     return null;
   }
 }
@@ -647,6 +651,7 @@ class _LevelUpOverlayState extends State<LevelUpOverlay>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return AnimatedBuilder(
       animation: _controller,
@@ -676,7 +681,7 @@ class _LevelUpOverlayState extends State<LevelUpOverlay>
 
                   // Level up text
                   Text(
-                    widget.didEvolve ? 'EVRİM!' : 'LEVEL ATLADI!',
+                    widget.didEvolve ? l10n.petEvolution : l10n.petLevelUp,
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.amber.shade700,
@@ -685,7 +690,7 @@ class _LevelUpOverlayState extends State<LevelUpOverlay>
                   const SizedBox(height: 8),
 
                   Text(
-                    'Level ${widget.newLevel}',
+                    l10n.petLevel(widget.newLevel),
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -703,7 +708,7 @@ class _LevelUpOverlayState extends State<LevelUpOverlay>
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
-                        '${widget.newStage!.displayName} oldu!',
+                        l10n.becameStage(widget.newStage!.getLocalizedName(context)),
                         style: theme.textTheme.titleMedium?.copyWith(
                           color: Colors.purple,
                           fontWeight: FontWeight.w600,

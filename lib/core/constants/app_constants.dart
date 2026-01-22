@@ -1,7 +1,10 @@
 class AppConstants {
+  AppConstants._();
+
   // App Info
   static const String appName = 'More Vocab';
   static const String appVersion = '1.0.0';
+  static const String logoAssetPath = 'assets/images/logo/morevocablogo1.png';
 
   // Database
   static const String isarDbName = 'more_vocab_db';
@@ -68,4 +71,26 @@ class AppConstants {
   // Default Values
   static const int defaultReviewIntervalDays = 1;
   static const int maxReviewCount = 5;
+
+  // UI Dimensions
+  static const double startButtonHeight = 80.0;
+  static const double petSectionHeight = 180.0;
+  static const int maxUserNameLength = 9;
+
+  // Greeting Font Sizes (Dynamic based on name length)
+  static const double greetingFontSizeLongName = 22.0;
+  static const double greetingFontSizeShortName = 26.0;
+
+  // Pet Widget Sizes
+  static const double petEmojiSizeLarge = 48.0;
+  static const double petEmojiSizeXLarge = 56.0;
+  static const double petSelectionEmojiSize = 40.0;
+
+  // Additional Animation Durations
+  static const Duration petEggAnimationDuration = Duration(milliseconds: 2000);
+  static const Duration petInteractionDuration = Duration(milliseconds: 1500);
+  static const Duration creditsModalTransition = Duration(milliseconds: 350);
+  static const Duration splashInitialDelay = Duration(milliseconds: 100);
+  static const Duration splashDataLoadDelay = Duration(milliseconds: 400);
+  static const Duration splashMainAnimationDuration = Duration(milliseconds: 3000);
 }
