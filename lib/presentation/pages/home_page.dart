@@ -11,6 +11,7 @@ import '../widgets/pet/pet_widgets.dart';
 import '../../l10n/app_localizations.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/time_constants.dart';
+import '../widgets/streak_badge.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -156,20 +157,7 @@ class HomePage extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.surfaceContainerHighest
-                                .withValues(alpha: 0.5),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.settings_suggest_rounded,
-                              color: Colors.indigo,
-                            ),
-                            onPressed: () => context.push('/settings'),
-                          ),
-                        ),
+                        const StreakBadge(),
                       ],
                     ),
 
@@ -187,6 +175,17 @@ class HomePage extends ConsumerWidget {
 
                     // Start Study Button
                     _buildStartButton(context, ref),
+
+                    const SizedBox(height: 12),
+
+                    // Arcade & Settings Row
+                    Row(
+                      children: [
+                        Expanded(child: _buildArcadeButton(context)),
+                        const SizedBox(width: 12),
+                        Expanded(child: _buildSettingsButton(context)),
+                      ],
+                    ),
 
                     const SizedBox(height: 16),
 
@@ -279,11 +278,11 @@ class HomePage extends ConsumerWidget {
           children: [
             // Background Icon Decoration
             Positioned(
-              right: -10,
-              bottom: -10,
+              right: -5,
+              bottom: -5,
               child: Icon(
                 Icons.rocket_launch_rounded,
-                size: 80,
+                size: 64,
                 color: Colors.white.withValues(alpha: 0.1),
               ),
             ),
@@ -299,9 +298,9 @@ class HomePage extends ConsumerWidget {
                   const Icon(
                     Icons.play_arrow_rounded,
                     color: Colors.white,
-                    size: 32,
+                    size: 28,
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 12),
 
                   // Text ONLY (No subtitle, no column needed)
                   Text(
@@ -310,7 +309,73 @@ class HomePage extends ConsumerWidget {
                       color: Colors.white,
                       fontWeight: FontWeight.w900,
                       letterSpacing: 1.5,
-                      fontSize: 24, // Slightly bigger since it's alone
+                      fontSize: 22,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildArcadeButton(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return AnimatedPressable(
+      onTap: () => context.push('/arcade'),
+      child: Container(
+        width: double.infinity,
+        height: 56,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            colors: [Colors.deepPurple, Colors.deepPurple.shade400],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.deepPurple.withValues(alpha: 0.3),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Background Icon Decoration
+            Positioned(
+              right: -5,
+              bottom: -5,
+              child: Icon(
+                Icons.videogame_asset_rounded,
+                size: 60,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
+            ),
+
+            // Content
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.sports_esports_rounded,
+                    color: Colors.white,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    AppLocalizations.of(context)!.arcadeMode.toUpperCase(),
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
                     ),
                   ),
                 ],
@@ -385,6 +450,71 @@ class HomePage extends ConsumerWidget {
             child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSettingsButton(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return AnimatedPressable(
+      onTap: () => context.push('/settings'),
+      child: Container(
+        height: 56,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            colors: [Colors.indigo, Colors.indigo.shade400],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.indigo.withValues(alpha: 0.3),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Background Icon Decoration
+            Positioned(
+              right: -5,
+              bottom: -5,
+              child: Icon(
+                Icons.settings_suggest_rounded,
+                size: 60,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
+            ),
+
+            // Content
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.settings_rounded,
+                    color: Colors.white,
+                    size: 24,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    AppLocalizations.of(context)!.settings.toUpperCase(),
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

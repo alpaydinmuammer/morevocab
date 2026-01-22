@@ -108,7 +108,9 @@ class _PetDisplayWidgetState extends ConsumerState<PetDisplayWidget>
                   child: Center(
                     child: Text(
                       pet.type.emoji,
-                      style: const TextStyle(fontSize: AppConstants.petEmojiSizeLarge),
+                      style: const TextStyle(
+                        fontSize: AppConstants.petEmojiSizeLarge,
+                      ),
                     ),
                   ),
                 );
@@ -251,7 +253,9 @@ class PetDetailModal extends ConsumerWidget {
                         child: Center(
                           child: Text(
                             pet.type.emoji,
-                            style: const TextStyle(fontSize: AppConstants.petEmojiSizeXLarge),
+                            style: const TextStyle(
+                              fontSize: AppConstants.petEmojiSizeXLarge,
+                            ),
                           ),
                         ),
                       );
@@ -464,9 +468,12 @@ class PetDetailModal extends ConsumerWidget {
 
   int? _getNextEvolutionLevel(PetModel pet) {
     final currentLevel = pet.level;
-    if (currentLevel < PetConstants.stageYoungMinLevel) return PetConstants.stageYoungMinLevel;
-    if (currentLevel < PetConstants.stageAdultMinLevel) return PetConstants.stageAdultMinLevel;
-    if (currentLevel < PetConstants.stageLegendaryMinLevel) return PetConstants.stageLegendaryMinLevel;
+    if (currentLevel < PetConstants.stageYoungMinLevel)
+      return PetConstants.stageYoungMinLevel;
+    if (currentLevel < PetConstants.stageAdultMinLevel)
+      return PetConstants.stageAdultMinLevel;
+    if (currentLevel < PetConstants.stageLegendaryMinLevel)
+      return PetConstants.stageLegendaryMinLevel;
     return null;
   }
 }
@@ -708,7 +715,9 @@ class _LevelUpOverlayState extends State<LevelUpOverlay>
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
-                        l10n.becameStage(widget.newStage!.getLocalizedName(context)),
+                        l10n.becameStage(
+                          widget.newStage!.getLocalizedName(context),
+                        ),
                         style: theme.textTheme.titleMedium?.copyWith(
                           color: Colors.purple,
                           fontWeight: FontWeight.w600,

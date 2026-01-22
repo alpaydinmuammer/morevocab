@@ -11,6 +11,12 @@ import '../../presentation/pages/word_list_page.dart';
 import '../../presentation/pages/deck_selection_page.dart';
 import '../../presentation/pages/auth_page.dart';
 import '../../presentation/pages/onboarding_page.dart';
+import '../../presentation/pages/arcade/arcade_hub_page.dart';
+import '../../presentation/pages/arcade/word_chain_game.dart';
+import '../../presentation/pages/arcade/anagram_game.dart';
+import '../../presentation/pages/arcade/word_builder_game.dart';
+import '../../presentation/pages/arcade/emoji_puzzle_game.dart';
+import '../../presentation/pages/arcade/odd_one_out_game.dart';
 import '../../presentation/providers/auth_provider.dart';
 import '../../presentation/providers/settings_provider.dart';
 import 'page_transitions.dart';
@@ -211,6 +217,115 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             duration: const Duration(milliseconds: 450),
           );
         },
+      ),
+      // Arcade Mode Routes
+      GoRoute(
+        path: '/arcade',
+        name: 'arcade',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const ArcadeHubPage(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/arcade/word-chain',
+        name: 'word-chain',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const WordChainGame(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/arcade/anagram',
+        name: 'anagram',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const AnagramGame(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/arcade/word-builder',
+        name: 'word-builder',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const WordBuilderGame(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/arcade/emoji-puzzle',
+        name: 'emoji-puzzle',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const EmojiPuzzleGame(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: '/arcade/odd-one-out',
+        name: 'odd-one-out',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const OddOneOutGame(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
       ),
     ],
   );

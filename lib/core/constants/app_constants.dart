@@ -18,8 +18,12 @@ class AppConstants {
   static const Duration swipeDuration = Duration(milliseconds: 300);
   static const Duration overlayFadeDuration = Duration(milliseconds: 200);
   static const Duration splashAnimationDuration = Duration(milliseconds: 2200);
-  static const Duration sessionCompleteAnimationShort = Duration(milliseconds: 600);
-  static const Duration sessionCompleteAnimationMedium = Duration(milliseconds: 800);
+  static const Duration sessionCompleteAnimationShort = Duration(
+    milliseconds: 600,
+  );
+  static const Duration sessionCompleteAnimationMedium = Duration(
+    milliseconds: 800,
+  );
   static const Duration fadeInDuration = Duration(milliseconds: 350);
 
   // Opacity Values
@@ -73,7 +77,7 @@ class AppConstants {
   static const int maxReviewCount = 5;
 
   // UI Dimensions
-  static const double startButtonHeight = 80.0;
+  static const double startButtonHeight = 64.0;
   static const double petSectionHeight = 180.0;
   static const int maxUserNameLength = 9;
 
@@ -92,5 +96,7 @@ class AppConstants {
   static const Duration creditsModalTransition = Duration(milliseconds: 350);
   static const Duration splashInitialDelay = Duration(milliseconds: 100);
   static const Duration splashDataLoadDelay = Duration(milliseconds: 400);
-  static const Duration splashMainAnimationDuration = Duration(milliseconds: 3000);
+  static const Duration splashMainAnimationDuration = Duration(
+    milliseconds: 3000,
+  );
 }

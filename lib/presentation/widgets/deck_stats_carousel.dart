@@ -42,7 +42,7 @@ class _DeckStatsCarouselState extends ConsumerState<DeckStatsCarousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250, // Fixed height for carousel
+      height: 230, // Slightly more compact height for carousel
       child: PageView.builder(
         controller: _pageController,
         itemCount: _decks.length,

@@ -614,25 +614,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get creditsVersion => 'Version';
 
   @override
-  String get arcadeMode => 'ARCADE MODU';
+  String get arcadeMode => 'Arcade';
 
   @override
-  String get arcadeModeSubtitle => 'Eğlenceli kelime oyunları!';
+  String get arcadeTitle => 'Oyunlar';
 
   @override
-  String get arcadeLibraryTitle => 'Oyun Kütüphanesi';
-
-  @override
-  String get arcadeLibrarySubtitle => 'Oynamak istediğin oyunu seç';
+  String get arcadeSubtitle => 'Kelime öğrenmenin eğlenceli yolları';
 
   @override
   String get gameWordChain => 'Kelime Zinciri';
 
   @override
-  String get gameWordChainDesc => 'Son harflerle zincir oluştur';
+  String get gameWordChainDesc => 'Son harfle başlayan kelimeler yaz';
 
   @override
-  String get gameAnagram => 'Kelime Çorbası';
+  String get gameAnagram => 'Anagram';
 
   @override
   String get gameAnagramDesc => 'Karışık harflerden kelime bul';
@@ -641,99 +638,48 @@ class AppLocalizationsFr extends AppLocalizations {
   String get gameWordBuilder => 'Kelime İnşaatı';
 
   @override
-  String get gameWordBuilderDesc => 'Hecelerden kelime yap';
+  String get gameWordBuilderDesc => 'Heceleri sıralayarak kelime oluştur';
 
   @override
-  String get gameEmojiQuiz => 'Emoji Bulmaca';
+  String get gameEmojiPuzzle => 'Emoji Bulmaca';
 
   @override
-  String get gameEmojiQuizDesc => 'Emojilerden kelime tahmin et';
+  String get gameEmojiPuzzleDesc => 'Emojilerden kelime tahmin et';
 
   @override
   String get gameOddOneOut => 'Farklı Olanı Bul';
 
   @override
-  String get gameOddOneOutDesc => 'Gruba uymayan kelimeyi bul';
+  String get gameOddOneOutDesc => 'Alakasız kelimeyi bul';
 
   @override
-  String get gameScore => 'Skor';
+  String get score => 'Puan';
 
   @override
-  String get gameStreak => 'Seri';
+  String get timeLeft => 'Kalan Süre';
 
   @override
-  String get gameCorrect => 'Doğru!';
+  String get yourTurn => 'Senin Sıran';
 
   @override
-  String get gameWrong => 'Yanlış!';
+  String get correct => 'Doğru!';
 
   @override
-  String get gameSkip => 'Geç';
-
-  @override
-  String get gameHint => 'İpucu';
-
-  @override
-  String get gameNext => 'Sonraki';
-
-  @override
-  String get gamePlayAgain => 'Tekrar Oyna';
+  String get incorrect => 'Yanlış!';
 
   @override
   String get gameOver => 'Oyun Bitti';
 
   @override
-  String get gamePaused => 'Durduruldu';
+  String get playAgain => 'Tekrar Oyna';
 
   @override
-  String get gameResume => 'Devam Et';
+  String get comingSoonGame => 'Çok Yakında';
 
   @override
-  String get gameQuit => 'Çık';
+  String get offlineWarning =>
+      'İnternet bağlantınız yok. Kelime doğrulama düzgün çalışmayabilir. Yine de devam etmek ister misiniz?';
 
   @override
-  String get gameYourTurn => 'Senin Sıran';
-
-  @override
-  String get gameEnterWord => 'Bir kelime gir...';
-
-  @override
-  String get gameInvalidWord => 'Geçersiz kelime!';
-
-  @override
-  String get gameWordUsed => 'Bu kelime zaten kullanıldı!';
-
-  @override
-  String gameMustStartWith(String letter) {
-    return '\'$letter\' harfiyle başlamalı';
-  }
-
-  @override
-  String gameWordsFound(int count) {
-    return '$count kelime bulundu';
-  }
-
-  @override
-  String get gameTimeUp => 'Süre Doldu!';
-
-  @override
-  String gameFinalScore(int score) {
-    return 'Final Skoru: $score';
-  }
-
-  @override
-  String gameBestScore(int score) {
-    return 'En İyi: $score';
-  }
-
-  @override
-  String get gameNewRecord => 'Yeni Rekor!';
-
-  @override
-  String get gameExplanation => 'Açıklama';
-
-  @override
-  String gameCategory(String category) {
-    return 'Kategori: $category';
-  }
+  String get continueOffline => 'Çevrimdışı Devam Et';
 }

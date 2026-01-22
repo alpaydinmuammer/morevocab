@@ -5,7 +5,8 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
+import 'package:flutter/foundation.dart'
+    show kIsWeb, defaultTargetPlatform, TargetPlatform;
 
 import '../../domain/models/user_model.dart';
 import '../../domain/models/auth_state.dart';
@@ -20,14 +21,16 @@ class FirebaseAuthDatasource {
   FirebaseAuthDatasource._({
     required FirebaseAuth firebaseAuth,
     required GoogleSignIn googleSignIn,
-  })  : _firebaseAuth = firebaseAuth,
-        _googleSignIn = googleSignIn;
+  }) : _firebaseAuth = firebaseAuth,
+       _googleSignIn = googleSignIn;
 
   /// Singleton factory
   factory FirebaseAuthDatasource() {
     _instance ??= FirebaseAuthDatasource._(
       firebaseAuth: FirebaseAuth.instance,
       googleSignIn: GoogleSignIn(
+        serverClientId:
+            '622265746255-7f1n6tridjbqppuagptoo5ghqn79puh0.apps.googleusercontent.com',
         scopes: ['email', 'profile'],
       ),
     );
@@ -60,6 +63,13 @@ class FirebaseAuthDatasource {
   /// Sign in with Google
   Future<UserModel> signInWithGoogle() async {
     try {
+      // Force a complete disconnect to clear all stale/cached tokens
+      try {
+        await _googleSignIn.disconnect();
+      } catch (e) {
+        // Ignore errors during disconnect (e.g. if already disconnected)
+      }
+
       // Trigger the Google Sign-In flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
@@ -81,8 +91,9 @@ class FirebaseAuthDatasource {
       );
 
       // Sign in to Firebase with the Google credential
-      final userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
 
       final user = userCredential.user;
       if (user == null) {
@@ -93,9 +104,11 @@ class FirebaseAuthDatasource {
       }
 
       return _mapFirebaseUser(user, provider: AuthProvider.google);
-    } on FirebaseAuthException {
+    } on FirebaseAuthException catch (e) {
+      print('!!!!!!! FIREBASE EXCEPTION: ${e.code} - ${e.message}');
       rethrow;
     } catch (e) {
+      print('!!!!!!! UNKNOWN LOGIN ERROR: $e');
       throw FirebaseAuthException(
         code: 'google-sign-in-failed',
         message: e.toString(),
@@ -120,14 +133,14 @@ class FirebaseAuthDatasource {
       );
 
       // Create OAuth credential
-      final oauthCredential = OAuthProvider('apple.com').credential(
-        idToken: appleCredential.identityToken,
-        rawNonce: rawNonce,
-      );
+      final oauthCredential = OAuthProvider(
+        'apple.com',
+      ).credential(idToken: appleCredential.identityToken, rawNonce: rawNonce);
 
       // Sign in to Firebase
-      final userCredential =
-          await _firebaseAuth.signInWithCredential(oauthCredential);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        oauthCredential,
+      );
 
       final user = userCredential.user;
       if (user == null) {
@@ -171,10 +184,7 @@ class FirebaseAuthDatasource {
 
   /// Sign out
   Future<void> signOut() async {
-    await Future.wait([
-      _firebaseAuth.signOut(),
-      _googleSignIn.signOut(),
-    ]);
+    await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
   }
 
   /// Map Firebase User to UserModel
@@ -211,8 +221,10 @@ class FirebaseAuthDatasource {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
-    return List.generate(length, (_) => charset[random.nextInt(charset.length)])
-        .join();
+    return List.generate(
+      length,
+      (_) => charset[random.nextInt(charset.length)],
+    ).join();
   }
 
   /// SHA256 hash for nonce

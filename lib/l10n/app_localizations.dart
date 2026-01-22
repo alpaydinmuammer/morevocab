@@ -1243,26 +1243,20 @@ abstract class AppLocalizations {
   /// No description provided for @arcadeMode.
   ///
   /// In tr, this message translates to:
-  /// **'ARCADE MODU'**
+  /// **'Arcade'**
   String get arcadeMode;
 
-  /// No description provided for @arcadeModeSubtitle.
+  /// No description provided for @arcadeTitle.
   ///
   /// In tr, this message translates to:
-  /// **'Eğlenceli kelime oyunları!'**
-  String get arcadeModeSubtitle;
+  /// **'Oyunlar'**
+  String get arcadeTitle;
 
-  /// No description provided for @arcadeLibraryTitle.
+  /// No description provided for @arcadeSubtitle.
   ///
   /// In tr, this message translates to:
-  /// **'Oyun Kütüphanesi'**
-  String get arcadeLibraryTitle;
-
-  /// No description provided for @arcadeLibrarySubtitle.
-  ///
-  /// In tr, this message translates to:
-  /// **'Oynamak istediğin oyunu seç'**
-  String get arcadeLibrarySubtitle;
+  /// **'Kelime öğrenmenin eğlenceli yolları'**
+  String get arcadeSubtitle;
 
   /// No description provided for @gameWordChain.
   ///
@@ -1273,13 +1267,13 @@ abstract class AppLocalizations {
   /// No description provided for @gameWordChainDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Son harflerle zincir oluştur'**
+  /// **'Son harfle başlayan kelimeler yaz'**
   String get gameWordChainDesc;
 
   /// No description provided for @gameAnagram.
   ///
   /// In tr, this message translates to:
-  /// **'Kelime Çorbası'**
+  /// **'Anagram'**
   String get gameAnagram;
 
   /// No description provided for @gameAnagramDesc.
@@ -1297,20 +1291,20 @@ abstract class AppLocalizations {
   /// No description provided for @gameWordBuilderDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Hecelerden kelime yap'**
+  /// **'Heceleri sıralayarak kelime oluştur'**
   String get gameWordBuilderDesc;
 
-  /// No description provided for @gameEmojiQuiz.
+  /// No description provided for @gameEmojiPuzzle.
   ///
   /// In tr, this message translates to:
   /// **'Emoji Bulmaca'**
-  String get gameEmojiQuiz;
+  String get gameEmojiPuzzle;
 
-  /// No description provided for @gameEmojiQuizDesc.
+  /// No description provided for @gameEmojiPuzzleDesc.
   ///
   /// In tr, this message translates to:
   /// **'Emojilerden kelime tahmin et'**
-  String get gameEmojiQuizDesc;
+  String get gameEmojiPuzzleDesc;
 
   /// No description provided for @gameOddOneOut.
   ///
@@ -1321,56 +1315,38 @@ abstract class AppLocalizations {
   /// No description provided for @gameOddOneOutDesc.
   ///
   /// In tr, this message translates to:
-  /// **'Gruba uymayan kelimeyi bul'**
+  /// **'Alakasız kelimeyi bul'**
   String get gameOddOneOutDesc;
 
-  /// No description provided for @gameScore.
+  /// No description provided for @score.
   ///
   /// In tr, this message translates to:
-  /// **'Skor'**
-  String get gameScore;
+  /// **'Puan'**
+  String get score;
 
-  /// No description provided for @gameStreak.
+  /// No description provided for @timeLeft.
   ///
   /// In tr, this message translates to:
-  /// **'Seri'**
-  String get gameStreak;
+  /// **'Kalan Süre'**
+  String get timeLeft;
 
-  /// No description provided for @gameCorrect.
+  /// No description provided for @yourTurn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senin Sıran'**
+  String get yourTurn;
+
+  /// No description provided for @correct.
   ///
   /// In tr, this message translates to:
   /// **'Doğru!'**
-  String get gameCorrect;
+  String get correct;
 
-  /// No description provided for @gameWrong.
+  /// No description provided for @incorrect.
   ///
   /// In tr, this message translates to:
   /// **'Yanlış!'**
-  String get gameWrong;
-
-  /// No description provided for @gameSkip.
-  ///
-  /// In tr, this message translates to:
-  /// **'Geç'**
-  String get gameSkip;
-
-  /// No description provided for @gameHint.
-  ///
-  /// In tr, this message translates to:
-  /// **'İpucu'**
-  String get gameHint;
-
-  /// No description provided for @gameNext.
-  ///
-  /// In tr, this message translates to:
-  /// **'Sonraki'**
-  String get gameNext;
-
-  /// No description provided for @gamePlayAgain.
-  ///
-  /// In tr, this message translates to:
-  /// **'Tekrar Oyna'**
-  String get gamePlayAgain;
+  String get incorrect;
 
   /// No description provided for @gameOver.
   ///
@@ -1378,95 +1354,29 @@ abstract class AppLocalizations {
   /// **'Oyun Bitti'**
   String get gameOver;
 
-  /// No description provided for @gamePaused.
+  /// No description provided for @playAgain.
   ///
   /// In tr, this message translates to:
-  /// **'Durduruldu'**
-  String get gamePaused;
+  /// **'Tekrar Oyna'**
+  String get playAgain;
 
-  /// No description provided for @gameResume.
+  /// No description provided for @comingSoonGame.
   ///
   /// In tr, this message translates to:
-  /// **'Devam Et'**
-  String get gameResume;
+  /// **'Çok Yakında'**
+  String get comingSoonGame;
 
-  /// No description provided for @gameQuit.
+  /// No description provided for @offlineWarning.
   ///
   /// In tr, this message translates to:
-  /// **'Çık'**
-  String get gameQuit;
+  /// **'İnternet bağlantınız yok. Kelime doğrulama düzgün çalışmayabilir. Yine de devam etmek ister misiniz?'**
+  String get offlineWarning;
 
-  /// No description provided for @gameYourTurn.
+  /// No description provided for @continueOffline.
   ///
   /// In tr, this message translates to:
-  /// **'Senin Sıran'**
-  String get gameYourTurn;
-
-  /// No description provided for @gameEnterWord.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bir kelime gir...'**
-  String get gameEnterWord;
-
-  /// No description provided for @gameInvalidWord.
-  ///
-  /// In tr, this message translates to:
-  /// **'Geçersiz kelime!'**
-  String get gameInvalidWord;
-
-  /// No description provided for @gameWordUsed.
-  ///
-  /// In tr, this message translates to:
-  /// **'Bu kelime zaten kullanıldı!'**
-  String get gameWordUsed;
-
-  /// No description provided for @gameMustStartWith.
-  ///
-  /// In tr, this message translates to:
-  /// **'\'{letter}\' harfiyle başlamalı'**
-  String gameMustStartWith(String letter);
-
-  /// No description provided for @gameWordsFound.
-  ///
-  /// In tr, this message translates to:
-  /// **'{count} kelime bulundu'**
-  String gameWordsFound(int count);
-
-  /// No description provided for @gameTimeUp.
-  ///
-  /// In tr, this message translates to:
-  /// **'Süre Doldu!'**
-  String get gameTimeUp;
-
-  /// No description provided for @gameFinalScore.
-  ///
-  /// In tr, this message translates to:
-  /// **'Final Skoru: {score}'**
-  String gameFinalScore(int score);
-
-  /// No description provided for @gameBestScore.
-  ///
-  /// In tr, this message translates to:
-  /// **'En İyi: {score}'**
-  String gameBestScore(int score);
-
-  /// No description provided for @gameNewRecord.
-  ///
-  /// In tr, this message translates to:
-  /// **'Yeni Rekor!'**
-  String get gameNewRecord;
-
-  /// No description provided for @gameExplanation.
-  ///
-  /// In tr, this message translates to:
-  /// **'Açıklama'**
-  String get gameExplanation;
-
-  /// No description provided for @gameCategory.
-  ///
-  /// In tr, this message translates to:
-  /// **'Kategori: {category}'**
-  String gameCategory(String category);
+  /// **'Çevrimdışı Devam Et'**
+  String get continueOffline;
 }
 
 class _AppLocalizationsDelegate

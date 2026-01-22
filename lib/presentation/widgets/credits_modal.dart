@@ -1,5 +1,6 @@
 import 'dart:ui' as importing_dart_ui;
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../l10n/app_localizations.dart';
 import 'premium_background.dart';
 
@@ -178,6 +179,10 @@ class CreditsModal extends StatelessWidget {
                       icon: Icons.info_outline_rounded,
                       color: Colors.teal,
                     ),
+                    const SizedBox(height: 32),
+
+                    // Contact Button
+                    _buildContactButton(context),
                   ],
                 ),
               ),
@@ -186,6 +191,99 @@ class CreditsModal extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildContactButton(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return GestureDetector(
+      onTap: () => _sendEmail(context),
+      child: Container(
+        height: 64,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: LinearGradient(
+            colors: [Colors.indigo.shade600, Colors.blue.shade600],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.indigo.withValues(alpha: 0.3),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Background decoration
+            Positioned(
+              right: -10,
+              bottom: -10,
+              child: Icon(
+                Icons.mark_email_unread_rounded,
+                size: 80,
+                color: Colors.white.withValues(alpha: 0.1),
+              ),
+            ),
+
+            // Content
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.mail_rounded, color: Colors.white, size: 24),
+                const SizedBox(width: 12),
+                Text(
+                  'Bana Ulaşın'.toUpperCase(),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _sendEmail(BuildContext context) async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'alpaydinmuammer@gmail.com',
+      query: _encodeQueryParameters(<String, String>{
+        'subject': 'More Vocab Feedback',
+      }),
+    );
+
+    try {
+      if (await canLaunchUrl(emailLaunchUri)) {
+        await launchUrl(emailLaunchUri, mode: LaunchMode.externalApplication);
+      } else {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Could not launch email app')),
+        );
+      }
+    } catch (e) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error: $e')));
+    }
+  }
+
+  String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map(
+          (MapEntry<String, String> e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+        )
+        .join('&');
   }
 
   Widget _buildCreditCard(

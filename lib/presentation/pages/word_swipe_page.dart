@@ -5,6 +5,7 @@ import '../../domain/models/word_deck.dart';
 import '../../domain/models/pet_model.dart';
 import '../providers/word_providers.dart';
 import '../providers/pet_provider.dart';
+import '../providers/streak_provider.dart';
 import '../widgets/word_card_widget.dart';
 import '../widgets/swipe_background_feedback.dart';
 import '../widgets/premium_background.dart';
@@ -23,7 +24,6 @@ class WordSwipePage extends ConsumerStatefulWidget {
 class _WordSwipePageState extends ConsumerState<WordSwipePage> {
   late CardSwiperController _cardController;
   double _swipeOffset = 0.0;
-
 
   @override
   void initState() {
@@ -289,11 +289,16 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
 
       // Add XP for correct answer (silently, no overlay)
       final currentWord = studyState.words[previousIndex];
-      final xp = PetXpValues.forCorrectAnswer(difficulty: currentWord.difficulty);
+      final xp = PetXpValues.forCorrectAnswer(
+        difficulty: currentWord.difficulty,
+      );
       ref.read(petProvider.notifier).addExperience(xp);
     } else if (direction == CardSwiperDirection.left) {
       notifier.markCurrentForReview();
     }
+
+    // Record activity for streak on any meaningful swipe
+    ref.read(streakProvider.notifier).recordActivity();
 
     setState(() {
       _swipeOffset = 0.0;
@@ -364,5 +369,4 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
       ],
     );
   }
-
 }

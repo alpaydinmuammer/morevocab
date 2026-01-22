@@ -612,22 +612,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get creditsVersion => 'Version';
 
   @override
-  String get arcadeMode => 'ARCADE MODE';
+  String get arcadeMode => 'Arcade';
 
   @override
-  String get arcadeModeSubtitle => 'Fun word games!';
+  String get arcadeTitle => 'Games';
 
   @override
-  String get arcadeLibraryTitle => 'Game Library';
-
-  @override
-  String get arcadeLibrarySubtitle => 'Choose a game to play';
+  String get arcadeSubtitle => 'Fun ways to learn vocabulary';
 
   @override
   String get gameWordChain => 'Word Chain';
 
   @override
-  String get gameWordChainDesc => 'Create a chain with last letters';
+  String get gameWordChainDesc => 'Create words starting with the last letter';
 
   @override
   String get gameAnagram => 'Anagram';
@@ -639,13 +636,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gameWordBuilder => 'Word Builder';
 
   @override
-  String get gameWordBuilderDesc => 'Build words from syllables';
+  String get gameWordBuilderDesc => 'Arrange syllables to form words';
 
   @override
-  String get gameEmojiQuiz => 'Emoji Quiz';
+  String get gameEmojiPuzzle => 'Emoji Puzzle';
 
   @override
-  String get gameEmojiQuizDesc => 'Guess words from emojis';
+  String get gameEmojiPuzzleDesc => 'Guess words from emoji clues';
 
   @override
   String get gameOddOneOut => 'Odd One Out';
@@ -654,84 +651,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get gameOddOneOutDesc => 'Find the word that doesn\'t belong';
 
   @override
-  String get gameScore => 'Score';
+  String get score => 'Score';
 
   @override
-  String get gameStreak => 'Streak';
+  String get timeLeft => 'Time Left';
 
   @override
-  String get gameCorrect => 'Correct!';
+  String get yourTurn => 'Your Turn';
 
   @override
-  String get gameWrong => 'Wrong!';
+  String get correct => 'Correct!';
 
   @override
-  String get gameSkip => 'Skip';
-
-  @override
-  String get gameHint => 'Hint';
-
-  @override
-  String get gameNext => 'Next';
-
-  @override
-  String get gamePlayAgain => 'Play Again';
+  String get incorrect => 'Incorrect!';
 
   @override
   String get gameOver => 'Game Over';
 
   @override
-  String get gamePaused => 'Paused';
+  String get playAgain => 'Play Again';
 
   @override
-  String get gameResume => 'Resume';
+  String get comingSoonGame => 'Coming Soon';
 
   @override
-  String get gameQuit => 'Quit';
+  String get offlineWarning =>
+      'You don\'t have an internet connection. Word validation may not work properly. Do you still want to continue?';
 
   @override
-  String get gameYourTurn => 'Your Turn';
-
-  @override
-  String get gameEnterWord => 'Enter a word...';
-
-  @override
-  String get gameInvalidWord => 'Invalid word!';
-
-  @override
-  String get gameWordUsed => 'Word already used!';
-
-  @override
-  String gameMustStartWith(String letter) {
-    return 'Must start with \'$letter\'';
-  }
-
-  @override
-  String gameWordsFound(int count) {
-    return '$count words found';
-  }
-
-  @override
-  String get gameTimeUp => 'Time\'s Up!';
-
-  @override
-  String gameFinalScore(int score) {
-    return 'Final Score: $score';
-  }
-
-  @override
-  String gameBestScore(int score) {
-    return 'Best: $score';
-  }
-
-  @override
-  String get gameNewRecord => 'New Record!';
-
-  @override
-  String get gameExplanation => 'Explanation';
-
-  @override
-  String gameCategory(String category) {
-    return 'Category: $category';
-  }
+  String get continueOffline => 'Continue Offline';
 }
