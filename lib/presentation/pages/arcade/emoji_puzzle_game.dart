@@ -5,6 +5,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
+import 'widgets/game_over_screen.dart';
+import 'widgets/arcade_stat_card.dart';
 
 /// Emoji Puzzle Game - Guess words from emoji combinations
 class EmojiPuzzleGame extends ConsumerStatefulWidget {
@@ -19,6 +21,12 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
   int _currentIndex = 0;
   int _score = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _puzzles.shuffle();
+  }
+
   final List<_Puzzle> _puzzles = [
     _Puzzle(['🌧️', '🧥', '☔'], 'RAINCOAT'),
     _Puzzle(['🔥', '🚒', '👨‍🚒'], 'FIREFIGHTER'),
@@ -28,6 +36,23 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
     _Puzzle(['❄️', '⛄', '🧣'], 'SNOWMAN'),
     _Puzzle(['🎂', '🎁', '🎉'], 'BIRTHDAY'),
     _Puzzle(['🐝', '🍯', '🌸'], 'HONEY'),
+    _Puzzle(['🍎', '🥧'], 'APPLEPIE'),
+    _Puzzle(['🍿', '🎬', '👓'], 'MOVIE'),
+    _Puzzle(['👸', '🍎', '🏰'], 'SNOWWHITE'),
+    _Puzzle(['❄️', '👸', '🏰'], 'FROZEN'),
+    _Puzzle(['🐒', '🍌', '🌴'], 'JUNGLE'),
+    _Puzzle(['🚀', '👨‍🚀', '🌑'], 'SPACE'),
+    _Puzzle(['🏥', '🚑', '🩺'], 'HOSPITAL'),
+    _Puzzle(['⌨️', '🖱️', '🖥️'], 'COMPUTER'),
+    _Puzzle(['🍳', '🥓', '☕'], 'BREAKFAST'),
+    _Puzzle(['🌊', '🌴', '🏖️'], 'BEACH'),
+    _Puzzle(['🕷️', '🕸️', '🦸'], 'SPIDERMAN'),
+    _Puzzle(['🦁', '👑', '🌅'], 'LIONKING'),
+    _Puzzle(['🍔', '🍟', '🥤'], 'FASTFOOD'),
+    _Puzzle(['🎸', '🎤', '🥁'], 'BAND'),
+    _Puzzle(['🚲', '🚴', '🏁'], 'BICYCLE'),
+    _Puzzle(['🥛', '🍪'], 'COOKIES'),
+    _Puzzle(['🎨', '🖌️', '🖼️'], 'ARTIST'),
   ];
 
   _Puzzle get _current => _puzzles[_currentIndex];
@@ -74,43 +99,36 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
 
   void _showComplete() {
     // Save high score
+    final highScores = ref.read(arcadeHighScoresProvider);
+    final previousHighScore = highScores.getScore(ArcadeGameType.emojiPuzzle);
     ref
         .read(arcadeHighScoresProvider.notifier)
         .updateScore(ArcadeGameType.emojiPuzzle, _score);
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.gameOver),
-        content: Text('${AppLocalizations.of(context)!.score}: $_score'),
-        actionsAlignment: MainAxisAlignment.center,
-        actions: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FilledButton(
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  setState(() {
-                    _currentIndex = 0;
-                    _score = 0;
-                    _controller.clear();
-                  });
-                },
-                child: Text(AppLocalizations.of(context)!.playAgain),
-              ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  context.pop();
-                },
-                child: Text(AppLocalizations.of(context)!.backToHome),
-              ),
-            ],
-          ),
-        ],
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GameOverScreen(
+          score: _score,
+          highScore: previousHighScore,
+          accentColor: Colors.pink,
+          extraStats: [
+            GameOverStat(label: 'Puzzles', value: '${_puzzles.length}'),
+            GameOverStat(
+              label: 'Success',
+              value: '${(_score / (_puzzles.length * 100) * 100).toInt()}%',
+            ),
+          ],
+          onPlayAgain: () {
+            Navigator.pop(context);
+            setState(() {
+              _puzzles.shuffle();
+              _currentIndex = 0;
+              _score = 0;
+              _controller.clear();
+            });
+          },
+        ),
       ),
     );
   }
@@ -163,41 +181,58 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _stat(
-                      theme,
-                      'Puzzle',
-                      '${_currentIndex + 1}/${_puzzles.length}',
-                      Colors.pink,
+                    ArcadeStatCard(
+                      label: 'Puzzle',
+                      value: '${_currentIndex + 1}/${_puzzles.length}',
+                      icon: Icons.extension_rounded,
+                      color: Colors.pink,
                     ),
-                    _stat(theme, l10n.score, '$_score', Colors.orange),
+                    ArcadeStatCard(
+                      label: l10n.score,
+                      value: '$_score',
+                      icon: Icons.stars_rounded,
+                      color: Colors.orange,
+                    ),
                   ],
                 ),
               ),
 
-              const Spacer(),
-
-              // Emoji display
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 24),
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surface,
-                  borderRadius: BorderRadius.circular(32),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: _current.emojis
-                      .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(e, style: const TextStyle(fontSize: 48)),
+              // Scrollable content area
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 32),
+                      // Emoji display
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 24),
+                        padding: const EdgeInsets.all(32),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surface,
+                          borderRadius: BorderRadius.circular(32),
                         ),
-                      )
-                      .toList(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _current.emojis
+                              .map(
+                                (e) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                  ),
+                                  child: Text(
+                                    e,
+                                    style: const TextStyle(fontSize: 48),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                    ],
+                  ),
                 ),
               ),
-
-              const Spacer(),
 
               // Input
               Padding(
@@ -244,34 +279,6 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _stat(ThemeData theme, String label, String value, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            value,
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: color,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }

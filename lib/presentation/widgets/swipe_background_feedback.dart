@@ -51,10 +51,8 @@ class SwipeBackgroundFeedback extends StatelessWidget {
                       : const Alignment(-1.2, 0.0), // Ekran dışından merkez
                   radius: 1.5, // Geniş yarıçap
                   colors: [
-                    // ignore: deprecated_member_use
-                    color.withOpacity(baseOpacity * progress),
-                    // ignore: deprecated_member_use
-                    color.withOpacity(midOpacity * progress),
+                    color.withValues(alpha: baseOpacity * progress),
+                    color.withValues(alpha: midOpacity * progress),
                     Colors.transparent,
                   ],
                   stops: const [0.0, 0.6, 1.0], // Yumuşak geçiş

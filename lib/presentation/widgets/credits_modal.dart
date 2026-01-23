@@ -236,7 +236,7 @@ class CreditsModal extends StatelessWidget {
                 const Icon(Icons.mail_rounded, color: Colors.white, size: 24),
                 const SizedBox(width: 12),
                 Text(
-                  'Bana Ulaşın'.toUpperCase(),
+                  AppLocalizations.of(context)!.contactUs.toUpperCase(),
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,

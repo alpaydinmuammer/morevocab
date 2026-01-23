@@ -104,11 +104,9 @@ class FirebaseAuthDatasource {
       }
 
       return _mapFirebaseUser(user, provider: AuthProvider.google);
-    } on FirebaseAuthException catch (e) {
-      print('!!!!!!! FIREBASE EXCEPTION: ${e.code} - ${e.message}');
+    } on FirebaseAuthException {
       rethrow;
     } catch (e) {
-      print('!!!!!!! UNKNOWN LOGIN ERROR: $e');
       throw FirebaseAuthException(
         code: 'google-sign-in-failed',
         message: e.toString(),

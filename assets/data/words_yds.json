@@ -298,5 +298,293 @@
         "localAsset": "assets/images/words/yds_ydt/word_hierarchy_1768735158973.webp",
         "difficulty": 3,
         "deck": "ydsYdt"
+    },
+    {
+        "id": 1026,
+        "word": "Abandon",
+        "meanings": {
+            "tr": "Terk etmek, bırakmak, vazgeçmek",
+            "en": "To give up completely or leave behind"
+        },
+        "exampleSentence": "They had to abandon the sinking ship.",
+        "localAsset": "assets/images/words/yds_ydt/word_abandon.webp",
+        "difficulty": 2,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1027,
+        "word": "Abolish",
+        "meanings": {
+            "tr": "Kaldırmak, yürürlükten kaldırmak",
+            "en": "To officially end a law, system, or institution"
+        },
+        "exampleSentence": "The government voted to abolish the death penalty.",
+        "localAsset": "assets/images/words/yds_ydt/word_abolish.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1028,
+        "word": "Abstain",
+        "meanings": {
+            "tr": "Kaçınmak, çekimser kalmak",
+            "en": "To choose not to do or have something"
+        },
+        "exampleSentence": "He abstained from chocolate to lose weight.",
+        "localAsset": "assets/images/words/yds_ydt/word_abstain.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1029,
+        "word": "Accelerate",
+        "meanings": {
+            "tr": "Hızlandırmak, ivme kazandırmak",
+            "en": "To increase speed or cause to happen sooner"
+        },
+        "exampleSentence": "The car began to accelerate on the highway.",
+        "localAsset": "assets/images/words/yds_ydt/word_accelerate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1030,
+        "word": "Accommodate",
+        "meanings": {
+            "tr": "Yer sağlamak, uyum sağlamak, karşılamak",
+            "en": "To provide space for or to adapt to needs"
+        },
+        "exampleSentence": "The hotel can accommodate up to 500 guests.",
+        "localAsset": "assets/images/words/yds_ydt/word_accommodate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1031,
+        "word": "Accumulate",
+        "meanings": {
+            "tr": "Biriktirmek, yığmak, birikmek",
+            "en": "To gather or collect over time"
+        },
+        "exampleSentence": "Dust tends to accumulate on the shelves.",
+        "localAsset": "assets/images/words/yds_ydt/word_accumulate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1032,
+        "word": "Accurate",
+        "meanings": {
+            "tr": "Doğru, kesin, isabetli",
+            "en": "Correct in all details; exact"
+        },
+        "exampleSentence": "The report was accurate and well-researched.",
+        "localAsset": "assets/images/words/yds_ydt/word_accurate.webp",
+        "difficulty": 2,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1033,
+        "word": "Acknowledge",
+        "meanings": {
+            "tr": "Kabul etmek, onaylamak, tanımak",
+            "en": "To accept or admit the existence or truth of"
+        },
+        "exampleSentence": "She refused to acknowledge her mistake.",
+        "localAsset": "assets/images/words/yds_ydt/word_acknowledge.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1034,
+        "word": "Adequate",
+        "meanings": {
+            "tr": "Yeterli, uygun",
+            "en": "Sufficient for a specific requirement"
+        },
+        "exampleSentence": "The salary was adequate for his needs.",
+        "localAsset": "assets/images/words/yds_ydt/word_adequate.webp",
+        "difficulty": 2,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1035,
+        "word": "Adhere",
+        "meanings": {
+            "tr": "Yapışmak, bağlı kalmak, uymak",
+            "en": "To stick firmly or follow rules closely"
+        },
+        "exampleSentence": "All employees must adhere to company policies.",
+        "localAsset": "assets/images/words/yds_ydt/word_adhere.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1036,
+        "word": "Adjacent",
+        "meanings": {
+            "tr": "Bitişik, komşu, yakın",
+            "en": "Next to or adjoining something else"
+        },
+        "exampleSentence": "The hotel is adjacent to the beach.",
+        "localAsset": "assets/images/words/yds_ydt/word_adjacent.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1037,
+        "word": "Adjourn",
+        "meanings": {
+            "tr": "Ertelemek, ara vermek",
+            "en": "To suspend a meeting to another time or place"
+        },
+        "exampleSentence": "The court decided to adjourn until tomorrow.",
+        "localAsset": "assets/images/words/yds_ydt/word_adjourn.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1038,
+        "word": "Adverse",
+        "meanings": {
+            "tr": "Olumsuz, zıt, zararlı",
+            "en": "Harmful or unfavorable"
+        },
+        "exampleSentence": "The drug may have adverse side effects.",
+        "localAsset": "assets/images/words/yds_ydt/word_adverse.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1039,
+        "word": "Affluent",
+        "meanings": {
+            "tr": "Zengin, varlıklı",
+            "en": "Having a great deal of money; wealthy"
+        },
+        "exampleSentence": "They live in an affluent neighborhood.",
+        "localAsset": "assets/images/words/yds_ydt/word_affluent.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1040,
+        "word": "Alleviate",
+        "meanings": {
+            "tr": "Hafifletmek, azaltmak",
+            "en": "To make suffering or a problem less severe"
+        },
+        "exampleSentence": "This medicine will alleviate your pain.",
+        "localAsset": "assets/images/words/yds_ydt/word_alleviate.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1041,
+        "word": "Allocate",
+        "meanings": {
+            "tr": "Tahsis etmek, ayırmak",
+            "en": "To distribute resources for a particular purpose"
+        },
+        "exampleSentence": "The government will allocate funds for education.",
+        "localAsset": "assets/images/words/yds_ydt/word_allocate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1042,
+        "word": "Anticipate",
+        "meanings": {
+            "tr": "Öngörmek, beklemek",
+            "en": "To expect or predict something"
+        },
+        "exampleSentence": "We anticipate a rise in sales this quarter.",
+        "localAsset": "assets/images/words/yds_ydt/word_anticipate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1043,
+        "word": "Appease",
+        "meanings": {
+            "tr": "Yatıştırmak, memnun etmek",
+            "en": "To calm or satisfy someone by giving in to demands"
+        },
+        "exampleSentence": "He tried to appease her with flowers.",
+        "localAsset": "assets/images/words/yds_ydt/word_appease.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1044,
+        "word": "Apprehend",
+        "meanings": {
+            "tr": "Yakalamak, kavramak, anlamak",
+            "en": "To arrest someone or understand something"
+        },
+        "exampleSentence": "The police managed to apprehend the suspect.",
+        "localAsset": "assets/images/words/yds_ydt/word_apprehend.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1045,
+        "word": "Arbitrary",
+        "meanings": {
+            "tr": "Keyfi, rastgele",
+            "en": "Based on random choice rather than reason"
+        },
+        "exampleSentence": "The decision seemed completely arbitrary.",
+        "localAsset": "assets/images/words/yds_ydt/word_arbitrary.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1046,
+        "word": "Articulate",
+        "meanings": {
+            "tr": "Açıkça ifade etmek, belagatlı",
+            "en": "To express clearly or speak fluently"
+        },
+        "exampleSentence": "She was able to articulate her ideas clearly.",
+        "localAsset": "assets/images/words/yds_ydt/word_articulate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1047,
+        "word": "Assert",
+        "meanings": {
+            "tr": "İddia etmek, ileri sürmek",
+            "en": "To state a fact or belief confidently"
+        },
+        "exampleSentence": "He asserted his innocence throughout the trial.",
+        "localAsset": "assets/images/words/yds_ydt/word_assert.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1048,
+        "word": "Assess",
+        "meanings": {
+            "tr": "Değerlendirmek, ölçmek",
+            "en": "To evaluate or estimate the nature or value of"
+        },
+        "exampleSentence": "We need to assess the risks before proceeding.",
+        "localAsset": "assets/images/words/yds_ydt/word_assess.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1049,
+        "word": "Attain",
+        "meanings": {
+            "tr": "Ulaşmak, elde etmek, erişmek",
+            "en": "To succeed in achieving a goal"
+        },
+        "exampleSentence": "She finally attained her dream of becoming a doctor.",
+        "localAsset": "assets/images/words/yds_ydt/word_attain.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
     }
 ]

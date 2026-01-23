@@ -286,5 +286,185 @@
         "localAsset": "assets/images/words/beginner/word_hat_1768735311623.webp",
         "difficulty": 1,
         "deck": "beginner"
+    },
+    {
+        "id": 2025,
+        "word": "Book",
+        "meanings": {
+            "tr": "Kitap",
+            "en": "A set of written or printed pages bound together"
+        },
+        "exampleSentence": "I am reading a book.",
+        "localAsset": "assets/images/words/beginner/word_book.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2026,
+        "word": "Pen",
+        "meanings": {
+            "tr": "Kalem",
+            "en": "A writing instrument using ink"
+        },
+        "exampleSentence": "Can I borrow your pen?",
+        "localAsset": "assets/images/words/beginner/word_pen.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2027,
+        "word": "Cat",
+        "meanings": {
+            "tr": "Kedi",
+            "en": "A small domesticated animal"
+        },
+        "exampleSentence": "The cat is sleeping.",
+        "localAsset": "assets/images/words/beginner/word_cat.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2028,
+        "word": "Dog",
+        "meanings": {
+            "tr": "Köpek",
+            "en": "A domesticated animal often kept as a pet"
+        },
+        "exampleSentence": "The dog is barking.",
+        "localAsset": "assets/images/words/beginner/word_dog.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2029,
+        "word": "Car",
+        "meanings": {
+            "tr": "Araba",
+            "en": "A motor vehicle with four wheels"
+        },
+        "exampleSentence": "He drives a red car.",
+        "localAsset": "assets/images/words/beginner/word_car.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2030,
+        "word": "House",
+        "meanings": {
+            "tr": "Ev",
+            "en": "A building for people to live in"
+        },
+        "exampleSentence": "This is my house.",
+        "localAsset": "assets/images/words/beginner/word_house.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2031,
+        "word": "Tree",
+        "meanings": {
+            "tr": "Ağaç",
+            "en": "A tall plant with a trunk and branches"
+        },
+        "exampleSentence": "The tree is very tall.",
+        "localAsset": "assets/images/words/beginner/word_tree.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2032,
+        "word": "Sun",
+        "meanings": {
+            "tr": "Güneş",
+            "en": "The star that provides light and heat for Earth"
+        },
+        "exampleSentence": "The sun is shining bright.",
+        "localAsset": "assets/images/words/beginner/word_sun.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2033,
+        "word": "Moon",
+        "meanings": {
+            "tr": "Ay",
+            "en": "The natural satellite of Earth"
+        },
+        "exampleSentence": "Look at the moon tonight.",
+        "localAsset": "assets/images/words/beginner/word_moon.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2034,
+        "word": "School",
+        "meanings": {
+            "tr": "Okul",
+            "en": "A place for teaching and learning"
+        },
+        "exampleSentence": "I go to school every day.",
+        "localAsset": "assets/images/words/beginner/word_school.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2035,
+        "word": "Teacher",
+        "meanings": {
+            "tr": "Öğretmen",
+            "en": "A person who teaches students"
+        },
+        "exampleSentence": "My teacher is very kind.",
+        "localAsset": "assets/images/words/beginner/word_teacher.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2036,
+        "word": "Student",
+        "meanings": {
+            "tr": "Öğrenci",
+            "en": "A person who is learning at a school"
+        },
+        "exampleSentence": "She is a good student.",
+        "localAsset": "assets/images/words/beginner/word_student.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2037,
+        "word": "Family",
+        "meanings": {
+            "tr": "Aile",
+            "en": "A group of people related to each other"
+        },
+        "exampleSentence": "I love my family.",
+        "localAsset": "assets/images/words/beginner/word_family.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2038,
+        "word": "Mother",
+        "meanings": {
+            "tr": "Anne",
+            "en": "A female parent"
+        },
+        "exampleSentence": "My mother cooks delicious food.",
+        "localAsset": "assets/images/words/beginner/word_mother.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2039,
+        "word": "Father",
+        "meanings": {
+            "tr": "Baba",
+            "en": "A male parent"
+        },
+        "exampleSentence": "My father works hard.",
+        "localAsset": "assets/images/words/beginner/word_father.webp",
+        "difficulty": 1,
+        "deck": "beginner"
     }
 ]

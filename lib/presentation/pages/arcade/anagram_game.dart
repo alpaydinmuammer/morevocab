@@ -6,6 +6,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
+import 'widgets/game_over_screen.dart';
+import 'widgets/arcade_stat_card.dart';
 
 /// Level data for Anagram game
 class AnagramLevel {
@@ -317,89 +319,42 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
     // Save level progress
     ref
         .read(arcadeHighScoresProvider.notifier)
-        .updateLevel(
-          ArcadeGameType.anagram,
-          _currentLevelIndex + 1, // Save next level as unlocked
-        );
+        .updateLevel(ArcadeGameType.anagram, _currentLevelIndex + 1);
     // Also save high score
+    final highScores = ref.read(arcadeHighScoresProvider);
+    final previousHighScore = highScores.getScore(ArcadeGameType.anagram);
     ref
         .read(arcadeHighScoresProvider.notifier)
         .updateScore(ArcadeGameType.anagram, _score);
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: Row(
-          children: [
-            const Text('🎉 '),
-            Text(
-              _isLastLevel
-                  ? 'All Levels Complete!'
-                  : 'Level ${_currentLevel.level} Complete!',
-            ),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GameOverScreen(
+          score: _score,
+          highScore: previousHighScore,
+          accentColor: Colors.teal,
+          title: _isLastLevel ? 'ALL LEVELS COMPLETE!' : 'LEVEL COMPLETE!',
+          extraStats: [
+            GameOverStat(label: 'Level', value: '${_currentLevel.level}'),
+            GameOverStat(label: 'Words', value: '${_foundWords.length}'),
           ],
+          onPlayAgain: () {
+            Navigator.pop(context);
+            if (!_isLastLevel) {
+              setState(() {
+                _currentLevelIndex++;
+              });
+              _startLevel();
+            } else {
+              setState(() {
+                _currentLevelIndex = 0;
+                _score = 0;
+              });
+              _startLevel();
+            }
+          },
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Score: $_score',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 8),
-            Text('Words found: ${_foundWords.length}'),
-            if (!_isLastLevel) ...[
-              const SizedBox(height: 16),
-              Text(
-                'Ready for Level ${_currentLevel.level + 1}?',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.teal,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ],
-        ),
-        actionsAlignment: MainAxisAlignment.center,
-        actions: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (!_isLastLevel)
-                FilledButton(
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    setState(() {
-                      _currentLevelIndex++;
-                    });
-                    _startLevel();
-                  },
-                  child: const Text('Next Level →'),
-                )
-              else
-                FilledButton(
-                  onPressed: () {
-                    Navigator.pop(ctx);
-                    setState(() {
-                      _currentLevelIndex = 0;
-                      _score = 0;
-                    });
-                    _startLevel();
-                  },
-                  child: Text(AppLocalizations.of(context)!.playAgain),
-                ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  context.pop();
-                },
-                child: Text(AppLocalizations.of(context)!.backToHome),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -427,85 +382,95 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildStatCard(
-                      theme,
-                      'Level',
-                      '${_currentLevel.level}/${_levels.length}',
-                      Colors.indigo,
+                    ArcadeStatCard(
+                      label: 'Level',
+                      value: '${_currentLevel.level}/${_levels.length}',
+                      icon: Icons.layers_rounded,
+                      color: Colors.indigo,
                     ),
-                    _buildStatCard(theme, l10n.score, '$_score', Colors.orange),
-                    _buildStatCard(
-                      theme,
-                      'Found',
-                      '${_foundWords.length}/${_currentLevel.validWords.length}',
-                      _levelComplete ? Colors.green : Colors.purple,
+                    ArcadeStatCard(
+                      label: l10n.score,
+                      value: '$_score',
+                      icon: Icons.stars_rounded,
+                      color: Colors.orange,
+                    ),
+                    ArcadeStatCard(
+                      label: 'Found',
+                      value:
+                          '${_foundWords.length}/${_currentLevel.validWords.length}',
+                      icon: Icons.check_circle_rounded,
+                      color: _levelComplete ? Colors.green : Colors.purple,
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 16),
-
-              // Letters display
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  alignment: WrapAlignment.center,
-                  children: _letters
-                      .map((letter) => _buildLetterTile(theme, letter))
-                      .toList(),
-                ),
-              ),
-
-              const SizedBox(height: 12),
-
-              // Shuffle button
-              TextButton.icon(
-                onPressed: _shuffleLetters,
-                icon: const Icon(Icons.shuffle_rounded),
-                label: const Text('Shuffle'),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Found words
+              // Scrollable content area
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surface.withValues(alpha: 0.8),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: _foundWords.isEmpty
-                      ? Center(
-                          child: Text(
-                            'Find words using the ${_letters.length} letters above!',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onSurface.withValues(
-                                alpha: 0.5,
-                              ),
-                            ),
-                          ),
-                        )
-                      : SingleChildScrollView(
-                          child: Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: _foundWords
-                                .map(
-                                  (word) => Chip(
-                                    label: Text(word),
-                                    backgroundColor: Colors.teal.withValues(
-                                      alpha: 0.2,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Column(
+                    children: [
+                      // Letters display
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          alignment: WrapAlignment.center,
+                          children: _letters
+                              .map((letter) => _buildLetterTile(theme, letter))
+                              .toList(),
                         ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Shuffle button
+                      TextButton.icon(
+                        onPressed: _shuffleLetters,
+                        icon: const Icon(Icons.shuffle_rounded),
+                        label: const Text('Shuffle'),
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Found words container
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 24),
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surface.withValues(
+                            alpha: 0.8,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: _foundWords.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'Find words using the ${_letters.length} letters above!',
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: theme.colorScheme.onSurface
+                                        .withValues(alpha: 0.5),
+                                  ),
+                                ),
+                              )
+                            : Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: _foundWords
+                                    .map(
+                                      (word) => Chip(
+                                        label: Text(word),
+                                        backgroundColor: Colors.teal.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
@@ -634,40 +599,6 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
             fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildStatCard(
-    ThemeData theme,
-    String label,
-    String value,
-    Color color,
-  ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            value,
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: color,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }

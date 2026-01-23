@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -303,16 +304,30 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
                 Positioned(
                   top: 16,
                   left: 16,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      onPressed: widget.onSpeak,
-                      icon: const Icon(Icons.volume_up_rounded),
-                      color: Colors.white,
-                      iconSize: 24,
+                  child: ClipOval(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.25),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.1),
+                            width: 1,
+                          ),
+                        ),
+                        child: IconButton(
+                          onPressed: widget.onSpeak,
+                          icon: const Icon(Icons.volume_up_rounded),
+                          color: Colors.white,
+                          iconSize: 22,
+                          constraints: const BoxConstraints(
+                            minWidth: 40,
+                            minHeight: 40,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                      ),
                     ),
                   ),
                 ),

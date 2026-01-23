@@ -12,7 +12,8 @@ class DeckCard extends ConsumerWidget {
   final bool showDescription;
   final bool showWordCount;
   final int? wordCount;
-  final String? customTitle; // NEW: dynamic title for custom decks
+  final String? customTitle;
+  final bool isFocused; // NEW: for carousel focus effect
 
   const DeckCard({
     super.key,
@@ -23,6 +24,7 @@ class DeckCard extends ConsumerWidget {
     this.showWordCount = false,
     this.wordCount,
     this.customTitle,
+    this.isFocused = false,
   });
 
   @override
@@ -46,9 +48,10 @@ class DeckCard extends ConsumerWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: deck.color.withValues(alpha: 0.3),
-              blurRadius: 12,
-              offset: const Offset(0, 8),
+              color: deck.color.withValues(alpha: isFocused ? 0.5 : 0.3),
+              blurRadius: isFocused ? 20 : 12,
+              offset: Offset(0, isFocused ? 10 : 8),
+              spreadRadius: isFocused ? 2 : 0,
             ),
           ],
         ),

@@ -238,5 +238,185 @@
         "localAsset": "assets/images/words/idioms/word_elephantinroom.webp",
         "difficulty": 3,
         "deck": "idioms"
+    },
+    {
+        "id": 5021,
+        "word": "A penny for your thoughts",
+        "meanings": {
+            "tr": "Ne düşünüyorsun?",
+            "en": "Used to ask what someone is thinking about"
+        },
+        "exampleSentence": "You look lost in thought. A penny for your thoughts?",
+        "localAsset": "assets/images/words/idioms/word_pennyforthoughts.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5022,
+        "word": "Actions speak louder than words",
+        "meanings": {
+            "tr": "Lafla peynir gemisi yürümez",
+            "en": "What you do matters more than what you say"
+        },
+        "exampleSentence": "He promised to help, but actions speak louder than words.",
+        "localAsset": "assets/images/words/idioms/word_actionsspeaklouder.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5023,
+        "word": "Add fuel to the fire",
+        "meanings": {
+            "tr": "Ateşe benzin dökmek",
+            "en": "Make a bad situation worse"
+        },
+        "exampleSentence": "His careless comments only added fuel to the fire.",
+        "localAsset": "assets/images/words/idioms/word_addfueltofire.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5024,
+        "word": "The ball is in your court",
+        "meanings": {
+            "tr": "Top sende, sıra sende",
+            "en": "It's up to you to make the next decision"
+        },
+        "exampleSentence": "I've made my offer. Now the ball is in your court.",
+        "localAsset": "assets/images/words/idioms/word_ballinyourcourt.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5025,
+        "word": "Better late than never",
+        "meanings": {
+            "tr": "Geç olsun güç olmasın",
+            "en": "It's better to do something late than not at all"
+        },
+        "exampleSentence": "You finally finished the project! Better late than never.",
+        "localAsset": "assets/images/words/idioms/word_betterlatethanever.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5026,
+        "word": "Burn bridges",
+        "meanings": {
+            "tr": "Köprüleri atmak",
+            "en": "Destroy relationships or opportunities"
+        },
+        "exampleSentence": "Don't burn bridges with your old employer.",
+        "localAsset": "assets/images/words/idioms/word_burnbridges.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5027,
+        "word": "Curiosity killed the cat",
+        "meanings": {
+            "tr": "Fazla merak tez kocatır",
+            "en": "Being too curious can get you in trouble"
+        },
+        "exampleSentence": "Stop asking so many questions. Curiosity killed the cat!",
+        "localAsset": "assets/images/words/idioms/word_curiositykilled.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5028,
+        "word": "Don't cry over spilt milk",
+        "meanings": {
+            "tr": "Olan oldu, ağlamanın faydası yok",
+            "en": "Don't waste time worrying about past mistakes"
+        },
+        "exampleSentence": "You failed the test, but don't cry over spilt milk.",
+        "localAsset": "assets/images/words/idioms/word_spiltmilk.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5029,
+        "word": "Every cloud has a silver lining",
+        "meanings": {
+            "tr": "Her şerde bir hayır vardır",
+            "en": "Every bad situation has something good in it"
+        },
+        "exampleSentence": "Losing my job led me to find my dream career. Every cloud has a silver lining.",
+        "localAsset": "assets/images/words/idioms/word_silverlining.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5030,
+        "word": "Go the extra mile",
+        "meanings": {
+            "tr": "Fazladan çaba göstermek",
+            "en": "Make more effort than expected"
+        },
+        "exampleSentence": "She always goes the extra mile for her clients.",
+        "localAsset": "assets/images/words/idioms/word_goextramile.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5031,
+        "word": "Hit the nail on the head",
+        "meanings": {
+            "tr": "Tam isabetli konuşmak",
+            "en": "Say something exactly right"
+        },
+        "exampleSentence": "You hit the nail on the head with your analysis.",
+        "localAsset": "assets/images/words/idioms/word_hitnailhead.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5032,
+        "word": "It takes two to tango",
+        "meanings": {
+            "tr": "Bir elin nesi var, iki elin sesi var",
+            "en": "Both people are responsible for the situation"
+        },
+        "exampleSentence": "Don't just blame him. It takes two to tango.",
+        "localAsset": "assets/images/words/idioms/word_takestwotango.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5033,
+        "word": "Jump on the bandwagon",
+        "meanings": {
+            "tr": "Modaya uyup katılmak",
+            "en": "Join a popular trend or activity"
+        },
+        "exampleSentence": "Everyone started investing, so he jumped on the bandwagon.",
+        "localAsset": "assets/images/words/idioms/word_jumpbandwagon.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5034,
+        "word": "Keep your chin up",
+        "meanings": {
+            "tr": "Başını dik tut, moralini bozma",
+            "en": "Stay positive in difficult times"
+        },
+        "exampleSentence": "Keep your chin up! Things will get better.",
+        "localAsset": "assets/images/words/idioms/word_keepchinup.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5035,
+        "word": "On thin ice",
+        "meanings": {
+            "tr": "Buz üzerinde yürümek, riskli durumda olmak",
+            "en": "In a risky or dangerous situation"
+        },
+        "exampleSentence": "After missing two deadlines, he's on thin ice with his boss.",
+        "localAsset": "assets/images/words/idioms/word_onthinice.webp",
+        "difficulty": 2,
+        "deck": "idioms"
     }
 ]

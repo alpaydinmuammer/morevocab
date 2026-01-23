@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
+import 'widgets/game_over_screen.dart';
+import 'widgets/arcade_stat_card.dart';
 
 /// Word Chain Game - Create words starting with the last letter
 class WordChainGame extends ConsumerStatefulWidget {
@@ -17,8 +20,41 @@ class WordChainGame extends ConsumerStatefulWidget {
 }
 
 class _WordChainGameState extends ConsumerState<WordChainGame> {
+  static const List<String> _startingWords = [
+    'APPLE',
+    'BANANA',
+    'CHERRY',
+    'DREAM',
+    'EARTH',
+    'FLOWER',
+    'GARDEN',
+    'HAPPY',
+    'ISLAND',
+    'JUNGLE',
+    'LEMON',
+    'MONKEY',
+    'NATURE',
+    'OCEAN',
+    'PIANO',
+    'QUEEN',
+    'RIVER',
+    'STREET',
+    'TIGER',
+    'VALLEY',
+    'WINDOW',
+    'YELLOW',
+    'ZEBRA',
+    'ORANGE',
+    'PEACH',
+    'STONE',
+    'WATER',
+    'LIGHT',
+    'BREEZE',
+    'CLOUD',
+  ];
+
+  final List<String> _wordChain = [];
   final TextEditingController _controller = TextEditingController();
-  final List<String> _wordChain = ['APPLE'];
   int _score = 0;
   int _timeLeft = 60;
   Timer? _timer;
@@ -36,6 +72,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
   }
 
   Future<void> _checkConnectionAndStart() async {
+    _wordChain.add(_startingWords[Random().nextInt(_startingWords.length)]);
     final hasInternet = await DictionaryService.hasInternetConnection();
 
     if (!mounted) return;
@@ -122,59 +159,48 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
     _timer?.cancel();
 
     // Save high score
+    final highScores = ref.read(arcadeHighScoresProvider);
+    final previousHighScore = highScores.getScore(ArcadeGameType.wordChain);
     ref
         .read(arcadeHighScoresProvider.notifier)
         .updateScore(ArcadeGameType.wordChain, _score);
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.gameOver),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('⏰', style: TextStyle(fontSize: 48)),
-            const SizedBox(height: 16),
-            Text(
-              '${AppLocalizations.of(context)!.score}: $_score',
-              style: Theme.of(context).textTheme.headlineSmall,
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GameOverScreen(
+          score: _score,
+          highScore: previousHighScore,
+          accentColor: Colors.orange,
+          extraStats: [
+            GameOverStat(label: 'Words', value: '${_wordChain.length}'),
+            GameOverStat(
+              label: 'Avg Length',
+              value:
+                  (_wordChain.isEmpty
+                          ? 0
+                          : _wordChain
+                                    .map((e) => e.length)
+                                    .reduce((a, b) => a + b) /
+                                _wordChain.length)
+                      .toStringAsFixed(1),
             ),
-            const SizedBox(height: 8),
-            Text('Words: ${_wordChain.length}'),
           ],
+          onPlayAgain: () {
+            Navigator.pop(context);
+            setState(() {
+              _wordChain.clear();
+              _wordChain.add(
+                _startingWords[Random().nextInt(_startingWords.length)],
+              );
+              _score = 0;
+              _timeLeft = 60;
+              _isGameOver = false;
+              _controller.clear();
+            });
+            _startTimer();
+          },
         ),
-        actionsAlignment: MainAxisAlignment.center,
-        actions: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FilledButton(
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  setState(() {
-                    _wordChain.clear();
-                    _wordChain.add('APPLE');
-                    _score = 0;
-                    _timeLeft = 60;
-                    _isGameOver = false;
-                    _controller.clear();
-                  });
-                  _startTimer();
-                },
-                child: Text(AppLocalizations.of(context)!.playAgain),
-              ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(ctx);
-                  context.pop();
-                },
-                child: Text(AppLocalizations.of(context)!.backToHome),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -314,136 +340,153 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildStatCard(theme, l10n.score, '$_score', Colors.orange),
-                    _buildStatCard(
-                      theme,
-                      l10n.timeLeft,
-                      '${_timeLeft}s',
-                      _timeLeft <= 10 ? Colors.red : Colors.green,
+                    ArcadeStatCard(
+                      label: l10n.score,
+                      value: '$_score',
+                      icon: Icons.stars_rounded,
+                      color: Colors.orange,
+                    ),
+                    ArcadeStatCard(
+                      label: l10n.timeLeft,
+                      value: '${_timeLeft}s',
+                      icon: Icons.timer_rounded,
+                      color: _timeLeft <= 10 ? Colors.red : Colors.green,
                     ),
                   ],
                 ),
               ),
 
-              // Current word display
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: theme.colorScheme.primary.withValues(alpha: 0.3),
-                      width: 2,
-                    ),
-                  ),
+              // Scrollable content area
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.only(bottom: 16),
                   child: Column(
                     children: [
-                      Text(
-                        'Current Word',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
+                      // Current word display
+                      Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.primary.withValues(
+                              alpha: 0.1,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: theme.colorScheme.primary.withValues(
+                                alpha: 0.3,
+                              ),
+                              width: 2,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Current Word',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: 0.6,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                _currentWord,
+                                style: theme.textTheme.displaySmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: theme.colorScheme.primary,
+                                  letterSpacing: 4,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.orange,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  'Next word starts with: $_lastLetter',
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Text(
-                        _currentWord,
-                        style: theme.textTheme.displaySmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.primary,
-                          letterSpacing: 4,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'Next word starts with: $_lastLetter',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+
+                      // Word chain history
+                      if (_wordChain.length > 1)
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 24),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surface.withValues(
+                              alpha: 0.5,
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            alignment: WrapAlignment.center,
+                            children: _wordChain
+                                .sublist(0, _wordChain.length - 1)
+                                .map((word) {
+                                  // Reduce font size if many words
+                                  final fontSize = _wordChain.length > 10
+                                      ? 11.0
+                                      : _wordChain.length > 6
+                                      ? 12.0
+                                      : 14.0;
+                                  final padding = _wordChain.length > 10
+                                      ? const EdgeInsets.symmetric(
+                                          horizontal: 10,
+                                          vertical: 6,
+                                        )
+                                      : const EdgeInsets.symmetric(
+                                          horizontal: 14,
+                                          vertical: 8,
+                                        );
+
+                                  return Container(
+                                    padding: padding,
+                                    decoration: BoxDecoration(
+                                      color: theme.colorScheme.primaryContainer,
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: theme.colorScheme.primary
+                                            .withValues(alpha: 0.3),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      word,
+                                      style: theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                            fontSize: fontSize,
+                                            fontWeight: FontWeight.w500,
+                                            color: theme
+                                                .colorScheme
+                                                .onPrimaryContainer,
+                                          ),
+                                    ),
+                                  );
+                                })
+                                .toList(),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-
-              // Word chain history
-              if (_wordChain.length > 1)
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.surface.withValues(alpha: 0.5),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: SingleChildScrollView(
-                      child: Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        alignment: WrapAlignment.center,
-                        children: _wordChain
-                            .sublist(0, _wordChain.length - 1)
-                            .map((word) {
-                              // Reduce font size if many words
-                              final fontSize = _wordChain.length > 10
-                                  ? 11.0
-                                  : _wordChain.length > 6
-                                  ? 12.0
-                                  : 14.0;
-                              final padding = _wordChain.length > 10
-                                  ? const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 6,
-                                    )
-                                  : const EdgeInsets.symmetric(
-                                      horizontal: 14,
-                                      vertical: 8,
-                                    );
-
-                              return Container(
-                                padding: padding,
-                                decoration: BoxDecoration(
-                                  color: theme.colorScheme.primaryContainer,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: theme.colorScheme.primary.withValues(
-                                      alpha: 0.3,
-                                    ),
-                                  ),
-                                ),
-                                child: Text(
-                                  word,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    fontSize: fontSize,
-                                    fontWeight: FontWeight.w500,
-                                    color: theme.colorScheme.onPrimaryContainer,
-                                  ),
-                                ),
-                              );
-                            })
-                            .toList(),
-                      ),
-                    ),
-                  ),
-                ),
-
-              const SizedBox(height: 16),
 
               // Input area
               Padding(
@@ -539,40 +582,6 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: theme.colorScheme.primary,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatCard(
-    ThemeData theme,
-    String label,
-    String value,
-    Color color,
-  ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            value,
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: color,
-              fontWeight: FontWeight.bold,
             ),
           ),
         ],

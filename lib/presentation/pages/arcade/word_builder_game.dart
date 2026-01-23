@@ -5,6 +5,8 @@ import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
+import 'widgets/game_over_screen.dart';
+import 'widgets/arcade_stat_card.dart';
 
 /// Word Builder Game - Build words from syllables based on definitions
 class WordBuilderGame extends ConsumerStatefulWidget {
@@ -19,7 +21,16 @@ class _WordBuilderGameState extends ConsumerState<WordBuilderGame> {
   int _score = 0;
   final List<String> _selectedSyllables = [];
 
-  // Sample questions (in production, this would come from a data source)
+  @override
+  void initState() {
+    super.initState();
+    _questions.shuffle();
+    for (var q in _questions) {
+      q.syllables.shuffle();
+    }
+  }
+
+  // Expanded question set
   final List<_WordBuilderQuestion> _questions = [
     _WordBuilderQuestion(
       definition: 'A building where movies are shown.',
@@ -45,6 +56,81 @@ class _WordBuilderGameState extends ConsumerState<WordBuilderGame> {
       definition: 'A device used to talk to people far away.',
       syllables: ['PHONE', 'TELE'],
       answer: 'TELEPHONE',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A tropical fruit with yellow skin.',
+      syllables: ['NA', 'BA', 'NA'],
+      answer: 'BANANA',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A machine that performs calculations.',
+      syllables: ['TER', 'COM', 'PU'],
+      answer: 'COMPUTER',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A large animal with a long trunk.',
+      syllables: ['PHANT', 'ELE'],
+      answer: 'ELEPHANT',
+    ),
+    _WordBuilderQuestion(
+      definition: 'The season between summer and winter.',
+      syllables: ['TUMN', 'AU'],
+      answer: 'AUTUMN',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A person who flies an airplane.',
+      syllables: ['LOT', 'PI'],
+      answer: 'PILOT',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A place where books are kept.',
+      syllables: ['RY', 'LIB', 'RA'],
+      answer: 'LIBRARY',
+    ),
+    _WordBuilderQuestion(
+      definition: 'An instrument used to measure time.',
+      syllables: ['DAR', 'CAL', 'EN'],
+      answer: 'CALENDAR',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A very high mountain.',
+      syllables: ['EST', 'EV', 'ER'],
+      answer: 'EVEREST',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A small animal that lives in a shell.',
+      syllables: ['TLE', 'TUR'],
+      answer: 'TURTLE',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A frozen dessert made from milk.',
+      syllables: ['CREAM', 'ICE'],
+      answer: 'ICECREAM',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A person who cooks food in a restaurant.',
+      syllables: ['CHEN', 'KIT'],
+      answer: 'KITCHEN',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A vehicle that travels through space.',
+      syllables: ['SHIP', 'ROCK', 'ET'],
+      answer: 'ROCKETSHIP',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A bright celestial body seen at night.',
+      syllables: ['NET', 'PLA'],
+      answer: 'PLANET',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A structure built over a river.',
+      syllables: ['DGE', 'BRI'],
+      answer: 'BRIDGE',
+    ),
+    _WordBuilderQuestion(
+      definition: 'A person who treats sick people.',
+      syllables: ['TOR', 'DOC'],
+      answer: 'DOCTOR',
     ),
   ];
 
@@ -110,53 +196,36 @@ class _WordBuilderGameState extends ConsumerState<WordBuilderGame> {
 
   void _showGameComplete() {
     // Save high score
+    final highScores = ref.read(arcadeHighScoresProvider);
+    final previousHighScore = highScores.getScore(ArcadeGameType.wordBuilder);
     ref
         .read(arcadeHighScoresProvider.notifier)
         .updateScore(ArcadeGameType.wordBuilder, _score);
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.gameOver),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('🎉', style: TextStyle(fontSize: 48)),
-            const SizedBox(height: 16),
-            Text(
-              '${AppLocalizations.of(context)!.score}: $_score',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GameOverScreen(
+          score: _score,
+          highScore: previousHighScore,
+          accentColor: Colors.indigo,
+          extraStats: [
+            GameOverStat(label: 'Words Built', value: '${_questions.length}'),
+            GameOverStat(label: 'Total Score', value: '$_score'),
           ],
+          onPlayAgain: () {
+            Navigator.pop(context);
+            setState(() {
+              _questions.shuffle();
+              for (var q in _questions) {
+                q.syllables.shuffle();
+              }
+              _currentQuestionIndex = 0;
+              _score = 0;
+              _selectedSyllables.clear();
+            });
+          },
         ),
-        actionsAlignment: MainAxisAlignment.center,
-        actions: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              FilledButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    _currentQuestionIndex = 0;
-                    _score = 0;
-                    _selectedSyllables.clear();
-                  });
-                },
-                child: Text(AppLocalizations.of(context)!.playAgain),
-              ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  context.pop();
-                },
-                child: Text(AppLocalizations.of(context)!.backToHome),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -184,13 +253,19 @@ class _WordBuilderGameState extends ConsumerState<WordBuilderGame> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildStatCard(
-                      theme,
-                      'Question',
-                      '${_currentQuestionIndex + 1}/${_questions.length}',
-                      Colors.indigo,
+                    ArcadeStatCard(
+                      label: 'Question',
+                      value:
+                          '${_currentQuestionIndex + 1}/${_questions.length}',
+                      icon: Icons.help_outline_rounded,
+                      color: Colors.indigo,
                     ),
-                    _buildStatCard(theme, l10n.score, '$_score', Colors.orange),
+                    ArcadeStatCard(
+                      label: l10n.score,
+                      value: '$_score',
+                      icon: Icons.stars_rounded,
+                      color: Colors.orange,
+                    ),
                   ],
                 ),
               ),
@@ -411,40 +486,6 @@ class _WordBuilderGameState extends ConsumerState<WordBuilderGame> {
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: theme.colorScheme.primary,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatCard(
-    ThemeData theme,
-    String label,
-    String value,
-    Color color,
-  ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: color,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            value,
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: color,
-              fontWeight: FontWeight.bold,
             ),
           ),
         ],

@@ -614,72 +614,80 @@ class AppLocalizationsFr extends AppLocalizations {
   String get creditsVersion => 'Version';
 
   @override
+  String get contactUs => 'Contactez-moi';
+
+  @override
   String get arcadeMode => 'Arcade';
 
   @override
-  String get arcadeTitle => 'Oyunlar';
+  String get arcadeTitle => 'Jeux';
 
   @override
-  String get arcadeSubtitle => 'Kelime öğrenmenin eğlenceli yolları';
+  String get arcadeSubtitle =>
+      'Des façons amusantes d\'apprendre du vocabulaire';
 
   @override
-  String get gameWordChain => 'Kelime Zinciri';
+  String get gameWordChain => 'Chaîne de mots';
 
   @override
-  String get gameWordChainDesc => 'Son harfle başlayan kelimeler yaz';
+  String get gameWordChainDesc =>
+      'Créez des mots commençant par la dernière lettre';
 
   @override
-  String get gameAnagram => 'Anagram';
+  String get gameAnagram => 'Anagramme';
 
   @override
-  String get gameAnagramDesc => 'Karışık harflerden kelime bul';
+  String get gameAnagramDesc =>
+      'Trouvez des mots à partir de lettres mélangées';
 
   @override
-  String get gameWordBuilder => 'Kelime İnşaatı';
+  String get gameWordBuilder => 'Constructeur de mots';
 
   @override
-  String get gameWordBuilderDesc => 'Heceleri sıralayarak kelime oluştur';
+  String get gameWordBuilderDesc =>
+      'Organisez les syllabes pour former des mots';
 
   @override
-  String get gameEmojiPuzzle => 'Emoji Bulmaca';
+  String get gameEmojiPuzzle => 'Puzzle d\'emojis';
 
   @override
-  String get gameEmojiPuzzleDesc => 'Emojilerden kelime tahmin et';
+  String get gameEmojiPuzzleDesc =>
+      'Devinez des mots à partir d\'indices emojis';
 
   @override
-  String get gameOddOneOut => 'Farklı Olanı Bul';
+  String get gameOddOneOut => 'L\'intrus';
 
   @override
-  String get gameOddOneOutDesc => 'Alakasız kelimeyi bul';
+  String get gameOddOneOutDesc => 'Trouvez le mot qui n\'a pas sa place';
 
   @override
-  String get score => 'Puan';
+  String get score => 'Score';
 
   @override
-  String get timeLeft => 'Kalan Süre';
+  String get timeLeft => 'Temps restant';
 
   @override
-  String get yourTurn => 'Senin Sıran';
+  String get yourTurn => 'À ton tour';
 
   @override
-  String get correct => 'Doğru!';
+  String get correct => 'Correct !';
 
   @override
-  String get incorrect => 'Yanlış!';
+  String get incorrect => 'Incorrect !';
 
   @override
-  String get gameOver => 'Oyun Bitti';
+  String get gameOver => 'Jeu terminé';
 
   @override
-  String get playAgain => 'Tekrar Oyna';
+  String get playAgain => 'Rejouer';
 
   @override
-  String get comingSoonGame => 'Çok Yakında';
+  String get comingSoonGame => 'Prochainement';
 
   @override
   String get offlineWarning =>
-      'İnternet bağlantınız yok. Kelime doğrulama düzgün çalışmayabilir. Yine de devam etmek ister misiniz?';
+      'Vous n\'avez pas de connexion Internet. La validation des mots peut ne pas fonctionner correctement. Voulez-vous quand même continuer ?';
 
   @override
-  String get continueOffline => 'Çevrimdışı Devam Et';
+  String get continueOffline => 'Continuer hors ligne';
 }

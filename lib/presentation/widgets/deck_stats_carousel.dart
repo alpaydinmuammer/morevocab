@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,7 +31,19 @@ class _DeckStatsCarouselState extends ConsumerState<DeckStatsCarousel> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.8);
+    // Use Random for better variety and center the initial page in the large range
+    final random = Random();
+    final randomOffset = random.nextInt(_decks.length);
+    // Start around the middle of the range (10000) to allow infinite feel in both directions
+    final middle = 5000;
+    // Adjust middle to align with a random deck index
+    final initialPage = middle - (middle % _decks.length) + randomOffset;
+
+    _pageController = PageController(
+      viewportFraction: 0.85,
+      initialPage: initialPage,
+    );
+    _currentPage = initialPage;
   }
 
   @override
@@ -42,24 +55,27 @@ class _DeckStatsCarouselState extends ConsumerState<DeckStatsCarousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 230, // Slightly more compact height for carousel
+      height: 230,
       child: PageView.builder(
         controller: _pageController,
-        itemCount: _decks.length,
+        // Using a very large number for infinite feel
+        itemCount: 10000,
         onPageChanged: (index) {
           setState(() {
             _currentPage = index;
           });
         },
         itemBuilder: (context, index) {
-          final deck = _decks[index];
-          // Calculate scale for current item
-          // Simple scale effect based on position (can be enhanced)
+          // Map global index to deck index
+          final deck = _decks[index % _decks.length];
+          final isCurrent = _currentPage == index;
+
           return AnimatedScale(
-            scale: _currentPage == index ? 1.0 : 0.9,
+            scale: isCurrent ? 1.0 : 0.9,
             duration: const Duration(milliseconds: 300),
             child: DeckCard(
               deck: deck,
+              isFocused: isCurrent,
               onTap: () {
                 showModalBottomSheet(
                   context: context,

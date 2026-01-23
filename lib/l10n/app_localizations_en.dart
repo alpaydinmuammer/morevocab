@@ -612,6 +612,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get creditsVersion => 'Version';
 
   @override
+  String get contactUs => 'Contact Me';
+
+  @override
   String get arcadeMode => 'Arcade';
 
   @override

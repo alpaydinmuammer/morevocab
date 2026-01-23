@@ -161,7 +161,7 @@ class HomePage extends ConsumerWidget {
                       ],
                     ),
 
-                    const Spacer(),
+                    const Expanded(flex: 1, child: SizedBox()),
 
                     // Pet Widget
                     _buildPetSection(context, ref),
@@ -171,7 +171,9 @@ class HomePage extends ConsumerWidget {
                     // Main Deck Carousel
                     const DeckStatsCarousel(),
 
-                    const Spacer(),
+                    const SizedBox(height: 16),
+
+                    const Expanded(flex: 1, child: SizedBox()),
 
                     // Start Study Button
                     _buildStartButton(context, ref),
@@ -332,13 +334,13 @@ class HomePage extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
-            colors: [Colors.deepPurple, Colors.deepPurple.shade400],
+            colors: [Colors.orange.shade800, Colors.orange.shade400],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.deepPurple.withValues(alpha: 0.3),
+              color: Colors.orange.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -464,13 +466,13 @@ class HomePage extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
-            colors: [Colors.indigo, Colors.indigo.shade400],
+            colors: [Colors.blueGrey.shade700, Colors.blueGrey.shade400],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.indigo.withValues(alpha: 0.3),
+              color: Colors.blueGrey.withValues(alpha: 0.3),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),

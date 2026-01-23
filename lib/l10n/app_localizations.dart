@@ -1240,6 +1240,12 @@ abstract class AppLocalizations {
   /// **'Sürüm'**
   String get creditsVersion;
 
+  /// No description provided for @contactUs.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bana Ulaşın'**
+  String get contactUs;
+
   /// No description provided for @arcadeMode.
   ///
   /// In tr, this message translates to:

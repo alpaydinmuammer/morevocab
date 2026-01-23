@@ -468,12 +468,15 @@ class PetDetailModal extends ConsumerWidget {
 
   int? _getNextEvolutionLevel(PetModel pet) {
     final currentLevel = pet.level;
-    if (currentLevel < PetConstants.stageYoungMinLevel)
+    if (currentLevel < PetConstants.stageYoungMinLevel) {
       return PetConstants.stageYoungMinLevel;
-    if (currentLevel < PetConstants.stageAdultMinLevel)
+    }
+    if (currentLevel < PetConstants.stageAdultMinLevel) {
       return PetConstants.stageAdultMinLevel;
-    if (currentLevel < PetConstants.stageLegendaryMinLevel)
+    }
+    if (currentLevel < PetConstants.stageLegendaryMinLevel) {
       return PetConstants.stageLegendaryMinLevel;
+    }
     return null;
   }
 }

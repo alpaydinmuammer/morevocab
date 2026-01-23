@@ -611,6 +611,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get creditsVersion => 'Sürüm';
 
   @override
+  String get contactUs => 'Bana Ulaşın';
+
+  @override
   String get arcadeMode => 'Arcade';
 
   @override
