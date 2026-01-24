@@ -62,72 +62,151 @@ class DeckCard extends ConsumerWidget {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                // Background Icon decoration
+                // Background decoration (Icon for home, Image for deck selection)
                 Positioned(
                   right: -10,
                   bottom: -10,
-                  child: Icon(
-                    deck.icon,
-                    size: 100,
-                    color: Colors.white.withValues(alpha: 0.1),
-                  ),
+                  child: showProgress
+                      // Home page: use icon
+                      ? Icon(
+                          deck.icon,
+                          size: 100,
+                          color: Colors.white.withValues(alpha: 0.1),
+                        )
+                      // Deck selection: use image if available
+                      : deck.imagePath != null
+                      ? Opacity(
+                          opacity: 0.08,
+                          child: Image.asset(
+                            deck.imagePath!,
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.contain,
+                          ),
+                        )
+                      : Icon(
+                          deck.icon,
+                          size: 100,
+                          color: Colors.white.withValues(alpha: 0.1),
+                        ),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(showProgress ? 16 : 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Deck Icon and Name
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Icon(
-                              deck.icon,
-                              color: Colors.white,
-                              size: showProgress ? 26 : 20,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              customTitle ?? deck.getLocalizedName(context),
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: showProgress ? 17 : 15,
+                      // Different layout based on showProgress
+                      if (showProgress) ...[
+                        // HOME PAGE LAYOUT: Small logo top-left with title
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
+                              child: deck.imagePath != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Image.asset(
+                                        deck.imagePath!,
+                                        width: 32,
+                                        height: 32,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Icon(
+                                      deck.icon,
+                                      color: Colors.white,
+                                      size: 22,
+                                    ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                customTitle ?? deck.getLocalizedName(context),
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                      ] else ...[
+                        // DECK SELECTION LAYOUT: Centered logo
+                        Expanded(
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(14),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.1),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: deck.imagePath != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        deck.imagePath!,
+                                        width: 65,
+                                        height: 65,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Icon(
+                                      deck.icon,
+                                      color: Colors.white,
+                                      size: 45,
+                                    ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
 
-                      const Spacer(),
+                        // Title (for deck selection)
+                        Text(
+                          customTitle ?? deck.getLocalizedName(context),
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
 
                       // Description
                       if (showDescription) ...[
+                        const SizedBox(height: 4),
                         Text(
                           deck.getLocalizedDescription(context),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.95),
-                            height: 1.2,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.9),
                             fontWeight: FontWeight.w500,
+                            height: 1.1,
+                            fontSize: 10,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 8),
                       ],
 
                       // Word Count Badge
-                      if (showWordCount && wordCount != null)
+                      if (showWordCount && wordCount != null) ...[
+                        const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 10,
@@ -151,6 +230,7 @@ class DeckCard extends ConsumerWidget {
                             ),
                           ),
                         ),
+                      ],
 
                       // Stats Content
                       if (showProgress && statsAsync != null)

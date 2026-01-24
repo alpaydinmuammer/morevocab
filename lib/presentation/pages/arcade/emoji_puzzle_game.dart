@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
+import '../../providers/challenge_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
 import 'widgets/game_over_screen.dart';
@@ -79,6 +80,11 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
       ref
           .read(arcadeHighScoresProvider.notifier)
           .updateLevel(ArcadeGameType.emojiPuzzle, nextLevel);
+
+      // Update challenge progress
+      ref
+          .read(challengesProvider.notifier)
+          .checkProgress(ArcadeGameType.emojiPuzzle, newLevel: nextLevel);
 
       // Record activity for streak
       ref.read(streakProvider.notifier).recordActivity();

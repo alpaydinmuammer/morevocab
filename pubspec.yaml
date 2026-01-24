@@ -75,6 +75,8 @@ flutter:
     - assets/images/pets/
     - assets/images/logo/
     - assets/images/onboarding slides/
+    - assets/images/arcade/
+    - assets/images/decks/
 
 flutter_launcher_icons:
   android: true

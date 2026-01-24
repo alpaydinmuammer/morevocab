@@ -1383,6 +1383,48 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Çevrimdışı Devam Et'**
   String get continueOffline;
+
+  /// No description provided for @dailyChallenges.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük Görevler'**
+  String get dailyChallenges;
+
+  /// No description provided for @completed.
+  ///
+  /// In tr, this message translates to:
+  /// **'tamamlandı'**
+  String get completed;
+
+  /// No description provided for @challengeScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'{target} puan yap'**
+  String challengeScore(int target);
+
+  /// No description provided for @challengeLevel.
+  ///
+  /// In tr, this message translates to:
+  /// **'{target}. seviyeye ulaş'**
+  String challengeLevel(int target);
+
+  /// No description provided for @challengePlayGame.
+  ///
+  /// In tr, this message translates to:
+  /// **'Herhangi bir oyun oyna'**
+  String get challengePlayGame;
+
+  /// No description provided for @anyGame.
+  ///
+  /// In tr, this message translates to:
+  /// **'Herhangi Bir Oyun'**
+  String get anyGame;
+
+  /// No description provided for @challenges.
+  ///
+  /// In tr, this message translates to:
+  /// **'Meydan Okumalar'**
+  String get challenges;
 }
 
 class _AppLocalizationsDelegate

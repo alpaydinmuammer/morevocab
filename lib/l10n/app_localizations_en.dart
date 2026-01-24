@@ -683,4 +683,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continueOffline => 'Continue Offline';
+
+  @override
+  String get dailyChallenges => 'Daily Challenges';
+
+  @override
+  String get completed => 'completed';
+
+  @override
+  String challengeScore(int target) {
+    return 'Score $target points';
+  }
+
+  @override
+  String challengeLevel(int target) {
+    return 'Reach level $target';
+  }
+
+  @override
+  String get challengePlayGame => 'Play any game';
+
+  @override
+  String get anyGame => 'Any Game';
+
+  @override
+  String get challenges => 'Challenges';
 }

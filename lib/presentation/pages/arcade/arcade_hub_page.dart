@@ -77,7 +77,7 @@ class ArcadeHubPage extends ConsumerWidget {
                     childAspectRatio: 0.85,
                     children: [
                       _ArcadeGameCard(
-                        emoji: '🔗',
+                        imagePath: 'assets/images/arcade/word_chain.png',
                         title: l10n.gameWordChain,
                         description: l10n.gameWordChainDesc,
                         accentColor: Colors.orange,
@@ -87,7 +87,7 @@ class ArcadeHubPage extends ConsumerWidget {
                         onTap: () => context.push('/arcade/word-chain'),
                       ),
                       _ArcadeGameCard(
-                        emoji: '🔤',
+                        imagePath: 'assets/images/arcade/anagram.png',
                         title: l10n.gameAnagram,
                         description: l10n.gameAnagramDesc,
                         accentColor: Colors.teal,
@@ -95,7 +95,7 @@ class ArcadeHubPage extends ConsumerWidget {
                         onTap: () => context.push('/arcade/anagram'),
                       ),
                       _ArcadeGameCard(
-                        emoji: '🏗️',
+                        imagePath: 'assets/images/arcade/word_builder.png',
                         title: l10n.gameWordBuilder,
                         description: l10n.gameWordBuilderDesc,
                         accentColor: Colors.indigo,
@@ -104,7 +104,7 @@ class ArcadeHubPage extends ConsumerWidget {
                         onTap: () => context.push('/arcade/word-builder'),
                       ),
                       _ArcadeGameCard(
-                        emoji: '😀',
+                        imagePath: 'assets/images/arcade/emoji_puzzle.png',
                         title: l10n.gameEmojiPuzzle,
                         description: l10n.gameEmojiPuzzleDesc,
                         accentColor: Colors.pink,
@@ -113,7 +113,7 @@ class ArcadeHubPage extends ConsumerWidget {
                         onTap: () => context.push('/arcade/emoji-puzzle'),
                       ),
                       _ArcadeGameCard(
-                        emoji: '🎯',
+                        imagePath: 'assets/images/arcade/odd_one_out.png',
                         title: l10n.gameOddOneOut,
                         description: l10n.gameOddOneOutDesc,
                         accentColor: Colors.deepPurple,
@@ -134,7 +134,7 @@ class ArcadeHubPage extends ConsumerWidget {
 }
 
 class _ArcadeGameCard extends StatelessWidget {
-  final String emoji;
+  final String imagePath;
   final String title;
   final String description;
   final Color accentColor;
@@ -143,7 +143,7 @@ class _ArcadeGameCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const _ArcadeGameCard({
-    required this.emoji,
+    required this.imagePath,
     required this.title,
     required this.description,
     required this.accentColor,
@@ -176,15 +176,17 @@ class _ArcadeGameCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Background emoji decoration
+            // Background image decoration
             Positioned(
               right: -10,
               bottom: -10,
-              child: Text(
-                emoji,
-                style: TextStyle(
-                  fontSize: 100,
-                  color: Colors.white.withValues(alpha: 0.05),
+              child: Opacity(
+                opacity: 0.1,
+                child: Image.asset(
+                  imagePath,
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -233,13 +235,13 @@ class _ArcadeGameCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Spacer(),
-                  // Central Emoji
+                  // Central Image
                   Center(
                     child: Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: 0.2),
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withValues(alpha: 0.1),
@@ -248,7 +250,15 @@ class _ArcadeGameCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Text(emoji, style: const TextStyle(fontSize: 42)),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.asset(
+                          imagePath,
+                          width: 95,
+                          height: 95,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   const Spacer(),

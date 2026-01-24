@@ -5,6 +5,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/pet_constants.dart';
 import '../../providers/pet_provider.dart';
+import '../challenges_modal.dart';
 
 /// Compact pet widget for HomePage - just shows the pet avatar
 /// Tapping opens the detail modal
@@ -406,6 +407,29 @@ class PetDetailModal extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
+
+              // Challenges button
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context); // Close pet modal first
+                    ChallengesModal.show(context);
+                  },
+                  icon: const Icon(
+                    Icons.local_fire_department_rounded,
+                    color: Colors.orange,
+                  ),
+                  label: Text(l10n.challenges),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(
+                      color: Colors.orange.withValues(alpha: 0.5),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
 
               // Close button
               SizedBox(

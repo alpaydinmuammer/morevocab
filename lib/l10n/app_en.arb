@@ -279,5 +279,23 @@
   "playAgain": "Play Again",
   "comingSoonGame": "Coming Soon",
   "offlineWarning": "You don't have an internet connection. Word validation may not work properly. Do you still want to continue?",
-  "continueOffline": "Continue Offline"
+  "continueOffline": "Continue Offline",
+
+  "dailyChallenges": "Daily Challenges",
+  "completed": "completed",
+  "challengeScore": "Score {target} points",
+  "@challengeScore": {
+    "placeholders": {
+      "target": {"type": "int"}
+    }
+  },
+  "challengeLevel": "Reach level {target}",
+  "@challengeLevel": {
+    "placeholders": {
+      "target": {"type": "int"}
+    }
+  },
+  "challengePlayGame": "Play any game",
+  "anyGame": "Any Game",
+  "challenges": "Challenges"
 }

@@ -139,4 +139,26 @@ extension WordDeckExtension on WordDeck {
         return Colors.blueGrey;
     }
   }
+
+  /// Path to the deck's logo image
+  String? get imagePath {
+    switch (this) {
+      case WordDeck.examStrategies:
+        return 'assets/images/decks/exam_strategies.png';
+      case WordDeck.mixed:
+        return 'assets/images/decks/mixed.png';
+      case WordDeck.ydsYdt:
+        return 'assets/images/decks/yds_ydt.png';
+      case WordDeck.beginner:
+        return 'assets/images/decks/beginner.png';
+      case WordDeck.survival:
+        return 'assets/images/decks/survival.png';
+      case WordDeck.phrasalVerbs:
+        return 'assets/images/decks/phrasal_verbs.png';
+      case WordDeck.idioms:
+        return 'assets/images/decks/idioms.png';
+      case WordDeck.custom:
+        return null; // No image for custom decks
+    }
+  }
 }

@@ -77,9 +77,11 @@ class DeckWordListModal extends ConsumerWidget {
                   padding: const EdgeInsets.fromLTRB(24, 40, 24, 20),
                   child: Row(
                     children: [
-                      // Deck Icon
+                      // Deck Logo
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        width: 64,
+                        height: 64,
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: deck.color.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(20),
@@ -94,7 +96,9 @@ class DeckWordListModal extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        child: Icon(deck.icon, color: deck.color, size: 32),
+                        child: deck.imagePath != null
+                            ? Image.asset(deck.imagePath!, fit: BoxFit.contain)
+                            : Icon(deck.icon, color: deck.color, size: 32),
                       ),
                       const SizedBox(width: 20),
                       // Title & Subtitle
@@ -139,12 +143,15 @@ class DeckWordListModal extends ConsumerWidget {
             // List Content
             Expanded(
               child: FutureBuilder<List<WordCard>>(
-                future: ref.read(wordRepositoryProvider).getWordsByDeck(deck).then(
-                  (result) => result.when(
-                    success: (words) => words,
-                    failure: (error) => throw Exception(error),
-                  ),
-                ),
+                future: ref
+                    .read(wordRepositoryProvider)
+                    .getWordsByDeck(deck)
+                    .then(
+                      (result) => result.when(
+                        success: (words) => words,
+                        failure: (error) => throw Exception(error),
+                      ),
+                    ),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());

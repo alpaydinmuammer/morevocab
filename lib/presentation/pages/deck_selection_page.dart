@@ -48,7 +48,8 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: theme.scaffoldBackgroundColor,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
@@ -62,57 +63,61 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
         ),
         centerTitle: true,
       ),
-      extendBodyBehindAppBar: true,
       body: PremiumBackground(
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                Text(
-                  AppLocalizations.of(context)!.whichDeckIntro,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 36,
+                  vertical: 20,
                 ),
-                const SizedBox(height: 24),
-                Expanded(
-                  child: GridView.builder(
-                    clipBehavior: Clip.none,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 16,
-                          crossAxisSpacing: 16,
-                          childAspectRatio:
-                              0.85, // Taller cards for better info
+                sliver: SliverToBoxAdapter(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 8),
+                      Text(
+                        AppLocalizations.of(context)!.whichDeckIntro,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
-                    itemCount: totalItems,
-                    itemBuilder: (context, index) {
-                      // Standard Decks
-                      if (index < standardDecks.length) {
-                        final deck = standardDecks[index];
-                        return DeckCard(
-                          deck: deck,
-                          showProgress: false,
-                          showDescription: true,
-                          showWordCount: true,
-                          wordCount: _deckCounts[deck] ?? 0,
-                          onTap: () {
-                            context.push('/swipe', extra: deck);
-                          },
-                        );
-                      }
-
-                      // Create New Deck Button (Coming Soon)
-                      return _buildCreateDeckCard(theme);
-                    },
+                      ),
+                      const SizedBox(height: 24),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(36, 0, 36, 20),
+                sliver: SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 0.85,
+                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    if (index < standardDecks.length) {
+                      final deck = standardDecks[index];
+                      return DeckCard(
+                        deck: deck,
+                        showProgress: false,
+                        showDescription: true,
+                        showWordCount: true,
+                        wordCount: _deckCounts[deck] ?? 0,
+                        onTap: () {
+                          context.push('/swipe', extra: deck);
+                        },
+                      );
+                    }
+                    return _buildCreateDeckCard(theme);
+                  }, childCount: totalItems),
+                ),
+              ),
+            ],
           ),
         ),
       ),

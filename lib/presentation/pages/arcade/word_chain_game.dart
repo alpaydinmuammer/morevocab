@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/services/dictionary_service.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
+import '../../providers/challenge_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
 import 'widgets/game_over_screen.dart';
@@ -164,6 +165,11 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
     ref
         .read(arcadeHighScoresProvider.notifier)
         .updateScore(ArcadeGameType.wordChain, _score);
+
+    // Update challenge progress
+    ref
+        .read(challengesProvider.notifier)
+        .checkProgress(ArcadeGameType.wordChain, newScore: _score);
 
     Navigator.push(
       context,
