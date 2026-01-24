@@ -163,5 +163,192 @@
         "exampleSentence": "The teacher emphasized the importance of practice. / I want to stress that safety comes first. / The report highlights the main findings.",
         "difficulty": 3,
         "deck": "examStrategies"
+    },
+    {
+        "id": 6016,
+        "word": "Despite / In spite of / Although / Even though / Though",
+        "meanings": {
+            "tr": "Hepsi \"-e rağmen / olmasına rağmen\" anlamına gelir (Zıtlık bildiren bağlaçlar)",
+            "en": "All mean \"regardless of / even if\" (Contrast conjunctions)"
+        },
+        "exampleSentence": "Despite the rain, we went out. / Although he is rich, he is not happy. / In spite of his efforts, he failed.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6017,
+        "word": "Therefore / Thus / Hence / Consequently / As a result",
+        "meanings": {
+            "tr": "Hepsi \"bu yüzden / sonuç olarak\" anlamına gelir (Sonuç bildiren zarflar)",
+            "en": "All mean \"for that reason / as a consequence\" (Result transitions)"
+        },
+        "exampleSentence": "It was raining; therefore, we stayed home. / She didn't study; consequently, she failed. / Demand increased; thus, prices went up.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6018,
+        "word": "Moreover / Furthermore / In addition / Besides / What's more",
+        "meanings": {
+            "tr": "Hepsi \"ayrıca / buna ek olarak / üstelik\" anlamına gelir (Ekleme)",
+            "en": "All mean \"also / additionally\" (Addition transitions)"
+        },
+        "exampleSentence": "The car is too expensive; moreover, it uses too much gas. / He is a talented actor; furthermore, he sings well. / In addition to English, she speaks French.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6019,
+        "word": "Due to / Owing to / Because of / On account of / Thanks to",
+        "meanings": {
+            "tr": "Hepsi \"-den dolayı / yüzünden / sayesinde\" anlamına gelir (Sebep)",
+            "en": "All mean \"as a result of / caused by\" (Reason prepositions)"
+        },
+        "exampleSentence": "The match was cancelled due to rain. / She succeeded thanks to hard work. / We were late because of traffic.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6020,
+        "word": "Accuse (of) / Charge (with) / Blame (for) / Criticize (for)",
+        "meanings": {
+            "tr": "Suçlama ve eleştirme fiilleri farklı edatlarla kullanılır: of, with, for",
+            "en": "Verbs of accusation use different prepositions: of, with, for"
+        },
+        "exampleSentence": "They accused him OF theft. / He was charged WITH murder. / Don't blame me FOR your mistakes.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6021,
+        "word": "Succeed in / Manage to / Achieve / Accomplish",
+        "meanings": {
+            "tr": "Hepsi \"başarmak\" anlamına gelir ama gramerleri farklıdır (in doing / to do)",
+            "en": "All mean \"to succeed\" but have different grammar (in doing / to do)"
+        },
+        "exampleSentence": "She succeeded IN solving the problem. / He managed TO finish on time. / They achieved their goals.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6022,
+        "word": "Focus on / Concentrate on / Center on / Pay attention to",
+        "meanings": {
+            "tr": "Hepsi \"odaklanmak / dikkat etmek\" anlamına gelir ve \"on/to\" alır",
+            "en": "All mean \"to give attention to\" and take \"on/to\""
+        },
+        "exampleSentence": "Please focus ON you work. / I can't concentrate ON reading. / Pay attention TO the warnings.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6023,
+        "word": "However / On the other hand / Conversely / Whereas / While",
+        "meanings": {
+            "tr": "Zıtlık bildiren bağlaçlar; cümle başı ve ortasında kullanılır",
+            "en": "Contrast conjunctions; used at the beginning or middle of sentences"
+        },
+        "exampleSentence": "The team played well; however, they lost. / Some people love hot weather, whereas others prefer the cold. / While I understand your point, I still disagree.",
+        "difficulty": 4,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6024,
+        "word": "In order TO / So as TO & So THAT",
+        "meanings": {
+            "tr": "Amaç bildirir; to'dan sonra fiilin yalın hali, that'den sonra cümle gelir",
+            "en": "Expresses purpose; 'to' is followed by V1, 'that' by a full sentence"
+        },
+        "exampleSentence": "He studied hard IN ORDER TO pass the exam. / I left early SO THAT I could catch the train. / They moved SO AS TO be closer to work.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6025,
+        "word": "Provided that / As long as / Unless / In case",
+        "meanings": {
+            "tr": "Koşul ve önlem yapıları; Unless = if not (medikçe/madıkça)",
+            "en": "Condition and precaution structures; Unless means 'if not'"
+        },
+        "exampleSentence": "You can stay here AS LONG AS you are quiet. / UNLESS it rains, we will have a picnic. / Take an umbrella IN CASE it rains.",
+        "difficulty": 4,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6026,
+        "word": "Relevant TO / Related TO / Associated WITH / Linked TO",
+        "meanings": {
+            "tr": "Hepsi \"ilişkili / ilgili\" anlamına gelir; kullanılan edatlara dikkat!",
+            "en": "All mean 'related to'; pay attention to the prepositions used!"
+        },
+        "exampleSentence": "The data is RELEVANT TO our research. / Heart disease is often ASSOCIATED WITH smoking. / These events are closely LINKED TO each other.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6027,
+        "word": "Abstain FROM / Refrain FROM / Avoid",
+        "meanings": {
+            "tr": "Hepsi \"kaçınmak / uzak durmak\" anlamına gelir; Abstain/Refrain \"from\" alır",
+            "en": "All mean 'to keep away from'; Abstain/Refrain take the preposition 'from'"
+        },
+        "exampleSentence": "You should ABSTAIN FROM drinking alcohol. / Please REFRAIN FROM smoking in this area. / He tries to AVOID eye contact.",
+        "difficulty": 4,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6028,
+        "word": "Enhance / Ameliorate / Improve / Boost / Advance",
+        "meanings": {
+            "tr": "Hepsi \"iyileştirmek / geliştirmek\" anlamına gelir (Olumlu gelişim)",
+            "en": "All mean 'to make something better' (Positive development)"
+        },
+        "exampleSentence": "This exercise will ENHANCE your skills. / The medicine helped AMELIORATE the pain. / We need new ideas to BOOST sales.",
+        "difficulty": 4,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6029,
+        "word": "Aggravate / Deteriorate / Undermine / Weaken / Worsen",
+        "meanings": {
+            "tr": "Hepsi \"kötüleştirmek / zayıflatma\" anlamına gelir (Olumsuz etki)",
+            "en": "All mean 'to make something worse' (Negative impact)"
+        },
+        "exampleSentence": "Stress can AGGRAVATE your health issues. / The weather is expected to DETERIORATE tomorrow. / These rumors UNDERMINE his authority.",
+        "difficulty": 4,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6030,
+        "word": "Comply WITH / Conform TO / Abide BY / Adhere TO",
+        "meanings": {
+            "tr": "Hepsi \"yasalara / kurallara uymak\" demektir; edatlar hayat kurtarır!",
+            "en": "All mean 'to follow rules/laws'; prepositions are life savers!"
+        },
+        "exampleSentence": "All visitors must COMPLY WITH the rules. / Students must CONFORM TO the school policy. / You must ABIDE BY the court's decision.",
+        "difficulty": 5,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6031,
+        "word": "Search FOR / Seek / Look FOR / Pursue",
+        "meanings": {
+            "tr": "Hepsi \"aramak / peşinden koşmak\" anlamına gelir; Seek edat almaz!",
+            "en": "All mean 'to search/look for'; Seek does not take a preposition!"
+        },
+        "exampleSentence": "Scientists are SEARCHING FOR a cure. / They decided to SEEK professional advice. / She is PURSUING a career in medicine.",
+        "difficulty": 3,
+        "deck": "examStrategies"
+    },
+    {
+        "id": 6032,
+        "word": "Lack OF / Devoid OF / Deprived OF / Short OF",
+        "meanings": {
+            "tr": "Hepsi \"-den yoksun / eksik olma\" anlamına gelir; hepsi \"of\" alır",
+            "en": "All mean 'to be without something'; they all take the preposition 'of'"
+        },
+        "exampleSentence": "His speech showed a LACK OF confidence. / The region is DEVOID OF natural resources. / They were DEPRIVED OF their basic rights.",
+        "difficulty": 4,
+        "deck": "examStrategies"
     }
 ]

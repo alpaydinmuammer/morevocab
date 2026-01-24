@@ -31,6 +31,7 @@ class AppTheme {
         surface: lightSurface,
         onSurface: lightOnSurface,
       ),
+      extensions: [AppColors.light],
       scaffoldBackgroundColor: lightBackground,
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
@@ -88,6 +89,7 @@ class AppTheme {
         surface: darkSurface,
         onSurface: darkOnSurface,
       ),
+      extensions: [AppColors.dark],
       scaffoldBackgroundColor: darkBackground,
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
@@ -214,4 +216,71 @@ class AppTheme {
       ),
     );
   }
+}
+
+@immutable
+class AppColors extends ThemeExtension<AppColors> {
+  final List<Color> arcadeGradient;
+  final List<Color> settingsGradient;
+  final Color arcadeShadow;
+  final Color settingsShadow;
+
+  const AppColors({
+    required this.arcadeGradient,
+    required this.settingsGradient,
+    required this.arcadeShadow,
+    required this.settingsShadow,
+  });
+
+  @override
+  AppColors copyWith({
+    List<Color>? arcadeGradient,
+    List<Color>? settingsGradient,
+    Color? arcadeShadow,
+    Color? settingsShadow,
+  }) {
+    return AppColors(
+      arcadeGradient: arcadeGradient ?? this.arcadeGradient,
+      settingsGradient: settingsGradient ?? this.settingsGradient,
+      arcadeShadow: arcadeShadow ?? this.arcadeShadow,
+      settingsShadow: settingsShadow ?? this.settingsShadow,
+    );
+  }
+
+  @override
+  AppColors lerp(ThemeExtension<AppColors>? other, double t) {
+    if (other is! AppColors) {
+      return this;
+    }
+    return AppColors(
+      arcadeGradient: [
+        Color.lerp(arcadeGradient[0], other.arcadeGradient[0], t)!,
+        Color.lerp(arcadeGradient[1], other.arcadeGradient[1], t)!,
+      ],
+      settingsGradient: [
+        Color.lerp(settingsGradient[0], other.settingsGradient[0], t)!,
+        Color.lerp(settingsGradient[1], other.settingsGradient[1], t)!,
+      ],
+      arcadeShadow: Color.lerp(arcadeShadow, other.arcadeShadow, t)!,
+      settingsShadow: Color.lerp(settingsShadow, other.settingsShadow, t)!,
+    );
+  }
+
+  // Predefined palettes
+  static final light = AppColors(
+    arcadeGradient: [Colors.orange.shade800, Colors.orange.shade400],
+    settingsGradient: [Colors.blueGrey.shade700, Colors.blueGrey.shade400],
+    arcadeShadow: Colors.orange.withValues(alpha: 0.3),
+    settingsShadow: Colors.blueGrey.withValues(alpha: 0.3),
+  );
+
+  static final dark = AppColors(
+    arcadeGradient: [Colors.orange.shade900, Colors.orange.shade500],
+    settingsGradient: [
+      Colors.blueGrey.shade800,
+      Colors.blueGrey.shade500,
+    ], // Slightly darker for dark mode
+    arcadeShadow: Colors.orange.withValues(alpha: 0.2),
+    settingsShadow: Colors.blueGrey.withValues(alpha: 0.2),
+  );
 }

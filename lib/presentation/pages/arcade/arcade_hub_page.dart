@@ -99,9 +99,8 @@ class ArcadeHubPage extends ConsumerWidget {
                         title: l10n.gameWordBuilder,
                         description: l10n.gameWordBuilderDesc,
                         accentColor: Colors.indigo,
-                        highScore: highScores.getScore(
-                          ArcadeGameType.wordBuilder,
-                        ),
+                        highScore: 0,
+                        level: highScores.getLevel(ArcadeGameType.wordBuilder),
                         onTap: () => context.push('/arcade/word-builder'),
                       ),
                       _ArcadeGameCard(
@@ -109,9 +108,8 @@ class ArcadeHubPage extends ConsumerWidget {
                         title: l10n.gameEmojiPuzzle,
                         description: l10n.gameEmojiPuzzleDesc,
                         accentColor: Colors.pink,
-                        highScore: highScores.getScore(
-                          ArcadeGameType.emojiPuzzle,
-                        ),
+                        highScore: 0,
+                        level: highScores.getLevel(ArcadeGameType.emojiPuzzle),
                         onTap: () => context.push('/arcade/emoji-puzzle'),
                       ),
                       _ArcadeGameCard(
@@ -119,9 +117,8 @@ class ArcadeHubPage extends ConsumerWidget {
                         title: l10n.gameOddOneOut,
                         description: l10n.gameOddOneOutDesc,
                         accentColor: Colors.deepPurple,
-                        highScore: highScores.getScore(
-                          ArcadeGameType.oddOneOut,
-                        ),
+                        highScore: 0,
+                        level: highScores.getLevel(ArcadeGameType.oddOneOut),
                         onTap: () => context.push('/arcade/odd-one-out'),
                       ),
                     ],
@@ -142,6 +139,7 @@ class _ArcadeGameCard extends StatelessWidget {
   final String description;
   final Color accentColor;
   final int highScore;
+  final int? level;
   final VoidCallback? onTap;
 
   const _ArcadeGameCard({
@@ -150,6 +148,7 @@ class _ArcadeGameCard extends StatelessWidget {
     required this.description,
     required this.accentColor,
     required this.highScore,
+    this.level,
     this.onTap,
   });
 
@@ -185,13 +184,13 @@ class _ArcadeGameCard extends StatelessWidget {
                 emoji,
                 style: TextStyle(
                   fontSize: 100,
-                  color: Colors.white.withValues(alpha: 0.1),
+                  color: Colors.white.withValues(alpha: 0.05),
                 ),
               ),
             ),
 
             // High Score Badge (Top Right)
-            if (highScore > 0)
+            if (highScore > 0 || (level != null && level! > 0))
               Positioned(
                 top: 12,
                 right: 12,
@@ -207,14 +206,16 @@ class _ArcadeGameCard extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
-                        Icons.emoji_events_rounded,
+                      Icon(
+                        level != null
+                            ? Icons.flag_rounded
+                            : Icons.emoji_events_rounded,
                         color: Colors.white,
                         size: 14,
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        '$highScore',
+                        level != null ? 'Lvl ${level! + 1}' : '$highScore',
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

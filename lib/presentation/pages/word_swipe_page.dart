@@ -10,6 +10,7 @@ import '../widgets/word_card_widget.dart';
 import '../widgets/swipe_background_feedback.dart';
 import '../widgets/premium_background.dart';
 import '../widgets/swipe_session_complete.dart';
+import '../widgets/hand_drawn_icon.dart';
 import '../../l10n/app_localizations.dart';
 
 class WordSwipePage extends ConsumerStatefulWidget {
@@ -320,48 +321,78 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
     VoidCallback onPressed,
   ) {
     final theme = Theme.of(context);
+    final isStrategyDeck = widget.deck == WordDeck.examStrategies;
 
     return Column(
       children: [
         AnimatedPressable(
           onTap: onPressed,
           child: Container(
-            width: 72,
-            height: 72,
+            width: isStrategyDeck ? 60 : 72,
+            height: isStrategyDeck ? 60 : 72,
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: theme.brightness == Brightness.dark
-                  ? theme.colorScheme.surfaceContainerLow.withValues(alpha: 0.9)
-                  : theme.colorScheme.surface.withValues(alpha: 0.8),
+              shape: isStrategyDeck ? BoxShape.rectangle : BoxShape.circle,
+              borderRadius: isStrategyDeck ? BorderRadius.circular(12) : null,
+              color: isStrategyDeck
+                  ? const Color(0xFFFDFCF0) // Paper color
+                  : (theme.brightness == Brightness.dark
+                        ? theme.colorScheme.surfaceContainerLow.withValues(
+                            alpha: 0.9,
+                          )
+                        : theme.colorScheme.surface.withValues(alpha: 0.8)),
               border: Border.all(
-                color: color.withValues(
-                  alpha: theme.brightness == Brightness.dark ? 0.3 : 0.15,
-                ),
-                width: 2,
+                color: isStrategyDeck
+                    ? const Color(0xFF2C3E50).withValues(
+                        alpha: 0.15,
+                      ) // Subtle ink border
+                    : color.withValues(
+                        alpha: theme.brightness == Brightness.dark ? 0.3 : 0.15,
+                      ),
+                width: isStrategyDeck ? 1.0 : 2,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: color.withValues(
-                    alpha: theme.brightness == Brightness.dark ? 0.2 : 0.1,
-                  ),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                ),
-                BoxShadow(
-                  color: theme.colorScheme.shadow.withValues(alpha: 0.05),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              boxShadow: isStrategyDeck
+                  ? [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.08),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : [
+                      BoxShadow(
+                        color: color.withValues(
+                          alpha: theme.brightness == Brightness.dark
+                              ? 0.2
+                              : 0.1,
+                        ),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10),
+                      ),
+                      BoxShadow(
+                        color: theme.colorScheme.shadow.withValues(alpha: 0.05),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
             ),
-            child: Center(child: Icon(icon, color: color, size: 32)),
+            child: Center(
+              child: isStrategyDeck
+                  ? HandDrawnIcon(
+                      isCheck: (icon != Icons.arrow_back_rounded),
+                      color: color,
+                      size: 32,
+                    )
+                  : Icon(icon, color: color, size: 32),
+            ),
           ),
         ),
         const SizedBox(height: 10),
         Text(
           label,
           style: theme.textTheme.labelMedium?.copyWith(
-            color: color.withValues(alpha: 0.8),
+            color: isStrategyDeck
+                ? const Color(0xFF2C3E50) // Ink color
+                : color.withValues(alpha: 0.8),
             fontWeight: FontWeight.w900,
             letterSpacing: 0.5,
           ),

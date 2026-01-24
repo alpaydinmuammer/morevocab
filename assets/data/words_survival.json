@@ -358,5 +358,342 @@
         "localAsset": "assets/images/words/survival/word_metro.webp",
         "difficulty": 1,
         "deck": "survival"
+    },
+    {
+        "id": 3031,
+        "word": "Checked Baggage",
+        "meanings": {
+            "tr": "Kargo bagajı",
+            "en": "Luggages stored in the plane's hold"
+        },
+        "exampleSentence": "Is your checked baggage overweight?",
+        "localAsset": "assets/images/words/survival/word_checked_baggage.png",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3032,
+        "word": "Carry-on Baggage",
+        "meanings": {
+            "tr": "Kabin bagajı, el bagajı",
+            "en": "Small bag you take inside the plane"
+        },
+        "exampleSentence": "Liquids are restricted in carry-on baggage.",
+        "localAsset": "assets/images/words/survival/word_carryon_baggage.png",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3033,
+        "word": "Boarding Pass",
+        "meanings": {
+            "tr": "Biniş kartı",
+            "en": "Document to get on the plane"
+        },
+        "exampleSentence": "Please show your boarding pass at the gate.",
+        "localAsset": "assets/images/words/survival/word_boarding_pass.png",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3034,
+        "word": "Gate",
+        "meanings": {
+            "tr": "Kapı (Havalimanı)",
+            "en": "The area where you board the plane"
+        },
+        "exampleSentence": "Our flight leaves from Gate B12.",
+        "localAsset": "assets/images/words/survival/word_gate.png",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3035,
+        "word": "Flight Attendant",
+        "meanings": {
+            "tr": "Kabin memuru, hostes",
+            "en": "Crew member on an airplane"
+        },
+        "exampleSentence": "The flight attendant served drinks.",
+        "localAsset": "assets/images/words/survival/word_flight_attendant.png",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3036,
+        "word": "Immigration",
+        "meanings": {
+            "tr": "Pasaport kontrolü, göçmenlik",
+            "en": "Where they check your travel documents"
+        },
+        "exampleSentence": "How long is the line at immigration?",
+        "localAsset": "assets/images/words/survival/word_immigration.png",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3037,
+        "word": "Customs",
+        "meanings": {
+            "tr": "Gümrük",
+            "en": "Where goods are checked at the border"
+        },
+        "exampleSentence": "Do you have anything to declare at customs?",
+        "localAsset": "assets/images/words/survival/word_customs.png",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3038,
+        "word": "Round Trip",
+        "meanings": {
+            "tr": "Gidiş-dönüş",
+            "en": "A journey to a place and back again"
+        },
+        "exampleSentence": "I'd like a round trip ticket to Paris.",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3039,
+        "word": "One Way",
+        "meanings": {
+            "tr": "Tek yön",
+            "en": "Travel in only one direction"
+        },
+        "exampleSentence": "Is it cheaper to buy a one way ticket?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3040,
+        "word": "Transit",
+        "meanings": {
+            "tr": "Aktarma",
+            "en": "Changing from one flight to another"
+        },
+        "exampleSentence": "I have a three-hour transit in Dubai.",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3041,
+        "word": "Reception",
+        "meanings": {
+            "tr": "Resepsiyon",
+            "en": "The front desk of a hotel"
+        },
+        "exampleSentence": "Please leave your key at the reception.",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3042,
+        "word": "Check-in",
+        "meanings": {
+            "tr": "Giriş yapma (Otel/Uçak)",
+            "en": "Registering at a hotel or airport"
+        },
+        "exampleSentence": "What time is check-in?",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3043,
+        "word": "Check-out",
+        "meanings": {
+            "tr": "Çıkış yapma",
+            "en": "Leaving and paying at a hotel"
+        },
+        "exampleSentence": "We need to check-out before noon.",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3044,
+        "word": "Room Service",
+        "meanings": {
+            "tr": "Oda servisi",
+            "en": "Food and drink delivered to your room"
+        },
+        "exampleSentence": "I'd like to order breakfast through room service.",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3045,
+        "word": "Key Card",
+        "meanings": {
+            "tr": "Anahtar kartı",
+            "en": "Electronic card to open hotel rooms"
+        },
+        "exampleSentence": "My key card is not working.",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3046,
+        "word": "Wake-up Call",
+        "meanings": {
+            "tr": "Uyandırma servisi",
+            "en": "A call to wake you up at a certain time"
+        },
+        "exampleSentence": "Can I have a wake-up call at 7 AM?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3047,
+        "word": "Sightseeing",
+        "meanings": {
+            "tr": "Şehir turu, turistik gezi",
+            "en": "Visiting interesting places while traveling"
+        },
+        "exampleSentence": "We went sightseeing in Istanbul.",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3048,
+        "word": "Tour Guide",
+        "meanings": {
+            "tr": "Tur rehberi",
+            "en": "Person who shows people around places"
+        },
+        "exampleSentence": "The tour guide was very knowledgeable.",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3049,
+        "word": "Entrance Fee",
+        "meanings": {
+            "tr": "Giriş ücreti",
+            "en": "Money paid to enter a place"
+        },
+        "exampleSentence": "Is there an entrance fee for the museum?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3050,
+        "word": "Discount",
+        "meanings": {
+            "tr": "İndirim",
+            "en": "Reduction in price"
+        },
+        "exampleSentence": "Do you offer a student discount?",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3051,
+        "word": "Receipt",
+        "meanings": {
+            "tr": "Fiş, makbuz",
+            "en": "Proof of purchase"
+        },
+        "exampleSentence": "Can I have a receipt, please?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3052,
+        "word": "Fitting Room",
+        "meanings": {
+            "tr": "Deneme kabini",
+            "en": "Area in a shop for trying on clothes"
+        },
+        "exampleSentence": "Where are the fitting rooms?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3053,
+        "word": "Allergy",
+        "meanings": {
+            "tr": "Alerji",
+            "en": "Medical sensitivity to something"
+        },
+        "exampleSentence": "I have an allergy to peanuts.",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3054,
+        "word": "Vegetarian",
+        "meanings": {
+            "tr": "Vejetaryen",
+            "en": "Someone who doesn't eat meat"
+        },
+        "exampleSentence": "Are there any vegetarian options?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3055,
+        "word": "Spicy",
+        "meanings": {
+            "tr": "Baharatlı, acı",
+            "en": "Having a strong, hot flavor"
+        },
+        "exampleSentence": "Is this dish very spicy?",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3056,
+        "word": "Tap Water",
+        "meanings": {
+            "tr": "Musluk suyu",
+            "en": "Water from a faucet"
+        },
+        "exampleSentence": "Is the tap water safe to drink?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3057,
+        "word": "Sold Out",
+        "meanings": {
+            "tr": "Tükendi",
+            "en": "Everything has been sold"
+        },
+        "exampleSentence": "The concert tickets are sold out.",
+        "difficulty": 1,
+        "deck": "survival"
+    },
+    {
+        "id": 3058,
+        "word": "Refund",
+        "meanings": {
+            "tr": "Para iadesi",
+            "en": "Money given back to the customer"
+        },
+        "exampleSentence": "Can I get a refund for this?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3059,
+        "word": "First Aid kit",
+        "meanings": {
+            "tr": "İlk yardım çantası",
+            "en": "Bag with basic medical supplies"
+        },
+        "exampleSentence": "Do you have a first aid kit?",
+        "difficulty": 2,
+        "deck": "survival"
+    },
+    {
+        "id": 3060,
+        "word": "Fire Alarm",
+        "meanings": {
+            "tr": "Yangın alarmı",
+            "en": "Device that warns about fire"
+        },
+        "exampleSentence": "Please exit calmly when the fire alarm sounds.",
+        "difficulty": 2,
+        "deck": "survival"
     }
 ]

@@ -4,80 +4,24 @@ import 'package:go_router/go_router.dart';
 import '../providers/word_providers.dart';
 import '../providers/settings_provider.dart';
 import '../providers/pet_provider.dart';
+import '../providers/home_provider.dart';
 import '../widgets/premium_background.dart';
 import '../widgets/deck_stats_carousel.dart';
 import '../widgets/credits_modal.dart';
 import '../widgets/pet/pet_widgets.dart';
 import '../../l10n/app_localizations.dart';
 import '../../core/constants/app_constants.dart';
-import '../../core/constants/time_constants.dart';
+import '../../core/theme/app_theme.dart';
 import '../widgets/streak_badge.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
-  /// Returns time-based greeting based on current hour
-  String _getGreeting(AppLocalizations l10n) {
-    final hour = DateTime.now().hour;
-    if (hour >= TimeConstants.morningStartHour &&
-        hour < TimeConstants.morningEndHour) {
-      return l10n.goodMorning; // 05:00 - 11:59 → Günaydın
-    } else if (hour >= TimeConstants.afternoonStartHour &&
-        hour < TimeConstants.afternoonEndHour) {
-      return l10n.goodAfternoon; // 12:00 - 17:59 → İyi Günler
-    } else if (hour >= TimeConstants.eveningStartHour &&
-        hour < TimeConstants.eveningEndHour) {
-      return l10n.goodEvening; // 18:00 - 21:59 → İyi Akşamlar
-    } else {
-      return l10n.goodNight; // 22:00 - 04:59 → İyi Geceler
-    }
-  }
-
-  /// Returns day-based motivational phrase (with special late night override)
-  String _getMotivationalPhrase(AppLocalizations l10n) {
-    final now = DateTime.now();
-    final hour = now.hour;
-    final weekday = now.weekday;
-
-    // Special message for 02:00-02:59 on Monday, Thursday, Sunday
-    if (hour == TimeConstants.specialMotivationalHour &&
-        (weekday == DateTime.monday ||
-            weekday == DateTime.thursday ||
-            weekday == DateTime.sunday)) {
-      return l10n.motive2am;
-    }
-
-    // Special message for 03:00-04:59 (late night)
-    if (hour >= TimeConstants.lateNightStartHour &&
-        hour < TimeConstants.lateNightEndHour) {
-      return l10n.motiveLateNight;
-    }
-
-    // Day-based phrases
-    switch (weekday) {
-      case DateTime.monday:
-        return l10n.motiveMon;
-      case DateTime.tuesday:
-        return l10n.motiveTue;
-      case DateTime.wednesday:
-        return l10n.motiveWed;
-      case DateTime.thursday:
-        return l10n.motiveThu;
-      case DateTime.friday:
-        return l10n.motiveFri;
-      case DateTime.saturday:
-        return l10n.motiveSat;
-      case DateTime.sunday:
-        return l10n.motiveSun;
-      default:
-        return l10n.letsLearn;
-    }
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final settings = ref.watch(settingsProvider);
+    final homeState = ref.watch(homeProvider);
 
     return Scaffold(
       body: PremiumBackground(
@@ -107,8 +51,8 @@ class HomePage extends ConsumerWidget {
                                     Flexible(
                                       child: Text(
                                         settings.userName.isNotEmpty
-                                            ? '${_getGreeting(AppLocalizations.of(context)!)}, ${settings.userName}'
-                                            : _getGreeting(
+                                            ? '${homeState.getGreeting(AppLocalizations.of(context)!)}, ${settings.userName}'
+                                            : homeState.getGreeting(
                                                 AppLocalizations.of(context)!,
                                               ),
                                         style: theme.textTheme.headlineMedium
@@ -141,7 +85,7 @@ class HomePage extends ConsumerWidget {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                _getMotivationalPhrase(
+                                homeState.getMotivationalPhrase(
                                   AppLocalizations.of(context)!,
                                 ),
                                 style: theme.textTheme.bodyLarge?.copyWith(
@@ -334,13 +278,13 @@ class HomePage extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
-            colors: [Colors.orange.shade800, Colors.orange.shade400],
+            colors: theme.extension<AppColors>()!.arcadeGradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.orange.withValues(alpha: 0.3),
+              color: theme.extension<AppColors>()!.arcadeShadow,
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -466,13 +410,13 @@ class HomePage extends ConsumerWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
-            colors: [Colors.blueGrey.shade700, Colors.blueGrey.shade400],
+            colors: theme.extension<AppColors>()!.settingsGradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.blueGrey.withValues(alpha: 0.3),
+              color: theme.extension<AppColors>()!.settingsShadow,
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),

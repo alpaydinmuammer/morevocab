@@ -10,7 +10,7 @@ class WordRepositoryImpl implements WordRepository {
 
   /// Create repository with optional custom datasource (useful for testing)
   WordRepositoryImpl({WordLocalDatasource? datasource})
-      : _datasource = datasource ?? WordLocalDatasource.instance;
+    : _datasource = datasource ?? WordLocalDatasource.instance;
 
   @override
   Future<Result<void>> init() async {
@@ -161,8 +161,9 @@ class WordRepositoryImpl implements WordRepository {
   Future<Result<WordStats>> getDeckStats(WordDeck? deck) async {
     try {
       if (deck == null || deck == WordDeck.mixed) {
-        final statsResult = await getStats();
-        return statsResult;
+        return Success(
+          _calculateStats(_datasource.getWordsByDeck(WordDeck.mixed)),
+        );
       }
       return Success(_calculateStats(_datasource.getWordsByDeck(deck)));
     } catch (e) {

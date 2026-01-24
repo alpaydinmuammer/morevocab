@@ -7,6 +7,7 @@ import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
 import 'widgets/game_over_screen.dart';
 import 'widgets/arcade_stat_card.dart';
+import 'odd_one_out_questions.dart';
 
 /// Odd One Out Game - Find the word that doesn't belong
 class OddOneOutGame extends ConsumerStatefulWidget {
@@ -18,101 +19,49 @@ class OddOneOutGame extends ConsumerStatefulWidget {
 
 class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
   int _currentIndex = 0;
-  int _score = 0;
+  List<String> _currentWords = [];
+  int _currentOddIndex = 0;
+
   int? _selectedIndex;
   bool _answered = false;
 
   @override
+  @override
   void initState() {
     super.initState();
-    _questions.shuffle();
-    for (var q in _questions) {
-      // Find old oddWord before shuffling words
-      final oddWord = q.words[q.oddIndex];
-      q.words.shuffle();
-      // Update oddIndex after shuffle
-      q.oddIndex = q.words.indexOf(oddWord);
+    // Load saved level
+    final savedLevel = ref
+        .read(arcadeHighScoresProvider)
+        .getLevel(ArcadeGameType.oddOneOut);
+
+    if (savedLevel < _questions.length) {
+      _currentIndex = savedLevel;
+    } else {
+      _currentIndex = 0;
     }
+
+    // Shuffle options for the current question only when needed, not all at once
+    _prepareCurrentQuestion();
   }
 
-  final List<_Question> _questions = [
-    _Question(['Apple', 'Banana', 'Car', 'Orange'], 2, 'Car is not a fruit'),
-    _Question(
-      ['Happy', 'Joyful', 'Sad', 'Cheerful'],
-      2,
-      'Sad is opposite emotion',
-    ),
-    _Question(['Dog', 'Cat', 'Bird', 'Table'], 3, 'Table is not an animal'),
-    _Question(['Red', 'Blue', 'Green', 'Chair'], 3, 'Chair is not a color'),
-    _Question(['Run', 'Walk', 'Jump', 'Book'], 3, 'Book is not an action'),
-    _Question(
-      ['Monday', 'Tuesday', 'March', 'Friday'],
-      2,
-      'March is a month, not a day',
-    ),
-    _Question(
-      ['Piano', 'Guitar', 'Violin', 'Hammer'],
-      3,
-      'Hammer is not an instrument',
-    ),
-    _Question(
-      ['Doctor', 'Teacher', 'Engineer', 'Apple'],
-      3,
-      'Apple is not a profession',
-    ),
-    _Question(
-      ['Whale', 'Shark', 'Dolphin', 'Lion'],
-      3,
-      'Lion lives on land, others in water',
-    ),
-    _Question(
-      ['Cloud', 'Rain', 'Snow', 'Sand'],
-      3,
-      'Sand is part of the ground, others are weather',
-    ),
-    _Question(
-      ['Square', 'Circle', 'Triangle', 'Blue'],
-      3,
-      'Blue is a color, others are shapes',
-    ),
-    _Question(
-      ['Mars', 'Venus', 'Jupiter', 'Moon'],
-      3,
-      'Moon is a satellite, others are planets',
-    ),
-    _Question(
-      ['Milk', 'Juice', 'Water', 'Bread'],
-      3,
-      'Bread is solid food, others are liquids',
-    ),
-    _Question(
-      ['Pencil', 'Pen', 'Crayon', 'Paper'],
-      3,
-      'Paper is for writing on, others are tools for writing',
-    ),
-    _Question(
-      ['Socks', 'Shoes', 'Boots', 'Hat'],
-      3,
-      'Hat is for the head, others are for feet',
-    ),
-    _Question(
-      ['Ear', 'Eye', 'Nose', 'Hand'],
-      3,
-      'Hand is a limb, others are facial sense organs',
-    ),
-    _Question(
-      ['Sun', 'Star', 'Lantern', 'Rock'],
-      3,
-      'Rock does not produce light',
-    ),
-    _Question(
-      ['Bed', 'Sofa', 'Chair', 'Car'],
-      3,
-      'Car is a vehicle, others are furniture',
-    ),
-  ];
+  void _prepareCurrentQuestion() {
+    // Create a mutable copy of words to shuffle functionality
+    // Since OddOneOutQuestion is immutable, we create local variables for current display
+    _currentWords = List.from(_questions[_currentIndex].words);
+    // Find the odd word string based on original index
+    final oddWord =
+        _questions[_currentIndex].words[_questions[_currentIndex].oddIndex];
 
-  _Question get _current => _questions[_currentIndex];
+    // Shuffle the display words
+    _currentWords.shuffle();
+
+    // Find the new index of the odd word
+    _currentOddIndex = _currentWords.indexOf(oddWord);
+  }
+
+  final List<OddOneOutQuestion> _questions = OddOneOutQuestions.questions;
+
+  OddOneOutQuestion get _current => _questions[_currentIndex];
 
   void _selectWord(int index) {
     if (_answered) return;
@@ -120,8 +69,13 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
     setState(() {
       _selectedIndex = index;
       _answered = true;
-      if (index == _current.oddIndex) {
-        _score += 50;
+      if (index == _currentOddIndex) {
+        // Save progress immediately
+        final nextLevel = _currentIndex + 1;
+        ref
+            .read(arcadeHighScoresProvider.notifier)
+            .updateLevel(ArcadeGameType.oddOneOut, nextLevel);
+
         // Record activity for streak
         ref.read(streakProvider.notifier).recordActivity();
       }
@@ -133,6 +87,7 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
           _currentIndex++;
           _selectedIndex = null;
           _answered = false;
+          _prepareCurrentQuestion();
         });
       } else if (mounted) {
         _showComplete();
@@ -141,42 +96,27 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
   }
 
   void _showComplete() {
-    // Save high score
-    final highScores = ref.read(arcadeHighScoresProvider);
-    final previousHighScore = highScores.getScore(ArcadeGameType.oddOneOut);
-    ref
-        .read(arcadeHighScoresProvider.notifier)
-        .updateScore(ArcadeGameType.oddOneOut, _score);
-
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
-          score: _score,
-          highScore: previousHighScore,
+          score: 0,
+          highScore: 0,
+          showScore: false,
           accentColor: Colors.deepPurple,
           extraStats: [
             GameOverStat(
               label: 'Total Questions',
               value: '${_questions.length}',
             ),
-            GameOverStat(label: 'Correct', value: '${_score ~/ 50}'),
           ],
           onPlayAgain: () {
             Navigator.pop(context);
             setState(() {
-              _questions.shuffle();
-              for (var q in _questions) {
-                // Find old oddWord before shuffling words
-                final oddWord = q.words[q.oddIndex];
-                q.words.shuffle();
-                // Update oddIndex after shuffle
-                q.oddIndex = q.words.indexOf(oddWord);
-              }
               _currentIndex = 0;
-              _score = 0;
               _selectedIndex = null;
               _answered = false;
+              _prepareCurrentQuestion();
             });
           },
         ),
@@ -193,128 +133,128 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
       body: PremiumBackground(
         showTypo: false,
         child: SafeArea(
-          child: Column(
+          child: Stack(
             children: [
-              // Header
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceContainerHighest
-                            .withValues(alpha: 0.5),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_rounded),
-                        onPressed: () => context.pop(),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Text(
-                      l10n.gameOddOneOut,
-                      style: theme.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Stats
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 8,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ArcadeStatCard(
-                      label: 'Question',
-                      value: '${_currentIndex + 1}/${_questions.length}',
-                      icon: Icons.help_outline_rounded,
-                      color: Colors.deepPurple,
-                    ),
-                    ArcadeStatCard(
-                      label: l10n.score,
-                      value: '$_score',
-                      icon: Icons.stars_rounded,
-                      color: Colors.orange,
-                    ),
-                  ],
-                ),
-              ),
-
-              const Spacer(),
-
-              // Question
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                  'Which one doesn\'t belong?',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-
-              const SizedBox(height: 32),
-
-              // Word options
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 2,
-                  children: List.generate(
-                    4,
-                    (index) => _buildWordCard(theme, index),
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Explanation (shown after answer)
-              if (_answered)
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: _selectedIndex == _current.oddIndex
-                        ? Colors.green.withValues(alpha: 0.2)
-                        : Colors.red.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        _selectedIndex == _current.oddIndex
-                            ? Icons.check_circle
-                            : Icons.cancel,
-                        color: _selectedIndex == _current.oddIndex
-                            ? Colors.green
-                            : Colors.red,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          _current.explanation,
-                          style: theme.textTheme.bodyMedium,
+              Column(
+                children: [
+                  // Header
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surfaceContainerHighest
+                                .withValues(alpha: 0.5),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back_rounded),
+                            onPressed: () => context.pop(),
+                          ),
                         ),
+                        const SizedBox(width: 16),
+                        Text(
+                          l10n.gameOddOneOut,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Stats
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ArcadeStatCard(
+                          label: 'Level',
+                          value: '${_currentIndex + 1}/${_questions.length}',
+                          icon: Icons.flag_rounded,
+                          color: Colors.deepPurple,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const Spacer(),
+
+                  // Question
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Text(
+                      'Which one doesn\'t belong?',
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w500,
                       ),
-                    ],
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  // Word options
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      childAspectRatio: 2,
+                      children: List.generate(
+                        4,
+                        (index) => _buildWordCard(theme, index),
+                      ),
+                    ),
+                  ),
+
+                  const Spacer(flex: 2),
+                ],
+              ),
+
+              // Explanation (overlay at bottom)
+              if (_answered)
+                Positioned(
+                  bottom: 24,
+                  left: 24,
+                  right: 24,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: _selectedIndex == _currentOddIndex
+                          ? Colors.green.withValues(alpha: 0.2)
+                          : Colors.red.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          _selectedIndex == _currentOddIndex
+                              ? Icons.check_circle
+                              : Icons.cancel,
+                          color: _selectedIndex == _currentOddIndex
+                              ? Colors.green
+                              : Colors.red,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            _current.explanation,
+                            style: theme.textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-
-              const Spacer(),
             ],
           ),
         ),
@@ -323,8 +263,11 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
   }
 
   Widget _buildWordCard(ThemeData theme, int index) {
-    final word = _current.words[index];
-    final isOdd = index == _current.oddIndex;
+    // Ensure we have words to display
+    if (_currentWords.isEmpty) return const SizedBox();
+
+    final word = _currentWords[index];
+    final isOdd = index == _currentOddIndex;
     final isSelected = _selectedIndex == index;
 
     Color bgColor = theme.colorScheme.surface;
@@ -369,11 +312,4 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
       ),
     );
   }
-}
-
-class _Question {
-  final List<String> words;
-  int oddIndex;
-  final String explanation;
-  _Question(this.words, this.oddIndex, this.explanation);
 }

@@ -114,8 +114,9 @@ class WordLocalDatasource {
 
     try {
       final List<dynamic> list = json.decode(customWordsJson);
-      final List<WordCard> customWords =
-          list.map((e) => WordCard.fromJson(e)).toList();
+      final List<WordCard> customWords = list
+          .map((e) => WordCard.fromJson(e))
+          .toList();
 
       // Add custom words to the main list, avoiding duplicates
       for (var word in customWords) {
@@ -278,7 +279,7 @@ class WordLocalDatasource {
   /// Get words by deck/category
   List<WordCard> getWordsByDeck(WordDeck deck) {
     if (deck == WordDeck.mixed) {
-      return List.from(_words);
+      return _words.where((w) => w.deck != WordDeck.examStrategies).toList();
     }
     return _words.where((w) => w.deck == deck).toList();
   }
@@ -286,7 +287,7 @@ class WordLocalDatasource {
   /// Get word count by deck
   int getWordCountByDeck(WordDeck deck) {
     if (deck == WordDeck.mixed) {
-      return _words.length;
+      return _words.where((w) => w.deck != WordDeck.examStrategies).length;
     }
     return _words.where((w) => w.deck == deck).length;
   }
@@ -359,7 +360,11 @@ class WordLocalDatasource {
   /// Words eligible for study session (New + Review + Learning)
   List<WordCard> getWordsForStudy() {
     return _words
-        .where((w) => !w.isKnown || w.isDueForReview || w.needsReview)
+        .where(
+          (w) =>
+              w.deck != WordDeck.examStrategies &&
+              (!w.isKnown || w.isDueForReview || w.needsReview),
+        )
         .toList();
   }
 

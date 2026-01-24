@@ -358,5 +358,185 @@
         "localAsset": "assets/images/words/phrasal_verbs/phrasal_settledown_1768859845600.webp",
         "difficulty": 2,
         "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4031,
+        "word": "Call off",
+        "meanings": {
+            "tr": "İptal etmek",
+            "en": "Cancel"
+        },
+        "exampleSentence": "They had to call off the meeting.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_calloff.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4032,
+        "word": "Look for",
+        "meanings": {
+            "tr": "Aramak",
+            "en": "Search for"
+        },
+        "exampleSentence": "I am looking for my keys.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_lookfor.webp",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4033,
+        "word": "Find out",
+        "meanings": {
+            "tr": "Öğrenmek, keşfetmek",
+            "en": "Discover"
+        },
+        "exampleSentence": "I need to find out the truth.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_findout.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4034,
+        "word": "Count on",
+        "meanings": {
+            "tr": "Güvenmek",
+            "en": "Rely on"
+        },
+        "exampleSentence": "You can always count on me.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_counton.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4035,
+        "word": "Get over",
+        "meanings": {
+            "tr": "Atlatmak, iyileşmek",
+            "en": "Recover from"
+        },
+        "exampleSentence": "It took him a long time to get over the flu.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_getover.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4036,
+        "word": "Run out of",
+        "meanings": {
+            "tr": "Tükenmek, bitmek",
+            "en": "Have none left"
+        },
+        "exampleSentence": "We ran out of milk.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_runoutof.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4037,
+        "word": "Put on",
+        "meanings": {
+            "tr": "Giymek",
+            "en": "Wear"
+        },
+        "exampleSentence": "Put on your coat, it's cold outside.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_puton.webp",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4038,
+        "word": "Take after",
+        "meanings": {
+            "tr": "Benzemek (aileden birine)",
+            "en": "Resemble a parent"
+        },
+        "exampleSentence": "She takes after her mother.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_takeafter.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4039,
+        "word": "Look up",
+        "meanings": {
+            "tr": "Araştırmak, sözlükte bakmak",
+            "en": "Search for information"
+        },
+        "exampleSentence": "If you don't know the word, look it up.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_lookup.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4040,
+        "word": "Break up",
+        "meanings": {
+            "tr": "Ayrılmak (ilişki)",
+            "en": "End a relationship"
+        },
+        "exampleSentence": "They decided to break up.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_breakup.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4041,
+        "word": "Keep up",
+        "meanings": {
+            "tr": "Sürdürmek, ayak uydurmak",
+            "en": "Continue, maintain pace"
+        },
+        "exampleSentence": "Keep up the good work!",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_keepup.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4042,
+        "word": "Turn on",
+        "meanings": {
+            "tr": "Açmak (cihaz)",
+            "en": "Switch on"
+        },
+        "exampleSentence": "Please turn on the light.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_turnon.webp",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4043,
+        "word": "Turn off",
+        "meanings": {
+            "tr": "Kapatmak (cihaz)",
+            "en": "Switch off"
+        },
+        "exampleSentence": "Don't forget to turn off the TV.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_turnoff.webp",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4044,
+        "word": "Go on",
+        "meanings": {
+            "tr": "Devam etmek",
+            "en": "Continue"
+        },
+        "exampleSentence": "Please go on, I'm listening.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_goon.webp",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4045,
+        "word": "Show up",
+        "meanings": {
+            "tr": "Çıkagelmek, varmak",
+            "en": "Arrive, appear"
+        },
+        "exampleSentence": "He didn't show up for the party.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_showup.webp",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
     }
 ]

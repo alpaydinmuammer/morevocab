@@ -55,8 +55,9 @@ class _DeckStatsCarouselState extends ConsumerState<DeckStatsCarousel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 230,
+      height: 215,
       child: PageView.builder(
+        clipBehavior: Clip.none,
         controller: _pageController,
         // Using a very large number for infinite feel
         itemCount: 10000,

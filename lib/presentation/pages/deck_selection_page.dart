@@ -66,7 +66,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
       body: PremiumBackground(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -80,6 +80,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                 const SizedBox(height: 24),
                 Expanded(
                   child: GridView.builder(
+                    clipBehavior: Clip.none,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -167,17 +168,21 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                         color: theme.colorScheme.primary.withValues(alpha: 0.1),
                       ),
                     ),
-                    
+
                     // Content - only icon, no text (text is below lock now)
                     Center(
                       child: Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: theme.colorScheme.primary.withValues(alpha: 0.9),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.9,
+                          ),
                           boxShadow: [
                             BoxShadow(
-                              color: theme.colorScheme.primary.withValues(alpha: 0.4),
+                              color: theme.colorScheme.primary.withValues(
+                                alpha: 0.4,
+                              ),
                               blurRadius: 12,
                               offset: const Offset(0, 4),
                             ),
@@ -190,12 +195,12 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                         ),
                       ),
                     ),
-                    
+
                     // Note: Text moved below lock - removed from blur
                   ],
                 ),
               ),
-              
+
               // Lock overlay (NOT blurred) - positioned higher
               Positioned(
                 top: 40,
@@ -216,7 +221,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                   ),
                 ),
               ),
-              
+
               // "Coming Soon" Badge (below lock)
               Positioned(
                 bottom: 30,
@@ -224,7 +229,10 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                 right: 0,
                 child: Center(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
@@ -264,5 +272,4 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
       ),
     );
   }
-
 }

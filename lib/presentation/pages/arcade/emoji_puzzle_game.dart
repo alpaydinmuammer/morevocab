@@ -19,14 +19,23 @@ class EmojiPuzzleGame extends ConsumerStatefulWidget {
 class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
   final TextEditingController _controller = TextEditingController();
   int _currentIndex = 0;
-  int _score = 0;
 
   @override
   void initState() {
     super.initState();
-    _puzzles.shuffle();
+    // Load saved level
+    final savedLevel = ref
+        .read(arcadeHighScoresProvider)
+        .getLevel(ArcadeGameType.emojiPuzzle);
+
+    if (savedLevel < _puzzles.length) {
+      _currentIndex = savedLevel;
+    } else {
+      _currentIndex = 0;
+    }
   }
 
+  // Fixed order for levels
   final List<_Puzzle> _puzzles = [
     _Puzzle(['🌧️', '🧥', '☔'], 'RAINCOAT'),
     _Puzzle(['🔥', '🚒', '👨‍🚒'], 'FIREFIGHTER'),
@@ -65,7 +74,12 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
 
   void _check() {
     if (_controller.text.trim().toUpperCase() == _current.answer) {
-      setState(() => _score += 100);
+      // Save progress immediately
+      final nextLevel = _currentIndex + 1;
+      ref
+          .read(arcadeHighScoresProvider.notifier)
+          .updateLevel(ArcadeGameType.emojiPuzzle, nextLevel);
+
       // Record activity for streak
       ref.read(streakProvider.notifier).recordActivity();
 
@@ -73,6 +87,7 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
         SnackBar(
           content: Text(AppLocalizations.of(context)!.correct),
           backgroundColor: Colors.green,
+          duration: const Duration(seconds: 1),
         ),
       );
       _next();
@@ -81,6 +96,7 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
         SnackBar(
           content: Text(AppLocalizations.of(context)!.incorrect),
           backgroundColor: Colors.red,
+          duration: const Duration(seconds: 1),
         ),
       );
     }
@@ -98,33 +114,21 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
   }
 
   void _showComplete() {
-    // Save high score
-    final highScores = ref.read(arcadeHighScoresProvider);
-    final previousHighScore = highScores.getScore(ArcadeGameType.emojiPuzzle);
-    ref
-        .read(arcadeHighScoresProvider.notifier)
-        .updateScore(ArcadeGameType.emojiPuzzle, _score);
-
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
-          score: _score,
-          highScore: previousHighScore,
+          score: 0,
+          highScore: 0,
+          showScore: false,
           accentColor: Colors.pink,
           extraStats: [
-            GameOverStat(label: 'Puzzles', value: '${_puzzles.length}'),
-            GameOverStat(
-              label: 'Success',
-              value: '${(_score / (_puzzles.length * 100) * 100).toInt()}%',
-            ),
+            GameOverStat(label: 'Puzzles Solved', value: '${_puzzles.length}'),
           ],
           onPlayAgain: () {
             Navigator.pop(context);
             setState(() {
-              _puzzles.shuffle();
               _currentIndex = 0;
-              _score = 0;
               _controller.clear();
             });
           },
@@ -179,19 +183,13 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
                   vertical: 8,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ArcadeStatCard(
-                      label: 'Puzzle',
+                      label: 'Level',
                       value: '${_currentIndex + 1}/${_puzzles.length}',
-                      icon: Icons.extension_rounded,
+                      icon: Icons.flag_rounded,
                       color: Colors.pink,
-                    ),
-                    ArcadeStatCard(
-                      label: l10n.score,
-                      value: '$_score',
-                      icon: Icons.stars_rounded,
-                      color: Colors.orange,
                     ),
                   ],
                 ),

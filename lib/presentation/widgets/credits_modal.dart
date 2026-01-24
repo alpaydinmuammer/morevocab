@@ -179,7 +179,7 @@ class CreditsModal extends StatelessWidget {
                       icon: Icons.info_outline_rounded,
                       color: Colors.teal,
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 20),
 
                     // Contact Button
                     _buildContactButton(context),
@@ -199,7 +199,7 @@ class CreditsModal extends StatelessWidget {
     return GestureDetector(
       onTap: () => _sendEmail(context),
       child: Container(
-        height: 64,
+        height: 56,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: LinearGradient(
@@ -224,7 +224,7 @@ class CreditsModal extends StatelessWidget {
               bottom: -10,
               child: Icon(
                 Icons.mark_email_unread_rounded,
-                size: 80,
+                size: 70,
                 color: Colors.white.withValues(alpha: 0.1),
               ),
             ),

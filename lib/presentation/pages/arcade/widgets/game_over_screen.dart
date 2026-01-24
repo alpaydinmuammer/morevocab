@@ -11,6 +11,7 @@ class GameOverScreen extends StatelessWidget {
   final VoidCallback onPlayAgain;
   final VoidCallback? onBackToHome;
   final Color accentColor;
+  final bool showScore;
 
   const GameOverScreen({
     super.key,
@@ -21,13 +22,15 @@ class GameOverScreen extends StatelessWidget {
     required this.onPlayAgain,
     this.onBackToHome,
     this.accentColor = Colors.orange,
+    this.showScore = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
-    final isNewHighScore = highScore != null && score >= highScore!;
+    final isNewHighScore =
+        showScore && highScore != null && score >= highScore!;
 
     return Scaffold(
       body: PremiumBackground(
@@ -131,35 +134,36 @@ class GameOverScreen extends StatelessWidget {
                 const Spacer(),
 
                 // Score Display
-                Column(
-                  children: [
-                    Text(
-                      l10n.score.toUpperCase(),
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onSurface.withValues(
-                          alpha: 0.6,
-                        ),
-                        letterSpacing: 4,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0, end: score.toDouble()),
-                      duration: const Duration(seconds: 2),
-                      curve: Curves.easeOutExpo,
-                      builder: (context, value, child) {
-                        return Text(
-                          '${value.toInt()}',
-                          style: theme.textTheme.displayLarge?.copyWith(
-                            fontWeight: FontWeight.w900,
-                            color: theme.colorScheme.onSurface,
-                            fontSize: 80,
+                if (showScore)
+                  Column(
+                    children: [
+                      Text(
+                        l10n.score.toUpperCase(),
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.6,
                           ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                          letterSpacing: 4,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0, end: score.toDouble()),
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.easeOutExpo,
+                        builder: (context, value, child) {
+                          return Text(
+                            '${value.toInt()}',
+                            style: theme.textTheme.displayLarge?.copyWith(
+                              fontWeight: FontWeight.w900,
+                              color: theme.colorScheme.onSurface,
+                              fontSize: 80,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
 
                 const SizedBox(height: 24),
 
