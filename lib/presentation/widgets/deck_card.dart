@@ -52,245 +52,259 @@ class DeckCard extends ConsumerWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: deck.color.withValues(alpha: isFocused ? 0.5 : 0.3),
+                  color: Colors.black.withValues(
+                    alpha: isFocused ? 0.25 : 0.15,
+                  ),
                   blurRadius: isFocused ? 20 : 12,
-                  offset: Offset(0, isFocused ? 10 : 8),
-                  spreadRadius: isFocused ? 2 : 0,
+                  offset: Offset(0, isFocused ? 10 : 6),
+                  spreadRadius: isFocused ? 1 : 0,
                 ),
               ],
             ),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                // Background decoration (Icon for home, Image for deck selection)
-                Positioned(
-                  right: -10,
-                  bottom: -10,
-                  child: showProgress
-                      // Home page: use icon
-                      ? Icon(
-                          deck.icon,
-                          size: 100,
-                          color: Colors.white.withValues(alpha: 0.1),
-                        )
-                      // Deck selection: use image if available
-                      : deck.imagePath != null
-                      ? Opacity(
-                          opacity: 0.08,
-                          child: Image.asset(
-                            deck.imagePath!,
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.contain,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  // Background decoration (Icon for home, Image for deck selection)
+                  Positioned(
+                    right: -10,
+                    bottom: -10,
+                    child: showProgress
+                        // Home page: use icon
+                        ? Icon(
+                            deck.icon,
+                            size: 100,
+                            color: Colors.white.withValues(alpha: 0.1),
+                          )
+                        // Deck selection: use image if available
+                        : deck.imagePath != null
+                        ? Opacity(
+                            opacity: 0.08,
+                            child: Image.asset(
+                              deck.imagePath!,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.contain,
+                            ),
+                          )
+                        : Icon(
+                            deck.icon,
+                            size: 100,
+                            color: Colors.white.withValues(alpha: 0.1),
                           ),
-                        )
-                      : Icon(
-                          deck.icon,
-                          size: 100,
-                          color: Colors.white.withValues(alpha: 0.1),
-                        ),
-                ),
+                  ),
 
-                Padding(
-                  padding: EdgeInsets.all(showProgress ? 16 : 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Different layout based on showProgress
-                      if (showProgress) ...[
-                        // HOME PAGE LAYOUT: Small logo top-left with title
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: deck.imagePath != null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Image.asset(
-                                        deck.imagePath!,
-                                        width: 32,
-                                        height: 32,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : Icon(
-                                      deck.icon,
-                                      color: Colors.white,
-                                      size: 22,
-                                    ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                customTitle ?? deck.getLocalizedName(context),
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                  Padding(
+                    padding: EdgeInsets.all(showProgress ? 16 : 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Different layout based on showProgress
+                        if (showProgress) ...[
+                          // HOME PAGE LAYOUT: Small logo top-left with title
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                                child: deck.imagePath != null
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(6),
+                                        child: Image.asset(
+                                          deck.imagePath!,
+                                          width: 32,
+                                          height: 32,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Icon(
+                                        deck.icon,
+                                        color: Colors.white,
+                                        size: 22,
+                                      ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  customTitle ?? deck.getLocalizedName(context),
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                        ] else ...[
+                          // DECK SELECTION LAYOUT: Centered logo
+                          Expanded(
+                            child: Center(
+                              child: Container(
+                                padding: const EdgeInsets.all(
+                                  7,
+                                ), // Middle ground padding
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  borderRadius: BorderRadius.circular(
+                                    15,
+                                  ), // Middle ground radius
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: deck.imagePath != null
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(11),
+                                        child: Image.asset(
+                                          deck.imagePath!,
+                                          width: 75, // Middle ground
+                                          height: 75, // Middle ground
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Icon(
+                                        deck.icon,
+                                        color: Colors.white,
+                                        size: 52, // Middle ground
+                                      ),
                               ),
                             ),
-                          ],
-                        ),
-                        const Spacer(),
-                      ] else ...[
-                        // DECK SELECTION LAYOUT: Centered logo
-                        Expanded(
-                          child: Center(
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withValues(alpha: 0.2),
-                                borderRadius: BorderRadius.circular(14),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.1),
-                                    blurRadius: 10,
-                                    offset: const Offset(0, 4),
+                          ),
+
+                          // Title (for deck selection)
+                          Text(
+                            customTitle ?? deck.getLocalizedName(context),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+
+                        // Description
+                        if (showDescription) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            deck.getLocalizedDescription(context),
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.9),
+                              fontWeight: FontWeight.w500,
+                              height: 1.1,
+                              fontSize: 10,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+
+                        // Word Count Badge
+                        if (showWordCount && wordCount != null) ...[
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              isStrategy
+                                  ? AppLocalizations.of(
+                                      context,
+                                    )!.strategiesCount(wordCount!)
+                                  : AppLocalizations.of(
+                                      context,
+                                    )!.deckWordCount(wordCount!),
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+
+                        // Stats Content
+                        if (showProgress && statsAsync != null)
+                          statsAsync.when(
+                            data: (stats) {
+                              final progress = stats.totalWords > 0
+                                  ? (stats.knownWords / stats.totalWords)
+                                  : 0.0;
+                              final percentage = (progress * 100).toInt();
+
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '$percentage%',
+                                    style: theme.textTheme.displaySmall
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 42,
+                                          height: 1,
+                                        ),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    '${stats.knownWords} / ${stats.totalWords} ${AppLocalizations.of(context)!.learned}',
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: Colors.white.withValues(
+                                        alpha: 0.9,
+                                      ),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(6),
+                                    child: LinearProgressIndicator(
+                                      value: progress,
+                                      backgroundColor: Colors.white.withValues(
+                                        alpha: 0.2,
+                                      ),
+                                      valueColor: const AlwaysStoppedAnimation(
+                                        Colors.white,
+                                      ),
+                                      minHeight: 8,
+                                    ),
                                   ),
                                 ],
+                              );
+                            },
+                            loading: () => const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
                               ),
-                              child: deck.imagePath != null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        deck.imagePath!,
-                                        width: 65,
-                                        height: 65,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )
-                                  : Icon(
-                                      deck.icon,
-                                      color: Colors.white,
-                                      size: 45,
-                                    ),
                             ),
+                            error: (_, _) => const SizedBox(),
                           ),
-                        ),
-
-                        // Title (for deck selection)
-                        Text(
-                          customTitle ?? deck.getLocalizedName(context),
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
                       ],
-
-                      // Description
-                      if (showDescription) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          deck.getLocalizedDescription(context),
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.9),
-                            fontWeight: FontWeight.w500,
-                            height: 1.1,
-                            fontSize: 10,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-
-                      // Word Count Badge
-                      if (showWordCount && wordCount != null) ...[
-                        const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            isStrategy
-                                ? AppLocalizations.of(
-                                    context,
-                                  )!.strategiesCount(wordCount!)
-                                : AppLocalizations.of(
-                                    context,
-                                  )!.deckWordCount(wordCount!),
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-
-                      // Stats Content
-                      if (showProgress && statsAsync != null)
-                        statsAsync.when(
-                          data: (stats) {
-                            final progress = stats.totalWords > 0
-                                ? (stats.knownWords / stats.totalWords)
-                                : 0.0;
-                            final percentage = (progress * 100).toInt();
-
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '$percentage%',
-                                  style: theme.textTheme.displaySmall?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 42,
-                                    height: 1,
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  '${stats.knownWords} / ${stats.totalWords} ${AppLocalizations.of(context)!.learned}',
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: Colors.white.withValues(alpha: 0.9),
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(6),
-                                  child: LinearProgressIndicator(
-                                    value: progress,
-                                    backgroundColor: Colors.white.withValues(
-                                      alpha: 0.2,
-                                    ),
-                                    valueColor: const AlwaysStoppedAnimation(
-                                      Colors.white,
-                                    ),
-                                    minHeight: 8,
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                          loading: () => const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2,
-                            ),
-                          ),
-                          error: (_, _) => const SizedBox(),
-                        ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 

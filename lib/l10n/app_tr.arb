@@ -300,5 +300,49 @@
   },
   "challengePlayGame": "Herhangi bir oyun oyna",
   "anyGame": "Herhangi Bir Oyun",
-  "challenges": "Meydan Okumalar"
+  "challenges": "Meydan Okumalar",
+
+  "badges": "Rozetler",
+  "badgeUnlocked": "Rozet Açıldı!",
+  "badgeSectionAnagram": "Anagram",
+  "badgeSectionWordChain": "Kelime Zinciri",
+  "badgeSectionOddOneOut": "Farklı Olanı Bul",
+  "badgeSectionEmojiPuzzle": "Emoji Bulmaca",
+  "badgeSectionWordBuilder": "Kelime İnşaatı",
+  "badgeSectionStreak": "Seri",
+  "badgeSectionSpecial": "Özel",
+  "badgeAnagramRookie": "Çırak",
+  "badgeAnagramExpert": "Uzman",
+  "badgeAnagramChampion": "Şampiyon",
+  "badgeChainStarter": "Başlatan",
+  "badgeChainMaster": "Usta",
+  "badgeChainLegend": "Efsane",
+  "badgeObserver": "Gözlemci",
+  "badgeDetective": "Dedektif",
+  "badgeSharpshooter": "Keskin Nişancı",
+  "badgeEmojiSolver": "Çözücü",
+  "badgePuzzleMaster": "Usta",
+  "badgeEmojiLegend": "Efsane",
+  "badgeWordWorker": "İşçi",
+  "badgeWordArchitect": "Mimar",
+  "badgeWordKing": "Kral",
+  "badgeFireSpirit": "Ateş Ruhu",
+  "badgeDedicated": "Kararlı",
+  "badgeLegendary": "Efsanevi",
+  "badgeFirstStep": "İlk Adım",
+  "badgeArcadeFan": "Arcade Fanı",
+  "badgeBrainBoss": "Beyin Patronu",
+
+  "errorLogTitle": "Yanlışlarım Defteri",
+  "errorLogSubtitle": "Bilmediğin kelimeler",
+  "errorLogEmpty": "Henüz hata yok!",
+  "errorLogEmptyHint": "Sola kaydırdığın kelimeler burada görünecek",
+  "errorLogPage": "Sayfa {current}/{total}",
+  "@errorLogPage": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "errorLogCardDesc": "Zorlandığın kelimeleri gözden geçir"
 }

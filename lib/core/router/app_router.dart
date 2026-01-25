@@ -11,6 +11,7 @@ import '../../presentation/pages/word_list_page.dart';
 import '../../presentation/pages/deck_selection_page.dart';
 import '../../presentation/pages/auth_page.dart';
 import '../../presentation/pages/onboarding_page.dart';
+import '../../presentation/pages/error_log_page.dart';
 import '../../presentation/pages/arcade/arcade_hub_page.dart';
 import '../../presentation/pages/arcade/word_chain_game.dart';
 import '../../presentation/pages/arcade/anagram_game.dart';
@@ -315,6 +316,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => CustomTransitionPage(
           key: state.pageKey,
           child: const OddOneOutGame(),
+          transitionDuration: const Duration(milliseconds: 450),
+          reverseTransitionDuration: const Duration(milliseconds: 450),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return CupertinoPageTransition(
+              primaryRouteAnimation: animation,
+              secondaryRouteAnimation: secondaryAnimation,
+              linearTransition: false,
+              child: child,
+            );
+          },
+        ),
+      ),
+      // Error Log (Yanlışlarım Defteri)
+      GoRoute(
+        path: '/error-log',
+        name: 'error-log',
+        pageBuilder: (context, state) => CustomTransitionPage(
+          key: state.pageKey,
+          child: const ErrorLogPage(),
           transitionDuration: const Duration(milliseconds: 450),
           reverseTransitionDuration: const Duration(milliseconds: 450),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {

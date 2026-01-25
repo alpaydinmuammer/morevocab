@@ -8,19 +8,29 @@ enum ArcadeGameType { wordChain, anagram, wordBuilder, emojiPuzzle, oddOneOut }
 class ArcadeState {
   final Map<ArcadeGameType, int> scores;
   final Map<ArcadeGameType, int> levelProgress;
+  final Map<ArcadeGameType, List<String>>
+  currentLevelWords; // Persisted progress
 
-  const ArcadeState({this.scores = const {}, this.levelProgress = const {}});
+  const ArcadeState({
+    this.scores = const {},
+    this.levelProgress = const {},
+    this.currentLevelWords = const {},
+  });
 
   int getScore(ArcadeGameType game) => scores[game] ?? 0;
   int getLevel(ArcadeGameType game) => levelProgress[game] ?? 0;
+  List<String> getLevelWords(ArcadeGameType game) =>
+      currentLevelWords[game] ?? [];
 
   ArcadeState copyWith({
     Map<ArcadeGameType, int>? scores,
     Map<ArcadeGameType, int>? levelProgress,
+    Map<ArcadeGameType, List<String>>? currentLevelWords,
   }) {
     return ArcadeState(
       scores: scores ?? this.scores,
       levelProgress: levelProgress ?? this.levelProgress,
+      currentLevelWords: currentLevelWords ?? this.currentLevelWords,
     );
   }
 }
@@ -33,18 +43,26 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
 
   static const _scorePrefix = 'arcade_highscore_';
   static const _levelPrefix = 'arcade_level_';
+  static const _progressPrefix = 'arcade_progress_';
 
   Future<void> _loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final scores = <ArcadeGameType, int>{};
     final levels = <ArcadeGameType, int>{};
+    final progress = <ArcadeGameType, List<String>>{};
 
     for (final game in ArcadeGameType.values) {
       scores[game] = prefs.getInt('$_scorePrefix${game.name}') ?? 0;
       levels[game] = prefs.getInt('$_levelPrefix${game.name}') ?? 0;
+      progress[game] =
+          prefs.getStringList('$_progressPrefix${game.name}') ?? [];
     }
 
-    state = ArcadeState(scores: scores, levelProgress: levels);
+    state = ArcadeState(
+      scores: scores,
+      levelProgress: levels,
+      currentLevelWords: progress,
+    );
   }
 
   Future<void> updateScore(ArcadeGameType game, int score) async {
@@ -61,18 +79,48 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
 
   Future<void> updateLevel(ArcadeGameType game, int level) async {
     final currentLevel = state.getLevel(game);
-    if (level > currentLevel) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('$_levelPrefix${game.name}', level);
+    // Even if level isn't higher (e.g. replaying), we might want to set it?
+    // But usually updateLevel is called when Level Complete.
+    // If we complete a level, we should definitely clear the progress for that type.
 
+    final prefs = await SharedPreferences.getInstance();
+
+    // 1. Update LeveL
+    if (level > currentLevel) {
+      await prefs.setInt('$_levelPrefix${game.name}', level);
       final newLevels = Map<ArcadeGameType, int>.from(state.levelProgress);
       newLevels[game] = level;
+      // We will perform the copyWith at the end combine changes
       state = state.copyWith(levelProgress: newLevels);
     }
+
+    // 2. Clear Progress (New level started or completed)
+    // When leveling up, the "found words" for the old level are irrelevant.
+    await prefs.remove('$_progressPrefix${game.name}');
+    final newProgress = Map<ArcadeGameType, List<String>>.from(
+      state.currentLevelWords,
+    );
+    newProgress[game] = [];
+    state = state.copyWith(currentLevelWords: newProgress);
+  }
+
+  Future<void> saveLevelProgress(
+    ArcadeGameType game,
+    List<String> words,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('$_progressPrefix${game.name}', words);
+
+    final newProgress = Map<ArcadeGameType, List<String>>.from(
+      state.currentLevelWords,
+    );
+    newProgress[game] = words;
+    state = state.copyWith(currentLevelWords: newProgress);
   }
 
   int getHighScore(ArcadeGameType game) => state.getScore(game);
   int getLevel(ArcadeGameType game) => state.getLevel(game);
+  List<String> getLevelWords(ArcadeGameType game) => state.getLevelWords(game);
 }
 
 /// Provider for arcade state (high scores + level progress)

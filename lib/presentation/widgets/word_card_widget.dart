@@ -370,7 +370,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: isStrategy
                     ? const Color(0xFF2C3E50) // Ink color for strategy
-                    : AppTheme.primaryColor,
+                    : theme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: isStrategy ? 24 : null,
               ),
@@ -413,12 +413,12 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
                 decoration: BoxDecoration(
                   color: isStrategy
                       ? Colors.black.withValues(alpha: 0.03)
-                      : AppTheme.primaryColor.withValues(alpha: 0.1),
+                      : theme.colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: isStrategy
                         ? Colors.black.withValues(alpha: 0.1)
-                        : AppTheme.primaryColor.withValues(alpha: 0.2),
+                        : theme.colorScheme.primary.withValues(alpha: 0.2),
                     width: 1,
                   ),
                 ),
@@ -485,7 +485,9 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
                         // Regular word: quote icon and centered text
                         Icon(
                           Icons.format_quote,
-                          color: AppTheme.primaryColor.withValues(alpha: 0.3),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.3,
+                          ),
                           size: 24,
                         ),
                         const SizedBox(height: 8),

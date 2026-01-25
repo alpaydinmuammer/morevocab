@@ -34,7 +34,6 @@ class AnagramGame extends ConsumerStatefulWidget {
 class _AnagramGameState extends ConsumerState<AnagramGame> {
   final TextEditingController _controller = TextEditingController();
   final List<String> _foundWords = [];
-  int _score = 0;
   int _currentLevelIndex = 0;
   List<String> _letters = [];
 
@@ -231,19 +230,32 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
       final savedLevel = ref
           .read(arcadeHighScoresProvider)
           .getLevel(ArcadeGameType.anagram);
-      if (savedLevel > 0 && savedLevel < _levels.length) {
+
+      List<String>? savedWords;
+
+      // If we have a saved level state compatible with current game version
+      if (savedLevel >= 0 && savedLevel < _levels.length) {
         setState(() {
           _currentLevelIndex = savedLevel;
         });
+
+        // Load saved words for this level
+        savedWords = ref
+            .read(arcadeHighScoresProvider)
+            .getLevelWords(ArcadeGameType.anagram);
       }
-      _startLevel();
+
+      _startLevel(restoreWords: savedWords);
     });
   }
 
-  void _startLevel() {
+  void _startLevel({List<String>? restoreWords}) {
     setState(() {
       _letters = List.from(_currentLevel.letters);
       _foundWords.clear();
+      if (restoreWords != null) {
+        _foundWords.addAll(restoreWords);
+      }
     });
     _shuffleLetters();
   }
@@ -256,15 +268,10 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
 
   @override
   void dispose() {
-    // Save high score when leaving
-    ref
-        .read(arcadeHighScoresProvider.notifier)
-        .updateScore(ArcadeGameType.anagram, _score);
-
-    // Update challenge progress
+    // Update challenge progress with current level
     ref
         .read(challengesProvider.notifier)
-        .checkProgress(ArcadeGameType.anagram, newScore: _score);
+        .checkProgress(ArcadeGameType.anagram, newLevel: _currentLevelIndex);
     _controller.dispose();
     super.dispose();
   }
@@ -287,18 +294,20 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
     if (_currentLevel.validWords.contains(word)) {
       setState(() {
         _foundWords.add(word);
-        _score += word.length * 10;
         _controller.clear();
       });
+
+      // Save progress immediately
+      ref
+          .read(arcadeHighScoresProvider.notifier)
+          .saveLevelProgress(ArcadeGameType.anagram, List.from(_foundWords));
 
       // After finding a valid word, record activity for streak
       ref.read(streakProvider.notifier).recordActivity();
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            '${AppLocalizations.of(context)!.correct} +${word.length * 10}',
-          ),
+          content: Text(AppLocalizations.of(context)!.correct),
           backgroundColor: Colors.green,
           duration: const Duration(seconds: 1),
         ),
@@ -326,19 +335,12 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
     ref
         .read(arcadeHighScoresProvider.notifier)
         .updateLevel(ArcadeGameType.anagram, _currentLevelIndex + 1);
-    // Also save high score
-    final highScores = ref.read(arcadeHighScoresProvider);
-    final previousHighScore = highScores.getScore(ArcadeGameType.anagram);
-    ref
-        .read(arcadeHighScoresProvider.notifier)
-        .updateScore(ArcadeGameType.anagram, _score);
 
     // Update challenge progress
     ref
         .read(challengesProvider.notifier)
         .checkProgress(
           ArcadeGameType.anagram,
-          newScore: _score,
           newLevel: _currentLevelIndex + 1,
         );
 
@@ -346,13 +348,16 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
-          score: _score,
-          highScore: previousHighScore,
+          score: _foundWords.length,
+          highScore: _currentLevel.validWords.length,
           accentColor: Colors.teal,
           title: _isLastLevel ? 'ALL LEVELS COMPLETE!' : 'LEVEL COMPLETE!',
           extraStats: [
             GameOverStat(label: 'Level', value: '${_currentLevel.level}'),
-            GameOverStat(label: 'Words', value: '${_foundWords.length}'),
+            GameOverStat(
+              label: 'Words',
+              value: '${_foundWords.length}/${_currentLevel.validWords.length}',
+            ),
           ],
           onPlayAgain: () {
             Navigator.pop(context);
@@ -364,7 +369,6 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
             } else {
               setState(() {
                 _currentLevelIndex = 0;
-                _score = 0;
               });
               _startLevel();
             }
@@ -402,12 +406,6 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
                       value: '${_currentLevel.level}/${_levels.length}',
                       icon: Icons.layers_rounded,
                       color: Colors.indigo,
-                    ),
-                    ArcadeStatCard(
-                      label: l10n.score,
-                      value: '$_score',
-                      icon: Icons.stars_rounded,
-                      color: Colors.orange,
                     ),
                     ArcadeStatCard(
                       label: 'Found',

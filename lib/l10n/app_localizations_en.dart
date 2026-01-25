@@ -708,4 +708,114 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get challenges => 'Challenges';
+
+  @override
+  String get badges => 'Badges';
+
+  @override
+  String get badgeUnlocked => 'Badge Unlocked!';
+
+  @override
+  String get badgeSectionAnagram => 'Anagram';
+
+  @override
+  String get badgeSectionWordChain => 'Word Chain';
+
+  @override
+  String get badgeSectionOddOneOut => 'Odd One Out';
+
+  @override
+  String get badgeSectionEmojiPuzzle => 'Emoji Puzzle';
+
+  @override
+  String get badgeSectionWordBuilder => 'Word Builder';
+
+  @override
+  String get badgeSectionStreak => 'Streak';
+
+  @override
+  String get badgeSectionSpecial => 'Special';
+
+  @override
+  String get badgeAnagramRookie => 'Rookie';
+
+  @override
+  String get badgeAnagramExpert => 'Expert';
+
+  @override
+  String get badgeAnagramChampion => 'Champion';
+
+  @override
+  String get badgeChainStarter => 'Starter';
+
+  @override
+  String get badgeChainMaster => 'Master';
+
+  @override
+  String get badgeChainLegend => 'Legend';
+
+  @override
+  String get badgeObserver => 'Observer';
+
+  @override
+  String get badgeDetective => 'Detective';
+
+  @override
+  String get badgeSharpshooter => 'Sharpshooter';
+
+  @override
+  String get badgeEmojiSolver => 'Solver';
+
+  @override
+  String get badgePuzzleMaster => 'Master';
+
+  @override
+  String get badgeEmojiLegend => 'Legend';
+
+  @override
+  String get badgeWordWorker => 'Worker';
+
+  @override
+  String get badgeWordArchitect => 'Architect';
+
+  @override
+  String get badgeWordKing => 'King';
+
+  @override
+  String get badgeFireSpirit => 'Fire Spirit';
+
+  @override
+  String get badgeDedicated => 'Dedicated';
+
+  @override
+  String get badgeLegendary => 'Legendary';
+
+  @override
+  String get badgeFirstStep => 'First Step';
+
+  @override
+  String get badgeArcadeFan => 'Arcade Fan';
+
+  @override
+  String get badgeBrainBoss => 'Brain Boss';
+
+  @override
+  String get errorLogTitle => 'My Mistakes';
+
+  @override
+  String get errorLogSubtitle => 'Words you got wrong';
+
+  @override
+  String get errorLogEmpty => 'No mistakes yet!';
+
+  @override
+  String get errorLogEmptyHint => 'Words you swipe left will appear here';
+
+  @override
+  String errorLogPage(int current, int total) {
+    return 'Page $current/$total';
+  }
+
+  @override
+  String get errorLogCardDesc => 'Review words you struggled with';
 }

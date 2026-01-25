@@ -1,10 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/foundation.dart';
 import '../../domain/models/word_card.dart';
 import '../../domain/models/word_deck.dart';
 import '../../core/exceptions/app_exceptions.dart';
+
+/// Top-level function for Isolate compatibility
+/// Parses JSON string into a List of dynamic objects (Maps)
+List<dynamic> _parseJsonList(String jsonString) {
+  return json.decode(jsonString) as List<dynamic>;
+}
 
 /// Word storage with persistent progress using SharedPreferences
 /// Uses dependency injection for better testability.
@@ -17,6 +24,7 @@ class WordLocalDatasource {
   final List<WordCard> _words = [];
   SharedPreferences? _prefs;
   bool _initialized = false;
+  Timer? _saveDebounceTimer;
 
   /// Singleton instance for production use
   static WordLocalDatasource? _instance;
@@ -78,11 +86,12 @@ class WordLocalDatasource {
     for (final file in files) {
       try {
         final jsonString = await rootBundle.loadString(file);
-        final List<dynamic> list = json.decode(jsonString);
+
+        // Critical Optimization 1: Offload JSON parsing to background thread
+        final List<dynamic> list = await compute(_parseJsonList, jsonString);
+
         _words.addAll(list.map((e) => WordCard.fromJson(e)).toList());
         loadedCount++;
-        // Yield to main thread to allow UI to update
-        await Future.delayed(Duration.zero);
       } catch (e) {
         errors.add('$file: $e');
         debugPrint('Warning: Failed to load $file: $e');
@@ -235,8 +244,29 @@ class WordLocalDatasource {
     }
   }
 
-  /// Save progress for a specific word
-  Future<void> _saveProgress() async {
+  /// Critical Optimization 3: Debounced Saving
+  /// Schedule a save operation. If one is pending, it resets the timer.
+  void _scheduleSave() {
+    if (_saveDebounceTimer?.isActive ?? false) {
+      _saveDebounceTimer!.cancel();
+    }
+
+    // Auto-save after 2 seconds of inactivity
+    _saveDebounceTimer = Timer(const Duration(seconds: 2), () {
+      _saveProgressInternal();
+    });
+  }
+
+  /// Force a save immediately (used during app cleanup/backgrounding)
+  Future<void> forceSave() async {
+    if (_saveDebounceTimer?.isActive ?? false) {
+      _saveDebounceTimer!.cancel();
+    }
+    await _saveProgressInternal();
+  }
+
+  /// The actual implementation of saving progress to disk
+  Future<void> _saveProgressInternal() async {
     if (_prefs == null) return;
 
     final Map<String, dynamic> progressMap = {};
@@ -259,7 +289,12 @@ class WordLocalDatasource {
       }
     }
 
-    await _prefs!.setString(_progressKey, json.encode(progressMap));
+    try {
+      await _prefs!.setString(_progressKey, json.encode(progressMap));
+      // debugPrint('Progress auto-saved successfully.');
+    } catch (e) {
+      debugPrint('Error auto-saving progress: $e');
+    }
   }
 
   /// Public API to update progress for a single word
@@ -267,9 +302,13 @@ class WordLocalDatasource {
     final int index = _words.indexWhere((w) => w.id == updatedWord.id);
     if (index != -1) {
       _words[index] = updatedWord;
-      await _saveProgress();
+      // Instead of saving immediately, we schedule it
+      _scheduleSave();
     }
   }
+
+  /// Get list of unique custom deck names (Restored)
+  // already defined above
 
   /// Get all words (immutable view preferable, but returning list copy)
   List<WordCard> getWords() {

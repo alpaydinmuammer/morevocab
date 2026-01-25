@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -6,6 +7,7 @@ import '../../domain/models/pet_model.dart';
 import '../providers/word_providers.dart';
 import '../providers/pet_provider.dart';
 import '../providers/streak_provider.dart';
+import '../providers/error_log_provider.dart';
 import '../widgets/word_card_widget.dart';
 import '../widgets/swipe_background_feedback.dart';
 import '../widgets/premium_background.dart';
@@ -24,7 +26,7 @@ class WordSwipePage extends ConsumerStatefulWidget {
 
 class _WordSwipePageState extends ConsumerState<WordSwipePage> {
   late CardSwiperController _cardController;
-  double _swipeOffset = 0.0;
+  final ValueNotifier<double> _swipeNotifier = ValueNotifier<double>(0.0);
 
   @override
   void initState() {
@@ -32,9 +34,7 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
     _cardController = CardSwiperController();
     // Load words for selected deck after frame
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() {
-        _swipeOffset = 0.0; // Reset swipe offset for new deck
-      });
+      _swipeNotifier.value = 0.0; // Reset swipe offset for new deck
       ref.read(wordStudyProvider.notifier).loadWords(widget.deck);
     });
   }
@@ -42,6 +42,7 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
   @override
   void dispose() {
     _cardController.dispose();
+    _swipeNotifier.dispose();
     super.dispose();
   }
 
@@ -216,17 +217,14 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
                               }
 
                               if (index == studyState.currentIndex) {
+                                // Critical Optimization 2: Update Notifier instead of SetState
+                                // This prevents full page rebuilds on every frame
                                 WidgetsBinding.instance.addPostFrameCallback((
                                   _,
                                 ) {
-                                  if (mounted &&
-                                      _swipeOffset !=
-                                          horizontalOffsetPercentage
-                                              .toDouble()) {
-                                    setState(() {
-                                      _swipeOffset = horizontalOffsetPercentage
-                                          .toDouble();
-                                    });
+                                  if (mounted) {
+                                    _swipeNotifier.value =
+                                        horizontalOffsetPercentage.toDouble();
                                   }
                                 });
                               }
@@ -243,26 +241,155 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
                     const SizedBox(height: 24),
 
                     // Action buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildActionButton(
-                          context,
-                          Icons.arrow_back_rounded,
-                          AppLocalizations.of(context)!.iDontKnow,
-                          Colors.red,
-                          () => _cardController.swipe(CardSwiperDirection.left),
+                    // Action buttons (Conditional)
+                    if (widget.deck == WordDeck.examStrategies)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildActionButton(
+                            context,
+                            Icons.arrow_back_rounded,
+                            AppLocalizations.of(context)!.iDontKnow,
+                            Colors.red,
+                            () =>
+                                _cardController.swipe(CardSwiperDirection.left),
+                          ),
+                          _buildActionButton(
+                            context,
+                            Icons.arrow_forward_rounded,
+                            AppLocalizations.of(context)!.iKnow,
+                            Colors.green,
+                            () => _cardController.swipe(
+                              CardSwiperDirection.right,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.center, // Center them
+                          children: [
+                            // LEFT ORB (Don't Know)
+                            AnimatedPressable(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  32,
+                                ), // Half of size
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 10,
+                                    sigmaY: 10,
+                                  ),
+                                  child: Container(
+                                    width: 64,
+                                    height: 64,
+                                    decoration: BoxDecoration(
+                                      color: theme.brightness == Brightness.dark
+                                          ? Colors.black.withValues(alpha: 0.3)
+                                          : Colors.white.withValues(alpha: 0.6),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: theme.colorScheme.outline
+                                            .withValues(alpha: 0.2),
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.red.withValues(
+                                            alpha: 0.1,
+                                          ),
+                                          blurRadius: 20,
+                                          offset: const Offset(0, 8),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        onTap: () => _cardController.swipe(
+                                          CardSwiperDirection.left,
+                                        ),
+                                        splashColor: Colors.red.withValues(
+                                          alpha: 0.3,
+                                        ),
+                                        highlightColor: Colors.red.withValues(
+                                          alpha: 0.1,
+                                        ),
+                                        child: Icon(
+                                          Icons.close_rounded,
+                                          color: Colors.red.shade400,
+                                          size: 32,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // GAP
+                            const SizedBox(width: 48), // Gap between buttons
+                            // RIGHT ORB (Know)
+                            AnimatedPressable(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(32),
+                                child: BackdropFilter(
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 10,
+                                    sigmaY: 10,
+                                  ),
+                                  child: Container(
+                                    width: 64,
+                                    height: 64,
+                                    decoration: BoxDecoration(
+                                      color: theme.brightness == Brightness.dark
+                                          ? Colors.black.withValues(alpha: 0.3)
+                                          : Colors.white.withValues(alpha: 0.6),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: theme.colorScheme.outline
+                                            .withValues(alpha: 0.2),
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.green.withValues(
+                                            alpha: 0.1,
+                                          ),
+                                          blurRadius: 20,
+                                          offset: const Offset(0, 8),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        onTap: () => _cardController.swipe(
+                                          CardSwiperDirection.right,
+                                        ),
+                                        splashColor: Colors.green.withValues(
+                                          alpha: 0.3,
+                                        ),
+                                        highlightColor: Colors.green.withValues(
+                                          alpha: 0.1,
+                                        ),
+                                        child: Icon(
+                                          Icons.check_rounded,
+                                          color: Colors.green.shade400,
+                                          size: 32,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        _buildActionButton(
-                          context,
-                          Icons.arrow_forward_rounded,
-                          AppLocalizations.of(context)!.iKnow,
-                          Colors.green,
-                          () =>
-                              _cardController.swipe(CardSwiperDirection.right),
-                        ),
-                      ],
-                    ),
+                      ),
                     const SizedBox(height: 16),
                   ],
                 ),
@@ -270,7 +397,13 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
             ),
 
             // Background Feedback (Above decor, below content padding if needed, but safe here)
-            SwipeBackgroundFeedback(swipeOffset: _swipeOffset),
+            // Background Feedback (Above decor, below content padding if needed, but safe here)
+            ValueListenableBuilder<double>(
+              valueListenable: _swipeNotifier,
+              builder: (context, value, child) {
+                return SwipeBackgroundFeedback(swipeOffset: value);
+              },
+            ),
           ],
         ),
       ),
@@ -284,26 +417,33 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
   ) {
     final notifier = ref.read(wordStudyProvider.notifier);
     final studyState = ref.read(wordStudyProvider);
+    final currentWord = studyState.words[previousIndex];
 
     if (direction == CardSwiperDirection.right) {
       notifier.markCurrentAsKnown();
 
       // Add XP for correct answer (silently, no overlay)
-      final currentWord = studyState.words[previousIndex];
       final xp = PetXpValues.forCorrectAnswer(
         difficulty: currentWord.difficulty,
       );
       ref.read(petProvider.notifier).addExperience(xp);
+
+      // Remove X mark or word from error log on correct answer
+      ref.read(errorLogProvider.notifier).removeMarkOrWord(currentWord.word);
     } else if (direction == CardSwiperDirection.left) {
       notifier.markCurrentForReview();
+
+      // Add word to error log on wrong answer
+      ref
+          .read(errorLogProvider.notifier)
+          .addWord(currentWord.word, currentWord.getMeaning('tr'));
     }
 
     // Record activity for streak on any meaningful swipe
     ref.read(streakProvider.notifier).recordActivity();
 
-    setState(() {
-      _swipeOffset = 0.0;
-    });
+    // Reset offset
+    _swipeNotifier.value = 0.0;
 
     return true;
   }

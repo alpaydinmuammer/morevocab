@@ -297,5 +297,49 @@
   },
   "challengePlayGame": "Play any game",
   "anyGame": "Any Game",
-  "challenges": "Challenges"
+  "challenges": "Challenges",
+
+  "badges": "Badges",
+  "badgeUnlocked": "Badge Unlocked!",
+  "badgeSectionAnagram": "Anagram",
+  "badgeSectionWordChain": "Word Chain",
+  "badgeSectionOddOneOut": "Odd One Out",
+  "badgeSectionEmojiPuzzle": "Emoji Puzzle",
+  "badgeSectionWordBuilder": "Word Builder",
+  "badgeSectionStreak": "Streak",
+  "badgeSectionSpecial": "Special",
+  "badgeAnagramRookie": "Rookie",
+  "badgeAnagramExpert": "Expert",
+  "badgeAnagramChampion": "Champion",
+  "badgeChainStarter": "Starter",
+  "badgeChainMaster": "Master",
+  "badgeChainLegend": "Legend",
+  "badgeObserver": "Observer",
+  "badgeDetective": "Detective",
+  "badgeSharpshooter": "Sharpshooter",
+  "badgeEmojiSolver": "Solver",
+  "badgePuzzleMaster": "Master",
+  "badgeEmojiLegend": "Legend",
+  "badgeWordWorker": "Worker",
+  "badgeWordArchitect": "Architect",
+  "badgeWordKing": "King",
+  "badgeFireSpirit": "Fire Spirit",
+  "badgeDedicated": "Dedicated",
+  "badgeLegendary": "Legendary",
+  "badgeFirstStep": "First Step",
+  "badgeArcadeFan": "Arcade Fan",
+  "badgeBrainBoss": "Brain Boss",
+
+  "errorLogTitle": "My Mistakes",
+  "errorLogSubtitle": "Words you got wrong",
+  "errorLogEmpty": "No mistakes yet!",
+  "errorLogEmptyHint": "Words you swipe left will appear here",
+  "errorLogPage": "Page {current}/{total}",
+  "@errorLogPage": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "errorLogCardDesc": "Review words you struggled with"
 }

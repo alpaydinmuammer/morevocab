@@ -7,6 +7,7 @@ import '../../l10n/app_localizations.dart';
 import '../widgets/premium_background.dart';
 import '../widgets/deck_card.dart';
 import '../providers/word_providers.dart';
+import '../providers/error_log_provider.dart';
 
 class DeckSelectionPage extends ConsumerStatefulWidget {
   const DeckSelectionPage({super.key});
@@ -37,13 +38,14 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Standard decks (excluding custom placeholder)
-    final standardDecks = WordDeck.values
-        .where((d) => d != WordDeck.custom)
+    // Reordered decks: examStrategies first, then others (excluding custom)
+    final otherDecks = WordDeck.values
+        .where((d) => d != WordDeck.custom && d != WordDeck.examStrategies)
         .toList();
 
-    // Total items: Standard Decks + Create Button (Coming Soon)
-    final totalItems = standardDecks.length + 1;
+    // Build order: examStrategies (0), errorLog (1), mixed (2), ...rest
+    // Total items: 1 (examStrategies) + 1 (errorLog) + otherDecks.length + 1 (coming soon)
+    final totalItems = 1 + 1 + otherDecks.length + 1;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -100,8 +102,9 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                     childAspectRatio: 0.85,
                   ),
                   delegate: SliverChildBuilderDelegate((context, index) {
-                    if (index < standardDecks.length) {
-                      final deck = standardDecks[index];
+                    // Position 0: examStrategies (first deck)
+                    if (index == 0) {
+                      final deck = WordDeck.examStrategies;
                       return DeckCard(
                         deck: deck,
                         showProgress: false,
@@ -113,6 +116,27 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                         },
                       );
                     }
+                    // Position 1: Error Log card (second)
+                    if (index == 1) {
+                      return _buildErrorLogCard(context, theme, ref);
+                    }
+                    // Positions 2 to (2 + otherDecks.length - 1): remaining decks
+                    final deckIndex =
+                        index - 2; // offset for examStrategies and error log
+                    if (deckIndex < otherDecks.length) {
+                      final deck = otherDecks[deckIndex];
+                      return DeckCard(
+                        deck: deck,
+                        showProgress: false,
+                        showDescription: true,
+                        showWordCount: true,
+                        wordCount: _deckCounts[deck] ?? 0,
+                        onTap: () {
+                          context.push('/swipe', extra: deck);
+                        },
+                      );
+                    }
+                    // Last position: Coming Soon card
                     return _buildCreateDeckCard(theme);
                   }, childCount: totalItems),
                 ),
@@ -269,6 +293,134 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                       ],
                     ),
                   ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorLogCard(
+    BuildContext context,
+    ThemeData theme,
+    WidgetRef ref,
+  ) {
+    final l10n = AppLocalizations.of(context)!;
+    final errorLogState = ref.watch(errorLogProvider);
+    final entryCount = errorLogState.totalEntries;
+
+    return GestureDetector(
+      onTap: () => context.push('/error-log'),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.red.shade600, Colors.orange.shade700],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.red.withValues(alpha: 0.25),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: Stack(
+            children: [
+              // Background icon
+              Positioned(
+                right: -10,
+                bottom: -10,
+                child: Icon(
+                  Icons.book_rounded,
+                  size: 100,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
+              ),
+
+              // Content
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Centered icon
+                    Expanded(
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(7),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.1),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.menu_book_rounded,
+                            color: Colors.white,
+                            size: 52,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Title
+                    Text(
+                      l10n.errorLogTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    // Description
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.errorLogCardDesc,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: Colors.white.withValues(alpha: 0.9),
+                        fontWeight: FontWeight.w500,
+                        height: 1.1,
+                        fontSize: 10,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    // Entry count badge
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        '$entryCount ${entryCount == 1 ? 'word' : 'words'}',
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

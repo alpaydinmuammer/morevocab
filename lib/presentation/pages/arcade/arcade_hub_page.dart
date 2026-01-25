@@ -3,14 +3,51 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../providers/arcade_provider.dart';
+import '../../providers/badge_provider.dart';
+import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
+import '../../widgets/badges_modal.dart';
 
 /// Arcade mode hub page displaying all available mini-games
-class ArcadeHubPage extends ConsumerWidget {
+class ArcadeHubPage extends ConsumerStatefulWidget {
   const ArcadeHubPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ArcadeHubPage> createState() => _ArcadeHubPageState();
+}
+
+class _ArcadeHubPageState extends ConsumerState<ArcadeHubPage> {
+  @override
+  void initState() {
+    super.initState();
+    // Check for newly unlocked badges after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkBadges();
+    });
+  }
+
+  Future<void> _checkBadges() async {
+    final arcadeState = ref.read(arcadeHighScoresProvider);
+    final streakState = ref.read(streakProvider);
+
+    final newlyUnlocked = await ref
+        .read(badgeProvider.notifier)
+        .checkAndUnlockBadges(
+          arcadeState: arcadeState,
+          streakState: streakState,
+        );
+
+    // Show popup for each newly unlocked badge
+    if (mounted && newlyUnlocked.isNotEmpty) {
+      for (final badge in newlyUnlocked) {
+        if (!mounted) break;
+        await BadgeUnlockDialog.show(context, badge);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
     final highScores = ref.watch(arcadeHighScoresProvider);
@@ -91,7 +128,8 @@ class ArcadeHubPage extends ConsumerWidget {
                         title: l10n.gameAnagram,
                         description: l10n.gameAnagramDesc,
                         accentColor: Colors.teal,
-                        highScore: highScores.getScore(ArcadeGameType.anagram),
+                        highScore: 0,
+                        level: highScores.getLevel(ArcadeGameType.anagram),
                         onTap: () => context.push('/arcade/anagram'),
                       ),
                       _ArcadeGameCard(

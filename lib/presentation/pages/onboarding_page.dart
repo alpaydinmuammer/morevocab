@@ -61,18 +61,21 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF0A1628),
-              AppTheme.darkBackground,
-              Color(0xFF0D2137),
+              theme.extension<AppColors>()!.onboardingGradientStart,
+              theme
+                  .colorScheme
+                  .surface, // Used as middle ground (darkSurface / lightBackground)
+              theme.extension<AppColors>()!.onboardingGradientEnd,
             ],
           ),
         ),
@@ -307,11 +310,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.asset(
-            imagePath,
-            height: 240,
-            fit: BoxFit.contain,
-          ),
+          child: Image.asset(imagePath, height: 240, fit: BoxFit.contain),
         ),
       ),
     );

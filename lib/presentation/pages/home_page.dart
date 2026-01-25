@@ -212,56 +212,59 @@ class HomePage extends ConsumerWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: theme.colorScheme.primary.withValues(alpha: 0.3),
+              color: Colors.black.withValues(alpha: 0.25),
               blurRadius: 16,
               offset: const Offset(0, 8),
             ),
           ],
         ),
-        child: Stack(
-          alignment: Alignment
-              .center, // CRITICAL FIX: Center content vertically/horizontally
-          children: [
-            // Background Icon Decoration
-            Positioned(
-              right: -5,
-              bottom: -5,
-              child: Icon(
-                Icons.rocket_launch_rounded,
-                size: 64,
-                color: Colors.white.withValues(alpha: 0.1),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: Stack(
+            alignment: Alignment
+                .center, // CRITICAL FIX: Center content vertically/horizontally
+            children: [
+              // Background Icon Decoration
+              Positioned(
+                right: -5,
+                bottom: -5,
+                child: Icon(
+                  Icons.rocket_launch_rounded,
+                  size: 64,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
               ),
-            ),
 
-            // Content
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.center, // Center everything
-                children: [
-                  // Icon (Cleaner, no box)
-                  const Icon(
-                    Icons.play_arrow_rounded,
-                    color: Colors.white,
-                    size: 28,
-                  ),
-                  const SizedBox(width: 12),
-
-                  // Text ONLY (No subtitle, no column needed)
-                  Text(
-                    AppLocalizations.of(context)!.start.toUpperCase(),
-                    style: theme.textTheme.titleLarge?.copyWith(
+              // Content
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // Center everything
+                  children: [
+                    // Icon (Cleaner, no box)
+                    const Icon(
+                      Icons.play_arrow_rounded,
                       color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.5,
-                      fontSize: 22,
+                      size: 28,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 12),
+
+                    // Text ONLY (No subtitle, no column needed)
+                    Text(
+                      AppLocalizations.of(context)!.start.toUpperCase(),
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.5,
+                        fontSize: 22,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -284,50 +287,53 @@ class HomePage extends ConsumerWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: theme.extension<AppColors>()!.arcadeShadow,
+              color: Colors.black.withValues(alpha: 0.25),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
           ],
         ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Background Icon Decoration
-            Positioned(
-              right: -5,
-              bottom: -5,
-              child: Icon(
-                Icons.videogame_asset_rounded,
-                size: 60,
-                color: Colors.white.withValues(alpha: 0.1),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Background Icon Decoration
+              Positioned(
+                right: -5,
+                bottom: -5,
+                child: Icon(
+                  Icons.videogame_asset_rounded,
+                  size: 60,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
               ),
-            ),
 
-            // Content
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.sports_esports_rounded,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    AppLocalizations.of(context)!.arcadeMode.toUpperCase(),
-                    style: theme.textTheme.titleMedium?.copyWith(
+              // Content
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.sports_esports_rounded,
                       color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.2,
+                      size: 24,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 12),
+                    Text(
+                      AppLocalizations.of(context)!.arcadeMode.toUpperCase(),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -416,50 +422,53 @@ class HomePage extends ConsumerWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: theme.extension<AppColors>()!.settingsShadow,
+              color: Colors.black.withValues(alpha: 0.25),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
           ],
         ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Background Icon Decoration
-            Positioned(
-              right: -5,
-              bottom: -5,
-              child: Icon(
-                Icons.settings_suggest_rounded,
-                size: 60,
-                color: Colors.white.withValues(alpha: 0.1),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Background Icon Decoration
+              Positioned(
+                right: -5,
+                bottom: -5,
+                child: Icon(
+                  Icons.settings_suggest_rounded,
+                  size: 60,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
               ),
-            ),
 
-            // Content
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.settings_rounded,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    AppLocalizations.of(context)!.settings.toUpperCase(),
-                    style: theme.textTheme.titleMedium?.copyWith(
+              // Content
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.settings_rounded,
                       color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.2,
+                      size: 24,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 12),
+                    Text(
+                      AppLocalizations.of(context)!.settings.toUpperCase(),
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

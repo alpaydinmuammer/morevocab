@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../providers/word_providers.dart';
+import '../../core/constants/app_constants.dart';
 import 'premium_background.dart';
 
 class SwipeSessionComplete extends StatelessWidget {
@@ -42,14 +43,14 @@ class SwipeSessionComplete extends StatelessWidget {
                 // Animated Success Icon with glow
                 TweenAnimationBuilder<double>(
                   tween: Tween(begin: 0.0, end: 1.0),
-                  duration: const Duration(milliseconds: 800),
+                  duration: AppConstants.sessionCompleteAnimationMedium,
                   curve: Curves.elasticOut,
                   builder: (context, value, child) {
                     return Transform.scale(
                       scale: value,
                       child: Container(
-                        width: 120,
-                        height: 120,
+                        width: AppConstants.iconSizeXLarge,
+                        height: AppConstants.iconSizeXLarge,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(
@@ -57,16 +58,18 @@ class SwipeSessionComplete extends StatelessWidget {
                             end: Alignment.bottomRight,
                             colors: [
                               theme.colorScheme.primary,
-                              theme.colorScheme.primary.withValues(alpha: 0.7),
+                              theme.colorScheme.primary.withValues(
+                                alpha: AppConstants.opacityMediumHigh,
+                              ),
                             ],
                           ),
                           boxShadow: [
                             BoxShadow(
                               color: theme.colorScheme.primary.withValues(
-                                alpha: 0.4,
+                                alpha: AppConstants.opacitySemiMedium,
                               ),
-                              blurRadius: 30,
-                              spreadRadius: 10,
+                              blurRadius: AppConstants.blurRadiusXXXLarge,
+                              spreadRadius: AppConstants.spreadRadiusMedium,
                             ),
                           ],
                         ),
@@ -95,7 +98,9 @@ class SwipeSessionComplete extends StatelessWidget {
                 Text(
                   l10n.sessionCompleted,
                   style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    color: theme.colorScheme.onSurface.withValues(
+                      alpha: AppConstants.opacitySemiHigh,
+                    ),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -110,11 +115,15 @@ class SwipeSessionComplete extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: theme.colorScheme.secondaryContainer.withValues(
-                      alpha: 0.5,
+                      alpha: AppConstants.opacityMedium,
                     ),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.borderRadiusMedium,
+                    ),
                     border: Border.all(
-                      color: theme.colorScheme.secondary.withValues(alpha: 0.2),
+                      color: theme.colorScheme.secondary.withValues(
+                        alpha: AppConstants.opacityLow,
+                      ),
                     ),
                   ),
                   child: Row(
@@ -178,16 +187,18 @@ class SwipeSessionComplete extends StatelessWidget {
                         gradient: LinearGradient(
                           colors: [
                             theme.colorScheme.primary,
-                            theme.colorScheme.primary.withValues(alpha: 0.8),
+                            theme.colorScheme.primary.withValues(
+                              alpha: AppConstants.opacityHigh,
+                            ),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(24),
                         boxShadow: [
                           BoxShadow(
                             color: theme.colorScheme.primary.withValues(
-                              alpha: 0.3,
+                              alpha: AppConstants.opacityLight,
                             ),
-                            blurRadius: 12,
+                            blurRadius: AppConstants.blurRadiusLarge,
                             offset: const Offset(0, 4),
                           ),
                         ],
@@ -229,7 +240,7 @@ class SwipeSessionComplete extends StatelessWidget {
                       l10n.backToHome.toUpperCase(),
                       style: TextStyle(
                         color: theme.colorScheme.onSurface.withValues(
-                          alpha: 0.5,
+                          alpha: AppConstants.opacityMedium,
                         ),
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.2,
@@ -287,10 +298,14 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-        borderRadius: BorderRadius.circular(24),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(
+          alpha: AppConstants.opacityLight,
+        ),
+        borderRadius: BorderRadius.circular(AppConstants.borderRadiusLarge),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.1),
+          color: theme.colorScheme.outline.withValues(
+            alpha: AppConstants.opacityVeryLight,
+          ),
         ),
       ),
       child: Column(
@@ -300,7 +315,9 @@ class _StatCard extends StatelessWidget {
           Text(
             label,
             style: theme.textTheme.labelMedium?.copyWith(
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              color: theme.colorScheme.onSurface.withValues(
+                alpha: AppConstants.opacityMedium,
+              ),
               fontWeight: FontWeight.w900,
               letterSpacing: 1,
             ),
@@ -321,7 +338,9 @@ class _StatCard extends StatelessWidget {
               Text(
                 ' / $total',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                  color: theme.colorScheme.onSurface.withValues(
+                    alpha: AppConstants.opacitySemiMedium,
+                  ),
                   fontWeight: FontWeight.bold,
                 ),
               ),

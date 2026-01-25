@@ -586,5 +586,341 @@
         "localAsset": "assets/images/words/yds_ydt/word_attain.webp",
         "difficulty": 3,
         "deck": "ydsYdt"
+    },
+    {
+        "id": 1050,
+        "word": "Bias",
+        "meanings": {
+            "tr": "Önyargı, eğilim",
+            "en": "Pregudice in favor of or against one thing, person, or group"
+        },
+        "exampleSentence": "The article was criticized for its bias.",
+        "localAsset": "assets/images/words/yds_ydt/word_bias.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1051,
+        "word": "Coherent",
+        "meanings": {
+            "tr": "Tutarlı, mantıklı",
+            "en": "Logical and consistent"
+        },
+        "exampleSentence": "He proposed a coherent plan to solve the problem.",
+        "localAsset": "assets/images/words/yds_ydt/word_coherent.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1052,
+        "word": "Compensate",
+        "meanings": {
+            "tr": "Telafi etmek, karşılamak",
+            "en": "To make up for something unwelcome or unpleasant"
+        },
+        "exampleSentence": "Nothing can compensate for the loss of a loved one.",
+        "localAsset": "assets/images/words/yds_ydt/word_compensate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1053,
+        "word": "Deduce",
+        "meanings": {
+            "tr": "Sonuç çıkarmak, tümdengelim yapmak",
+            "en": "To reach a conclusion by reasoning"
+        },
+        "exampleSentence": "We can deduce from your silence that you agree.",
+        "localAsset": "assets/images/words/yds_ydt/word_deduce.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1054,
+        "word": "Distort",
+        "meanings": {
+            "tr": "Çarpıtmak, bozmak",
+            "en": "To pull or twist out of shape; to give a misleading account"
+        },
+        "exampleSentence": "The media can sometimes distort the truth.",
+        "localAsset": "assets/images/words/yds_ydt/word_distort.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1055,
+        "word": "Facilitate",
+        "meanings": {
+            "tr": "Kolaylaştırmak, rahatlatmak",
+            "en": "To make an action or process easier"
+        },
+        "exampleSentence": "The new software will facilitate teamwork.",
+        "localAsset": "assets/images/words/yds_ydt/word_facilitate.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1056,
+        "word": "Fluctuate",
+        "meanings": {
+            "tr": "Dalgalanmak, değişmek",
+            "en": "To rise and fall irregularly in number or amount"
+        },
+        "exampleSentence": "Oil prices continue to fluctuate.",
+        "localAsset": "assets/images/words/yds_ydt/word_fluctuate.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1057,
+        "word": "Imminent",
+        "meanings": {
+            "tr": "Eli kulağında, yakın",
+            "en": "About to happen"
+        },
+        "exampleSentence": "They were in imminent danger.",
+        "localAsset": "assets/images/words/yds_ydt/word_imminent.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1058,
+        "word": "Indispensable",
+        "meanings": {
+            "tr": "Vazgeçilmez, zorunlu",
+            "en": "Absolutely necessary"
+        },
+        "exampleSentence": "Water is indispensable for life.",
+        "localAsset": "assets/images/words/yds_ydt/word_indispensable.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1059,
+        "word": "Inevitable",
+        "meanings": {
+            "tr": "Kaçınılmaz, beklenen",
+            "en": "Certain to happen; unavoidable"
+        },
+        "exampleSentence": "Change is inevitable in life.",
+        "localAsset": "assets/images/words/yds_ydt/word_inevitable.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1060,
+        "word": "Mitigate",
+        "meanings": {
+            "tr": "Hafifletmek, yatıştırmak",
+            "en": "To make less severe, serious, or painful"
+        },
+        "exampleSentence": "We must take steps to mitigate the environmental damage.",
+        "localAsset": "assets/images/words/yds_ydt/word_mitigate.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1061,
+        "word": "Profound",
+        "meanings": {
+            "tr": "Derin, köklü, yoğun",
+            "en": "Very great or intense; having or showing great knowledge"
+        },
+        "exampleSentence": "The book had a profound effect on me.",
+        "localAsset": "assets/images/words/yds_ydt/word_profound.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1062,
+        "word": "Recruit",
+        "meanings": {
+            "tr": "İşe almak, üye yapmak",
+            "en": "To enroll someone as a member or worker"
+        },
+        "exampleSentence": "The company plans to recruit 50 new employees.",
+        "localAsset": "assets/images/words/yds_ydt/word_recruit.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1063,
+        "word": "Sustain",
+        "meanings": {
+            "tr": "Sürdürmek, ayakta tutmak",
+            "en": "To strengthen or support physically or mentally"
+        },
+        "exampleSentence": "She managed to sustain everyone's interest.",
+        "localAsset": "assets/images/words/yds_ydt/word_sustain.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1064,
+        "word": "Vulnerable",
+        "meanings": {
+            "tr": "Savunmasız, kırılgan",
+            "en": "Susceptible to physical or emotional attack or harm"
+        },
+        "exampleSentence": "Children are the most vulnerable members of society.",
+        "localAsset": "assets/images/words/yds_ydt/word_vulnerable.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1065,
+        "word": "Negligible",
+        "meanings": {
+            "tr": "Önemsiz, ihmal edilebilir",
+            "en": "So small or unimportant as to be not worth considering"
+        },
+        "exampleSentence": "The difference in price is negligible.",
+        "localAsset": "assets/images/words/yds_ydt/word_negligible.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1066,
+        "word": "Obscure",
+        "meanings": {
+            "tr": "Belirsiz, anlaşılması güç; Gizlemek",
+            "en": "Not discovered or known about; uncertain"
+        },
+        "exampleSentence": "The details of his life remain obscure.",
+        "localAsset": "assets/images/words/yds_ydt/word_obscure.webp",
+        "difficulty": 4,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1067,
+        "word": "Diminish",
+        "meanings": {
+            "tr": "Azalmak, eksiltmek",
+            "en": "To make or become less"
+        },
+        "exampleSentence": "Our supplies are diminishing rapidly.",
+        "localAsset": "assets/images/words/yds_ydt/word_diminish.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1068,
+        "word": "Coincide",
+        "meanings": {
+            "tr": "Aynı zamana denk gelmek, uyuşmak",
+            "en": "Occur at or during the same time"
+        },
+        "exampleSentence": "My holiday coincides with yours.",
+        "localAsset": "assets/images/words/yds_ydt/word_coincide.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1069,
+        "word": "Breakthrough",
+        "meanings": {
+            "tr": "Büyük buluş, dönüm noktası",
+            "en": "A sudden, dramatic, and important discovery or development"
+        },
+        "exampleSentence": "Scientists have made a major breakthrough in cancer research.",
+        "localAsset": "assets/images/words/yds_ydt/word_breakthrough.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1070,
+        "word": "Abrupt",
+        "meanings": {
+            "tr": "Ani, beklenmedik",
+            "en": "Sudden and unexpected"
+        },
+        "exampleSentence": "The meeting came to an abrupt end.",
+        "localAsset": "assets/images/words/yds_ydt/word_abrupt.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1071,
+        "word": "Persist",
+        "meanings": {
+            "tr": "Israr etmek, devam etmek",
+            "en": "To continue firmly or obstinately in an opinion or a course of action"
+        },
+        "exampleSentence": "If symptoms persist, consult a doctor.",
+        "localAsset": "assets/images/words/yds_ydt/word_persist.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1072,
+        "word": "Surpass",
+        "meanings": {
+            "tr": "Aşmak, geride bırakmak",
+            "en": "To exceed; to be greater than"
+        },
+        "exampleSentence": "The results surpassed our expectations.",
+        "localAsset": "assets/images/words/yds_ydt/word_surpass.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1073,
+        "word": "Comprehensive",
+        "meanings": {
+            "tr": "Kapsamlı, etraflı",
+            "en": "Complete; including all or nearly all elements or aspects of something"
+        },
+        "exampleSentence": "We need a comprehensive study of the subject.",
+        "localAsset": "assets/images/words/yds_ydt/word_comprehensive.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1074,
+        "word": "Drastic",
+        "meanings": {
+            "tr": "Köklü, şiddetli, ani",
+            "en": "Likely to have a strong or far-reaching effect; radical and extreme"
+        },
+        "exampleSentence": "Drastic measures are needed to save the economy.",
+        "localAsset": "assets/images/words/yds_ydt/word_drastic.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1075,
+        "word": "Dilemma",
+        "meanings": {
+            "tr": "İkilem, çıkmaz",
+            "en": "A situation in which a difficult choice has to be made"
+        },
+        "exampleSentence": "She faced a difficult dilemma.",
+        "localAsset": "assets/images/words/yds_ydt/word_dilemma.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1076,
+        "word": "Vague",
+        "meanings": {
+            "tr": "Muğlak, belirsiz",
+            "en": "Of uncertain, indefinite, or unclear character or meaning"
+        },
+        "exampleSentence": "He gave a vague description of the attacker.",
+        "localAsset": "assets/images/words/yds_ydt/word_vague.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
+    },
+    {
+        "id": 1077,
+        "word": "Perceive",
+        "meanings": {
+            "tr": "Algılamak, fark etmek",
+            "en": "Become aware or conscious of something; come to realize or understand"
+        },
+        "exampleSentence": "I perceived a change in his behavior.",
+        "localAsset": "assets/images/words/yds_ydt/word_perceive.webp",
+        "difficulty": 3,
+        "deck": "ydsYdt"
     }
 ]

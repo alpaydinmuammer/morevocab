@@ -28,8 +28,11 @@ class AppConstants {
 
   // Opacity Values
   static const double opacityVeryLight = 0.1;
+  static const double opacityLow = 0.2;
   static const double opacityLight = 0.3;
+  static const double opacitySemiMedium = 0.4;
   static const double opacityMedium = 0.5;
+  static const double opacitySemiHigh = 0.6;
   static const double opacityMediumHigh = 0.7;
   static const double opacityHigh = 0.8;
   static const double opacityAlmostFull = 0.9;
@@ -63,6 +66,9 @@ class AppConstants {
   static const double blurRadiusXLarge = 16.0;
   static const double blurRadiusXXLarge = 20.0;
   static const double blurRadiusXXXLarge = 30.0;
+
+  // Spread Radius Values
+  static const double spreadRadiusMedium = 10.0;
 
   // Splash Animation Values
   static const double splashCardSlideDistance = 80.0;

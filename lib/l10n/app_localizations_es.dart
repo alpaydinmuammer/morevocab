@@ -709,4 +709,114 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get challenges => 'Meydan Okumalar';
+
+  @override
+  String get badges => 'Rozetler';
+
+  @override
+  String get badgeUnlocked => 'Rozet Açıldı!';
+
+  @override
+  String get badgeSectionAnagram => 'Anagram';
+
+  @override
+  String get badgeSectionWordChain => 'Kelime Zinciri';
+
+  @override
+  String get badgeSectionOddOneOut => 'Farklı Olanı Bul';
+
+  @override
+  String get badgeSectionEmojiPuzzle => 'Emoji Bulmaca';
+
+  @override
+  String get badgeSectionWordBuilder => 'Kelime İnşaatı';
+
+  @override
+  String get badgeSectionStreak => 'Seri';
+
+  @override
+  String get badgeSectionSpecial => 'Özel';
+
+  @override
+  String get badgeAnagramRookie => 'Çırak';
+
+  @override
+  String get badgeAnagramExpert => 'Uzman';
+
+  @override
+  String get badgeAnagramChampion => 'Şampiyon';
+
+  @override
+  String get badgeChainStarter => 'Başlatan';
+
+  @override
+  String get badgeChainMaster => 'Usta';
+
+  @override
+  String get badgeChainLegend => 'Efsane';
+
+  @override
+  String get badgeObserver => 'Gözlemci';
+
+  @override
+  String get badgeDetective => 'Dedektif';
+
+  @override
+  String get badgeSharpshooter => 'Keskin Nişancı';
+
+  @override
+  String get badgeEmojiSolver => 'Çözücü';
+
+  @override
+  String get badgePuzzleMaster => 'Usta';
+
+  @override
+  String get badgeEmojiLegend => 'Efsane';
+
+  @override
+  String get badgeWordWorker => 'İşçi';
+
+  @override
+  String get badgeWordArchitect => 'Mimar';
+
+  @override
+  String get badgeWordKing => 'Kral';
+
+  @override
+  String get badgeFireSpirit => 'Ateş Ruhu';
+
+  @override
+  String get badgeDedicated => 'Kararlı';
+
+  @override
+  String get badgeLegendary => 'Efsanevi';
+
+  @override
+  String get badgeFirstStep => 'İlk Adım';
+
+  @override
+  String get badgeArcadeFan => 'Arcade Fanı';
+
+  @override
+  String get badgeBrainBoss => 'Beyin Patronu';
+
+  @override
+  String get errorLogTitle => 'Yanlışlarım Defteri';
+
+  @override
+  String get errorLogSubtitle => 'Bilmediğin kelimeler';
+
+  @override
+  String get errorLogEmpty => 'Henüz hata yok!';
+
+  @override
+  String get errorLogEmptyHint => 'Sola kaydırdığın kelimeler burada görünecek';
+
+  @override
+  String errorLogPage(int current, int total) {
+    return 'Sayfa $current/$total';
+  }
+
+  @override
+  String get errorLogCardDesc => 'Zorlandığın kelimeleri gözden geçir';
 }

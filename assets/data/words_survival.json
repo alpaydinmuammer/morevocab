@@ -655,6 +655,7 @@
             "en": "Having a strong, hot flavor"
         },
         "exampleSentence": "Is this dish very spicy?",
+        "localAsset": "assets/images/words/survival/word_spicy.webp",
         "difficulty": 1,
         "deck": "survival"
     },
@@ -666,6 +667,7 @@
             "en": "Water from a faucet"
         },
         "exampleSentence": "Is the tap water safe to drink?",
+        "localAsset": "assets/images/words/survival/word_tap_water.webp",
         "difficulty": 2,
         "deck": "survival"
     },
@@ -677,6 +679,7 @@
             "en": "Everything has been sold"
         },
         "exampleSentence": "The concert tickets are sold out.",
+        "localAsset": "assets/images/words/survival/word_sold_out.webp",
         "difficulty": 1,
         "deck": "survival"
     },
@@ -688,6 +691,7 @@
             "en": "Money given back to the customer"
         },
         "exampleSentence": "Can I get a refund for this?",
+        "localAsset": "assets/images/words/survival/word_refund.webp",
         "difficulty": 2,
         "deck": "survival"
     },
@@ -699,6 +703,7 @@
             "en": "Bag with basic medical supplies"
         },
         "exampleSentence": "Do you have a first aid kit?",
+        "localAsset": "assets/images/words/survival/word_first_aid_kit.webp",
         "difficulty": 2,
         "deck": "survival"
     },
@@ -710,6 +715,7 @@
             "en": "Device that warns about fire"
         },
         "exampleSentence": "Please exit calmly when the fire alarm sounds.",
+        "localAsset": "assets/images/words/survival/word_fire_alarm.webp",
         "difficulty": 2,
         "deck": "survival"
     }

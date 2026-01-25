@@ -8,6 +8,7 @@ import '../providers/auth_provider.dart';
 import '../providers/pet_provider.dart';
 import '../providers/settings_provider.dart';
 import '../providers/word_providers.dart';
+import '../providers/error_log_provider.dart';
 import '../widgets/auth/sign_in_button.dart';
 import '../widgets/premium_background.dart';
 
@@ -464,10 +465,7 @@ class SettingsPage extends ConsumerWidget {
                 color: theme.colorScheme.error.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Icons.logout_rounded,
-                color: theme.colorScheme.error,
-              ),
+              child: Icon(Icons.logout_rounded, color: theme.colorScheme.error),
             ),
             title: Text(
               AppLocalizations.of(context)!.signOut,
@@ -539,9 +537,11 @@ class SettingsPage extends ConsumerWidget {
     if (confirmed == true) {
       await ref.read(wordRepositoryProvider).resetProgress();
       await ref.read(petProvider.notifier).deletePet(); // Also reset pet
+      await ref.read(errorLogProvider.notifier).clearAll(); // Clear error log
       ref.invalidate(wordStatsProvider);
       ref.invalidate(wordStudyProvider);
       ref.invalidate(petProvider);
+      ref.invalidate(errorLogProvider);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -628,8 +628,9 @@ class _SignInModalState extends ConsumerState<_SignInModal> {
   Future<void> _signInWithGoogle() async {
     setState(() => _isGoogleLoading = true);
 
-    final success =
-        await ref.read(authNotifierProvider.notifier).signInWithGoogle();
+    final success = await ref
+        .read(authNotifierProvider.notifier)
+        .signInWithGoogle();
 
     if (mounted) {
       setState(() => _isGoogleLoading = false);
@@ -649,8 +650,9 @@ class _SignInModalState extends ConsumerState<_SignInModal> {
   Future<void> _signInWithApple() async {
     setState(() => _isAppleLoading = true);
 
-    final success =
-        await ref.read(authNotifierProvider.notifier).signInWithApple();
+    final success = await ref
+        .read(authNotifierProvider.notifier)
+        .signInWithApple();
 
     if (mounted) {
       setState(() => _isAppleLoading = false);

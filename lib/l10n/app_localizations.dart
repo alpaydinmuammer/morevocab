@@ -1425,6 +1425,222 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Meydan Okumalar'**
   String get challenges;
+
+  /// No description provided for @badges.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rozetler'**
+  String get badges;
+
+  /// No description provided for @badgeUnlocked.
+  ///
+  /// In tr, this message translates to:
+  /// **'Rozet Açıldı!'**
+  String get badgeUnlocked;
+
+  /// No description provided for @badgeSectionAnagram.
+  ///
+  /// In tr, this message translates to:
+  /// **'Anagram'**
+  String get badgeSectionAnagram;
+
+  /// No description provided for @badgeSectionWordChain.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime Zinciri'**
+  String get badgeSectionWordChain;
+
+  /// No description provided for @badgeSectionOddOneOut.
+  ///
+  /// In tr, this message translates to:
+  /// **'Farklı Olanı Bul'**
+  String get badgeSectionOddOneOut;
+
+  /// No description provided for @badgeSectionEmojiPuzzle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Emoji Bulmaca'**
+  String get badgeSectionEmojiPuzzle;
+
+  /// No description provided for @badgeSectionWordBuilder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelime İnşaatı'**
+  String get badgeSectionWordBuilder;
+
+  /// No description provided for @badgeSectionStreak.
+  ///
+  /// In tr, this message translates to:
+  /// **'Seri'**
+  String get badgeSectionStreak;
+
+  /// No description provided for @badgeSectionSpecial.
+  ///
+  /// In tr, this message translates to:
+  /// **'Özel'**
+  String get badgeSectionSpecial;
+
+  /// No description provided for @badgeAnagramRookie.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çırak'**
+  String get badgeAnagramRookie;
+
+  /// No description provided for @badgeAnagramExpert.
+  ///
+  /// In tr, this message translates to:
+  /// **'Uzman'**
+  String get badgeAnagramExpert;
+
+  /// No description provided for @badgeAnagramChampion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şampiyon'**
+  String get badgeAnagramChampion;
+
+  /// No description provided for @badgeChainStarter.
+  ///
+  /// In tr, this message translates to:
+  /// **'Başlatan'**
+  String get badgeChainStarter;
+
+  /// No description provided for @badgeChainMaster.
+  ///
+  /// In tr, this message translates to:
+  /// **'Usta'**
+  String get badgeChainMaster;
+
+  /// No description provided for @badgeChainLegend.
+  ///
+  /// In tr, this message translates to:
+  /// **'Efsane'**
+  String get badgeChainLegend;
+
+  /// No description provided for @badgeObserver.
+  ///
+  /// In tr, this message translates to:
+  /// **'Gözlemci'**
+  String get badgeObserver;
+
+  /// No description provided for @badgeDetective.
+  ///
+  /// In tr, this message translates to:
+  /// **'Dedektif'**
+  String get badgeDetective;
+
+  /// No description provided for @badgeSharpshooter.
+  ///
+  /// In tr, this message translates to:
+  /// **'Keskin Nişancı'**
+  String get badgeSharpshooter;
+
+  /// No description provided for @badgeEmojiSolver.
+  ///
+  /// In tr, this message translates to:
+  /// **'Çözücü'**
+  String get badgeEmojiSolver;
+
+  /// No description provided for @badgePuzzleMaster.
+  ///
+  /// In tr, this message translates to:
+  /// **'Usta'**
+  String get badgePuzzleMaster;
+
+  /// No description provided for @badgeEmojiLegend.
+  ///
+  /// In tr, this message translates to:
+  /// **'Efsane'**
+  String get badgeEmojiLegend;
+
+  /// No description provided for @badgeWordWorker.
+  ///
+  /// In tr, this message translates to:
+  /// **'İşçi'**
+  String get badgeWordWorker;
+
+  /// No description provided for @badgeWordArchitect.
+  ///
+  /// In tr, this message translates to:
+  /// **'Mimar'**
+  String get badgeWordArchitect;
+
+  /// No description provided for @badgeWordKing.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kral'**
+  String get badgeWordKing;
+
+  /// No description provided for @badgeFireSpirit.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ateş Ruhu'**
+  String get badgeFireSpirit;
+
+  /// No description provided for @badgeDedicated.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kararlı'**
+  String get badgeDedicated;
+
+  /// No description provided for @badgeLegendary.
+  ///
+  /// In tr, this message translates to:
+  /// **'Efsanevi'**
+  String get badgeLegendary;
+
+  /// No description provided for @badgeFirstStep.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlk Adım'**
+  String get badgeFirstStep;
+
+  /// No description provided for @badgeArcadeFan.
+  ///
+  /// In tr, this message translates to:
+  /// **'Arcade Fanı'**
+  String get badgeArcadeFan;
+
+  /// No description provided for @badgeBrainBoss.
+  ///
+  /// In tr, this message translates to:
+  /// **'Beyin Patronu'**
+  String get badgeBrainBoss;
+
+  /// No description provided for @errorLogTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yanlışlarım Defteri'**
+  String get errorLogTitle;
+
+  /// No description provided for @errorLogSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bilmediğin kelimeler'**
+  String get errorLogSubtitle;
+
+  /// No description provided for @errorLogEmpty.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz hata yok!'**
+  String get errorLogEmpty;
+
+  /// No description provided for @errorLogEmptyHint.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sola kaydırdığın kelimeler burada görünecek'**
+  String get errorLogEmptyHint;
+
+  /// No description provided for @errorLogPage.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sayfa {current}/{total}'**
+  String errorLogPage(int current, int total);
+
+  /// No description provided for @errorLogCardDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Zorlandığın kelimeleri gözden geçir'**
+  String get errorLogCardDesc;
 }
 
 class _AppLocalizationsDelegate

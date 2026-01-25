@@ -6,6 +6,7 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/pet_constants.dart';
 import '../../providers/pet_provider.dart';
 import '../challenges_modal.dart';
+import '../badges_modal.dart';
 
 /// Compact pet widget for HomePage - just shows the pet avatar
 /// Tapping opens the detail modal
@@ -425,6 +426,29 @@ class PetDetailModal extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     side: BorderSide(
                       color: Colors.orange.withValues(alpha: 0.5),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+
+              // Badges button
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context); // Close pet modal first
+                    BadgesModal.show(context);
+                  },
+                  icon: const Icon(
+                    Icons.emoji_events_rounded,
+                    color: Colors.amber,
+                  ),
+                  label: Text(l10n.badges),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    side: BorderSide(
+                      color: Colors.amber.withValues(alpha: 0.5),
                     ),
                   ),
                 ),

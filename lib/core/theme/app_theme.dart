@@ -84,7 +84,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: ColorScheme.dark(
-        primary: primaryColor,
+        primary: const Color(0xFF64B5F6), // Lighter Blue for visibility on dark
         secondary: secondaryColor,
         surface: darkSurface,
         onSurface: darkOnSurface,
@@ -224,12 +224,16 @@ class AppColors extends ThemeExtension<AppColors> {
   final List<Color> settingsGradient;
   final Color arcadeShadow;
   final Color settingsShadow;
+  final Color onboardingGradientStart;
+  final Color onboardingGradientEnd;
 
   const AppColors({
     required this.arcadeGradient,
     required this.settingsGradient,
     required this.arcadeShadow,
     required this.settingsShadow,
+    required this.onboardingGradientStart,
+    required this.onboardingGradientEnd,
   });
 
   @override
@@ -238,12 +242,18 @@ class AppColors extends ThemeExtension<AppColors> {
     List<Color>? settingsGradient,
     Color? arcadeShadow,
     Color? settingsShadow,
+    Color? onboardingGradientStart,
+    Color? onboardingGradientEnd,
   }) {
     return AppColors(
       arcadeGradient: arcadeGradient ?? this.arcadeGradient,
       settingsGradient: settingsGradient ?? this.settingsGradient,
       arcadeShadow: arcadeShadow ?? this.arcadeShadow,
       settingsShadow: settingsShadow ?? this.settingsShadow,
+      onboardingGradientStart:
+          onboardingGradientStart ?? this.onboardingGradientStart,
+      onboardingGradientEnd:
+          onboardingGradientEnd ?? this.onboardingGradientEnd,
     );
   }
 
@@ -263,6 +273,16 @@ class AppColors extends ThemeExtension<AppColors> {
       ],
       arcadeShadow: Color.lerp(arcadeShadow, other.arcadeShadow, t)!,
       settingsShadow: Color.lerp(settingsShadow, other.settingsShadow, t)!,
+      onboardingGradientStart: Color.lerp(
+        onboardingGradientStart,
+        other.onboardingGradientStart,
+        t,
+      )!,
+      onboardingGradientEnd: Color.lerp(
+        onboardingGradientEnd,
+        other.onboardingGradientEnd,
+        t,
+      )!,
     );
   }
 
@@ -272,6 +292,8 @@ class AppColors extends ThemeExtension<AppColors> {
     settingsGradient: [Colors.blueGrey.shade700, Colors.blueGrey.shade400],
     arcadeShadow: Colors.orange.withValues(alpha: 0.3),
     settingsShadow: Colors.blueGrey.withValues(alpha: 0.3),
+    onboardingGradientStart: const Color(0xFF0A1628), // Deep Space Blue
+    onboardingGradientEnd: const Color(0xFF0D2137), // Darker Navy
   );
 
   static final dark = AppColors(
@@ -282,5 +304,7 @@ class AppColors extends ThemeExtension<AppColors> {
     ], // Slightly darker for dark mode
     arcadeShadow: Colors.orange.withValues(alpha: 0.2),
     settingsShadow: Colors.blueGrey.withValues(alpha: 0.2),
+    onboardingGradientStart: const Color(0xFF0A1628), // Keep consistent
+    onboardingGradientEnd: const Color(0xFF0D2137), // Keep consistent
   );
 }
