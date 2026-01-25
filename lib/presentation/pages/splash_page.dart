@@ -76,6 +76,58 @@ class _SplashPageState extends ConsumerState<SplashPage>
     });
   }
 
+  bool _imagesPrecached = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_imagesPrecached) {
+      _imagesPrecached = true;
+      _precacheCriticalImages();
+    }
+  }
+
+  /// Precache critical images to prevent frame drops during navigation
+  void _precacheCriticalImages() {
+    // Logo
+    precacheImage(const AssetImage(AppConstants.logoAssetPath), context);
+    precacheImage(
+      const AssetImage('assets/images/logo/morevocabicon.png'),
+      context,
+    );
+
+    // Deck images
+    precacheImage(const AssetImage('assets/images/decks/sat.png'), context);
+    precacheImage(
+      const AssetImage('assets/images/decks/strategy.png'),
+      context,
+    );
+    precacheImage(const AssetImage('assets/images/decks/ielts.png'), context);
+    precacheImage(const AssetImage('assets/images/decks/toefl.png'), context);
+
+    // Arcade game thumbnails
+    precacheImage(
+      const AssetImage('assets/images/arcade/word_chain.png'),
+      context,
+    );
+    precacheImage(
+      const AssetImage('assets/images/arcade/anagram.png'),
+      context,
+    );
+    precacheImage(
+      const AssetImage('assets/images/arcade/word_builder.png'),
+      context,
+    );
+    precacheImage(
+      const AssetImage('assets/images/arcade/emoji_puzzle.png'),
+      context,
+    );
+    precacheImage(
+      const AssetImage('assets/images/arcade/odd_one_out.png'),
+      context,
+    );
+  }
+
   void _setupAnimations() {
     // Card 1 (Top) - Enhanced with scale
     _card1Slide = Tween<double>(begin: 0.0, end: 120.0).animate(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../providers/settings_provider.dart';
@@ -95,7 +96,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
                         l10n.onboardingSkip,
                         style: TextStyle(
                           color: Colors.white.withValues(alpha: 0.6),
-                          fontSize: 16,
+                          fontSize: AppConstants.textLG,
                         ),
                       ),
                     ),
@@ -122,13 +123,17 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
 
                 // Page indicators
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: AppConstants.spacingLG,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(6, (index) {
                       return AnimatedContainer(
                         duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: AppConstants.spacingXXS,
+                        ),
                         width: _currentPage == index ? 24 : 8,
                         height: 8,
                         decoration: BoxDecoration(
@@ -163,7 +168,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
                             ? l10n.onboardingStart
                             : l10n.onboardingNext,
                         style: const TextStyle(
-                          fontSize: 18,
+                          fontSize: AppConstants.textXL,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -191,24 +196,24 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage>
             width: 180,
             height: 180,
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: AppConstants.spacingHuge),
           // Title
           Text(
             l10n.onboardingWelcomeTitle,
             style: const TextStyle(
-              fontSize: 32,
+              fontSize: AppConstants.textHero,
               fontWeight: FontWeight.bold,
               color: Colors.white,
               letterSpacing: 0.5,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppConstants.spacingLG),
           // Subtitle
           Text(
             l10n.onboardingWelcomeSubtitle,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: AppConstants.textXL,
               color: Colors.white.withValues(alpha: 0.7),
               height: 1.5,
             ),

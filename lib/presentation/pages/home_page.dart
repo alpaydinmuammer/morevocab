@@ -72,10 +72,12 @@ class HomePage extends ConsumerWidget {
                                     ),
                                     // Edit icon - only show if no name entered yet
                                     if (settings.userName.isEmpty) ...[
-                                      const SizedBox(width: 8),
+                                      const SizedBox(
+                                        width: AppConstants.spacingSM,
+                                      ),
                                       Icon(
                                         Icons.edit_rounded,
-                                        size: 20,
+                                        size: AppConstants.iconSizeXS,
                                         color: theme.colorScheme.primary
                                             .withValues(alpha: 0.7),
                                       ),
@@ -83,12 +85,12 @@ class HomePage extends ConsumerWidget {
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              const SizedBox(height: AppConstants.spacingXXS),
                               Text(
                                 homeState.getMotivationalPhrase(
                                   AppLocalizations.of(context)!,
                                 ),
-                                style: theme.textTheme.bodyLarge?.copyWith(
+                                style: theme.textTheme.bodyMedium?.copyWith(
                                   fontStyle: FontStyle.italic,
                                   color: theme.colorScheme.onSurface.withValues(
                                     alpha: theme.brightness == Brightness.dark
@@ -100,7 +102,7 @@ class HomePage extends ConsumerWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: AppConstants.spacingSM),
                         const StreakBadge(),
                       ],
                     ),
@@ -110,37 +112,37 @@ class HomePage extends ConsumerWidget {
                     // Pet Widget
                     _buildPetSection(context, ref),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AppConstants.spacingLG),
 
                     // Main Deck Carousel
                     const DeckStatsCarousel(),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AppConstants.spacingLG),
 
                     const Expanded(flex: 1, child: SizedBox()),
 
                     // Start Study Button
                     _buildStartButton(context, ref),
 
-                    const SizedBox(height: 12),
+                    const SizedBox(height: AppConstants.spacingMD),
 
                     // Arcade & Settings Row
                     Row(
                       children: [
                         Expanded(child: _buildArcadeButton(context)),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: AppConstants.spacingMD),
                         Expanded(child: _buildSettingsButton(context)),
                       ],
                     ),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: AppConstants.spacingLG),
 
                     // Credits button
                     TextButton.icon(
                       onPressed: () => _showCredits(context),
                       icon: Icon(
                         Icons.info_outline_rounded,
-                        size: 18,
+                        size: AppConstants.textXL,
                         color: theme.colorScheme.onSurface.withValues(
                           alpha: 0.5,
                         ),
@@ -154,7 +156,7 @@ class HomePage extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: AppConstants.spacingSM),
                   ],
                 ),
               ),
@@ -246,9 +248,9 @@ class HomePage extends ConsumerWidget {
                     const Icon(
                       Icons.play_arrow_rounded,
                       color: Colors.white,
-                      size: 28,
+                      size: AppConstants.textDisplay,
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: AppConstants.spacingMD),
 
                     // Text ONLY (No subtitle, no column needed)
                     Text(
@@ -257,7 +259,7 @@ class HomePage extends ConsumerWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 1.5,
-                        fontSize: 22,
+                        fontSize: AppConstants.textXXL,
                       ),
                     ),
                   ],
@@ -277,7 +279,7 @@ class HomePage extends ConsumerWidget {
       onTap: () => context.push('/arcade'),
       child: Container(
         width: double.infinity,
-        height: 56,
+        height: 52,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
@@ -318,9 +320,9 @@ class HomePage extends ConsumerWidget {
                     const Icon(
                       Icons.sports_esports_rounded,
                       color: Colors.white,
-                      size: 24,
+                      size: AppConstants.iconSizeSM,
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: AppConstants.spacingMD),
                     Text(
                       AppLocalizations.of(context)!.arcadeMode.toUpperCase(),
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -412,7 +414,7 @@ class HomePage extends ConsumerWidget {
     return AnimatedPressable(
       onTap: () => context.push('/settings'),
       child: Container(
-        height: 56,
+        height: 52,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: LinearGradient(
@@ -453,9 +455,9 @@ class HomePage extends ConsumerWidget {
                     const Icon(
                       Icons.settings_rounded,
                       color: Colors.white,
-                      size: 24,
+                      size: AppConstants.iconSizeSM,
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: AppConstants.spacingMD),
                     Text(
                       AppLocalizations.of(context)!.settings.toUpperCase(),
                       style: theme.textTheme.titleMedium?.copyWith(

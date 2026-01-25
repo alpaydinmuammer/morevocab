@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/app_constants.dart';
 import '../../domain/models/badge_model.dart';
 import '../../l10n/app_localizations.dart';
 import '../providers/badge_provider.dart';
@@ -27,10 +28,10 @@ class BadgesModal extends ConsumerWidget {
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height * 0.75,
       ),
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(AppConstants.spacingLG),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(AppConstants.borderRadiusXLarge),
       ),
       child: SafeArea(
         child: Column(
@@ -38,10 +39,10 @@ class BadgesModal extends ConsumerWidget {
           children: [
             // Handle
             Padding(
-              padding: const EdgeInsets.only(top: 12),
+              padding: const EdgeInsets.only(top: AppConstants.spacingMD),
               child: Container(
-                width: 40,
-                height: 4,
+                width: AppConstants.modalHandleWidth,
+                height: AppConstants.modalHandleHeight,
                 decoration: BoxDecoration(
                   color: theme.colorScheme.outlineVariant,
                   borderRadius: BorderRadius.circular(2),
@@ -50,11 +51,14 @@ class BadgesModal extends ConsumerWidget {
             ),
             // Header
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(AppConstants.spacingXL),
               child: Row(
                 children: [
-                  const Text('🏅', style: TextStyle(fontSize: 28)),
-                  const SizedBox(width: 12),
+                  const Text(
+                    '🏅',
+                    style: TextStyle(fontSize: AppConstants.textDisplay),
+                  ),
+                  const SizedBox(width: AppConstants.spacingMD),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,14 +262,14 @@ class _BadgeCard extends StatelessWidget {
                 Text(
                   badge.icon,
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: AppConstants.textEmoji,
                     color: isUnlocked ? null : Colors.grey,
                   ),
                 ),
                 if (!isUnlocked)
                   Container(
-                    width: 48,
-                    height: 48,
+                    width: AppConstants.spacingMassive,
+                    height: AppConstants.spacingMassive,
                     decoration: BoxDecoration(
                       color: Colors.black.withValues(alpha: 0.4),
                       shape: BoxShape.circle,
@@ -273,12 +277,12 @@ class _BadgeCard extends StatelessWidget {
                     child: const Icon(
                       Icons.lock_rounded,
                       color: Colors.white54,
-                      size: 20,
+                      size: AppConstants.iconSizeXS,
                     ),
                   ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppConstants.spacingSM),
             // Name
             Text(
               _getBadgeName(type, l10n),
@@ -292,7 +296,7 @@ class _BadgeCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppConstants.spacingXXS),
             // Requirement
             Text(
               _getRequirementText(type, l10n),
@@ -300,7 +304,7 @@ class _BadgeCard extends StatelessWidget {
                 color: isUnlocked
                     ? Colors.green.shade600
                     : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
-                fontSize: 10,
+                fontSize: AppConstants.textXS,
               ),
               textAlign: TextAlign.center,
               maxLines: 2,
@@ -448,25 +452,30 @@ class BadgeUnlockDialog extends StatelessWidget {
 
     return Dialog(
       backgroundColor: theme.colorScheme.surface,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppConstants.spacingXXL),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(AppConstants.spacingXXL),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Celebration icon
             Container(
-              width: 80,
-              height: 80,
+              width: AppConstants.avatarSizeLG,
+              height: AppConstants.avatarSizeLG,
               decoration: BoxDecoration(
                 color: _getTierColor(badge.tier).withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: Text(badge.icon, style: const TextStyle(fontSize: 40)),
+                child: Text(
+                  badge.icon,
+                  style: const TextStyle(fontSize: AppConstants.textEmoji),
+                ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppConstants.spacingLG),
             Text(
               l10n.badgeUnlocked,
               style: theme.textTheme.titleMedium?.copyWith(
@@ -474,7 +483,7 @@ class BadgeUnlockDialog extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppConstants.spacingSM),
             Text(
               _getBadgeName(badgeType, l10n),
               style: theme.textTheme.titleLarge?.copyWith(
@@ -482,7 +491,7 @@ class BadgeUnlockDialog extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: AppConstants.spacingXL),
             SizedBox(
               width: double.infinity,
               child: FilledButton(

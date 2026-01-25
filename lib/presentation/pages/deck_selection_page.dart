@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../domain/models/word_deck.dart';
 import '../../l10n/app_localizations.dart';
 import '../widgets/premium_background.dart';
@@ -99,7 +100,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                     crossAxisCount: 2,
                     mainAxisSpacing: 16,
                     crossAxisSpacing: 16,
-                    childAspectRatio: 0.85,
+                    childAspectRatio: 0.80,
                   ),
                   delegate: SliverChildBuilderDelegate((context, index) {
                     // Position 0: examStrategies (first deck)
@@ -333,14 +334,18 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
           borderRadius: BorderRadius.circular(24),
           child: Stack(
             children: [
-              // Background icon
+              // Background image
               Positioned(
                 right: -10,
                 bottom: -10,
-                child: Icon(
-                  Icons.book_rounded,
-                  size: 100,
-                  color: Colors.white.withValues(alpha: 0.1),
+                child: Opacity(
+                  opacity: 0.08,
+                  child: Image.asset(
+                    'assets/images/decks/error_log.png',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
 
@@ -350,7 +355,7 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Centered icon
+                    // Centered logo
                     Expanded(
                       child: Center(
                         child: Container(
@@ -366,24 +371,29 @@ class _DeckSelectionPageState extends ConsumerState<DeckSelectionPage> {
                               ),
                             ],
                           ),
-                          child: const Icon(
-                            Icons.menu_book_rounded,
-                            color: Colors.white,
-                            size: 52,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(11),
+                            child: Image.asset(
+                              'assets/images/decks/error_log.png',
+                              width: 75,
+                              height: 75,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
                     ),
 
                     // Title
-                    Text(
+                    AutoSizeText(
                       l10n.errorLogTitle,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 14,
                       ),
-                      maxLines: 2,
+                      maxLines: 1,
+                      minFontSize: 10,
                       overflow: TextOverflow.ellipsis,
                     ),
 

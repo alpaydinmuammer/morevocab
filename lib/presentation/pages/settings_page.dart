@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/datasources/firebase_auth_datasource.dart';
 import '../../l10n/app_localizations.dart';
@@ -49,7 +50,7 @@ class SettingsPage extends ConsumerWidget {
               child: _buildThemeSelector(context, ref, settings.themeMode),
             ),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: AppConstants.spacingXXXL),
             _buildSectionHeader(
               context,
               AppLocalizations.of(context)!.language,
@@ -61,7 +62,7 @@ class SettingsPage extends ConsumerWidget {
               child: _buildLanguageSelector(context, ref, settings.locale),
             ),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: AppConstants.spacingXXXL),
             _buildSectionHeader(
               context,
               AppLocalizations.of(context)!.data,
@@ -99,10 +100,10 @@ class SettingsPage extends ConsumerWidget {
               ),
             ),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: AppConstants.spacingXXXL),
             // Show Sign In for guests, Sign Out for authenticated users
             _buildAuthSection(context, ref),
-            const SizedBox(height: 40),
+            const SizedBox(height: AppConstants.spacingHuge),
           ],
         ),
       ),
@@ -116,15 +117,18 @@ class SettingsPage extends ConsumerWidget {
   ) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(left: 4, bottom: 12),
+      padding: const EdgeInsets.only(
+        left: AppConstants.spacingXXS,
+        bottom: AppConstants.spacingMD,
+      ),
       child: Row(
         children: [
           Icon(
             icon,
-            size: 20,
+            size: AppConstants.iconSizeXS,
             color: theme.colorScheme.primary.withValues(alpha: 0.7),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppConstants.spacingSM),
           Text(
             title.toUpperCase(),
             style: theme.textTheme.labelLarge?.copyWith(
@@ -152,7 +156,7 @@ class SettingsPage extends ConsumerWidget {
         color: isDark
             ? Colors.white.withValues(alpha: 0.08)
             : theme.colorScheme.surface.withValues(alpha: 0.85),
-        borderRadius: BorderRadius.circular(28),
+        borderRadius: BorderRadius.circular(AppConstants.borderRadiusXLarge),
         border: Border.all(
           color: Colors.white.withValues(alpha: isDark ? 0.1 : 0.4),
           width: 1.5,
@@ -201,11 +205,11 @@ class SettingsPage extends ConsumerWidget {
                   color: isSelected ? Colors.white : theme.colorScheme.primary,
                   size: 20,
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppConstants.spacingXXS),
                 Text(
                   label,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: AppConstants.textSM,
                     fontWeight: FontWeight.bold,
                     color: isSelected
                         ? Colors.white
@@ -226,7 +230,7 @@ class SettingsPage extends ConsumerWidget {
           ThemeMode.system,
           Icons.brightness_auto_rounded,
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: AppConstants.spacingSM),
         buildChip(
           AppLocalizations.of(context)!.light,
           ThemeMode.light,
@@ -338,15 +342,15 @@ class SettingsPage extends ConsumerWidget {
                           Text(
                             lang['flag']!,
                             style: TextStyle(
-                              fontSize: 28,
+                              fontSize: AppConstants.textDisplay,
                               color: isSupported ? null : Colors.grey,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          const SizedBox(height: AppConstants.spacingXXS),
                           Text(
                             lang['name']!,
                             style: TextStyle(
-                              fontSize: 11,
+                              fontSize: AppConstants.textSXS,
                               fontWeight: isSelected
                                   ? FontWeight.bold
                                   : FontWeight.normal,
@@ -388,7 +392,7 @@ class SettingsPage extends ConsumerWidget {
                         AppLocalizations.of(context)!.comingSoon,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 8,
+                          fontSize: AppConstants.textTiny,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

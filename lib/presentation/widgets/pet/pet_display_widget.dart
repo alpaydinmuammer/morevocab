@@ -66,7 +66,7 @@ class _PetDisplayWidgetState extends ConsumerState<PetDisplayWidget>
 
   Widget _buildPetAvatar(PetModel pet) {
     final theme = Theme.of(context);
-    const size = 100.0;
+    const size = 85.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

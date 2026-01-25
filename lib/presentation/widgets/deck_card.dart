@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import '../../core/constants/app_constants.dart';
 import '../../domain/models/word_deck.dart';
 import '../providers/word_providers.dart';
 import '../../l10n/app_localizations.dart';
@@ -127,16 +129,17 @@ class DeckCard extends ConsumerWidget {
                                         size: 22,
                                       ),
                               ),
-                              const SizedBox(width: 12),
+                              const SizedBox(width: AppConstants.spacingMD),
                               Expanded(
-                                child: Text(
+                                child: AutoSizeText(
                                   customTitle ?? deck.getLocalizedName(context),
                                   style: theme.textTheme.titleMedium?.copyWith(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17,
                                   ),
-                                  maxLines: 2,
+                                  maxLines: 1,
+                                  minFontSize: AppConstants.textSM,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -186,28 +189,29 @@ class DeckCard extends ConsumerWidget {
                           ),
 
                           // Title (for deck selection)
-                          Text(
+                          AutoSizeText(
                             customTitle ?? deck.getLocalizedName(context),
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                              fontSize: 14,
+                              fontSize: AppConstants.textMD,
                             ),
-                            maxLines: 2,
+                            maxLines: 1,
+                            minFontSize: AppConstants.textXS,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
 
                         // Description
                         if (showDescription) ...[
-                          const SizedBox(height: 4),
+                          const SizedBox(height: AppConstants.spacingXXS),
                           Text(
                             deck.getLocalizedDescription(context),
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: Colors.white.withValues(alpha: 0.9),
                               fontWeight: FontWeight.w500,
                               height: 1.1,
-                              fontSize: 10,
+                              fontSize: AppConstants.textXS,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -216,7 +220,7 @@ class DeckCard extends ConsumerWidget {
 
                         // Word Count Badge
                         if (showWordCount && wordCount != null) ...[
-                          const SizedBox(height: 8),
+                          const SizedBox(height: AppConstants.spacingSM),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
@@ -260,11 +264,13 @@ class DeckCard extends ConsumerWidget {
                                         ?.copyWith(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w900,
-                                          fontSize: 42,
+                                          fontSize: AppConstants.textEmojiLG,
                                           height: 1,
                                         ),
                                   ),
-                                  const SizedBox(height: 6),
+                                  const SizedBox(
+                                    height: AppConstants.spacingXS,
+                                  ),
                                   Text(
                                     '${stats.knownWords} / ${stats.totalWords} ${AppLocalizations.of(context)!.learned}',
                                     style: theme.textTheme.bodyMedium?.copyWith(
@@ -272,10 +278,12 @@ class DeckCard extends ConsumerWidget {
                                         alpha: 0.9,
                                       ),
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14,
+                                      fontSize: AppConstants.textMD,
                                     ),
                                   ),
-                                  const SizedBox(height: 12),
+                                  const SizedBox(
+                                    height: AppConstants.spacingMD,
+                                  ),
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(6),
                                     child: LinearProgressIndicator(
@@ -337,13 +345,13 @@ class DeckCard extends ConsumerWidget {
                       size: 14,
                       color: const Color(0xFF00838F),
                     ),
-                    const SizedBox(width: 4),
+                    const SizedBox(width: AppConstants.spacingXXS),
                     Text(
                       AppLocalizations.of(context)!.newLabel,
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: const Color(0xFF00838F),
                         fontWeight: FontWeight.bold,
-                        fontSize: 11,
+                        fontSize: AppConstants.textSXS,
                       ),
                     ),
                   ],
