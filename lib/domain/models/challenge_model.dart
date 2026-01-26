@@ -1,5 +1,5 @@
 import 'dart:math';
-import '../../../presentation/providers/arcade_provider.dart';
+import '../../presentation/providers/arcade_provider.dart';
 
 /// Represents a daily challenge
 class Challenge {

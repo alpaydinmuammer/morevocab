@@ -56,6 +56,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
 
   final List<String> _wordChain = [];
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
   int _score = 0;
   int _timeLeft = 60;
   Timer? _timer;
@@ -215,6 +216,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
   void dispose() {
     _timer?.cancel();
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -285,6 +287,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
       _score += word.length * 10;
       _timeLeft += 5; // Bonus time for correct word
       _controller.clear();
+      _focusNode.requestFocus();
     });
 
     // Record activity for streak
@@ -340,8 +343,8 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
               // Score and Timer
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
+                  horizontal: 16,
+                  vertical: 8,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -370,10 +373,13 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
                     children: [
                       // Current word display
                       Padding(
-                        padding: const EdgeInsets.all(24),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         child: Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.all(24),
+                          padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.primary.withValues(
                               alpha: 0.1,
@@ -399,7 +405,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
                               const SizedBox(height: 8),
                               Text(
                                 _currentWord,
-                                style: theme.textTheme.displaySmall?.copyWith(
+                                style: theme.textTheme.headlineMedium?.copyWith(
                                   fontWeight: FontWeight.bold,
                                   color: theme.colorScheme.primary,
                                   letterSpacing: 4,
@@ -432,7 +438,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
                       // Word chain history
                       if (_wordChain.length > 1)
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 24),
+                          margin: const EdgeInsets.symmetric(horizontal: 16),
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
                             color: theme.colorScheme.surface.withValues(
@@ -496,14 +502,16 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
 
               // Input area
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
                     Expanded(
                       child: TextField(
                         controller: _controller,
+                        focusNode: _focusNode,
+                        autofocus: true,
                         textCapitalization: TextCapitalization.characters,
-                        enabled: !_isGameOver && !_isValidating,
+                        enabled: !_isGameOver,
                         decoration: InputDecoration(
                           hintText: 'Type a word starting with $_lastLetter...',
                           filled: true,
@@ -514,7 +522,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
                           ),
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20,
-                            vertical: 16,
+                            vertical: 12,
                           ),
                         ),
                         onSubmitted: (_) => _submitWord(),
@@ -545,7 +553,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
                         onPressed: (_isGameOver || _isValidating)
                             ? null
                             : _submitWord,
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                       ),
                     ),
                   ],
@@ -564,7 +572,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
     AppLocalizations l10n,
   ) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           Container(

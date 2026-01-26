@@ -30,7 +30,8 @@ class _PetDisplayWidgetState extends ConsumerState<PetDisplayWidget>
       vsync: this,
     )..repeat(reverse: true);
 
-    _bounceAnimation = Tween<double>(begin: 0, end: 6).animate(
+    // Reduced bounce 6 -> 3 for subtle effect
+    _bounceAnimation = Tween<double>(begin: 0, end: 3).animate(
       CurvedAnimation(parent: _bounceController, curve: Curves.easeInOut),
     );
   }

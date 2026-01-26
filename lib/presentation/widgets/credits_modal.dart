@@ -74,15 +74,15 @@ class CreditsModal extends StatelessWidget {
 
                   // Content
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 40, 24, 20),
+                    padding: const EdgeInsets.fromLTRB(20, 32, 20, 16),
                     child: Row(
                       children: [
                         // Header Icon
                         Container(
-                          padding: const EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
                             color: creditColor.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(16),
                             border: Border.all(
                               color: creditColor.withValues(alpha: 0.3),
                               width: 1.5,
@@ -97,7 +97,7 @@ class CreditsModal extends StatelessWidget {
                           child: Icon(
                             Icons.verified_user_rounded,
                             color: creditColor,
-                            size: 32,
+                            size: 28,
                           ),
                         ),
                         const SizedBox(width: 20),
@@ -145,7 +145,7 @@ class CreditsModal extends StatelessWidget {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
-                    vertical: 20,
+                    vertical: 16,
                   ),
                   children: [
                     _buildCreditCard(
@@ -155,7 +155,7 @@ class CreditsModal extends StatelessWidget {
                       icon: Icons.code_rounded,
                       color: Colors.blue,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildCreditCard(
                       context,
                       title: AppLocalizations.of(context)!.creditsDesign,
@@ -163,7 +163,7 @@ class CreditsModal extends StatelessWidget {
                       icon: Icons.auto_awesome_rounded,
                       color: Colors.purple,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildCreditCard(
                       context,
                       title: AppLocalizations.of(context)!.creditsTechnology,
@@ -171,7 +171,7 @@ class CreditsModal extends StatelessWidget {
                       icon: Icons.bolt_rounded,
                       color: Colors.cyan,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     _buildCreditCard(
                       context,
                       title: AppLocalizations.of(context)!.creditsVersion,
@@ -179,7 +179,7 @@ class CreditsModal extends StatelessWidget {
                       icon: Icons.info_outline_rounded,
                       color: Colors.teal,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
 
                     // Contact Button
                     _buildContactButton(context),
@@ -199,7 +199,7 @@ class CreditsModal extends StatelessWidget {
     return GestureDetector(
       onTap: () => _sendEmail(context),
       child: Container(
-        height: 56,
+        height: 48,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           gradient: LinearGradient(
@@ -224,7 +224,7 @@ class CreditsModal extends StatelessWidget {
               bottom: -10,
               child: Icon(
                 Icons.mark_email_unread_rounded,
-                size: 70,
+                size: 60,
                 color: Colors.white.withValues(alpha: 0.1),
               ),
             ),
@@ -324,7 +324,7 @@ class CreditsModal extends StatelessWidget {
               ? (importing_dart_ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10))
               : (importing_dart_ui.ImageFilter.blur(sigmaX: 0, sigmaY: 0)),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

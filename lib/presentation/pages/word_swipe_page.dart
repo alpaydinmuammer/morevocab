@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -274,55 +273,46 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
                           children: [
                             // LEFT ORB (Don't Know)
                             AnimatedPressable(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                  32,
-                                ), // Half of size
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                    sigmaX: 10,
-                                    sigmaY: 10,
-                                  ),
-                                  child: Container(
-                                    width: 64,
-                                    height: 64,
-                                    decoration: BoxDecoration(
-                                      color: theme.brightness == Brightness.dark
-                                          ? Colors.black.withValues(alpha: 0.3)
-                                          : Colors.white.withValues(alpha: 0.6),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: theme.colorScheme.outline
-                                            .withValues(alpha: 0.2),
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.red.withValues(
-                                            alpha: 0.1,
-                                          ),
-                                          blurRadius: 20,
-                                          offset: const Offset(0, 8),
-                                        ),
-                                      ],
+                              child: Container(
+                                width: 64,
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  color: theme.brightness == Brightness.dark
+                                      ? Colors.black.withValues(alpha: 0.3)
+                                      : Colors.white.withValues(alpha: 0.6),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: theme.colorScheme.outline.withValues(
+                                      alpha: 0.2,
                                     ),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        onTap: () => _cardController.swipe(
-                                          CardSwiperDirection.left,
-                                        ),
-                                        splashColor: Colors.red.withValues(
-                                          alpha: 0.3,
-                                        ),
-                                        highlightColor: Colors.red.withValues(
-                                          alpha: 0.1,
-                                        ),
-                                        child: Icon(
-                                          Icons.close_rounded,
-                                          color: Colors.red.shade400,
-                                          size: 32,
-                                        ),
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.red.withValues(alpha: 0.1),
+                                      blurRadius: 20,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipOval(
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      customBorder: const CircleBorder(),
+                                      onTap: () => _cardController.swipe(
+                                        CardSwiperDirection.left,
+                                      ),
+                                      splashColor: Colors.red.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      highlightColor: Colors.red.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      child: Icon(
+                                        Icons.close_rounded,
+                                        color: Colors.red.shade400,
+                                        size: 32,
                                       ),
                                     ),
                                   ),
@@ -334,53 +324,48 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
                             const SizedBox(width: 48), // Gap between buttons
                             // RIGHT ORB (Know)
                             AnimatedPressable(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(32),
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                    sigmaX: 10,
-                                    sigmaY: 10,
-                                  ),
-                                  child: Container(
-                                    width: 64,
-                                    height: 64,
-                                    decoration: BoxDecoration(
-                                      color: theme.brightness == Brightness.dark
-                                          ? Colors.black.withValues(alpha: 0.3)
-                                          : Colors.white.withValues(alpha: 0.6),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: theme.colorScheme.outline
-                                            .withValues(alpha: 0.2),
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.green.withValues(
-                                            alpha: 0.1,
-                                          ),
-                                          blurRadius: 20,
-                                          offset: const Offset(0, 8),
-                                        ),
-                                      ],
+                              child: Container(
+                                width: 64,
+                                height: 64,
+                                decoration: BoxDecoration(
+                                  color: theme.brightness == Brightness.dark
+                                      ? Colors.black.withValues(alpha: 0.3)
+                                      : Colors.white.withValues(alpha: 0.6),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: theme.colorScheme.outline.withValues(
+                                      alpha: 0.2,
                                     ),
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        onTap: () => _cardController.swipe(
-                                          CardSwiperDirection.right,
-                                        ),
-                                        splashColor: Colors.green.withValues(
-                                          alpha: 0.3,
-                                        ),
-                                        highlightColor: Colors.green.withValues(
-                                          alpha: 0.1,
-                                        ),
-                                        child: Icon(
-                                          Icons.check_rounded,
-                                          color: Colors.green.shade400,
-                                          size: 32,
-                                        ),
+                                    width: 1,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.green.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      blurRadius: 20,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: ClipOval(
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      customBorder: const CircleBorder(),
+                                      onTap: () => _cardController.swipe(
+                                        CardSwiperDirection.right,
+                                      ),
+                                      splashColor: Colors.green.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      highlightColor: Colors.green.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      child: Icon(
+                                        Icons.check_rounded,
+                                        color: Colors.green.shade400,
+                                        size: 32,
                                       ),
                                     ),
                                   ),
@@ -526,17 +511,17 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
-        Text(
-          label,
-          style: theme.textTheme.labelMedium?.copyWith(
-            color: isStrategyDeck
-                ? const Color(0xFF2C3E50) // Ink color
-                : color.withValues(alpha: 0.8),
-            fontWeight: FontWeight.w900,
-            letterSpacing: 0.5,
+        if (!isStrategyDeck) ...[
+          const SizedBox(height: 10),
+          Text(
+            label,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: color.withValues(alpha: 0.8),
+              fontWeight: FontWeight.w900,
+              letterSpacing: 0.5,
+            ),
           ),
-        ),
+        ],
       ],
     );
   }

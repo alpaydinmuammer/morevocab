@@ -466,5 +466,725 @@
         "localAsset": "assets/images/words/beginner/word_father.webp",
         "difficulty": 1,
         "deck": "beginner"
+    },
+    {
+        "id": 2040,
+        "word": "Red",
+        "meanings": {
+            "tr": "Kırmızı",
+            "en": "A color like blood"
+        },
+        "exampleSentence": "The apple is red.",
+        "localAsset": "assets/images/words/beginner/word_red_1769428300001.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2041,
+        "word": "Blue",
+        "meanings": {
+            "tr": "Mavi",
+            "en": "A color like the sky"
+        },
+        "exampleSentence": "The sky is blue.",
+        "localAsset": "assets/images/words/beginner/word_blue_1769428300002.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2042,
+        "word": "Green",
+        "meanings": {
+            "tr": "Yeşil",
+            "en": "A color like grass"
+        },
+        "exampleSentence": "The grass is green.",
+        "localAsset": "assets/images/words/beginner/word_green_1769428300003.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2043,
+        "word": "Yellow",
+        "meanings": {
+            "tr": "Sarı",
+            "en": "A color like the sun"
+        },
+        "exampleSentence": "The lemon is yellow.",
+        "localAsset": "assets/images/words/beginner/word_yellow_1769428300004.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2044,
+        "word": "Head",
+        "meanings": {
+            "tr": "Baş / Kafa",
+            "en": "Top part of the body"
+        },
+        "exampleSentence": "Nod your head.",
+        "localAsset": "assets/images/words/beginner/word_head_1769428300005.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2045,
+        "word": "Hand",
+        "meanings": {
+            "tr": "El",
+            "en": "Body part used to hold things"
+        },
+        "exampleSentence": "Clap your hands.",
+        "localAsset": "assets/images/words/beginner/word_hand_1769428300006.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2046,
+        "word": "Eye",
+        "meanings": {
+            "tr": "Göz",
+            "en": "Organ for seeing"
+        },
+        "exampleSentence": "Close your eyes.",
+        "localAsset": "assets/images/words/beginner/word_eye_1769428300007.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2047,
+        "word": "Mouth",
+        "meanings": {
+            "tr": "Ağız",
+            "en": "Body part for eating and speaking"
+        },
+        "exampleSentence": "Open your mouth.",
+        "localAsset": "assets/images/words/beginner/word_mouth_1769442867989.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2048,
+        "word": "Day",
+        "meanings": {
+            "tr": "Gün",
+            "en": "Time when the sun is up"
+        },
+        "exampleSentence": "Have a nice day!",
+        "localAsset": "assets/images/words/beginner/word_day_1769442885567.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2049,
+        "word": "Night",
+        "meanings": {
+            "tr": "Gece",
+            "en": "Time when it is dark"
+        },
+        "exampleSentence": "Good night.",
+        "localAsset": "assets/images/words/beginner/word_night_1769442905465.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2050,
+        "word": "Eat",
+        "meanings": {
+            "tr": "Yemek",
+            "en": "To consume food"
+        },
+        "exampleSentence": "I like to eat pizza.",
+        "localAsset": "assets/images/words/beginner/word_eat_1769442923950.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2051,
+        "word": "Drink",
+        "meanings": {
+            "tr": "İçmek",
+            "en": "To consume liquid"
+        },
+        "exampleSentence": "I drink water.",
+        "localAsset": "assets/images/words/beginner/word_drink_1769442944560.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2052,
+        "word": "Sleep",
+        "meanings": {
+            "tr": "Uyumak",
+            "en": "To rest with eyes closed"
+        },
+        "exampleSentence": "I sleep at night.",
+        "localAsset": "assets/images/words/beginner/word_sleep_1769442984987.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2053,
+        "word": "Run",
+        "meanings": {
+            "tr": "Koşmak",
+            "en": "To move fast on foot"
+        },
+        "exampleSentence": "I run in the park.",
+        "localAsset": "assets/images/words/beginner/word_run_1769443003997.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2054,
+        "word": "Walk",
+        "meanings": {
+            "tr": "Yürümek",
+            "en": "To move on foot"
+        },
+        "exampleSentence": "I walk to school.",
+        "localAsset": "assets/images/words/beginner/word_walk_1769443022093.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2055,
+        "word": "Big",
+        "meanings": {
+            "tr": "Büyük",
+            "en": "Large in size"
+        },
+        "exampleSentence": "The elephant is big.",
+        "localAsset": "assets/images/words/beginner/word_big_1769443039706.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2056,
+        "word": "Small",
+        "meanings": {
+            "tr": "Küçük",
+            "en": "Little in size"
+        },
+        "exampleSentence": "The mouse is small.",
+        "localAsset": "assets/images/words/beginner/word_small_1769443057302.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2057,
+        "word": "Hot",
+        "meanings": {
+            "tr": "Sıcak",
+            "en": "Having a high temperature"
+        },
+        "exampleSentence": "The coffee is hot.",
+        "localAsset": "assets/images/words/beginner/word_hot_1769443073848.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2058,
+        "word": "Cold",
+        "meanings": {
+            "tr": "Soğuk",
+            "en": "Having a low temperature"
+        },
+        "exampleSentence": "Ice cream is cold.",
+        "localAsset": "assets/images/words/beginner/word_cold_1769443092899.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2059,
+        "word": "Rain",
+        "meanings": {
+            "tr": "Yağmur",
+            "en": "Water falling from the sky"
+        },
+        "exampleSentence": "I have an umbrella for the rain.",
+        "localAsset": "assets/images/words/beginner/word_rain_1769443141878.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2060,
+        "word": "Snow",
+        "meanings": {
+            "tr": "Kar",
+            "en": "Frozen rain"
+        },
+        "exampleSentence": "Snow is white and cold.",
+        "localAsset": "assets/images/words/beginner/word_snow_1769443159310.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2061,
+        "word": "Bird",
+        "meanings": {
+            "tr": "Kuş",
+            "en": "Animal that can fly"
+        },
+        "exampleSentence": "The bird sings.",
+        "localAsset": "assets/images/words/beginner/word_bird_1769443179723.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2062,
+        "word": "Fish",
+        "meanings": {
+            "tr": "Balık",
+            "en": "Animal that lives in water"
+        },
+        "exampleSentence": "Fish swim in the sea.",
+        "localAsset": "assets/images/words/beginner/word_fish_1769443197097.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2063,
+        "word": "Street",
+        "meanings": {
+            "tr": "Cadde / Sokak",
+            "en": "A public road"
+        },
+        "exampleSentence": "Do not play in the street.",
+        "localAsset": "assets/images/words/beginner/word_street_1769443215414.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2064,
+        "word": "Park",
+        "meanings": {
+            "tr": "Park",
+            "en": "An area for recreation"
+        },
+        "exampleSentence": "Let's go to the park.",
+        "localAsset": "assets/images/words/beginner/word_park.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2065,
+        "word": "Money",
+        "meanings": {
+            "tr": "Para",
+            "en": "Used to buy things"
+        },
+        "exampleSentence": "I need money to buy this.",
+        "localAsset": "assets/images/words/beginner/word_money.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2066,
+        "word": "Milk",
+        "meanings": {
+            "tr": "Süt",
+            "en": "White liquid from cows"
+        },
+        "exampleSentence": "I drink milk for breakfast.",
+        "localAsset": "assets/images/words/beginner/word_milk.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2067,
+        "word": "Tea",
+        "meanings": {
+            "tr": "Çay",
+            "en": "A hot drink made from leaves"
+        },
+        "exampleSentence": "Would you like some tea?",
+        "localAsset": "assets/images/words/beginner/word_tea.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2068,
+        "word": "Coffee",
+        "meanings": {
+            "tr": "Kahve",
+            "en": "A dark caffeine drink"
+        },
+        "exampleSentence": "I drink coffee in the morning.",
+        "localAsset": "assets/images/words/beginner/word_coffee.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2069,
+        "word": "Bread",
+        "meanings": {
+            "tr": "Ekmek",
+            "en": "Baked food made from flour"
+        },
+        "exampleSentence": "I eat bread and butter.",
+        "localAsset": "assets/images/words/beginner/word_bread.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2070,
+        "word": "Apple",
+        "meanings": {
+            "tr": "Elma",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I eat an apple.",
+        "localAsset": "assets/images/words/beginner/word_apple.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2071,
+        "word": "Banana",
+        "meanings": {
+            "tr": "Muz",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Monkeys like bananas.",
+        "localAsset": "assets/images/words/beginner/word_banana.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2072,
+        "word": "Orange",
+        "meanings": {
+            "tr": "Portakal",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Orange juice is sweet.",
+        "localAsset": "assets/images/words/beginner/word_orange.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2073,
+        "word": "Egg",
+        "meanings": {
+            "tr": "Yumurta",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I have an egg for breakfast.",
+        "localAsset": "assets/images/words/beginner/word_egg.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2074,
+        "word": "Cheese",
+        "meanings": {
+            "tr": "Peynir",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The mouse eats cheese.",
+        "localAsset": "assets/images/words/beginner/word_cheese.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2075,
+        "word": "Meat",
+        "meanings": {
+            "tr": "Et",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "He cooks meat.",
+        "localAsset": "assets/images/words/beginner/word_meat.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2076,
+        "word": "Chicken",
+        "meanings": {
+            "tr": "Tavuk",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Chicken tastes good.",
+        "localAsset": "assets/images/words/beginner/word_chicken.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2077,
+        "word": "Rice",
+        "meanings": {
+            "tr": "Pirinç / Pilav",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I eat rice with chicken.",
+        "localAsset": "assets/images/words/beginner/word_rice.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2078,
+        "word": "Salt",
+        "meanings": {
+            "tr": "Tuz",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Pass the salt, please.",
+        "localAsset": "assets/images/words/beginner/word_salt.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2079,
+        "word": "Sugar",
+        "meanings": {
+            "tr": "Şeker",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Sugar is sweet.",
+        "localAsset": "assets/images/words/beginner/word_sugar.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2080,
+        "word": "Breakfast",
+        "meanings": {
+            "tr": "Kahvaltı",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I eat breakfast at 8.",
+        "localAsset": "assets/images/words/beginner/word_breakfast.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2081,
+        "word": "Lunch",
+        "meanings": {
+            "tr": "Öğle Yemeği",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "We have lunch at noon.",
+        "localAsset": "assets/images/words/beginner/word_lunch.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2082,
+        "word": "Dinner",
+        "meanings": {
+            "tr": "Akşam Yemeği",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Dinner is ready.",
+        "localAsset": "assets/images/words/beginner/word_dinner.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2083,
+        "word": "Boy",
+        "meanings": {
+            "tr": "Erkek Çocuk",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The boy is playing.",
+        "localAsset": "assets/images/words/beginner/word_boy.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2084,
+        "word": "Girl",
+        "meanings": {
+            "tr": "Kız Çocuk",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The girl is reading.",
+        "localAsset": "assets/images/words/beginner/word_girl.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2085,
+        "word": "Man",
+        "meanings": {
+            "tr": "Adam",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The man is tall.",
+        "localAsset": "assets/images/words/beginner/word_man.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2086,
+        "word": "Woman",
+        "meanings": {
+            "tr": "Kadın",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The woman is working.",
+        "localAsset": "assets/images/words/beginner/word_woman.png",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2087,
+        "word": "Baby",
+        "meanings": {
+            "tr": "Bebek",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The baby is sleeping.",
+        "localAsset": "assets/images/words/beginner/word_baby_1769464940246.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2088,
+        "word": "White",
+        "meanings": {
+            "tr": "Beyaz",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Snow is white.",
+        "localAsset": "assets/images/words/beginner/word_white_1769464954327.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2089,
+        "word": "Black",
+        "meanings": {
+            "tr": "Siyah",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The night is black.",
+        "localAsset": "assets/images/words/beginner/word_black_1769464968149.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2090,
+        "word": "Key",
+        "meanings": {
+            "tr": "Anahtar",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I lost my key.",
+        "localAsset": "assets/images/words/beginner/word_key_1769464992144.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2091,
+        "word": "Train",
+        "meanings": {
+            "tr": "Tren",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The train is fast.",
+        "localAsset": "assets/images/words/beginner/word_train_1769465005380.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2092,
+        "word": "Plane",
+        "meanings": {
+            "tr": "Uçak",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The plane flies high.",
+        "localAsset": "assets/images/words/beginner/word_plane_1769465017292.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2093,
+        "word": "Bike",
+        "meanings": {
+            "tr": "Bisiklet",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I ride my bike.",
+        "localAsset": "assets/images/words/beginner/word_bike_1769465031045.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2094,
+        "word": "Bed",
+        "meanings": {
+            "tr": "Yatak",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "I sleep in my bed.",
+        "localAsset": "assets/images/words/beginner/word_bed_1769465050833.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2095,
+        "word": "Room",
+        "meanings": {
+            "tr": "Oda",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "My room is clean.",
+        "localAsset": "assets/images/words/beginner/word_room_1769465063555.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2096,
+        "word": "Kitchen",
+        "meanings": {
+            "tr": "Mutfak",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "We cook in the kitchen.",
+        "localAsset": "assets/images/words/beginner/word_kitchen_1769465076094.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2097,
+        "word": "Bathroom",
+        "meanings": {
+            "tr": "Banyo",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "Wash your hands in the bathroom.",
+        "localAsset": "assets/images/words/beginner/word_bathroom_1769465095181.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2098,
+        "word": "Garden",
+        "meanings": {
+            "tr": "Bahçe",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The flowers are in the garden.",
+        "localAsset": "assets/images/words/beginner/word_garden_1769465108474.webp",
+        "difficulty": 1,
+        "deck": "beginner"
+    },
+    {
+        "id": 2099,
+        "word": "Flower",
+        "meanings": {
+            "tr": "Çiçek",
+            "en": "Basic vocabulary"
+        },
+        "exampleSentence": "The flower is beautiful.",
+        "localAsset": "assets/images/words/beginner/word_flower_1769465121080.webp",
+        "difficulty": 1,
+        "deck": "beginner"
     }
 ]

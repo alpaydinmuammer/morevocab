@@ -418,5 +418,365 @@
         "localAsset": "assets/images/words/idioms/word_onthinice.webp",
         "difficulty": 2,
         "deck": "idioms"
+    },
+    {
+        "id": 5036,
+        "word": "Break a leg",
+        "meanings": {
+            "tr": "İyi şanslar (Şeytanın bacağını kır)",
+            "en": "Good luck"
+        },
+        "exampleSentence": "Break a leg in your performance tonight!",
+        "localAsset": "assets/images/words/idioms/word_breakaleg.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5037,
+        "word": "No pain, no gain",
+        "meanings": {
+            "tr": "Emek olmadan yemek olmaz",
+            "en": "You have to work hard for what you want"
+        },
+        "exampleSentence": "I'm tired from the gym, but no pain, no gain.",
+        "localAsset": "assets/images/words/idioms/word_nopainnogain.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5038,
+        "word": "So far, so good",
+        "meanings": {
+            "tr": "Şu ana kadar her şey yolunda",
+            "en": "Everything is going well so far"
+        },
+        "exampleSentence": "We've finished half the work, and so far, so good.",
+        "localAsset": "assets/images/words/idioms/word_sofarsogood.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5039,
+        "word": "Time flies",
+        "meanings": {
+            "tr": "Zaman su gibi akıp gidiyor",
+            "en": "Time passes very quickly"
+        },
+        "exampleSentence": "Look at the time! Time flies when you're having fun.",
+        "localAsset": "assets/images/words/idioms/word_timeflies.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5040,
+        "word": "Under the radar",
+        "meanings": {
+            "tr": "Dikkat çekmeden, gizlice",
+            "en": "Not noticed or detected"
+        },
+        "exampleSentence": "He likes to keep his personal life under the radar.",
+        "localAsset": "assets/images/words/idioms/word_undertheradar.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5041,
+        "word": "Hang in there",
+        "meanings": {
+            "tr": "Dayan, vazgeçme",
+            "en": "Don't give up"
+        },
+        "exampleSentence": "I know it's tough, but hang in there.",
+        "localAsset": "assets/images/words/idioms/word_hanginthere.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5042,
+        "word": "Cut corners",
+        "meanings": {
+            "tr": "Kolaya kaçmak, işten/masraftan kısmak",
+            "en": "Do something cheaply or quickly, often sacrificing quality"
+        },
+        "exampleSentence": "Don't cut corners on safety.",
+        "localAsset": "assets/images/words/idioms/word_cutcorners.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5043,
+        "word": "Get out of hand",
+        "meanings": {
+            "tr": "Çığırından çıkmak, kontrolü kaybetmek",
+            "en": "Become difficult to control"
+        },
+        "exampleSentence": "The party got out of hand and the neighbors called the police.",
+        "localAsset": "assets/images/words/idioms/word_getoutofhand.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5044,
+        "word": "Miss the boat",
+        "meanings": {
+            "tr": "Fırsatı kaçırmak",
+            "en": "Miss an opportunity"
+        },
+        "exampleSentence": "I wanted to buy tickets, but I missed the boat.",
+        "localAsset": "assets/images/words/idioms/word_misstheboat.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5045,
+        "word": "Pull someone's leg",
+        "meanings": {
+            "tr": "Biriyle kafa bulmak, şaka yapmak",
+            "en": "Joke with someone"
+        },
+        "exampleSentence": "I'm just pulling your leg, I didn't really win the lottery.",
+        "localAsset": "assets/images/words/idioms/word_pullleg.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5046,
+        "word": "Make a long story short",
+        "meanings": {
+            "tr": "Uzun lafın kısası",
+            "en": "Tell something briefly"
+        },
+        "exampleSentence": "To make a long story short, we missed the flight.",
+        "localAsset": "assets/images/words/idioms/word_longstoryshort.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5047,
+        "word": "Go cold turkey",
+        "meanings": {
+            "tr": "Birden bire bırakmak (alışkanlığı)",
+            "en": "Stop a habit suddenly and completely"
+        },
+        "exampleSentence": "He decided to quit smoking strict cold turkey.",
+        "localAsset": "assets/images/words/idioms/word_coldturkey.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5048,
+        "word": "Face the music",
+        "meanings": {
+            "tr": "Yaptığının cezasını çekmek, yüzleşmek",
+            "en": "Accept the unpleasant consequences of one's actions"
+        },
+        "exampleSentence": "He broke the window and now he has to face the music.",
+        "localAsset": "assets/images/words/idioms/word_facethemusic.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5049,
+        "word": "Sit on the fence",
+        "meanings": {
+            "tr": "Kararsız kalmak, taraf tutmamak",
+            "en": "Undecided or avoiding making a decision"
+        },
+        "exampleSentence": "You can't sit on the fence forever; you need to choose a side.",
+        "localAsset": "assets/images/words/idioms/word_sitonthefence.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5050,
+        "word": "Through thick and thin",
+        "meanings": {
+            "tr": "İyi günde kötü günde",
+            "en": "Support someone in good times and bad times"
+        },
+        "exampleSentence": "She stuck by him through thick and thin.",
+        "localAsset": "assets/images/words/idioms/word_thickandthin.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5051,
+        "word": "Hit the sack",
+        "meanings": {
+            "tr": "Kafayı vurup yatmak",
+            "en": "Go to sleep"
+        },
+        "exampleSentence": "I'm exhausted, it's time to hit the sack.",
+        "localAsset": "assets/images/words/idioms/word_hitthesack.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5052,
+        "word": "Up in the air",
+        "meanings": {
+            "tr": "Belirsiz, havada",
+            "en": "Uncertain or not yet decided"
+        },
+        "exampleSentence": "Our travel plans are still up in the air.",
+        "localAsset": "assets/images/words/idioms/word_upintheair.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5053,
+        "word": "Stab someone in the back",
+        "meanings": {
+            "tr": "Sırtından bıçaklamak",
+            "en": "Betray someone who trusted you"
+        },
+        "exampleSentence": "I can't believe he stabbed me in the back like that.",
+        "localAsset": "assets/images/words/idioms/word_stabintheback.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5054,
+        "word": "Lose your touch",
+        "meanings": {
+            "tr": "Yeteneyini kaybetmek, paslanmak",
+            "en": "No longer able to do something as well as before"
+        },
+        "exampleSentence": "He used to be a great player, but he seems to have lost his touch.",
+        "localAsset": "assets/images/words/idioms/word_loseyourtouch.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5055,
+        "word": "Sit tight",
+        "meanings": {
+            "tr": "Kıpırdamadan beklemek",
+            "en": "Wait patiently without taking action"
+        },
+        "exampleSentence": "Just sit tight, the doctor will be with you shortly.",
+        "localAsset": "assets/images/words/idioms/word_sittight.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5056,
+        "word": "Pitch in",
+        "meanings": {
+            "tr": "El atmak, katkıda bulunmak",
+            "en": "Help out or contribute to a common goal"
+        },
+        "exampleSentence": "If everyone pitches in, we can finish early.",
+        "localAsset": "assets/images/words/idioms/word_pitchin.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5057,
+        "word": "Ring a bell",
+        "meanings": {
+            "tr": "Tanıdık gelmek / Çağrışım yapmak",
+            "en": "Sound familiar"
+        },
+        "exampleSentence": "That name rings a bell, but I can't remember his face.",
+        "localAsset": "assets/images/words/idioms/word_ringabell.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5058,
+        "word": "Rule of thumb",
+        "meanings": {
+            "tr": "Pratik kural, göz kararı",
+            "en": "A practical and approximate way of doing or measuring something"
+        },
+        "exampleSentence": "A good rule of thumb is to drink 8 glasses of water a day.",
+        "localAsset": "assets/images/words/idioms/word_ruleofthumb.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5059,
+        "word": "Blow off steam",
+        "meanings": {
+            "tr": "Stres atmak, deşarj olmak",
+            "en": "Do something to relieve built-up energy or anger"
+        },
+        "exampleSentence": "He went for a run to blow off steam.",
+        "localAsset": "assets/images/words/idioms/word_blowoffsteam.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5060,
+        "word": "Cut to the chase",
+        "meanings": {
+            "tr": "Sadede gelmek",
+            "en": "Get to the main point without wasting time"
+        },
+        "exampleSentence": "We don't have much time, so let's cut to the chase.",
+        "localAsset": "assets/images/words/idioms/word_cuttothechase.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5061,
+        "word": "Look before you leap",
+        "meanings": {
+            "tr": "İnce eleyip sık dokumak",
+            "en": "Think carefully about the consequences before acting"
+        },
+        "exampleSentence": "You should look before you leap when investing money.",
+        "localAsset": "assets/images/words/idioms/word_lookbeforeleap.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5062,
+        "word": "Born with a silver spoon in one's mouth",
+        "meanings": {
+            "tr": "Ağzında gümüş kaşıkla doğmak",
+            "en": "Born into a wealthy and privileged family"
+        },
+        "exampleSentence": "He doesn't understand poverty; he was born with a silver spoon in his mouth.",
+        "localAsset": "assets/images/words/idioms/word_silverspoon.webp",
+        "difficulty": 3,
+        "deck": "idioms"
+    },
+    {
+        "id": 5063,
+        "word": "Close call",
+        "meanings": {
+            "tr": "Ucuz atlatmak, kıl payı",
+            "en": "A narrow escape from danger or disaster"
+        },
+        "exampleSentence": "That was a close call! The car almost hit us.",
+        "localAsset": "assets/images/words/idioms/word_closecall.webp",
+        "difficulty": 2,
+        "deck": "idioms"
+    },
+    {
+        "id": 5064,
+        "word": "Keep an eye on",
+        "meanings": {
+            "tr": "Göz kulak olmak",
+            "en": "Watch someone or something carefully"
+        },
+        "exampleSentence": "Could you keep an eye on my bag for a minute?",
+        "localAsset": "assets/images/words/idioms/word_keepaneyeon.webp",
+        "difficulty": 1,
+        "deck": "idioms"
+    },
+    {
+        "id": 5065,
+        "word": "Out of the blue",
+        "meanings": {
+            "tr": "Damdan düşer gibi, aniden",
+            "en": "Happening unexpectedly or suddenly"
+        },
+        "exampleSentence": "She called me out of the blue after years of no contact.",
+        "localAsset": "assets/images/words/idioms/word_outoftheblue.webp",
+        "difficulty": 2,
+        "deck": "idioms"
     }
 ]

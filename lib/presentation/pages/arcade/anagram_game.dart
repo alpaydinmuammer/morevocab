@@ -395,8 +395,8 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
               // Stats row
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 8,
+                  horizontal: 16,
+                  vertical: 4,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -426,10 +426,10 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
                     children: [
                       // Letters display
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
+                          spacing: 8,
+                          runSpacing: 8,
                           alignment: WrapAlignment.center,
                           children: _letters
                               .map((letter) => _buildLetterTile(theme, letter))
@@ -444,13 +444,13 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
                         icon: const Icon(Icons.shuffle_rounded),
                         label: const Text('Shuffle'),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
 
                       // Found words container
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 24),
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
                         width: double.infinity,
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.surface.withValues(
                             alpha: 0.8,
@@ -489,7 +489,7 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
 
               // Input area
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
                     Expanded(
@@ -506,7 +506,7 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
                           ),
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20,
-                            vertical: 16,
+                            vertical: 12,
                           ),
                         ),
                         onSubmitted: (_) => _submitWord(),
@@ -526,7 +526,7 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
                           color: Colors.white,
                         ),
                         onPressed: _submitWord,
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(12),
                       ),
                     ),
                   ],
@@ -545,7 +545,7 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
     AppLocalizations l10n,
   ) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           Container(
@@ -587,8 +587,8 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
 
   Widget _buildLetterTile(ThemeData theme, String letter) {
     return Container(
-      width: 55,
-      height: 55,
+      width: 48,
+      height: 48,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.teal.shade400, Colors.teal.shade600],
@@ -607,7 +607,7 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
       child: Center(
         child: Text(
           letter,
-          style: theme.textTheme.headlineMedium?.copyWith(
+          style: theme.textTheme.titleLarge?.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),

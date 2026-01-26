@@ -156,7 +156,10 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
             children: [
               // Header
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 child: Row(
                   children: [
                     Container(
@@ -185,8 +188,8 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
               // Stats
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 8,
+                  horizontal: 16,
+                  vertical: 4,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -206,14 +209,14 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 16),
                       // Emoji display
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 24),
-                        padding: const EdgeInsets.all(32),
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: theme.colorScheme.surface,
-                          borderRadius: BorderRadius.circular(32),
+                          borderRadius: BorderRadius.circular(24),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -225,14 +228,14 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
                                   ),
                                   child: Text(
                                     e,
-                                    style: const TextStyle(fontSize: 48),
+                                    style: const TextStyle(fontSize: 40),
                                   ),
                                 ),
                               )
                               .toList(),
                         ),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 16),
                     ],
                   ),
                 ),
@@ -240,7 +243,7 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
 
               // Input
               Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
                     TextField(
@@ -252,13 +255,13 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
                         filled: true,
                         fillColor: theme.colorScheme.surface,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(16),
                           borderSide: BorderSide.none,
                         ),
                       ),
                       onSubmitted: (_) => _check(),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     Row(
                       children: [
                         Expanded(

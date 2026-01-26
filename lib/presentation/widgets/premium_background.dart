@@ -21,7 +21,8 @@ class PremiumBackground extends StatelessWidget {
       children: [
         if (showMesh) const MeshBackground(),
         if (showTypo) const BackgroundTypo(),
-        if (showGrain) const GrainOverlay(),
+        // GrainOverlay removed for optimization
+        // if (showGrain) const GrainOverlay(),
         child,
       ],
     );
