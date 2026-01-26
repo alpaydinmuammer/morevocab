@@ -11,20 +11,34 @@
 - **Görsel Hafıza:** Her kelime için özenle seçilmiş WebP formatında yüksek kaliteli görseller.
 - **Sesli Telaffuz:** Yüksek kaliteli TTS (Text-to-Speech) desteği ile doğru telaffuzu dinle.
 
-### 🕹️ 2. Arcade Modu (Arcade Mode)
-Geleneksel öğrenmenin dışına çıkın! 5 farklı mini oyun ile kelime bilginizi test edin:
-- **Word Chain:** Önceki kelimenin son harfiyle yeni kelime üret.
-- **Anagram:** Karışık harflerden doğru kelimeyi bul.
-- **Word Builder:** Eksik harfleri tamamlayarak kelimeyi inşa et.
-- **Emoji Puzzle:** Emojilerin anlattığı gizli kelimeyi tahmin et.
-- **Odd One Out:** Birbirine uymayan kelimeyi gruptan ayıkla.
+### 📚 2. Geniş İçerik Kütüphanesi (7 Farklı Deste)
+Her seviyeye uygun, özenle hazırlanmış kelime setleri:
+- **Beginner:** Başlangıç seviyesi için temel kelimeler.
+- **Common:** Günlük hayatta en sık kullanılan kelimeler.
+- **Exam / TOEFL:** Akademik ve sınav odaklı kelime dağarcığı.
+- **Idioms:** İngilizce deyimler ve kültürel ifadeler.
+- **Phrasal Verbs:** Öbek fiiller ve kullanımları.
+- **Survival:** Seyahat ve acil durumlar için gerekli kelimeler.
+- **YDS / YDT:** Türkiye'deki dil sınavlarına özel hazırlık seti.
 
-### 🥚 3. Evcil Hayvan Sistemi (Pet System)
+### 🕹️ 3. Arcade Modu (Arcade Mode)
+Geleneksel öğrenmenin dışına çıkın! Seviye bazlı ilerleme sistemi (Level-based Progression) ile 5 farklı mini oyun:
+- **Word Chain:** Kelime zinciri kurarak zihnini zorla.
+- **Anagram:** Karışık harflerden doğru kelimeyi bul.
+- **Word Builder:** Harfleri birleştir, kelimeyi inşa et.
+- **Emoji Puzzle:** Emojilerin anlattığı gizli kelimeyi tahmin et.
+- **Odd One Out:** Farklı olanı bulma oyunu ile dikkatinizi test edin.
+
+### 🎨 4. AI Destekli Görsel İçerik
+- **Yüksek Kalite:** Tüm kelimeler için 500x500 özel optimize edilmiş WebP görseller.
+- **AI Generation:** Eksik görseller, yapay zeka ile kelimenin anlamına en uygun şekilde üretilmiştir.
+
+### 🥚 5. Evcil Hayvan Sistemi (Pet System)
 - **Yumurtadan Başla:** Öğrenmeye başladığında bir yumurta seçersin.
 - **Evrimleşme:** Kelime öğrendikçe ve puan topladıkça petin büyür ve evrim geçirir.
 - **Kişisel Bağ:** Öğrenme motivasyonunu artıran tatlı dostlar.
 
-### 🔥 4. Seri (Streak) ve Başarılar
+### 🔥 6. Seri (Streak) ve Başarılar
 - **Günlük Hedef:** Her gün çalışarak "Streak" puanını koru.
 - **Premium Rozetler:** Başarılarını sergilemek için özel tasarım rozetler kazan.
 
