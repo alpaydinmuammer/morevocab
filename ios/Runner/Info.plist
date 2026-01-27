@@ -49,5 +49,14 @@
 		<true/>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<!-- Push Notification Background Modes -->
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+			<string>remote-notification</string>
+		</array>
+		<!-- Firebase Messaging Auto Initialization -->
+		<key>FirebaseMessagingAutoInitEnabled</key>
+		<true/>
 	</dict>
 </plist>

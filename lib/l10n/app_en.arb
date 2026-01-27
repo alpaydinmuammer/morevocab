@@ -341,5 +341,27 @@
       "total": {"type": "int"}
     }
   },
-  "errorLogCardDesc": "Review words you struggled with"
+  "errorLogCardDesc": "Review words you struggled with",
+
+  "notifications": "Notifications",
+  "notificationsEnabled": "Push Notifications",
+  "notificationsEnabledDesc": "Receive learning reminders",
+  "dailyReminder": "Daily Reminder",
+  "dailyReminderDesc": "Get reminded to practice every day",
+  "reminderTime": "Reminder Time",
+  "reminderTimeDesc": "When to send daily reminder",
+  "notificationPermissionDenied": "Notification permission denied",
+  "dailyReminderTitle": "Time to Learn!",
+  "dailyReminderBody": "Your vocabulary is waiting for you. Just 5 minutes today!",
+
+  "cloudSync": "Cloud Sync",
+  "syncNow": "Sync Now",
+  "lastSync": "Last sync",
+  "syncSuccess": "Sync completed successfully",
+  "syncFailed": "Sync failed. Please try again.",
+  "neverSynced": "Never synced",
+  "justNow": "Just now",
+  "minutesAgo": "minutes ago",
+  "hoursAgo": "hours ago",
+  "daysAgo": "days ago"
 }

@@ -53,14 +53,20 @@ class _PetDisplayWidgetState extends ConsumerState<PetDisplayWidget>
 
     return GestureDetector(
       onTap: () => PetDetailModal.show(context),
-      child: AnimatedBuilder(
-        animation: _bounceAnimation,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: Offset(0, -_bounceAnimation.value),
-            child: _buildPetAvatar(pet),
-          );
-        },
+      // RepaintBoundary isolates the animation from parent widget tree
+      child: RepaintBoundary(
+        child: AnimatedBuilder(
+          animation: _bounceAnimation,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(0, -_bounceAnimation.value),
+              // Use cached child instead of rebuilding _buildPetAvatar every frame
+              child: child,
+            );
+          },
+          // Build avatar once, reuse in every animation frame
+          child: _buildPetAvatar(pet),
+        ),
       ),
     );
   }

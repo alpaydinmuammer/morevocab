@@ -42,7 +42,14 @@ class WordLocalDatasource {
 
   /// Reset the singleton (useful for testing)
   static void resetInstance() {
+    _instance?.dispose();
     _instance = null;
+  }
+
+  /// Dispose resources (cancel pending timers)
+  void dispose() {
+    _saveDebounceTimer?.cancel();
+    _saveDebounceTimer = null;
   }
 
   /// Initialize the datasource asynchronously.
@@ -83,18 +90,26 @@ class WordLocalDatasource {
     int loadedCount = 0;
     final errors = <String>[];
 
-    for (final file in files) {
-      try {
-        final jsonString = await rootBundle.loadString(file);
+    // Critical Optimization 2: Parallelize file loading and parsing
+    final results = await Future.wait(
+      files.map((file) async {
+        try {
+          final jsonString = await rootBundle.loadString(file);
+          // Offload JSON parsing to background thread
+          final list = await compute(_parseJsonList, jsonString);
+          return list.map((e) => WordCard.fromJson(e)).toList();
+        } catch (e) {
+          errors.add('$file: $e');
+          debugPrint('Warning: Failed to load $file: $e');
+          return <WordCard>[];
+        }
+      }),
+    );
 
-        // Critical Optimization 1: Offload JSON parsing to background thread
-        final List<dynamic> list = await compute(_parseJsonList, jsonString);
-
-        _words.addAll(list.map((e) => WordCard.fromJson(e)).toList());
+    for (var list in results) {
+      if (list.isNotEmpty) {
+        _words.addAll(list);
         loadedCount++;
-      } catch (e) {
-        errors.add('$file: $e');
-        debugPrint('Warning: Failed to load $file: $e');
       }
     }
 
@@ -128,9 +143,12 @@ class WordLocalDatasource {
           .toList();
 
       // Add custom words to the main list, avoiding duplicates
+      // Use Set for O(1) lookups instead of O(n) .any() calls
+      final existingIds = _words.map((w) => w.id).toSet();
       for (var word in customWords) {
-        if (!_words.any((w) => w.id == word.id)) {
+        if (!existingIds.contains(word.id)) {
           _words.add(word);
+          existingIds.add(word.id); // Keep set updated
         }
       }
       debugPrint('Loaded ${customWords.length} custom words');

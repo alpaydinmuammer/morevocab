@@ -292,8 +292,8 @@ class AppColors extends ThemeExtension<AppColors> {
     settingsGradient: [Colors.blueGrey.shade700, Colors.blueGrey.shade400],
     arcadeShadow: Colors.orange.withValues(alpha: 0.3),
     settingsShadow: Colors.blueGrey.withValues(alpha: 0.3),
-    onboardingGradientStart: const Color(0xFF0A1628), // Deep Space Blue
-    onboardingGradientEnd: const Color(0xFF0D2137), // Darker Navy
+    onboardingGradientStart: const Color(0xFFD9EDF8), // Soft Sky (Light)
+    onboardingGradientEnd: const Color(0xFFFFFFFF), // White (Light)
   );
 
   static final dark = AppColors(

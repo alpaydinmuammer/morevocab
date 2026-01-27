@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import '../../core/theme/app_theme.dart';
 
 class PremiumBackground extends StatelessWidget {
   final Widget child;
@@ -29,69 +30,99 @@ class PremiumBackground extends StatelessWidget {
   }
 }
 
-class MeshBackground extends StatelessWidget {
+class MeshBackground extends StatefulWidget {
   const MeshBackground({super.key});
+
+  @override
+  State<MeshBackground> createState() => _MeshBackgroundState();
+}
+
+class _MeshBackgroundState extends State<MeshBackground>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _bgController;
+
+  @override
+  void initState() {
+    super.initState();
+    _bgController = AnimationController(
+      duration: const Duration(seconds: 20),
+      vsync: this,
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _bgController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    // Use onboarding gradient colors if available, or fallback to surface/primary behavior
+    // but user specifically asked for "onboarding background", so we emulate that style
+    final startColor =
+        theme.extension<AppColors>()?.onboardingGradientStart ??
+        theme.colorScheme.surface;
 
-    return Stack(
-      children: [
-        Positioned.fill(child: Container(color: theme.colorScheme.surface)),
-        // Top Right
-        Positioned(
-          top: -150,
-          right: -100,
-          child: MeshBlob(
-            color: theme.colorScheme.primary.withValues(
-              alpha: isDark ? 0.2 : 0.15,
+    return AnimatedBuilder(
+      animation: _bgController,
+      builder: (context, child) {
+        return Stack(
+          children: [
+            // Base background
+            Container(color: startColor),
+
+            // Blob 1 (Top Left - Primary Color)
+            Positioned(
+              top: -100 + (math.sin(_bgController.value * 2 * math.pi) * 50),
+              left: -50 + (math.cos(_bgController.value * 2 * math.pi) * 30),
+              child: MeshBlob(
+                color: theme.primaryColor.withValues(alpha: 0.4),
+                size: 400,
+              ),
             ),
-            size: 400,
-          ),
-        ),
-        // Center Left
-        Positioned(
-          top: 250,
-          left: -150,
-          child: MeshBlob(
-            color: theme.colorScheme.secondary.withValues(
-              alpha: isDark ? 0.15 : 0.12,
+
+            // Blob 2 (Bottom Right)
+            // Fix for Dark Mode: Cyan looks muddy on dark background, so we use Primary (Blue) instead
+            // Light Mode: Keep Secondary (Cyan) as user liked it
+            Positioned(
+              bottom: -50 + (math.cos(_bgController.value * 2 * math.pi) * 50),
+              right: -100 + (math.sin(_bgController.value * 2 * math.pi) * 30),
+              child: MeshBlob(
+                color:
+                    (Theme.of(context).brightness == Brightness.dark
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.secondary)
+                        .withValues(
+                          alpha: Theme.of(context).brightness == Brightness.dark
+                              ? 0.2
+                              : 0.4,
+                        ),
+                size: 300,
+              ),
             ),
-            size: 350,
-          ),
-        ),
-        // Middle Right
-        Positioned(
-          top: 400,
-          right: -120,
-          child: MeshBlob(
-            color: Colors.orange.withValues(alpha: isDark ? 0.08 : 0.05),
-            size: 300,
-          ),
-        ),
-        // Bottom Left
-        Positioned(
-          bottom: 100,
-          left: -80,
-          child: MeshBlob(
-            color: Colors.indigo.withValues(alpha: isDark ? 0.1 : 0.08),
-            size: 320,
-          ),
-        ),
-        // Bottom Right
-        Positioned(
-          bottom: -150,
-          right: -100,
-          child: MeshBlob(
-            color: theme.colorScheme.primary.withValues(
-              alpha: isDark ? 0.15 : 0.1,
+
+            // Blob 3 (Center - Accent)
+            Positioned(
+              top:
+                  MediaQuery.of(context).size.height * 0.4 +
+                  (math.sin(_bgController.value * 2 * math.pi) * 30),
+              right: -50,
+              child: MeshBlob(
+                color: Colors.purple.withValues(alpha: 0.25),
+                size: 200,
+              ),
             ),
-            size: 450,
-          ),
-        ),
-      ],
+
+            // Glass Overlay to blur the blobs and create "atmosphere"
+            // We use a stronger blur here to make sure text is readable on Home Page
+            // Glass Overlay removed for performance (GPU killer)
+            // The soft RadialGradients in MeshBlob provide enough "atmosphere" without the expensive saveLayer call.
+            Container(color: Colors.transparent),
+          ],
+        );
+      },
     );
   }
 }
@@ -130,7 +161,9 @@ class BackgroundTypo extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final opacity = isDark ? 0.01 : 0.02; // User requested 0.01/0.02
+    final opacity = isDark
+        ? 0.025
+        : 0.045; // User requested 2.5% dark, 4.5% light
     final color = isDark
         ? theme.colorScheme.onSurface
         : theme.colorScheme.primary;
@@ -145,6 +178,14 @@ class BackgroundTypo extends StatelessWidget {
       child: IgnorePointer(
         child: Stack(
           children: [
+            Positioned(
+              top: -60,
+              left: -20,
+              child: Transform.rotate(
+                angle: -0.15,
+                child: Text('G', style: style),
+              ),
+            ),
             Positioned(
               top: 40,
               right: -40,

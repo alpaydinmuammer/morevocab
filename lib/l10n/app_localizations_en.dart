@@ -818,4 +818,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorLogCardDesc => 'Review words you struggled with';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get notificationsEnabled => 'Push Notifications';
+
+  @override
+  String get notificationsEnabledDesc => 'Receive learning reminders';
+
+  @override
+  String get dailyReminder => 'Daily Reminder';
+
+  @override
+  String get dailyReminderDesc => 'Get reminded to practice every day';
+
+  @override
+  String get reminderTime => 'Reminder Time';
+
+  @override
+  String get reminderTimeDesc => 'When to send daily reminder';
+
+  @override
+  String get notificationPermissionDenied => 'Notification permission denied';
+
+  @override
+  String get dailyReminderTitle => 'Time to Learn!';
+
+  @override
+  String get dailyReminderBody =>
+      'Your vocabulary is waiting for you. Just 5 minutes today!';
+
+  @override
+  String get cloudSync => 'Cloud Sync';
+
+  @override
+  String get syncNow => 'Sync Now';
+
+  @override
+  String get lastSync => 'Last sync';
+
+  @override
+  String get syncSuccess => 'Sync completed successfully';
+
+  @override
+  String get syncFailed => 'Sync failed. Please try again.';
+
+  @override
+  String get neverSynced => 'Never synced';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String get minutesAgo => 'minutes ago';
+
+  @override
+  String get hoursAgo => 'hours ago';
+
+  @override
+  String get daysAgo => 'days ago';
 }

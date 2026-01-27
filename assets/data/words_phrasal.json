@@ -538,5 +538,365 @@
         "localAsset": "assets/images/words/phrasal_verbs/phrasal_showup.webp",
         "difficulty": 2,
         "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4046,
+        "word": "Blow up",
+        "meanings": {
+            "tr": "Patlamak",
+            "en": "Explode"
+        },
+        "exampleSentence": "The car blew up after the crash.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_blowup.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4047,
+        "word": "Break in",
+        "meanings": {
+            "tr": "Zorla girmek",
+            "en": "Enter forcibly"
+        },
+        "exampleSentence": "Thieves broke in last night.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_breakin.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4048,
+        "word": "Break out",
+        "meanings": {
+            "tr": "Kaçmak / Patlak vermek",
+            "en": "Escape / Start suddenly"
+        },
+        "exampleSentence": "Use mask if a fire breaks out.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_breakout.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4049,
+        "word": "Call back",
+        "meanings": {
+            "tr": "Geri aramak",
+            "en": "Return a call"
+        },
+        "exampleSentence": "I will call you back later.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_callback.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4050,
+        "word": "Check in",
+        "meanings": {
+            "tr": "Giriş yapmak",
+            "en": "Register at hotel/airport"
+        },
+        "exampleSentence": "We checked in at the hotel.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_checkin.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4051,
+        "word": "Check out",
+        "meanings": {
+            "tr": "Çıkış yapmak / İncelemek",
+            "en": "Leave hotel / Investigate"
+        },
+        "exampleSentence": "Check out this new song!",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_checkout.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4052,
+        "word": "Come back",
+        "meanings": {
+            "tr": "Geri gelmek",
+            "en": "Return"
+        },
+        "exampleSentence": "Please come back soon.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_comeback.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4053,
+        "word": "Come up with",
+        "meanings": {
+            "tr": "Bulmak (fikir)",
+            "en": "Invent / Think of"
+        },
+        "exampleSentence": "He came up with a great idea.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_comeupwith.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4054,
+        "word": "Cut down on",
+        "meanings": {
+            "tr": "Azaltmak",
+            "en": "Reduce consumption"
+        },
+        "exampleSentence": "I need to cut down on sugar.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_cutdownon.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4055,
+        "word": "Drop by",
+        "meanings": {
+            "tr": "Uğramak",
+            "en": "Visit briefly"
+        },
+        "exampleSentence": "Can I drop by your office?",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_dropby.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4056,
+        "word": "Eat out",
+        "meanings": {
+            "tr": "Dışarıda yemek",
+            "en": "Eat at a restaurant"
+        },
+        "exampleSentence": "We eat out every Friday.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_eatout.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4057,
+        "word": "Fall apart",
+        "meanings": {
+            "tr": "Dağılmak",
+            "en": "Break into pieces"
+        },
+        "exampleSentence": "The old book is falling apart.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_fallapart.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4058,
+        "word": "Fill in",
+        "meanings": {
+            "tr": "Doldurmak",
+            "en": "Complete a form"
+        },
+        "exampleSentence": "Please fill in the blanks.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_fillin.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4059,
+        "word": "Get away",
+        "meanings": {
+            "tr": "Kaçmak",
+            "en": "Escape"
+        },
+        "exampleSentence": "The robbers got away.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_getaway.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4060,
+        "word": "Get back",
+        "meanings": {
+            "tr": "Geri dönmek / Geri almak",
+            "en": "Return / Recover"
+        },
+        "exampleSentence": "When will you get back?",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_getback.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4061,
+        "word": "Get on",
+        "meanings": {
+            "tr": "Binmek",
+            "en": "Board"
+        },
+        "exampleSentence": "We got on the bus.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_geton.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4062,
+        "word": "Get off",
+        "meanings": {
+            "tr": "İnmek",
+            "en": "Leave a vehicle"
+        },
+        "exampleSentence": "Get off at the next stop.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_getoff.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4063,
+        "word": "Get up",
+        "meanings": {
+            "tr": "Kalkmak",
+            "en": "Rise from bed"
+        },
+        "exampleSentence": "I get up at 7 AM.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_getup_1769510532136.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4064,
+        "word": "Go out",
+        "meanings": {
+            "tr": "Dışarı çıkmak",
+            "en": "Leave home for fun"
+        },
+        "exampleSentence": "Do you want to go out tonight?",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_goout_1769510687590.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4065,
+        "word": "Grow up",
+        "meanings": {
+            "tr": "Büyümek",
+            "en": "Mature / Become adult"
+        },
+        "exampleSentence": "I grew up in London.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_growup_1769510871214.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4066,
+        "word": "Hand in",
+        "meanings": {
+            "tr": "Teslim etmek",
+            "en": "Submit"
+        },
+        "exampleSentence": "Hand in your homework.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_handin_1769510979752.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4067,
+        "word": "Let down",
+        "meanings": {
+            "tr": "Hayal kırıklığına uğratmak",
+            "en": "Disappoint"
+        },
+        "exampleSentence": "Don't let me down.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_letdown_1769511056282.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4068,
+        "word": "Look out",
+        "meanings": {
+            "tr": "Dikkat etmek",
+            "en": "Be careful"
+        },
+        "exampleSentence": "Look out! A car is coming.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_lookout_1769511116551.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4069,
+        "word": "Pass away",
+        "meanings": {
+            "tr": "Vefat etmek",
+            "en": "Die"
+        },
+        "exampleSentence": "His grandfather passed away.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_passaway_1769511154659.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4070,
+        "word": "Pick up",
+        "meanings": {
+            "tr": "Almak / Toplamak",
+            "en": "Lift / Collect"
+        },
+        "exampleSentence": "Can you pick me up?",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_pickup_1769511217051.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4071,
+        "word": "Put out",
+        "meanings": {
+            "tr": "Söndürmek",
+            "en": "Extinguish"
+        },
+        "exampleSentence": "Firefighters put out the fire.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_putout_1769511294369.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4072,
+        "word": "Run away",
+        "meanings": {
+            "tr": "Kaçmak",
+            "en": "Escape from a place"
+        },
+        "exampleSentence": "Don't run away from problems.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_runaway_1769511370624.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4073,
+        "word": "Set off",
+        "meanings": {
+            "tr": "Yola çıkmak",
+            "en": "Start a journey"
+        },
+        "exampleSentence": "We set off early in the morning.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_setoff_1769511475503.png",
+        "difficulty": 2,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4074,
+        "word": "Take out",
+        "meanings": {
+            "tr": "Çıkarmak / Götürmek",
+            "en": "Remove / Extract"
+        },
+        "exampleSentence": "Take out the trash.",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_takeout_1769511560086.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
+    },
+    {
+        "id": 4075,
+        "word": "Try on",
+        "meanings": {
+            "tr": "Denemek (kıyafet)",
+            "en": "Test clothes"
+        },
+        "exampleSentence": "Can I try this shirt on?",
+        "localAsset": "assets/images/words/phrasal_verbs/phrasal_tryon_1769511593792.png",
+        "difficulty": 1,
+        "deck": "phrasalVerbs"
     }
 ]

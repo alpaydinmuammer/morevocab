@@ -119,9 +119,8 @@ class WordRepositoryImpl implements WordRepository {
   @override
   Future<Result<void>> addWords(List<WordCard> words) async {
     try {
-      for (final word in words) {
-        await _datasource.saveCustomWord(word);
-      }
+      // Parallel save instead of sequential for better performance
+      await Future.wait(words.map((word) => _datasource.saveCustomWord(word)));
       return const Success(null);
     } catch (e) {
       return Failure('Failed to add words: ${e.toString()}');
@@ -173,21 +172,34 @@ class WordRepositoryImpl implements WordRepository {
 
   /// Calculates statistics for a given list of words
   /// Extracted to avoid code duplication between getStats and getDeckStats
+  /// Optimized: Single pass instead of 4 separate .where() calls
   WordStats _calculateStats(List<WordCard> words) {
     final total = words.length;
 
-    final learning = words
-        .where(
-          (w) =>
-              w.reviewCount > 0 &&
-              !w.isKnown &&
-              !w.isMastered &&
-              w.srsLevel > 0,
-        )
-        .length;
-    final mastered = words.where((w) => w.isMastered).length;
-    final review = words.where((w) => w.isDueForReview).length;
-    final newWords = words.where((w) => w.isNew).length;
+    int learning = 0;
+    int mastered = 0;
+    int review = 0;
+    int newWords = 0;
+
+    for (final w in words) {
+      // Mastered check
+      if (w.isMastered) {
+        mastered++;
+      } else if (w.reviewCount > 0 && !w.isKnown && w.srsLevel > 0) {
+        // Learning: has reviews, not known, not mastered, has SRS level
+        learning++;
+      }
+
+      // Due for review (can overlap with other categories)
+      if (w.isDueForReview) {
+        review++;
+      }
+
+      // New words check
+      if (w.isNew) {
+        newWords++;
+      }
+    }
 
     return WordStats(
       totalWords: total,

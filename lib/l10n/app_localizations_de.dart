@@ -820,4 +820,65 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get errorLogCardDesc => 'Zorlandığın kelimeleri gözden geçir';
+
+  @override
+  String get notifications => 'Bildirimler';
+
+  @override
+  String get notificationsEnabled => 'Push Bildirimleri';
+
+  @override
+  String get notificationsEnabledDesc => 'Öğrenme hatırlatmaları al';
+
+  @override
+  String get dailyReminder => 'Günlük Hatırlatma';
+
+  @override
+  String get dailyReminderDesc => 'Her gün pratik yapman için hatırlat';
+
+  @override
+  String get reminderTime => 'Hatırlatma Saati';
+
+  @override
+  String get reminderTimeDesc => 'Günlük hatırlatma ne zaman gönderilsin';
+
+  @override
+  String get notificationPermissionDenied => 'Bildirim izni reddedildi';
+
+  @override
+  String get dailyReminderTitle => 'Öğrenme Zamanı!';
+
+  @override
+  String get dailyReminderBody =>
+      'Kelimeler seni bekliyor. Bugün sadece 5 dakika!';
+
+  @override
+  String get cloudSync => 'Bulut Senkronizasyonu';
+
+  @override
+  String get syncNow => 'Şimdi Senkronize Et';
+
+  @override
+  String get lastSync => 'Son senkronizasyon';
+
+  @override
+  String get syncSuccess => 'Senkronizasyon başarılı';
+
+  @override
+  String get syncFailed => 'Senkronizasyon başarısız. Tekrar deneyin.';
+
+  @override
+  String get neverSynced => 'Hiç senkronize edilmedi';
+
+  @override
+  String get justNow => 'Az önce';
+
+  @override
+  String get minutesAgo => 'dakika önce';
+
+  @override
+  String get hoursAgo => 'saat önce';
+
+  @override
+  String get daysAgo => 'gün önce';
 }

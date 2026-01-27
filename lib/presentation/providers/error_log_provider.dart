@@ -50,30 +50,30 @@ class ErrorLogNotifier extends StateNotifier<ErrorLogState> {
 
   /// Add a word or increment its wrong count if already exists
   Future<void> addWord(String word, String translation) async {
+    final lowerWord = word.toLowerCase();
     final existingIndex = state.entries.indexWhere(
-      (e) => e.word.toLowerCase() == word.toLowerCase(),
+      (e) => e.word.toLowerCase() == lowerWord,
     );
 
-    List<ErrorLogEntry> newEntries;
+    final List<ErrorLogEntry> newEntries;
 
     if (existingIndex >= 0) {
-      // Increment wrong count
-      newEntries = List.from(state.entries);
-      final existing = newEntries[existingIndex];
-      newEntries[existingIndex] = existing.copyWith(
-        wrongCount: existing.wrongCount + 1,
-      );
-    } else {
-      // Add new entry
+      // Increment wrong count - use indexed replacement to avoid full list copy
+      final existing = state.entries[existingIndex];
       newEntries = [
-        ...state.entries,
-        ErrorLogEntry(
+        ...state.entries.sublist(0, existingIndex),
+        existing.copyWith(wrongCount: existing.wrongCount + 1),
+        ...state.entries.sublist(existingIndex + 1),
+      ];
+    } else {
+      // Add new entry - use growable list for single append
+      newEntries = List.of(state.entries)
+        ..add(ErrorLogEntry(
           word: word,
           translation: translation,
           wrongCount: 1,
           addedAt: DateTime.now(),
-        ),
-      ];
+        ));
     }
 
     state = state.copyWith(entries: newEntries);
@@ -82,23 +82,29 @@ class ErrorLogNotifier extends StateNotifier<ErrorLogState> {
 
   /// Remove one X mark, or remove word if only 1 X remaining
   Future<void> removeMarkOrWord(String word) async {
+    final lowerWord = word.toLowerCase();
     final existingIndex = state.entries.indexWhere(
-      (e) => e.word.toLowerCase() == word.toLowerCase(),
+      (e) => e.word.toLowerCase() == lowerWord,
     );
 
     if (existingIndex < 0) return;
 
-    List<ErrorLogEntry> newEntries = List.from(state.entries);
-    final existing = newEntries[existingIndex];
+    final existing = state.entries[existingIndex];
+    final List<ErrorLogEntry> newEntries;
 
     if (existing.wrongCount <= 1) {
-      // Remove entire entry
-      newEntries.removeAt(existingIndex);
+      // Remove entire entry - concatenate sublists
+      newEntries = [
+        ...state.entries.sublist(0, existingIndex),
+        ...state.entries.sublist(existingIndex + 1),
+      ];
     } else {
-      // Decrement wrong count
-      newEntries[existingIndex] = existing.copyWith(
-        wrongCount: existing.wrongCount - 1,
-      );
+      // Decrement wrong count - indexed replacement
+      newEntries = [
+        ...state.entries.sublist(0, existingIndex),
+        existing.copyWith(wrongCount: existing.wrongCount - 1),
+        ...state.entries.sublist(existingIndex + 1),
+      ];
     }
 
     state = state.copyWith(entries: newEntries);

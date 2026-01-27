@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -6,6 +7,7 @@ import '../../domain/models/user_model.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../data/datasources/firebase_auth_datasource.dart';
+import '../../core/services/cloud_sync_service.dart';
 
 const _guestModeKey = 'is_guest_mode';
 
@@ -45,6 +47,7 @@ final isAppleSignInAvailableProvider = Provider<bool>((ref) {
 /// Auth notifier for handling sign-in/sign-out actions
 class AuthNotifier extends StateNotifier<AsyncValue<void>> {
   final AuthRepository _repository;
+  final CloudSyncService _cloudSync = CloudSyncService();
 
   AuthNotifier(this._repository) : super(const AsyncValue.data(null));
 
@@ -54,7 +57,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
     final result = await _repository.signInWithGoogle();
 
     return result.when(
-      success: (_) {
+      success: (_) async {
+        // Sync data after successful login
+        await _performCloudSync();
         state = const AsyncValue.data(null);
         return true;
       },
@@ -71,7 +76,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
     final result = await _repository.signInWithApple();
 
     return result.when(
-      success: (_) {
+      success: (_) async {
+        // Sync data after successful login
+        await _performCloudSync();
         state = const AsyncValue.data(null);
         return true;
       },
@@ -85,6 +92,14 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
   /// Sign out
   Future<bool> signOut() async {
     state = const AsyncValue.loading();
+
+    // Upload final state to cloud before signing out
+    try {
+      await _cloudSync.syncToCloud();
+    } catch (e) {
+      debugPrint('Failed to sync before sign out: $e');
+    }
+
     final result = await _repository.signOut();
 
     return result.when(
@@ -97,6 +112,30 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
         return false;
       },
     );
+  }
+
+  /// Perform cloud sync (smart merge)
+  Future<void> _performCloudSync() async {
+    try {
+      final updated = await _cloudSync.smartSync();
+      if (updated) {
+        debugPrint('Cloud sync: Local data was updated from cloud');
+      }
+    } catch (e) {
+      debugPrint('Cloud sync failed: $e');
+      // Don't block login on sync failure
+    }
+  }
+
+  /// Manual sync trigger (can be called from settings)
+  Future<bool> manualSync() async {
+    try {
+      await _cloudSync.smartSync();
+      return true;
+    } catch (e) {
+      debugPrint('Manual sync failed: $e');
+      return false;
+    }
   }
 
   /// Clear error state

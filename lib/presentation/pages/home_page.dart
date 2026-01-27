@@ -20,7 +20,8 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final settings = ref.watch(settingsProvider);
+    // Use select() to only rebuild when userName changes, not all settings
+    final userName = ref.watch(settingsProvider.select((s) => s.userName));
     final homeState = ref.watch(homeProvider);
 
     return Scaffold(
@@ -50,8 +51,8 @@ class HomePage extends ConsumerWidget {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        settings.userName.isNotEmpty
-                                            ? '${homeState.getGreeting(AppLocalizations.of(context)!)}, ${settings.userName}'
+                                        userName.isNotEmpty
+                                            ? '${homeState.getGreeting(AppLocalizations.of(context)!)}, $userName'
                                             : homeState.getGreeting(
                                                 AppLocalizations.of(context)!,
                                               ),
@@ -60,7 +61,7 @@ class HomePage extends ConsumerWidget {
                                               fontWeight: FontWeight.bold,
                                               color: theme.colorScheme.primary,
                                               fontSize:
-                                                  settings.userName.length > 6
+                                                  userName.length > 6
                                                   ? AppConstants
                                                         .greetingFontSizeLongName
                                                   : AppConstants
@@ -71,7 +72,7 @@ class HomePage extends ConsumerWidget {
                                       ),
                                     ),
                                     // Edit icon - only show if no name entered yet
-                                    if (settings.userName.isEmpty) ...[
+                                    if (userName.isEmpty) ...[
                                       const SizedBox(
                                         width: AppConstants.spacingSM,
                                       ),

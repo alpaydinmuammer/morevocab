@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/exceptions/app_exceptions.dart';
 import '../../core/constants/app_constants.dart';
+import '../../core/services/cloud_sync_service.dart';
+import '../../core/services/notification_service.dart';
 import '../../domain/models/auth_state.dart';
 import '../providers/word_providers.dart';
 import '../providers/auth_provider.dart';
@@ -218,6 +220,11 @@ class _SplashPageState extends ConsumerState<SplashPage>
 
   Future<void> _initializeData() async {
     try {
+      // Start notification initialization in background (don't await)
+      // Firebase is already initialized in main.dart
+      unawaited(NotificationService().initialize());
+
+      // Initialize word repository
       final repository = ref.read(wordRepositoryProvider);
       final result = await repository.init().timeout(
         const Duration(seconds: 5),
@@ -268,19 +275,28 @@ class _SplashPageState extends ConsumerState<SplashPage>
     final settings = ref.read(settingsProvider);
 
     authState.when(
-      data: (state) {
+      data: (state) async {
         final isAuthenticated = state is AuthAuthenticated;
         final canAccess = isAuthenticated || isGuest;
 
         if (!canAccess) {
           // Not logged in -> go to auth
-          context.go('/auth');
-        } else if (!settings.hasSeenOnboarding) {
-          // Logged in but first time -> go to onboarding
-          context.go('/onboarding');
+          if (mounted) context.go('/auth');
         } else {
-          // Logged in and returning user -> go to home
-          context.go('/');
+          // If authenticated (not guest), sync data from cloud
+          if (isAuthenticated) {
+            await _performCloudSync();
+          }
+
+          if (!mounted) return;
+
+          if (!settings.hasSeenOnboarding) {
+            // First time -> go to onboarding
+            context.go('/onboarding');
+          } else {
+            // Returning user -> go to home
+            context.go('/');
+          }
         }
       },
       loading: () {
@@ -292,6 +308,20 @@ class _SplashPageState extends ConsumerState<SplashPage>
         context.go('/auth');
       },
     );
+  }
+
+  /// Perform cloud sync for returning authenticated users
+  Future<void> _performCloudSync() async {
+    try {
+      final cloudSync = CloudSyncService();
+      final updated = await cloudSync.smartSync();
+      if (updated) {
+        debugPrint('Splash: Cloud data restored to local');
+      }
+    } catch (e) {
+      debugPrint('Splash: Cloud sync failed: $e');
+      // Don't block navigation on sync failure
+    }
   }
 
   @override

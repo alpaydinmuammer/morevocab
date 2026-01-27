@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/constants/app_constants.dart';
+import '../../core/services/cloud_sync_service.dart';
+import '../../core/services/notification_service.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/datasources/firebase_auth_datasource.dart';
 import '../../l10n/app_localizations.dart';
@@ -99,6 +101,33 @@ class SettingsPage extends ConsumerWidget {
                 onTap: () => _showResetConfirmation(context, ref),
               ),
             ),
+
+            const SizedBox(height: AppConstants.spacingXXXL),
+            _buildSectionHeader(
+              context,
+              AppLocalizations.of(context)!.notifications,
+              Icons.notifications_outlined,
+            ),
+            _buildGlassCard(
+              context,
+              padding: EdgeInsets.zero,
+              child: const _NotificationSettings(),
+            ),
+
+            // Cloud Sync section - only show for authenticated users
+            if (ref.watch(isAuthenticatedProvider)) ...[
+              const SizedBox(height: AppConstants.spacingXXXL),
+              _buildSectionHeader(
+                context,
+                AppLocalizations.of(context)!.cloudSync,
+                Icons.cloud_sync_outlined,
+              ),
+              _buildGlassCard(
+                context,
+                padding: EdgeInsets.zero,
+                child: const _CloudSyncSettings(),
+              ),
+            ],
 
             const SizedBox(height: AppConstants.spacingXXXL),
             // Show Sign In for guests, Sign Out for authenticated users
@@ -614,6 +643,362 @@ class SettingsPage extends ConsumerWidget {
         context.go('/auth');
       }
     }
+  }
+}
+
+/// Notification settings widget
+class _NotificationSettings extends StatefulWidget {
+  const _NotificationSettings();
+
+  @override
+  State<_NotificationSettings> createState() => _NotificationSettingsState();
+}
+
+class _NotificationSettingsState extends State<_NotificationSettings> {
+  final _notificationService = NotificationService();
+  bool _notificationsEnabled = true;
+  bool _dailyReminderEnabled = false;
+  int _reminderHour = 20;
+  int _reminderMinute = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+  }
+
+  Future<void> _loadSettings() async {
+    final notificationsEnabled = await _notificationService.areNotificationsEnabled();
+    final dailyReminderEnabled = await _notificationService.isDailyReminderEnabled();
+    final reminderTime = await _notificationService.getDailyReminderTime();
+
+    if (mounted) {
+      setState(() {
+        _notificationsEnabled = notificationsEnabled;
+        _dailyReminderEnabled = dailyReminderEnabled;
+        _reminderHour = reminderTime.hour;
+        _reminderMinute = reminderTime.minute;
+      });
+    }
+  }
+
+  Future<void> _toggleNotifications(bool enabled) async {
+    setState(() => _notificationsEnabled = enabled);
+    await _notificationService.setNotificationsEnabled(enabled);
+
+    if (!enabled) {
+      setState(() => _dailyReminderEnabled = false);
+      await _notificationService.setDailyReminderEnabled(false);
+    }
+  }
+
+  Future<void> _toggleDailyReminder(bool enabled) async {
+    final l10n = AppLocalizations.of(context)!;
+    setState(() => _dailyReminderEnabled = enabled);
+    await _notificationService.setDailyReminderEnabled(enabled);
+
+    if (enabled) {
+      await _notificationService.scheduleDailyReminder(
+        hour: _reminderHour,
+        minute: _reminderMinute,
+        title: l10n.dailyReminderTitle,
+        body: l10n.dailyReminderBody,
+      );
+    }
+  }
+
+  Future<void> _selectTime() async {
+    final l10n = AppLocalizations.of(context)!;
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: _reminderHour, minute: _reminderMinute),
+    );
+
+    if (picked != null && mounted) {
+      setState(() {
+        _reminderHour = picked.hour;
+        _reminderMinute = picked.minute;
+      });
+
+      await _notificationService.setDailyReminderTime(picked.hour, picked.minute);
+
+      if (_dailyReminderEnabled) {
+        await _notificationService.scheduleDailyReminder(
+          hour: picked.hour,
+          minute: picked.minute,
+          title: l10n.dailyReminderTitle,
+          body: l10n.dailyReminderBody,
+        );
+      }
+    }
+  }
+
+  String _formatTime(int hour, int minute) {
+    final h = hour.toString().padLeft(2, '0');
+    final m = minute.toString().padLeft(2, '0');
+    return '$h:$m';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    return Column(
+      children: [
+        // Push Notifications Toggle
+        SwitchListTile(
+          secondary: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.notifications_active_outlined,
+              color: theme.colorScheme.primary,
+            ),
+          ),
+          title: Text(
+            l10n.notificationsEnabled,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            l10n.notificationsEnabledDesc,
+            style: TextStyle(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+          ),
+          value: _notificationsEnabled,
+          onChanged: _toggleNotifications,
+        ),
+
+        if (_notificationsEnabled) ...[
+          Divider(
+            height: 1,
+            indent: 72,
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+          ),
+
+          // Daily Reminder Toggle
+          SwitchListTile(
+            secondary: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.secondary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.alarm_outlined,
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+            title: Text(
+              l10n.dailyReminder,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              l10n.dailyReminderDesc,
+              style: TextStyle(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+            value: _dailyReminderEnabled,
+            onChanged: _toggleDailyReminder,
+          ),
+
+          if (_dailyReminderEnabled) ...[
+            Divider(
+              height: 1,
+              indent: 72,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+            ),
+
+            // Reminder Time Picker
+            ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.tertiary.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.schedule_outlined,
+                  color: theme.colorScheme.tertiary,
+                ),
+              ),
+              title: Text(
+                l10n.reminderTime,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                l10n.reminderTimeDesc,
+                style: TextStyle(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
+              ),
+              trailing: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  _formatTime(_reminderHour, _reminderMinute),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.primary,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              onTap: _selectTime,
+            ),
+          ],
+        ],
+      ],
+    );
+  }
+}
+
+/// Cloud sync settings widget
+class _CloudSyncSettings extends StatefulWidget {
+  const _CloudSyncSettings();
+
+  @override
+  State<_CloudSyncSettings> createState() => _CloudSyncSettingsState();
+}
+
+class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
+  final _cloudSync = CloudSyncService();
+  bool _isSyncing = false;
+  DateTime? _lastSyncTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLastSyncTime();
+  }
+
+  Future<void> _loadLastSyncTime() async {
+    final lastSync = await _cloudSync.getLastSyncTime();
+    if (mounted) {
+      setState(() => _lastSyncTime = lastSync);
+    }
+  }
+
+  Future<void> _performSync() async {
+    setState(() => _isSyncing = true);
+
+    try {
+      await _cloudSync.smartSync();
+      await _loadLastSyncTime();
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white, size: 20),
+                const SizedBox(width: 12),
+                Text(AppLocalizations.of(context)!.syncSuccess),
+              ],
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.error_outline, color: Colors.white, size: 20),
+                const SizedBox(width: 12),
+                Text(AppLocalizations.of(context)!.syncFailed),
+              ],
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.red,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isSyncing = false);
+      }
+    }
+  }
+
+  String _formatLastSync() {
+    if (_lastSyncTime == null) {
+      return AppLocalizations.of(context)!.neverSynced;
+    }
+
+    final now = DateTime.now();
+    final diff = now.difference(_lastSyncTime!);
+
+    if (diff.inMinutes < 1) {
+      return AppLocalizations.of(context)!.justNow;
+    } else if (diff.inMinutes < 60) {
+      return '${diff.inMinutes} ${AppLocalizations.of(context)!.minutesAgo}';
+    } else if (diff.inHours < 24) {
+      return '${diff.inHours} ${AppLocalizations.of(context)!.hoursAgo}';
+    } else {
+      return '${diff.inDays} ${AppLocalizations.of(context)!.daysAgo}';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    return ListTile(
+      leading: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.primary.withValues(alpha: 0.1),
+          shape: BoxShape.circle,
+        ),
+        child: _isSyncing
+            ? SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: theme.colorScheme.primary,
+                ),
+              )
+            : Icon(
+                Icons.cloud_sync_outlined,
+                color: theme.colorScheme.primary,
+              ),
+      ),
+      title: Text(
+        l10n.syncNow,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        '${l10n.lastSync}: ${_formatLastSync()}',
+        style: TextStyle(
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+        ),
+      ),
+      trailing: _isSyncing
+          ? null
+          : Icon(
+              Icons.chevron_right,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
+            ),
+      onTap: _isSyncing ? null : _performSync,
+    );
   }
 }
 

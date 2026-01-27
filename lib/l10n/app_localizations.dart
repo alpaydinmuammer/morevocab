@@ -1641,6 +1641,126 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Zorlandığın kelimeleri gözden geçir'**
   String get errorLogCardDesc;
+
+  /// No description provided for @notifications.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirimler'**
+  String get notifications;
+
+  /// No description provided for @notificationsEnabled.
+  ///
+  /// In tr, this message translates to:
+  /// **'Push Bildirimleri'**
+  String get notificationsEnabled;
+
+  /// No description provided for @notificationsEnabledDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme hatırlatmaları al'**
+  String get notificationsEnabledDesc;
+
+  /// No description provided for @dailyReminder.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük Hatırlatma'**
+  String get dailyReminder;
+
+  /// No description provided for @dailyReminderDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Her gün pratik yapman için hatırlat'**
+  String get dailyReminderDesc;
+
+  /// No description provided for @reminderTime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hatırlatma Saati'**
+  String get reminderTime;
+
+  /// No description provided for @reminderTimeDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Günlük hatırlatma ne zaman gönderilsin'**
+  String get reminderTimeDesc;
+
+  /// No description provided for @notificationPermissionDenied.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bildirim izni reddedildi'**
+  String get notificationPermissionDenied;
+
+  /// No description provided for @dailyReminderTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Öğrenme Zamanı!'**
+  String get dailyReminderTitle;
+
+  /// No description provided for @dailyReminderBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kelimeler seni bekliyor. Bugün sadece 5 dakika!'**
+  String get dailyReminderBody;
+
+  /// No description provided for @cloudSync.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bulut Senkronizasyonu'**
+  String get cloudSync;
+
+  /// No description provided for @syncNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şimdi Senkronize Et'**
+  String get syncNow;
+
+  /// No description provided for @lastSync.
+  ///
+  /// In tr, this message translates to:
+  /// **'Son senkronizasyon'**
+  String get lastSync;
+
+  /// No description provided for @syncSuccess.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senkronizasyon başarılı'**
+  String get syncSuccess;
+
+  /// No description provided for @syncFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Senkronizasyon başarısız. Tekrar deneyin.'**
+  String get syncFailed;
+
+  /// No description provided for @neverSynced.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hiç senkronize edilmedi'**
+  String get neverSynced;
+
+  /// No description provided for @justNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Az önce'**
+  String get justNow;
+
+  /// No description provided for @minutesAgo.
+  ///
+  /// In tr, this message translates to:
+  /// **'dakika önce'**
+  String get minutesAgo;
+
+  /// No description provided for @hoursAgo.
+  ///
+  /// In tr, this message translates to:
+  /// **'saat önce'**
+  String get hoursAgo;
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In tr, this message translates to:
+  /// **'gün önce'**
+  String get daysAgo;
 }
 
 class _AppLocalizationsDelegate

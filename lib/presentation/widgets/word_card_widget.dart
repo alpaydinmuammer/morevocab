@@ -69,6 +69,10 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    // Pre-build both sides once (not every animation frame)
+    final frontSide = _buildFrontSide(theme);
+    final backSide = _buildBackSide(theme);
+
     return GestureDetector(
       onTap: _toggleCard,
       child: ListenableBuilder(
@@ -82,7 +86,11 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.001)
               ..rotateY(rotationValue),
-            child: isBack ? _buildBackSide(theme) : _buildFrontSide(theme),
+            // Use IndexedStack to keep both sides in memory, avoiding rebuilds
+            child: IndexedStack(
+              index: isBack ? 1 : 0,
+              children: [frontSide, backSide],
+            ),
           );
         },
       ),

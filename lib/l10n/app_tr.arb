@@ -344,5 +344,27 @@
       "total": {"type": "int"}
     }
   },
-  "errorLogCardDesc": "Zorlandığın kelimeleri gözden geçir"
+  "errorLogCardDesc": "Zorlandığın kelimeleri gözden geçir",
+
+  "notifications": "Bildirimler",
+  "notificationsEnabled": "Push Bildirimleri",
+  "notificationsEnabledDesc": "Öğrenme hatırlatmaları al",
+  "dailyReminder": "Günlük Hatırlatma",
+  "dailyReminderDesc": "Her gün pratik yapman için hatırlat",
+  "reminderTime": "Hatırlatma Saati",
+  "reminderTimeDesc": "Günlük hatırlatma ne zaman gönderilsin",
+  "notificationPermissionDenied": "Bildirim izni reddedildi",
+  "dailyReminderTitle": "Öğrenme Zamanı!",
+  "dailyReminderBody": "Kelimeler seni bekliyor. Bugün sadece 5 dakika!",
+
+  "cloudSync": "Bulut Senkronizasyonu",
+  "syncNow": "Şimdi Senkronize Et",
+  "lastSync": "Son senkronizasyon",
+  "syncSuccess": "Senkronizasyon başarılı",
+  "syncFailed": "Senkronizasyon başarısız. Tekrar deneyin.",
+  "neverSynced": "Hiç senkronize edilmedi",
+  "justNow": "Az önce",
+  "minutesAgo": "dakika önce",
+  "hoursAgo": "saat önce",
+  "daysAgo": "gün önce"
 }
