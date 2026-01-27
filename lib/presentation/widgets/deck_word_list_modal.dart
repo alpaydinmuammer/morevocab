@@ -21,7 +21,7 @@ class DeckWordListModal extends ConsumerWidget {
     final langCode = ref.watch(settingsProvider).locale.languageCode;
 
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       child: PremiumBackground(
         showTypo: false, // Too noisy for a list modal
         showMesh: true,
@@ -74,13 +74,13 @@ class DeckWordListModal extends ConsumerWidget {
 
                 // Content
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 40, 24, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 32, 20, 16),
                   child: Row(
                     children: [
                       // Deck Logo
                       Container(
-                        width: 64,
-                        height: 64,
+                        width: 56,
+                        height: 56,
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: deck.color.withValues(alpha: 0.15),
@@ -108,7 +108,7 @@ class DeckWordListModal extends ConsumerWidget {
                           children: [
                             Text(
                               deck.getLocalizedName(context),
-                              style: theme.textTheme.headlineSmall?.copyWith(
+                              style: theme.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 height: 1.1,
                                 color: isDark
@@ -192,11 +192,11 @@ class DeckWordListModal extends ConsumerWidget {
                   return ListView.separated(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
-                      vertical: 20,
+                      vertical: 16,
                     ),
                     itemCount: words.length,
                     separatorBuilder: (context, index) =>
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 8),
                     itemBuilder: (context, index) {
                       final word = words[index];
                       final isKnown = word.srsLevel > 0;
@@ -230,7 +230,7 @@ class DeckWordListModal extends ConsumerWidget {
                         decoration: BoxDecoration(
                           color: cardColor,
                           borderRadius: BorderRadius.circular(
-                            20,
+                            16,
                           ), // More rounded for premium feel
                           border: Border.all(
                             color: borderColor,
@@ -247,7 +247,7 @@ class DeckWordListModal extends ConsumerWidget {
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(16),
                           child: BackdropFilter(
                             filter: isDark
                                 ? (importing_dart_ui.ImageFilter.blur(
@@ -259,7 +259,7 @@ class DeckWordListModal extends ConsumerWidget {
                                     sigmaY: 0,
                                   )), // Blur only for dark glassmorphism
                             child: Padding(
-                              padding: const EdgeInsets.all(16),
+                              padding: const EdgeInsets.all(12),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -273,7 +273,7 @@ class DeckWordListModal extends ConsumerWidget {
                                           style: theme.textTheme.titleMedium
                                               ?.copyWith(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 18,
+                                                fontSize: 16,
                                                 color: textColor,
                                               ),
                                         ),

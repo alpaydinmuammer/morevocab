@@ -106,6 +106,7 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
+          gameId: 'oddOneOut',
           score: 0,
           highScore: 0,
           showScore: false,

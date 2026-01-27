@@ -9,6 +9,7 @@ import '../../providers/badge_provider.dart';
 import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
 import '../../widgets/badges_modal.dart';
+import 'widgets/arcade_leaderboard_screen.dart';
 
 /// Arcade mode hub page displaying all available mini-games
 class ArcadeHubPage extends ConsumerStatefulWidget {
@@ -99,6 +100,28 @@ class _ArcadeHubPageState extends ConsumerState<ArcadeHubPage> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(width: AppConstants.spacingLG),
+                    // Leaderboard Button
+                    Container(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainerHighest
+                            .withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.leaderboard_rounded),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ArcadeLeaderboardScreen(),
+                              fullscreenDialog: true,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

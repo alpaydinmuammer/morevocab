@@ -124,6 +124,7 @@ class _EmojiPuzzleGameState extends ConsumerState<EmojiPuzzleGame> {
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
+          gameId: 'emojiPuzzle',
           score: 0,
           highScore: 0,
           showScore: false,

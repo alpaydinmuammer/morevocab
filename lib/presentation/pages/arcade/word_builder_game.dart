@@ -123,6 +123,7 @@ class _WordBuilderGameState extends ConsumerState<WordBuilderGame> {
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
+          gameId: 'wordBuilder',
           score: 0,
           showScore: false,
           highScore: 0,

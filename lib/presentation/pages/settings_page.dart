@@ -40,7 +40,7 @@ class SettingsPage extends ConsumerWidget {
       ),
       body: PremiumBackground(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(24, 120, 24, 24),
+          padding: const EdgeInsets.fromLTRB(20, 100, 20, 24),
           children: [
             _buildSectionHeader(
               context,
@@ -75,7 +75,7 @@ class SettingsPage extends ConsumerWidget {
               child: ListTile(
                 contentPadding: EdgeInsets.zero,
                 leading: Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.red.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
@@ -148,7 +148,7 @@ class SettingsPage extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(
         left: AppConstants.spacingXXS,
-        bottom: AppConstants.spacingMD,
+        bottom: AppConstants.spacingSM, // Reduced from MD
       ),
       child: Row(
         children: [
@@ -180,15 +180,15 @@ class SettingsPage extends ConsumerWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return Container(
-      padding: padding ?? const EdgeInsets.all(20),
+      padding: padding ?? const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: isDark
             ? Colors.white.withValues(alpha: 0.08)
             : theme.colorScheme.surface.withValues(alpha: 0.85),
-        borderRadius: BorderRadius.circular(AppConstants.borderRadiusXLarge),
+        borderRadius: BorderRadius.circular(16), // Reduced from XLarge
         border: Border.all(
           color: Colors.white.withValues(alpha: isDark ? 0.1 : 0.4),
-          width: 1.5,
+          width: 1.0, // Reduced from 1.5
         ),
         boxShadow: [
           BoxShadow(
@@ -215,7 +215,7 @@ class SettingsPage extends ConsumerWidget {
         child: AnimatedPressable(
           onTap: () => ref.read(settingsProvider.notifier).setThemeMode(mode),
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
               color: isSelected
                   ? theme.colorScheme.primary
@@ -314,7 +314,7 @@ class SettingsPage extends ConsumerWidget {
     ];
 
     return SizedBox(
-      height: 110,
+      height: 90,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
@@ -342,8 +342,8 @@ class SettingsPage extends ConsumerWidget {
                           }
                         : null,
                     child: Container(
-                      width: 85,
-                      height: 80,
+                      width: 70,
+                      height: 68,
                       decoration: BoxDecoration(
                         color: isSupported
                             ? (isSelected
@@ -371,7 +371,7 @@ class SettingsPage extends ConsumerWidget {
                           Text(
                             lang['flag']!,
                             style: TextStyle(
-                              fontSize: AppConstants.textDisplay,
+                              fontSize: 24,
                               color: isSupported ? null : Colors.grey,
                             ),
                           ),
@@ -455,7 +455,7 @@ class SettingsPage extends ConsumerWidget {
             child: ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
@@ -493,7 +493,7 @@ class SettingsPage extends ConsumerWidget {
           child: ListTile(
             contentPadding: EdgeInsets.zero,
             leading: Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: theme.colorScheme.error.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
@@ -668,8 +668,10 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
   }
 
   Future<void> _loadSettings() async {
-    final notificationsEnabled = await _notificationService.areNotificationsEnabled();
-    final dailyReminderEnabled = await _notificationService.isDailyReminderEnabled();
+    final notificationsEnabled = await _notificationService
+        .areNotificationsEnabled();
+    final dailyReminderEnabled = await _notificationService
+        .isDailyReminderEnabled();
     final reminderTime = await _notificationService.getDailyReminderTime();
 
     if (mounted) {
@@ -720,7 +722,10 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
         _reminderMinute = picked.minute;
       });
 
-      await _notificationService.setDailyReminderTime(picked.hour, picked.minute);
+      await _notificationService.setDailyReminderTime(
+        picked.hour,
+        picked.minute,
+      );
 
       if (_dailyReminderEnabled) {
         await _notificationService.scheduleDailyReminder(
@@ -749,7 +754,7 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
         // Push Notifications Toggle
         SwitchListTile(
           secondary: Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: theme.colorScheme.primary.withValues(alpha: 0.1),
               shape: BoxShape.circle,
@@ -783,7 +788,7 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
           // Daily Reminder Toggle
           SwitchListTile(
             secondary: Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: theme.colorScheme.secondary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
@@ -817,7 +822,7 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
             // Reminder Time Picker
             ListTile(
               leading: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.tertiary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
@@ -838,7 +843,10 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
                 ),
               ),
               trailing: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -906,7 +914,9 @@ class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
             ),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.green,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             margin: const EdgeInsets.all(16),
           ),
         );
@@ -924,7 +934,9 @@ class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
             ),
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.red,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             margin: const EdgeInsets.all(16),
           ),
         );
@@ -962,7 +974,7 @@ class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
 
     return ListTile(
       leading: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: theme.colorScheme.primary.withValues(alpha: 0.1),
           shape: BoxShape.circle,
@@ -976,10 +988,7 @@ class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
                   color: theme.colorScheme.primary,
                 ),
               )
-            : Icon(
-                Icons.cloud_sync_outlined,
-                color: theme.colorScheme.primary,
-              ),
+            : Icon(Icons.cloud_sync_outlined, color: theme.colorScheme.primary),
       ),
       title: Text(
         l10n.syncNow,

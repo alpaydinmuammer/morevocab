@@ -348,6 +348,7 @@ class _AnagramGameState extends ConsumerState<AnagramGame> {
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
+          gameId: 'anagram',
           score: _foundWords.length,
           highScore: _currentLevel.validWords.length,
           accentColor: Colors.teal,

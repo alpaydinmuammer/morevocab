@@ -176,6 +176,7 @@ class _WordChainGameState extends ConsumerState<WordChainGame> {
       context,
       MaterialPageRoute(
         builder: (context) => GameOverScreen(
+          gameId: 'wordChain',
           score: _score,
           highScore: previousHighScore,
           accentColor: Colors.orange,
