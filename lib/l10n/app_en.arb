@@ -37,6 +37,8 @@
   "german": "German",
   "italian": "Italian",
   "soundSettings": "Sound Settings",
+  "soundEffects": "Sound Effects",
+  "soundEffectsDesc": "Play sounds for actions and feedback",
   "speed": "Speed",
   "volume": "Volume",
   "pitch": "Pitch",
@@ -363,5 +365,76 @@
   "justNow": "Just now",
   "minutesAgo": "minutes ago",
   "hoursAgo": "hours ago",
-  "daysAgo": "days ago"
+  "daysAgo": "days ago",
+  "leaderboardTitle": "LEADERBOARD",
+  "topPlayers": "TOP PLAYERS",
+  "couldNotLoadLeaderboard": "Could not load leaderboard",
+  "noScoresYet": "No scores yet!",
+  "newHighScore": "NEW HIGH SCORE!",
+  "totalQuestions": "Total Questions",
+  "oddOneOutQuestion": "Which one doesn't belong?",
+  "autoReminderTitle": "Have you studied words today?",
+  "autoReminderBody": "Just 5 minutes make a difference!",
+  "wordChainTitle": "WORD CHAIN",
+  "leaderboardPremiumWarning": "Only Premium members can appear on the leaderboard. Upgrade to join the ranks!",
+  "joinPremium": "Join Premium",
+
+  "subscription": "Subscription",
+  "premiumMember": "Premium Member",
+  "active": "Active",
+  "manageSubscription": "Manage Subscription",
+  "unlockPremium": "Unlock Premium",
+  "premiumDescription": "Ad-free, unlimited sync, leaderboard access",
+  "upgradeNow": "Upgrade Now",
+  "restorePurchases": "Restore Purchases",
+  "restoreSuccess": "Purchases restored successfully",
+  "restoreNoPurchases": "No purchases to restore",
+
+  "paywallTitle": "More Vocab Premium",
+  "paywallSubtitle": "Unlock unlimited sync, leaderboard access, and remove ads.",
+  "paywallWhatsIncluded": "WHAT'S INCLUDED",
+  "featureNoAdsTitle": "No Ads",
+  "featureNoAdsSubtitle": "Experience complete immersion with zero ads.",
+  "featureSyncTitle": "Unlimited Sync",
+  "featureSyncSubtitle": "Save and sync your progress across all devices.",
+  "featureLeaderboardTitle": "Leaderboard",
+  "featureLeaderboardSubtitle": "Compete with others and climb the rankings.",
+  "paywallMonthly": "Monthly",
+  "paywallAnnual": "Annual",
+  "paywallLifetime": "Lifetime",
+  "paywallBestValue": "BEST VALUE",
+  "paywallNoSubscriptions": "No subscriptions available",
+  "paywallContinue": "Continue",
+  "paywallRestore": "Restore purchases",
+  "paywallRestoreSuccess": "Purchases restored successfully!",
+  "paywallRestoreNoPurchases": "No purchases found to restore.",
+  "paywallRestoreFailed": "Restore failed: {error}",
+  "@paywallRestoreFailed": {
+    "placeholders": {
+        "error": {"type": "String"}
+    }
+  },
+  "paywallPurchaseFailed": "Purchase failed or cancelled: {error}",
+  "@paywallPurchaseFailed": {
+    "placeholders": {
+        "error": {"type": "String"}
+    }
+  },
+
+  "imageCache": "Image Cache",
+  "clearCache": "Clear Cache",
+  "clearCacheConfirm": "This will delete all downloaded images. They will be re-downloaded when needed.",
+  "cacheCleared": "Cache cleared successfully",
+  "noCachedImages": "No cached images",
+  "cachedDecksCount": "{count} decks cached",
+  "@cachedDecksCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "clear": "Clear",
+  "downloadImages": "Download Images",
+  "downloading": "Downloading...",
+  "downloaded": "Downloaded",
+  "downloadFailed": "Download failed"
 }

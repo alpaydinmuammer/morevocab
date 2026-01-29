@@ -42,7 +42,20 @@ class LeaderboardService {
       _auth.currentUser?.email?.split('@')[0] ??
       'Player';
 
-  Future<void> updateScore(String gameId, int score) async {
+  /// Update user's score on leaderboard
+  /// Only premium users can submit scores to the leaderboard
+  /// [isPremium] - Whether the user has a premium subscription
+  Future<void> updateScore(
+    String gameId,
+    int score, {
+    required bool isPremium,
+  }) async {
+    // Only premium users can appear on leaderboard
+    if (!isPremium) {
+      debugPrint('Leaderboard: Free user, score not submitted');
+      return;
+    }
+
     final uid = _userId;
     if (uid == null) return;
 

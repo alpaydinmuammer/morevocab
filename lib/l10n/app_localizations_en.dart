@@ -125,6 +125,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get soundSettings => 'Sound Settings';
 
   @override
+  String get soundEffects => 'Sound Effects';
+
+  @override
+  String get soundEffectsDesc => 'Play sounds for actions and feedback';
+
+  @override
   String get speed => 'Speed';
 
   @override
@@ -879,4 +885,176 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get daysAgo => 'days ago';
+
+  @override
+  String get leaderboardTitle => 'LEADERBOARD';
+
+  @override
+  String get topPlayers => 'TOP PLAYERS';
+
+  @override
+  String get couldNotLoadLeaderboard => 'Could not load leaderboard';
+
+  @override
+  String get noScoresYet => 'No scores yet!';
+
+  @override
+  String get newHighScore => 'NEW HIGH SCORE!';
+
+  @override
+  String get totalQuestions => 'Total Questions';
+
+  @override
+  String get oddOneOutQuestion => 'Which one doesn\'t belong?';
+
+  @override
+  String get autoReminderTitle => 'Have you studied words today?';
+
+  @override
+  String get autoReminderBody => 'Just 5 minutes make a difference!';
+
+  @override
+  String get wordChainTitle => 'WORD CHAIN';
+
+  @override
+  String get leaderboardPremiumWarning =>
+      'Only Premium members can appear on the leaderboard. Upgrade to join the ranks!';
+
+  @override
+  String get joinPremium => 'Join Premium';
+
+  @override
+  String get subscription => 'Subscription';
+
+  @override
+  String get premiumMember => 'Premium Member';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get manageSubscription => 'Manage Subscription';
+
+  @override
+  String get unlockPremium => 'Unlock Premium';
+
+  @override
+  String get premiumDescription =>
+      'Ad-free, unlimited sync, leaderboard access';
+
+  @override
+  String get upgradeNow => 'Upgrade Now';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
+
+  @override
+  String get restoreSuccess => 'Purchases restored successfully';
+
+  @override
+  String get restoreNoPurchases => 'No purchases to restore';
+
+  @override
+  String get paywallTitle => 'More Vocab Premium';
+
+  @override
+  String get paywallSubtitle =>
+      'Unlock unlimited sync, leaderboard access, and remove ads.';
+
+  @override
+  String get paywallWhatsIncluded => 'WHAT\'S INCLUDED';
+
+  @override
+  String get featureNoAdsTitle => 'No Ads';
+
+  @override
+  String get featureNoAdsSubtitle =>
+      'Experience complete immersion with zero ads.';
+
+  @override
+  String get featureSyncTitle => 'Unlimited Sync';
+
+  @override
+  String get featureSyncSubtitle =>
+      'Save and sync your progress across all devices.';
+
+  @override
+  String get featureLeaderboardTitle => 'Leaderboard';
+
+  @override
+  String get featureLeaderboardSubtitle =>
+      'Compete with others and climb the rankings.';
+
+  @override
+  String get paywallMonthly => 'Monthly';
+
+  @override
+  String get paywallAnnual => 'Annual';
+
+  @override
+  String get paywallLifetime => 'Lifetime';
+
+  @override
+  String get paywallBestValue => 'BEST VALUE';
+
+  @override
+  String get paywallNoSubscriptions => 'No subscriptions available';
+
+  @override
+  String get paywallContinue => 'Continue';
+
+  @override
+  String get paywallRestore => 'Restore purchases';
+
+  @override
+  String get paywallRestoreSuccess => 'Purchases restored successfully!';
+
+  @override
+  String get paywallRestoreNoPurchases => 'No purchases found to restore.';
+
+  @override
+  String paywallRestoreFailed(String error) {
+    return 'Restore failed: $error';
+  }
+
+  @override
+  String paywallPurchaseFailed(String error) {
+    return 'Purchase failed or cancelled: $error';
+  }
+
+  @override
+  String get imageCache => 'Image Cache';
+
+  @override
+  String get clearCache => 'Clear Cache';
+
+  @override
+  String get clearCacheConfirm =>
+      'This will delete all downloaded images. They will be re-downloaded when needed.';
+
+  @override
+  String get cacheCleared => 'Cache cleared successfully';
+
+  @override
+  String get noCachedImages => 'No cached images';
+
+  @override
+  String cachedDecksCount(int count) {
+    return '$count decks cached';
+  }
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get downloadImages => 'Download Images';
+
+  @override
+  String get downloading => 'Downloading...';
+
+  @override
+  String get downloaded => 'Downloaded';
+
+  @override
+  String get downloadFailed => 'Download failed';
 }

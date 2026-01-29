@@ -8,6 +8,7 @@ import '../../domain/repositories/auth_repository.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../data/datasources/firebase_auth_datasource.dart';
 import '../../core/services/cloud_sync_service.dart';
+import '../../core/services/subscription_service.dart';
 
 const _guestModeKey = 'is_guest_mode';
 
@@ -48,6 +49,7 @@ final isAppleSignInAvailableProvider = Provider<bool>((ref) {
 class AuthNotifier extends StateNotifier<AsyncValue<void>> {
   final AuthRepository _repository;
   final CloudSyncService _cloudSync = CloudSyncService();
+  final SubscriptionService _subscriptionService = SubscriptionService();
 
   AuthNotifier(this._repository) : super(const AsyncValue.data(null));
 
@@ -57,7 +59,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
     final result = await _repository.signInWithGoogle();
 
     return result.when(
-      success: (_) async {
+      success: (user) async {
+        // Link user to RevenueCat for subscription tracking
+        await _linkUserToRevenueCat(user.uid);
         // Sync data after successful login
         await _performCloudSync();
         state = const AsyncValue.data(null);
@@ -76,7 +80,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
     final result = await _repository.signInWithApple();
 
     return result.when(
-      success: (_) async {
+      success: (user) async {
+        // Link user to RevenueCat for subscription tracking
+        await _linkUserToRevenueCat(user.uid);
         // Sync data after successful login
         await _performCloudSync();
         state = const AsyncValue.data(null);
@@ -100,6 +106,13 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
       debugPrint('Failed to sync before sign out: $e');
     }
 
+    // Log out from RevenueCat
+    try {
+      await _subscriptionService.logOut();
+    } catch (e) {
+      debugPrint('Failed to log out from RevenueCat: $e');
+    }
+
     final result = await _repository.signOut();
 
     return result.when(
@@ -112,6 +125,17 @@ class AuthNotifier extends StateNotifier<AsyncValue<void>> {
         return false;
       },
     );
+  }
+
+  /// Link user to RevenueCat for subscription tracking
+  Future<void> _linkUserToRevenueCat(String userId) async {
+    try {
+      await _subscriptionService.identifyUser(userId);
+      debugPrint('User linked to RevenueCat: $userId');
+    } catch (e) {
+      debugPrint('Failed to link user to RevenueCat: $e');
+      // Don't block login on RevenueCat failure
+    }
   }
 
   /// Perform cloud sync (smart merge)

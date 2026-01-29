@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 import '../../domain/models/error_log_model.dart';
 
 /// State containing all error log entries
@@ -23,11 +24,9 @@ class ErrorLogNotifier extends StateNotifier<ErrorLogState> {
     _loadState();
   }
 
-  static const _storageKey = 'error_log_entries';
-
   Future<void> _loadState() async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonStr = prefs.getString(_storageKey);
+    final jsonStr = prefs.getString(StorageKeys.errorLogEntries);
 
     if (jsonStr != null) {
       try {
@@ -45,7 +44,7 @@ class ErrorLogNotifier extends StateNotifier<ErrorLogState> {
   Future<void> _saveState() async {
     final prefs = await SharedPreferences.getInstance();
     final jsonList = state.entries.map((e) => e.toJson()).toList();
-    await prefs.setString(_storageKey, jsonEncode(jsonList));
+    await prefs.setString(StorageKeys.errorLogEntries, jsonEncode(jsonList));
   }
 
   /// Add a word or increment its wrong count if already exists
@@ -115,7 +114,7 @@ class ErrorLogNotifier extends StateNotifier<ErrorLogState> {
   Future<void> clearAll() async {
     state = const ErrorLogState();
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_storageKey);
+    await prefs.remove(StorageKeys.errorLogEntries);
   }
 }
 

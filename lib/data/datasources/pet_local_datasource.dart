@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 import '../../domain/models/pet_model.dart';
 
 /// Local datasource for pet data using SharedPreferences
 class PetLocalDatasource {
-  static const String _petDataKey = 'pet_data';
-  static const String _hasPetKey = 'has_pet';
 
   // Singleton instance
   static PetLocalDatasource? _instance;
@@ -39,13 +38,13 @@ class PetLocalDatasource {
   /// Check if user has a pet
   Future<bool> hasPet() async {
     final prefs = await _getPrefs();
-    return prefs.getBool(_hasPetKey) ?? false;
+    return prefs.getBool(StorageKeys.hasPet) ?? false;
   }
 
   /// Get the stored pet data
   Future<PetModel?> getPet() async {
     final prefs = await _getPrefs();
-    final jsonString = prefs.getString(_petDataKey);
+    final jsonString = prefs.getString(StorageKeys.petData);
 
     if (jsonString == null || jsonString.isEmpty) {
       return null;
@@ -65,15 +64,15 @@ class PetLocalDatasource {
     final prefs = await _getPrefs();
     final jsonString = jsonEncode(pet.toJson());
 
-    await prefs.setString(_petDataKey, jsonString);
-    await prefs.setBool(_hasPetKey, true);
+    await prefs.setString(StorageKeys.petData, jsonString);
+    await prefs.setBool(StorageKeys.hasPet, true);
   }
 
   /// Delete pet data
   Future<void> deletePet() async {
     final prefs = await _getPrefs();
-    await prefs.remove(_petDataKey);
-    await prefs.setBool(_hasPetKey, false);
+    await prefs.remove(StorageKeys.petData);
+    await prefs.setBool(StorageKeys.hasPet, false);
   }
 
   /// Update pet with new experience and handle level ups

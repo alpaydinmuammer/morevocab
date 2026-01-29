@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
 
 class StrategyTextRenderer extends StatelessWidget {
   final String text;
@@ -79,8 +80,8 @@ class StrategyTextRenderer extends StatelessWidget {
     }
 
     // Highlighter colors for prepositions
-    final highlighterColor = const Color(0xFFFDFD96).withValues(alpha: 0.8);
-    final inkColor = const Color(0xFF2C3E50); // Dark ink blue/grey
+    final highlighterColor = ColorPalette.highlighterColor.withValues(alpha: 0.8);
+    final inkColor = ColorPalette.inkColor;
 
     if (foundPrep == null) {
       return Text(

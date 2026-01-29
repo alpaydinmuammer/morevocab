@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/badge_thresholds.dart';
+import '../../core/constants/storage_keys.dart';
 import '../../domain/models/badge_model.dart';
 import 'arcade_provider.dart';
 import 'streak_provider.dart';
@@ -33,11 +35,9 @@ class BadgeNotifier extends StateNotifier<BadgeState> {
     _loadState();
   }
 
-  static const _storageKey = 'user_badges';
-
   Future<void> _loadState() async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonStr = prefs.getString(_storageKey);
+    final jsonStr = prefs.getString(StorageKeys.userBadges);
 
     if (jsonStr != null) {
       try {
@@ -68,7 +68,7 @@ class BadgeNotifier extends StateNotifier<BadgeState> {
       }
     }
 
-    await prefs.setString(_storageKey, jsonEncode(json));
+    await prefs.setString(StorageKeys.userBadges, jsonEncode(json));
   }
 
   /// Check and unlock badges based on current arcade and streak state
@@ -88,45 +88,45 @@ class BadgeNotifier extends StateNotifier<BadgeState> {
 
     // Anagram badges (Level-based)
     final anagramLevel = arcadeState.getLevel(ArcadeGameType.anagram);
-    tryUnlock(BadgeType.anagramRookie, anagramLevel >= 5);
-    tryUnlock(BadgeType.anagramExpert, anagramLevel >= 15);
-    tryUnlock(BadgeType.anagramChampion, anagramLevel >= 30);
+    tryUnlock(BadgeType.anagramRookie, anagramLevel >= BadgeThresholds.anagramBronze);
+    tryUnlock(BadgeType.anagramExpert, anagramLevel >= BadgeThresholds.anagramSilver);
+    tryUnlock(BadgeType.anagramChampion, anagramLevel >= BadgeThresholds.anagramGold);
 
-    // Word Chain badges (Score-based) - harder
+    // Word Chain badges (Score-based)
     final chainScore = arcadeState.getScore(ArcadeGameType.wordChain);
-    tryUnlock(BadgeType.chainStarter, chainScore >= 500);
-    tryUnlock(BadgeType.chainMaster, chainScore >= 1000);
-    tryUnlock(BadgeType.chainLegend, chainScore >= 1500);
+    tryUnlock(BadgeType.chainStarter, chainScore >= BadgeThresholds.chainBronze);
+    tryUnlock(BadgeType.chainMaster, chainScore >= BadgeThresholds.chainSilver);
+    tryUnlock(BadgeType.chainLegend, chainScore >= BadgeThresholds.chainGold);
 
-    // Odd One Out badges (Score-based) - harder
+    // Odd One Out badges (Score-based)
     final oddScore = arcadeState.getScore(ArcadeGameType.oddOneOut);
-    tryUnlock(BadgeType.observer, oddScore >= 100);
-    tryUnlock(BadgeType.detective, oddScore >= 250);
-    tryUnlock(BadgeType.sharpshooter, oddScore >= 500);
+    tryUnlock(BadgeType.observer, oddScore >= BadgeThresholds.oddBronze);
+    tryUnlock(BadgeType.detective, oddScore >= BadgeThresholds.oddSilver);
+    tryUnlock(BadgeType.sharpshooter, oddScore >= BadgeThresholds.oddGold);
 
     // Emoji Puzzle badges (Level-based)
     final emojiLevel = arcadeState.getLevel(ArcadeGameType.emojiPuzzle);
-    tryUnlock(BadgeType.emojiSolver, emojiLevel >= 10);
-    tryUnlock(BadgeType.puzzleMaster, emojiLevel >= 20);
-    tryUnlock(BadgeType.emojiLegend, emojiLevel >= 30);
+    tryUnlock(BadgeType.emojiSolver, emojiLevel >= BadgeThresholds.emojiBronze);
+    tryUnlock(BadgeType.puzzleMaster, emojiLevel >= BadgeThresholds.emojiSilver);
+    tryUnlock(BadgeType.emojiLegend, emojiLevel >= BadgeThresholds.emojiGold);
 
-    // Word Builder badges (Score-based) - harder
+    // Word Builder badges (Score-based)
     final wordBuilderScore = arcadeState.getScore(ArcadeGameType.wordBuilder);
-    tryUnlock(BadgeType.wordWorker, wordBuilderScore >= 100);
-    tryUnlock(BadgeType.wordArchitect, wordBuilderScore >= 250);
-    tryUnlock(BadgeType.wordKing, wordBuilderScore >= 500);
+    tryUnlock(BadgeType.wordWorker, wordBuilderScore >= BadgeThresholds.builderBronze);
+    tryUnlock(BadgeType.wordArchitect, wordBuilderScore >= BadgeThresholds.builderSilver);
+    tryUnlock(BadgeType.wordKing, wordBuilderScore >= BadgeThresholds.builderGold);
 
-    // Streak badges - harder
+    // Streak badges
     final streak = streakState.bestStreak;
-    tryUnlock(BadgeType.fireSpirit, streak >= 7);
-    tryUnlock(BadgeType.dedicated, streak >= 30);
-    tryUnlock(BadgeType.legendary, streak >= 100);
+    tryUnlock(BadgeType.fireSpirit, streak >= BadgeThresholds.streakBronze);
+    tryUnlock(BadgeType.dedicated, streak >= BadgeThresholds.streakSilver);
+    tryUnlock(BadgeType.legendary, streak >= BadgeThresholds.streakGold);
 
     // Special badges - based on total badges unlocked
     final totalUnlocked = state.unlockedCount + newlyUnlocked.length;
-    tryUnlock(BadgeType.firstStep, totalUnlocked >= 5);
-    tryUnlock(BadgeType.arcadeFan, totalUnlocked >= 10);
-    tryUnlock(BadgeType.brainBoss, totalUnlocked >= 20);
+    tryUnlock(BadgeType.firstStep, totalUnlocked >= BadgeThresholds.milestoneBronze);
+    tryUnlock(BadgeType.arcadeFan, totalUnlocked >= BadgeThresholds.milestoneSilver);
+    tryUnlock(BadgeType.brainBoss, totalUnlocked >= BadgeThresholds.milestoneGold);
 
     // Update state with newly unlocked badges
     if (newlyUnlocked.isNotEmpty) {

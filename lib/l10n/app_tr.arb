@@ -40,6 +40,8 @@
   "german": "Almanca",
   "italian": "İtalyanca",
   "soundSettings": "Ses Ayarları",
+  "soundEffects": "Ses Efektleri",
+  "soundEffectsDesc": "Eylemler ve geri bildirimler için ses çal",
   "speed": "Hız",
   "volume": "Ses Seviyesi",
   "pitch": "Perde",
@@ -366,5 +368,76 @@
   "justNow": "Az önce",
   "minutesAgo": "dakika önce",
   "hoursAgo": "saat önce",
-  "daysAgo": "gün önce"
+  "daysAgo": "gün önce",
+  "leaderboardTitle": "LİDER TABLOSU",
+  "topPlayers": "EN İYİ OYUNCULAR",
+  "couldNotLoadLeaderboard": "Lider tablosu yüklenemedi",
+  "noScoresYet": "Henüz skor yok!",
+  "newHighScore": "YENİ REKOR!",
+  "totalQuestions": "Toplam Soru",
+  "oddOneOutQuestion": "Hangisi gruba uymuyor?",
+  "autoReminderTitle": "Bugün kelime çalıştın mı?",
+  "autoReminderBody": "Sadece 5 dakika ayır, fark yaratır!",
+  "wordChainTitle": "KELİME ZİNCİRİ",
+  "leaderboardPremiumWarning": "Sadece Premium üyeler liderlik tablosunda yer alabilir. Sıralamaya girmek için Premium'a geç!",
+  "joinPremium": "Premium'a Geç",
+
+  "subscription": "Abonelik",
+  "premiumMember": "Premium Üye",
+  "active": "Aktif",
+  "manageSubscription": "Aboneliği Yönet",
+  "unlockPremium": "Premium'u Aç",
+  "premiumDescription": "Reklamsız, sınırsız senkronizasyon, lider tablosu",
+  "upgradeNow": "Şimdi Yükselt",
+  "restorePurchases": "Satın Almaları Geri Yükle",
+  "restoreSuccess": "Satın almalar başarıyla geri yüklendi",
+  "restoreNoPurchases": "Geri yüklenecek satın alma yok",
+
+  "paywallTitle": "More Vocab Premium",
+  "paywallSubtitle": "Sınırsız senkronizasyon, lider tablosu ve reklamsız deneyimin kilidini aç.",
+  "paywallWhatsIncluded": "NELER DAHİL",
+  "featureNoAdsTitle": "Reklamsız",
+  "featureNoAdsSubtitle": "Sıfır reklamla tam odaklanma deneyimi yaşa.",
+  "featureSyncTitle": "Sınırsız Senkronizasyon",
+  "featureSyncSubtitle": "İlerlemelerini kaydet ve tüm cihazlarında senkronize et.",
+  "featureLeaderboardTitle": "Lider Tablosu",
+  "featureLeaderboardSubtitle": "Diğerleriyle yarış ve sıralamada yüksel.",
+  "paywallMonthly": "Aylık",
+  "paywallAnnual": "Yıllık",
+  "paywallLifetime": "Ömür Boyu",
+  "paywallBestValue": "EN İYİ FİYAT",
+  "paywallNoSubscriptions": "Abonelik bulunamadı",
+  "paywallContinue": "Devam Et",
+  "paywallRestore": "Satın Almaları Geri Yükle",
+  "paywallRestoreSuccess": "Satın alımlar başarıyla geri yüklendi!",
+  "paywallRestoreNoPurchases": "Geri yüklenecek satın alım bulunamadı.",
+  "paywallRestoreFailed": "Geri yükleme başarısız: {error}",
+  "@paywallRestoreFailed": {
+    "placeholders": {
+        "error": {"type": "String"}
+    }
+  },
+  "paywallPurchaseFailed": "Satın alma başarısız veya iptal edildi: {error}",
+  "@paywallPurchaseFailed": {
+    "placeholders": {
+        "error": {"type": "String"}
+    }
+  },
+
+  "imageCache": "Görsel Önbelleği",
+  "clearCache": "Önbelleği Temizle",
+  "clearCacheConfirm": "Bu işlem tüm indirilen görselleri silecek. İhtiyaç duyulduğunda tekrar indirilecekler.",
+  "cacheCleared": "Önbellek başarıyla temizlendi",
+  "noCachedImages": "Önbelleğe alınmış görsel yok",
+  "cachedDecksCount": "{count} deste önbelleğe alındı",
+  "@cachedDecksCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "clear": "Temizle",
+  "downloadImages": "Görselleri İndir",
+  "downloading": "İndiriliyor...",
+  "downloaded": "İndirildi",
+  "downloadFailed": "İndirme başarısız"
 }

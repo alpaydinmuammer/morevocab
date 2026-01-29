@@ -328,6 +328,18 @@ abstract class AppLocalizations {
   /// **'Ses Ayarları'**
   String get soundSettings;
 
+  /// No description provided for @soundEffects.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ses Efektleri'**
+  String get soundEffects;
+
+  /// No description provided for @soundEffectsDesc.
+  ///
+  /// In tr, this message translates to:
+  /// **'Eylemler ve geri bildirimler için ses çal'**
+  String get soundEffectsDesc;
+
   /// No description provided for @speed.
   ///
   /// In tr, this message translates to:
@@ -1761,6 +1773,324 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'gün önce'**
   String get daysAgo;
+
+  /// No description provided for @leaderboardTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'LİDER TABLOSU'**
+  String get leaderboardTitle;
+
+  /// No description provided for @topPlayers.
+  ///
+  /// In tr, this message translates to:
+  /// **'EN İYİ OYUNCULAR'**
+  String get topPlayers;
+
+  /// No description provided for @couldNotLoadLeaderboard.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lider tablosu yüklenemedi'**
+  String get couldNotLoadLeaderboard;
+
+  /// No description provided for @noScoresYet.
+  ///
+  /// In tr, this message translates to:
+  /// **'Henüz skor yok!'**
+  String get noScoresYet;
+
+  /// No description provided for @newHighScore.
+  ///
+  /// In tr, this message translates to:
+  /// **'YENİ REKOR!'**
+  String get newHighScore;
+
+  /// No description provided for @totalQuestions.
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam Soru'**
+  String get totalQuestions;
+
+  /// No description provided for @oddOneOutQuestion.
+  ///
+  /// In tr, this message translates to:
+  /// **'Hangisi gruba uymuyor?'**
+  String get oddOneOutQuestion;
+
+  /// No description provided for @autoReminderTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bugün kelime çalıştın mı?'**
+  String get autoReminderTitle;
+
+  /// No description provided for @autoReminderBody.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sadece 5 dakika ayır, fark yaratır!'**
+  String get autoReminderBody;
+
+  /// No description provided for @wordChainTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'KELİME ZİNCİRİ'**
+  String get wordChainTitle;
+
+  /// No description provided for @leaderboardPremiumWarning.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sadece Premium üyeler liderlik tablosunda yer alabilir. Sıralamaya girmek için Premium\'a geç!'**
+  String get leaderboardPremiumWarning;
+
+  /// No description provided for @joinPremium.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium\'a Geç'**
+  String get joinPremium;
+
+  /// No description provided for @subscription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Abonelik'**
+  String get subscription;
+
+  /// No description provided for @premiumMember.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium Üye'**
+  String get premiumMember;
+
+  /// No description provided for @active.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aktif'**
+  String get active;
+
+  /// No description provided for @manageSubscription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aboneliği Yönet'**
+  String get manageSubscription;
+
+  /// No description provided for @unlockPremium.
+  ///
+  /// In tr, this message translates to:
+  /// **'Premium\'u Aç'**
+  String get unlockPremium;
+
+  /// No description provided for @premiumDescription.
+  ///
+  /// In tr, this message translates to:
+  /// **'Reklamsız, sınırsız senkronizasyon, lider tablosu'**
+  String get premiumDescription;
+
+  /// No description provided for @upgradeNow.
+  ///
+  /// In tr, this message translates to:
+  /// **'Şimdi Yükselt'**
+  String get upgradeNow;
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In tr, this message translates to:
+  /// **'Satın Almaları Geri Yükle'**
+  String get restorePurchases;
+
+  /// No description provided for @restoreSuccess.
+  ///
+  /// In tr, this message translates to:
+  /// **'Satın almalar başarıyla geri yüklendi'**
+  String get restoreSuccess;
+
+  /// No description provided for @restoreNoPurchases.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri yüklenecek satın alma yok'**
+  String get restoreNoPurchases;
+
+  /// No description provided for @paywallTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'More Vocab Premium'**
+  String get paywallTitle;
+
+  /// No description provided for @paywallSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sınırsız senkronizasyon, lider tablosu ve reklamsız deneyimin kilidini aç.'**
+  String get paywallSubtitle;
+
+  /// No description provided for @paywallWhatsIncluded.
+  ///
+  /// In tr, this message translates to:
+  /// **'NELER DAHİL'**
+  String get paywallWhatsIncluded;
+
+  /// No description provided for @featureNoAdsTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Reklamsız'**
+  String get featureNoAdsTitle;
+
+  /// No description provided for @featureNoAdsSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıfır reklamla tam odaklanma deneyimi yaşa.'**
+  String get featureNoAdsSubtitle;
+
+  /// No description provided for @featureSyncTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sınırsız Senkronizasyon'**
+  String get featureSyncTitle;
+
+  /// No description provided for @featureSyncSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'İlerlemelerini kaydet ve tüm cihazlarında senkronize et.'**
+  String get featureSyncSubtitle;
+
+  /// No description provided for @featureLeaderboardTitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Lider Tablosu'**
+  String get featureLeaderboardTitle;
+
+  /// No description provided for @featureLeaderboardSubtitle.
+  ///
+  /// In tr, this message translates to:
+  /// **'Diğerleriyle yarış ve sıralamada yüksel.'**
+  String get featureLeaderboardSubtitle;
+
+  /// No description provided for @paywallMonthly.
+  ///
+  /// In tr, this message translates to:
+  /// **'Aylık'**
+  String get paywallMonthly;
+
+  /// No description provided for @paywallAnnual.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yıllık'**
+  String get paywallAnnual;
+
+  /// No description provided for @paywallLifetime.
+  ///
+  /// In tr, this message translates to:
+  /// **'Ömür Boyu'**
+  String get paywallLifetime;
+
+  /// No description provided for @paywallBestValue.
+  ///
+  /// In tr, this message translates to:
+  /// **'EN İYİ FİYAT'**
+  String get paywallBestValue;
+
+  /// No description provided for @paywallNoSubscriptions.
+  ///
+  /// In tr, this message translates to:
+  /// **'Abonelik bulunamadı'**
+  String get paywallNoSubscriptions;
+
+  /// No description provided for @paywallContinue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Devam Et'**
+  String get paywallContinue;
+
+  /// No description provided for @paywallRestore.
+  ///
+  /// In tr, this message translates to:
+  /// **'Satın Almaları Geri Yükle'**
+  String get paywallRestore;
+
+  /// No description provided for @paywallRestoreSuccess.
+  ///
+  /// In tr, this message translates to:
+  /// **'Satın alımlar başarıyla geri yüklendi!'**
+  String get paywallRestoreSuccess;
+
+  /// No description provided for @paywallRestoreNoPurchases.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri yüklenecek satın alım bulunamadı.'**
+  String get paywallRestoreNoPurchases;
+
+  /// No description provided for @paywallRestoreFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Geri yükleme başarısız: {error}'**
+  String paywallRestoreFailed(String error);
+
+  /// No description provided for @paywallPurchaseFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'Satın alma başarısız veya iptal edildi: {error}'**
+  String paywallPurchaseFailed(String error);
+
+  /// No description provided for @imageCache.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görsel Önbelleği'**
+  String get imageCache;
+
+  /// No description provided for @clearCache.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önbelleği Temizle'**
+  String get clearCache;
+
+  /// No description provided for @clearCacheConfirm.
+  ///
+  /// In tr, this message translates to:
+  /// **'Bu işlem tüm indirilen görselleri silecek. İhtiyaç duyulduğunda tekrar indirilecekler.'**
+  String get clearCacheConfirm;
+
+  /// No description provided for @cacheCleared.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önbellek başarıyla temizlendi'**
+  String get cacheCleared;
+
+  /// No description provided for @noCachedImages.
+  ///
+  /// In tr, this message translates to:
+  /// **'Önbelleğe alınmış görsel yok'**
+  String get noCachedImages;
+
+  /// No description provided for @cachedDecksCount.
+  ///
+  /// In tr, this message translates to:
+  /// **'{count} deste önbelleğe alındı'**
+  String cachedDecksCount(int count);
+
+  /// No description provided for @clear.
+  ///
+  /// In tr, this message translates to:
+  /// **'Temizle'**
+  String get clear;
+
+  /// No description provided for @downloadImages.
+  ///
+  /// In tr, this message translates to:
+  /// **'Görselleri İndir'**
+  String get downloadImages;
+
+  /// No description provided for @downloading.
+  ///
+  /// In tr, this message translates to:
+  /// **'İndiriliyor...'**
+  String get downloading;
+
+  /// No description provided for @downloaded.
+  ///
+  /// In tr, this message translates to:
+  /// **'İndirildi'**
+  String get downloaded;
+
+  /// No description provided for @downloadFailed.
+  ///
+  /// In tr, this message translates to:
+  /// **'İndirme başarısız'**
+  String get downloadFailed;
 }
 
 class _AppLocalizationsDelegate

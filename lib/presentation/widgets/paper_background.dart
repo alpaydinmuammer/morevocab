@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
 
 class PaperBackground extends StatelessWidget {
   final Widget child;
@@ -9,7 +10,7 @@ class PaperBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFFFDFCF0), // Off-white cream paper
+        color: ColorPalette.paperColor,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
@@ -38,8 +39,7 @@ class _PaperLinesPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final linePaint = Paint()
-      ..color = const Color(0xFFAEC6CF)
-          .withValues(alpha: 0.5) // Soft blue
+      ..color = ColorPalette.watercolorBlue.withValues(alpha: 0.5)
       ..strokeWidth = 1.0;
 
     // Draw horizontal lines

@@ -40,7 +40,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on FirebaseAuthException catch (e) {
       return Failure(_getLocalizedErrorMessage(e.errorType));
     } catch (e) {
-      return Failure('Sign in failed: $e');
+      // Unexpected error - include type for debugging
+      return Failure('Google sign in failed unexpectedly (${e.runtimeType}): $e');
     }
   }
 
@@ -52,7 +53,8 @@ class AuthRepositoryImpl implements AuthRepository {
     } on FirebaseAuthException catch (e) {
       return Failure(_getLocalizedErrorMessage(e.errorType));
     } catch (e) {
-      return Failure('Sign in failed: $e');
+      // Unexpected error - include type for debugging
+      return Failure('Apple sign in failed unexpectedly (${e.runtimeType}): $e');
     }
   }
 
@@ -62,7 +64,8 @@ class AuthRepositoryImpl implements AuthRepository {
       await _datasource.signOut();
       return const Success(null);
     } catch (e) {
-      return Failure('Sign out failed: $e');
+      // Include error type for easier debugging
+      return Failure('Sign out failed (${e.runtimeType}): $e');
     }
   }
 

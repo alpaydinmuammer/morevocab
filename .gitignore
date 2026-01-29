@@ -45,6 +45,12 @@ app.*.map.json
 /android/app/release
 .env
 
+# R2 upload script (contains secrets)
+upload_to_r2.dart
+upload_to_r2.py
+check_assets.dart
+check_assets.py
+
 # Firebase sensitive files
 lib/firebase_options.dart
 android/app/google-services.json

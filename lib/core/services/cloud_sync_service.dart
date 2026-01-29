@@ -3,12 +3,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../constants/game_constants.dart';
+import '../constants/storage_keys.dart';
+import '../constants/subscription_constants.dart';
 
 // Top-level functions for compute
 dynamic _parseJson(String jsonStr) => jsonDecode(jsonStr);
 String _encodeJson(Object? data) => jsonEncode(data);
 
 /// Service for syncing user data between local storage and Firebase Cloud Firestore
+///
+/// ## Sync Strategies:
+/// - **syncToCloud()**: Upload local data to cloud (overwrites)
+/// - **syncFromCloud()**: Download cloud data to local (overwrites)
+/// - **smartSync()**: Intelligent merge - keeps better progress from both sources
+///
+/// ## Smart Merge Rules:
+/// - **Word Progress**: Keep higher SRS level; if equal, keep higher review count
+/// - **Pet Data**: Keep higher level; if equal, keep higher XP
+/// - **Badges**: Union of all unlocked badges (never lose a badge)
+/// - **Streak**: Keep higher best streak; use more recent activity for current
+/// - **Error Log**: Union of entries; keep higher wrong count for duplicates
+/// - **Arcade**: Keep higher scores and levels per game
+/// - **Custom Words**: Union by ID (never lose a custom word)
 class CloudSyncService {
   static final CloudSyncService _instance = CloudSyncService._internal();
   factory CloudSyncService() => _instance;
@@ -17,37 +34,77 @@ class CloudSyncService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // SharedPreferences keys
-  static const String _wordProgressKey = 'word_progress';
-  static const String _customWordsKey = 'custom_words_data';
-  static const String _petDataKey = 'pet_data';
-  static const String _hasPetKey = 'has_pet';
-  static const String _badgesKey = 'user_badges';
-  static const String _streakKey = 'user_streak_data';
-  static const String _errorLogKey = 'error_log_entries';
-
-  // Arcade prefixes
-  static const String _arcadeScorePrefix = 'arcade_highscore_';
-  static const String _arcadeLevelPrefix = 'arcade_level_';
-  static const String _arcadeProgressPrefix = 'arcade_progress_';
-
-  // Arcade game types
-  static const List<String> _arcadeGames = [
-    'wordChain',
-    'anagram',
-    'wordBuilder',
-    'emojiPuzzle',
-    'oddOneOut',
-  ];
-
-  // Last sync timestamp key
-  static const String _lastSyncKey = 'last_cloud_sync';
 
   /// Get current user ID, returns null if not authenticated
   String? get _userId => _auth.currentUser?.uid;
 
   /// Check if user is authenticated
   bool get isAuthenticated => _userId != null;
+
+  // ===========================================
+  // FREE USER SYNC LIMITING
+  // ===========================================
+
+  /// Check if free user can sync (once per day limit)
+  Future<bool> canFreeUserSync() async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastSyncStr = prefs.getString(StorageKeys.lastSyncLimitDate);
+    if (lastSyncStr == null) return true;
+
+    final lastSync = DateTime.tryParse(lastSyncStr);
+    if (lastSync == null) return true;
+
+    return DateTime.now().difference(lastSync) >=
+        SubscriptionConstants.freeSyncCooldown;
+  }
+
+  /// Record sync usage for free user limit tracking
+  Future<void> recordFreeSyncUsage() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      StorageKeys.lastSyncLimitDate,
+      DateTime.now().toIso8601String(),
+    );
+  }
+
+  /// Get time until next free sync is available
+  Future<Duration?> getTimeUntilNextFreeSync() async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastSyncStr = prefs.getString(StorageKeys.lastSyncLimitDate);
+    if (lastSyncStr == null) return null;
+
+    final lastSync = DateTime.tryParse(lastSyncStr);
+    if (lastSync == null) return null;
+
+    final nextSyncTime = lastSync.add(SubscriptionConstants.freeSyncCooldown);
+    final remaining = nextSyncTime.difference(DateTime.now());
+
+    return remaining.isNegative ? null : remaining;
+  }
+
+  /// Smart sync with premium check
+  /// Returns true if local data was updated from cloud
+  /// Throws [SyncLimitException] if free user has exceeded daily limit
+  Future<bool> smartSyncWithPremiumCheck({required bool isPremium}) async {
+    if (!isPremium) {
+      final canSync = await canFreeUserSync();
+      if (!canSync) {
+        final remaining = await getTimeUntilNextFreeSync();
+        throw SyncLimitException(
+          'Free users can sync once per day',
+          remainingTime: remaining,
+        );
+      }
+    }
+
+    final result = await smartSync();
+
+    if (!isPremium) {
+      await recordFreeSyncUsage();
+    }
+
+    return result;
+  }
 
   /// Get user document reference
   DocumentReference? get _userDoc {
@@ -71,13 +128,13 @@ class CloudSyncService {
       // Prepare all data for upload
       final syncData = <String, dynamic>{
         'lastSyncAt': FieldValue.serverTimestamp(),
-        'wordProgress': await _getJsonFromPrefs(prefs, _wordProgressKey),
-        'customWords': await _getJsonFromPrefs(prefs, _customWordsKey),
-        'petData': await _getJsonFromPrefs(prefs, _petDataKey),
-        'hasPet': prefs.getBool(_hasPetKey) ?? false,
-        'badges': await _getJsonFromPrefs(prefs, _badgesKey),
-        'streak': await _getJsonFromPrefs(prefs, _streakKey),
-        'errorLog': await _getJsonFromPrefs(prefs, _errorLogKey),
+        'wordProgress': await _getJsonFromPrefs(prefs, StorageKeys.wordProgress),
+        'customWords': await _getJsonFromPrefs(prefs, StorageKeys.customWordsData),
+        'petData': await _getJsonFromPrefs(prefs, StorageKeys.petData),
+        'hasPet': prefs.getBool(StorageKeys.hasPet) ?? false,
+        'badges': await _getJsonFromPrefs(prefs, StorageKeys.userBadges),
+        'streak': await _getJsonFromPrefs(prefs, StorageKeys.streakData),
+        'errorLog': await _getJsonFromPrefs(prefs, StorageKeys.errorLogEntries),
         'arcade': _getArcadeData(prefs),
       };
 
@@ -85,7 +142,7 @@ class CloudSyncService {
       await _userDoc!.set(syncData, SetOptions(merge: true));
 
       // Save sync timestamp locally
-      await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
+      await prefs.setString(StorageKeys.lastCloudSync, DateTime.now().toIso8601String());
 
       debugPrint('CloudSync: Upload completed successfully');
     } catch (e) {
@@ -118,7 +175,7 @@ class CloudSyncService {
       // Restore word progress
       if (data['wordProgress'] != null) {
         await prefs.setString(
-          _wordProgressKey,
+          StorageKeys.wordProgress,
           await compute(_encodeJson, data['wordProgress']),
         );
       }
@@ -126,7 +183,7 @@ class CloudSyncService {
       // Restore custom words
       if (data['customWords'] != null) {
         await prefs.setString(
-          _customWordsKey,
+          StorageKeys.customWordsData,
           await compute(_encodeJson, data['customWords']),
         );
       }
@@ -134,18 +191,18 @@ class CloudSyncService {
       // Restore pet data
       if (data['petData'] != null) {
         await prefs.setString(
-          _petDataKey,
+          StorageKeys.petData,
           await compute(_encodeJson, data['petData']),
         );
       }
       if (data['hasPet'] != null) {
-        await prefs.setBool(_hasPetKey, data['hasPet'] as bool);
+        await prefs.setBool(StorageKeys.hasPet, data['hasPet'] as bool);
       }
 
       // Restore badges
       if (data['badges'] != null) {
         await prefs.setString(
-          _badgesKey,
+          StorageKeys.userBadges,
           await compute(_encodeJson, data['badges']),
         );
       }
@@ -153,7 +210,7 @@ class CloudSyncService {
       // Restore streak
       if (data['streak'] != null) {
         await prefs.setString(
-          _streakKey,
+          StorageKeys.streakData,
           await compute(_encodeJson, data['streak']),
         );
       }
@@ -161,7 +218,7 @@ class CloudSyncService {
       // Restore error log
       if (data['errorLog'] != null) {
         await prefs.setString(
-          _errorLogKey,
+          StorageKeys.errorLogEntries,
           await compute(_encodeJson, data['errorLog']),
         );
       }
@@ -172,7 +229,7 @@ class CloudSyncService {
       }
 
       // Save sync timestamp
-      await prefs.setString(_lastSyncKey, DateTime.now().toIso8601String());
+      await prefs.setString(StorageKeys.lastCloudSync, DateTime.now().toIso8601String());
 
       debugPrint('CloudSync: Download completed successfully');
     } catch (e) {
@@ -249,7 +306,7 @@ class CloudSyncService {
   /// Get last sync timestamp
   Future<DateTime?> getLastSyncTime() async {
     final prefs = await SharedPreferences.getInstance();
-    final timestamp = prefs.getString(_lastSyncKey);
+    final timestamp = prefs.getString(StorageKeys.lastCloudSync);
     if (timestamp == null) return null;
     return DateTime.tryParse(timestamp);
   }
@@ -273,13 +330,13 @@ class CloudSyncService {
   Map<String, dynamic> _getArcadeData(SharedPreferences prefs) {
     final arcadeData = <String, dynamic>{};
 
-    for (final game in _arcadeGames) {
+    for (final game in GameConstants.arcadeGameTypes) {
       arcadeData['${game}_score'] =
-          prefs.getInt('$_arcadeScorePrefix$game') ?? 0;
+          prefs.getInt('$StorageKeys.arcadeHighscorePrefix$game') ?? 0;
       arcadeData['${game}_level'] =
-          prefs.getInt('$_arcadeLevelPrefix$game') ?? 0;
+          prefs.getInt('$StorageKeys.arcadeLevelPrefix$game') ?? 0;
       arcadeData['${game}_progress'] =
-          prefs.getStringList('$_arcadeProgressPrefix$game') ?? [];
+          prefs.getStringList('$StorageKeys.arcadeProgressPrefix$game') ?? [];
     }
 
     return arcadeData;
@@ -290,20 +347,20 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> arcadeData,
   ) async {
-    for (final game in _arcadeGames) {
+    for (final game in GameConstants.arcadeGameTypes) {
       final score = arcadeData['${game}_score'] as int?;
       final level = arcadeData['${game}_level'] as int?;
       final progress = arcadeData['${game}_progress'];
 
       if (score != null) {
-        await prefs.setInt('$_arcadeScorePrefix$game', score);
+        await prefs.setInt('$StorageKeys.arcadeHighscorePrefix$game', score);
       }
       if (level != null) {
-        await prefs.setInt('$_arcadeLevelPrefix$game', level);
+        await prefs.setInt('$StorageKeys.arcadeLevelPrefix$game', level);
       }
       if (progress != null && progress is List) {
         await prefs.setStringList(
-          '$_arcadeProgressPrefix$game',
+          '$StorageKeys.arcadeProgressPrefix$game',
           progress.cast<String>(),
         );
       }
@@ -319,13 +376,13 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> cloudData,
   ) async {
-    final localJson = await _getJsonFromPrefs(prefs, _wordProgressKey);
+    final localJson = await _getJsonFromPrefs(prefs, StorageKeys.wordProgress);
     final cloudProgress = cloudData['wordProgress'];
 
     if (cloudProgress == null) return false;
     if (localJson == null) {
       await prefs.setString(
-        _wordProgressKey,
+        StorageKeys.wordProgress,
         await compute(_encodeJson, cloudProgress),
       );
       return true;
@@ -363,7 +420,7 @@ class CloudSyncService {
 
     if (updated) {
       await prefs.setString(
-        _wordProgressKey,
+        StorageKeys.wordProgress,
         await compute(_encodeJson, localProgress),
       );
     }
@@ -375,16 +432,16 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> cloudData,
   ) async {
-    final localJson = await _getJsonFromPrefs(prefs, _petDataKey);
+    final localJson = await _getJsonFromPrefs(prefs, StorageKeys.petData);
     final cloudPet = cloudData['petData'];
     final cloudHasPet = cloudData['hasPet'] ?? false;
 
     if (cloudPet == null || !cloudHasPet) return false;
 
-    if (localJson == null || !(prefs.getBool(_hasPetKey) ?? false)) {
+    if (localJson == null || !(prefs.getBool(StorageKeys.hasPet) ?? false)) {
       // No local pet, use cloud
-      await prefs.setString(_petDataKey, await compute(_encodeJson, cloudPet));
-      await prefs.setBool(_hasPetKey, true);
+      await prefs.setString(StorageKeys.petData, await compute(_encodeJson, cloudPet));
+      await prefs.setBool(StorageKeys.hasPet, true);
       return true;
     }
 
@@ -399,7 +456,7 @@ class CloudSyncService {
     // Keep the one with higher level/XP
     if (cloudLevel > localLevel ||
         (cloudLevel == localLevel && cloudXp > localXp)) {
-      await prefs.setString(_petDataKey, await compute(_encodeJson, cloudPet));
+      await prefs.setString(StorageKeys.petData, await compute(_encodeJson, cloudPet));
       return true;
     }
 
@@ -411,7 +468,7 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> cloudData,
   ) async {
-    final localJson = await _getJsonFromPrefs(prefs, _badgesKey);
+    final localJson = await _getJsonFromPrefs(prefs, StorageKeys.userBadges);
     final cloudBadges = cloudData['badges'];
 
     if (cloudBadges == null) return false;
@@ -430,7 +487,7 @@ class CloudSyncService {
 
     if (updated) {
       await prefs.setString(
-        _badgesKey,
+        StorageKeys.userBadges,
         await compute(_encodeJson, localBadges),
       );
     }
@@ -442,14 +499,14 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> cloudData,
   ) async {
-    final localJson = await _getJsonFromPrefs(prefs, _streakKey);
+    final localJson = await _getJsonFromPrefs(prefs, StorageKeys.streakData);
     final cloudStreak = cloudData['streak'];
 
     if (cloudStreak == null) return false;
 
     if (localJson == null) {
       await prefs.setString(
-        _streakKey,
+        StorageKeys.streakData,
         await compute(_encodeJson, cloudStreak),
       );
       return true;
@@ -489,7 +546,7 @@ class CloudSyncService {
     }
 
     if (updated) {
-      await prefs.setString(_streakKey, await compute(_encodeJson, localData));
+      await prefs.setString(StorageKeys.streakData, await compute(_encodeJson, localData));
     }
     return updated;
   }
@@ -499,13 +556,13 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> cloudData,
   ) async {
-    final localJson = await _getJsonFromPrefs(prefs, _errorLogKey);
+    final localJson = await _getJsonFromPrefs(prefs, StorageKeys.errorLogEntries);
     final cloudLog = cloudData['errorLog'];
 
     if (cloudLog == null) return false;
 
     if (localJson == null) {
-      await prefs.setString(_errorLogKey, await compute(_encodeJson, cloudLog));
+      await prefs.setString(StorageKeys.errorLogEntries, await compute(_encodeJson, cloudLog));
       return true;
     }
 
@@ -542,7 +599,7 @@ class CloudSyncService {
 
     if (updated) {
       await prefs.setString(
-        _errorLogKey,
+        StorageKeys.errorLogEntries,
         await compute(_encodeJson, localEntries),
       );
     }
@@ -560,20 +617,20 @@ class CloudSyncService {
     final cloud = cloudArcade as Map<String, dynamic>;
     bool updated = false;
 
-    for (final game in _arcadeGames) {
+    for (final game in GameConstants.arcadeGameTypes) {
       // Merge scores - keep higher
       final cloudScore = cloud['${game}_score'] as int? ?? 0;
-      final localScore = prefs.getInt('$_arcadeScorePrefix$game') ?? 0;
+      final localScore = prefs.getInt('$StorageKeys.arcadeHighscorePrefix$game') ?? 0;
       if (cloudScore > localScore) {
-        await prefs.setInt('$_arcadeScorePrefix$game', cloudScore);
+        await prefs.setInt('$StorageKeys.arcadeHighscorePrefix$game', cloudScore);
         updated = true;
       }
 
       // Merge levels - keep higher
       final cloudLevel = cloud['${game}_level'] as int? ?? 0;
-      final localLevel = prefs.getInt('$_arcadeLevelPrefix$game') ?? 0;
+      final localLevel = prefs.getInt('$StorageKeys.arcadeLevelPrefix$game') ?? 0;
       if (cloudLevel > localLevel) {
-        await prefs.setInt('$_arcadeLevelPrefix$game', cloudLevel);
+        await prefs.setInt('$StorageKeys.arcadeLevelPrefix$game', cloudLevel);
         updated = true;
       }
     }
@@ -586,14 +643,14 @@ class CloudSyncService {
     SharedPreferences prefs,
     Map<String, dynamic> cloudData,
   ) async {
-    final localJson = await _getJsonFromPrefs(prefs, _customWordsKey);
+    final localJson = await _getJsonFromPrefs(prefs, StorageKeys.customWordsData);
     final cloudWords = cloudData['customWords'];
 
     if (cloudWords == null) return false;
 
     if (localJson == null) {
       await prefs.setString(
-        _customWordsKey,
+        StorageKeys.customWordsData,
         await compute(_encodeJson, cloudWords),
       );
       return true;
@@ -622,10 +679,32 @@ class CloudSyncService {
 
     if (updated) {
       await prefs.setString(
-        _customWordsKey,
+        StorageKeys.customWordsData,
         await compute(_encodeJson, localWords),
       );
     }
     return updated;
+  }
+}
+
+/// Exception thrown when free user exceeds sync limit
+class SyncLimitException implements Exception {
+  final String message;
+  final Duration? remainingTime;
+
+  SyncLimitException(this.message, {this.remainingTime});
+
+  @override
+  String toString() => 'SyncLimitException: $message';
+
+  /// Get human-readable remaining time
+  String get remainingTimeText {
+    if (remainingTime == null) return '';
+    final hours = remainingTime!.inHours;
+    final minutes = remainingTime!.inMinutes % 60;
+    if (hours > 0) {
+      return '$hours saat $minutes dakika';
+    }
+    return '$minutes dakika';
   }
 }

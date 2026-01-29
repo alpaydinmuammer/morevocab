@@ -102,6 +102,7 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
   }
 
   void _showComplete() {
+    final l10n = AppLocalizations.of(context)!;
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -113,7 +114,7 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
           accentColor: Colors.deepPurple,
           extraStats: [
             GameOverStat(
-              label: 'Total Questions',
+              label: l10n.totalQuestions,
               value: '${_questions.length}',
             ),
           ],
@@ -197,7 +198,7 @@ class _OddOneOutGameState extends ConsumerState<OddOneOutGame> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Text(
-                      'Which one doesn\'t belong?',
+                      l10n.oddOneOutQuestion,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w500,
                       ),

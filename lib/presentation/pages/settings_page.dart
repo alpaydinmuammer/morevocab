@@ -4,16 +4,22 @@ import 'package:go_router/go_router.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/services/cloud_sync_service.dart';
 import '../../core/services/notification_service.dart';
+import '../../core/services/sound_service.dart';
+import '../../core/services/subscription_service.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/datasources/firebase_auth_datasource.dart';
 import '../../l10n/app_localizations.dart';
 import '../providers/auth_provider.dart';
+import '../providers/cloud_image_provider.dart';
 import '../providers/pet_provider.dart';
 import '../providers/settings_provider.dart';
+import '../providers/sound_provider.dart';
+import '../providers/subscription_provider.dart';
 import '../providers/word_providers.dart';
 import '../providers/error_log_provider.dart';
 import '../widgets/auth/sign_in_button.dart';
 import '../widgets/premium_background.dart';
+import 'paywall_page.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -64,12 +70,31 @@ class SettingsPage extends ConsumerWidget {
               child: _buildLanguageSelector(context, ref, settings.locale),
             ),
 
+            // Subscription section
+            const SizedBox(height: AppConstants.spacingXXXL),
+            _buildSectionHeader(
+              context,
+              AppLocalizations.of(context)!.subscription,
+              Icons.workspace_premium_rounded,
+            ),
+            _buildGlassCard(
+              context,
+              padding: EdgeInsets.zero,
+              child: const _SubscriptionSettings(),
+            ),
+
             const SizedBox(height: AppConstants.spacingXXXL),
             _buildSectionHeader(
               context,
               AppLocalizations.of(context)!.data,
               Icons.storage_rounded,
             ),
+            _buildGlassCard(
+              context,
+              padding: EdgeInsets.zero,
+              child: const _CacheSettings(),
+            ),
+            const SizedBox(height: AppConstants.spacingMD),
             _buildGlassCard(
               context,
               child: ListTile(
@@ -112,6 +137,19 @@ class SettingsPage extends ConsumerWidget {
               context,
               padding: EdgeInsets.zero,
               child: const _NotificationSettings(),
+            ),
+
+            // Sound settings
+            const SizedBox(height: AppConstants.spacingXXXL),
+            _buildSectionHeader(
+              context,
+              AppLocalizations.of(context)!.soundSettings,
+              Icons.volume_up_outlined,
+            ),
+            _buildGlassCard(
+              context,
+              padding: EdgeInsets.zero,
+              child: const _SoundSettings(),
             ),
 
             // Cloud Sync section - only show for authenticated users
@@ -870,14 +908,14 @@ class _NotificationSettingsState extends State<_NotificationSettings> {
 }
 
 /// Cloud sync settings widget
-class _CloudSyncSettings extends StatefulWidget {
+class _CloudSyncSettings extends ConsumerStatefulWidget {
   const _CloudSyncSettings();
 
   @override
-  State<_CloudSyncSettings> createState() => _CloudSyncSettingsState();
+  ConsumerState<_CloudSyncSettings> createState() => _CloudSyncSettingsState();
 }
 
-class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
+class _CloudSyncSettingsState extends ConsumerState<_CloudSyncSettings> {
   final _cloudSync = CloudSyncService();
   bool _isSyncing = false;
   DateTime? _lastSyncTime;
@@ -896,6 +934,15 @@ class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
   }
 
   Future<void> _performSync() async {
+    final isPremium = ref.read(isPremiumProvider);
+    if (!isPremium) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const PaywallPage()),
+      );
+      return;
+    }
+
     setState(() => _isSyncing = true);
 
     try {
@@ -988,7 +1035,12 @@ class _CloudSyncSettingsState extends State<_CloudSyncSettings> {
                   color: theme.colorScheme.primary,
                 ),
               )
-            : Icon(Icons.cloud_sync_outlined, color: theme.colorScheme.primary),
+            : Icon(
+                ref.watch(isPremiumProvider)
+                    ? Icons.cloud_sync_outlined
+                    : Icons.lock_outline_rounded,
+                color: theme.colorScheme.primary,
+              ),
       ),
       title: Text(
         l10n.syncNow,
@@ -1168,6 +1220,399 @@ class _SignInModalState extends ConsumerState<_SignInModal> {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Cache management settings widget
+class _CacheSettings extends ConsumerStatefulWidget {
+  const _CacheSettings();
+
+  @override
+  ConsumerState<_CacheSettings> createState() => _CacheSettingsState();
+}
+
+class _CacheSettingsState extends ConsumerState<_CacheSettings> {
+  bool _isClearing = false;
+
+  Future<void> _clearCache() async {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: theme.colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+        title: Text(
+          l10n.clearCache,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: Text(l10n.clearCacheConfirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(
+              l10n.cancel,
+              style: TextStyle(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.orange,
+              foregroundColor: Colors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text(l10n.clear),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true && mounted) {
+      setState(() => _isClearing = true);
+
+      await ref.read(deckDownloadProvider.notifier).clearAllCache();
+
+      if (mounted) {
+        setState(() => _isClearing = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Row(
+              children: [
+                const Icon(Icons.check_circle, color: Colors.white, size: 20),
+                const SizedBox(width: 12),
+                Text(l10n.cacheCleared),
+              ],
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.green,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            margin: const EdgeInsets.all(16),
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final downloadState = ref.watch(deckDownloadProvider);
+    final downloadedCount = downloadState.downloadedDecks.length;
+
+    return ListTile(
+      leading: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.orange.withValues(alpha: 0.1),
+          shape: BoxShape.circle,
+        ),
+        child: _isClearing
+            ? SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Colors.orange,
+                ),
+              )
+            : const Icon(
+                Icons.cached_rounded,
+                color: Colors.orange,
+              ),
+      ),
+      title: Text(
+        l10n.imageCache,
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ),
+      subtitle: Text(
+        downloadedCount > 0
+            ? l10n.cachedDecksCount(downloadedCount)
+            : l10n.noCachedImages,
+        style: TextStyle(
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+        ),
+      ),
+      trailing: TextButton(
+        onPressed: _isClearing ? null : _clearCache,
+        child: Text(
+          l10n.clear,
+          style: TextStyle(
+            color: _isClearing ? Colors.grey : Colors.orange,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Subscription settings widget
+class _SubscriptionSettings extends ConsumerWidget {
+  const _SubscriptionSettings();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final subscriptionState = ref.watch(subscriptionProvider);
+    final subscriptionService = SubscriptionService();
+
+    if (subscriptionState.isLoading) {
+      return const Padding(
+        padding: EdgeInsets.all(16),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (subscriptionState.isPremium) {
+      // Premium user - show status and manage subscription
+      return Column(
+        children: [
+          ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.amber.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.workspace_premium_rounded,
+                color: Colors.amber,
+              ),
+            ),
+            title: Text(
+              l10n.premiumMember,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              subscriptionState.tierName,
+              style: TextStyle(
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+            trailing: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.green.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                l10n.active,
+                style: const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+          ),
+          const Divider(height: 1),
+          ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.manage_accounts_rounded,
+                color: theme.colorScheme.primary,
+              ),
+            ),
+            title: Text(l10n.manageSubscription),
+            trailing: Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 16,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
+            ),
+            onTap: () async {
+              await subscriptionService.presentCustomerCenter();
+              // Refresh after customer center closes
+              ref.read(subscriptionProvider.notifier).refresh();
+            },
+          ),
+        ],
+      );
+    }
+
+    // Free user - show upgrade prompt
+    return Column(
+      children: [
+        ListTile(
+          leading: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.amber.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(
+              Icons.workspace_premium_outlined,
+              color: Colors.amber,
+            ),
+          ),
+          title: Text(
+            l10n.unlockPremium,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            l10n.premiumDescription,
+            style: TextStyle(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+          child: SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () async {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const PaywallPage()),
+                );
+              },
+              icon: const Icon(Icons.star_rounded),
+              label: Text(l10n.upgradeNow),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Sound settings widget
+class _SoundSettings extends ConsumerWidget {
+  const _SoundSettings();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final soundEnabled = ref.watch(soundEnabledProvider);
+    final soundVolume = ref.watch(soundVolumeProvider);
+
+    return Column(
+      children: [
+        // Sound Effects Toggle
+        SwitchListTile(
+          secondary: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              soundEnabled ? Icons.volume_up_rounded : Icons.volume_off_rounded,
+              color: theme.colorScheme.primary,
+            ),
+          ),
+          title: Text(
+            l10n.soundEffects,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            l10n.soundEffectsDesc,
+            style: TextStyle(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+            ),
+          ),
+          value: soundEnabled,
+          onChanged: (value) => ref.setSoundEnabled(value),
+        ),
+
+        if (soundEnabled) ...[
+          Divider(
+            height: 1,
+            indent: 72,
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+          ),
+
+          // Volume Slider
+          ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.secondary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.tune_rounded,
+                color: theme.colorScheme.secondary,
+              ),
+            ),
+            title: Text(
+              l10n.volume,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                trackHeight: 4,
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+              ),
+              child: Slider(
+                value: soundVolume,
+                min: 0.0,
+                max: 1.0,
+                divisions: 10,
+                onChanged: (value) => ref.setSoundVolume(value),
+              ),
+            ),
+            trailing: Text(
+              '${(soundVolume * 100).round()}%',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.primary,
+              ),
+            ),
+          ),
+
+          Divider(
+            height: 1,
+            indent: 72,
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.1),
+          ),
+
+          // Test Sound Button
+          ListTile(
+            leading: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.tertiary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.play_circle_outline_rounded,
+                color: theme.colorScheme.tertiary,
+              ),
+            ),
+            title: Text(
+              l10n.testSound,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            onTap: () => ref.playSound(SoundEffect.correct),
+          ),
+        ],
+      ],
     );
   }
 }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/services/leaderboard_service.dart';
+import '../../../../l10n/app_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../../../../core/services/ad_service.dart';
+import '../../../providers/subscription_provider.dart';
+import '../../paywall_page.dart';
 
 import '../../../widgets/premium_background.dart';
 
 // Standalone screen for when accessed directly (e.g. from game over)
-class LeaderboardScreen extends StatelessWidget {
+class LeaderboardScreen extends ConsumerStatefulWidget {
   final String gameId;
   final Color accentColor;
 
@@ -15,9 +21,48 @@ class LeaderboardScreen extends StatelessWidget {
   });
 
   @override
+  ConsumerState<LeaderboardScreen> createState() => _LeaderboardScreenState();
+}
+
+class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
+  BannerAd? _bannerAd;
+  bool _isBannerAdReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadBannerAd();
+    });
+  }
+
+  void _loadBannerAd() {
+    final isPremium = ref.read(isPremiumProvider);
+    if (isPremium) return;
+
+    _bannerAd = AdService().createBannerAd(
+      onAdLoaded: (ad) {
+        if (mounted) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        }
+      },
+    )..load();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context)!;
+    final isPremium = ref.watch(isPremiumProvider);
 
     return Scaffold(
       body: PremiumBackground(
@@ -53,7 +98,7 @@ class LeaderboardScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            'LEADERBOARD',
+                            l10n.leaderboardTitle,
                             style: theme.textTheme.labelMedium?.copyWith(
                               color: colorScheme.onSurface.withValues(
                                 alpha: 0.6,
@@ -64,7 +109,7 @@ class LeaderboardScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'TOP PLAYERS',
+                            l10n.topPlayers,
                             style: theme.textTheme.headlineSmall?.copyWith(
                               color: colorScheme.onSurface,
                               fontWeight: FontWeight.w900,
@@ -79,13 +124,123 @@ class LeaderboardScreen extends StatelessWidget {
                 ),
               ),
 
-              // List
+              // Content with Stack for floating banner
               Expanded(
-                child: LeaderboardList(
-                  gameId: gameId,
-                  accentColor: accentColor,
+                child: Stack(
+                  children: [
+                    // Leaderboard List (always visible)
+                    Positioned.fill(
+                      child: LeaderboardList(
+                        gameId: widget.gameId,
+                        accentColor: widget.accentColor,
+                      ),
+                    ),
+
+                    // Premium Warning Banner (Floating in Center)
+                    if (!isPremium)
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 48),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 16,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.amber.shade700,
+                                Colors.amber.shade900,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.2),
+                                blurRadius: 16,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.lock_rounded,
+                                  color: Colors.white,
+                                  size: 24,
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                l10n.leaderboardPremiumWarning,
+                                textAlign: TextAlign.center,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PaywallPage(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: Colors.amber.shade900,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 10,
+                                    ),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    l10n.joinPremium.toUpperCase(),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
+
+              // Banner Ad
+              if (_isBannerAdReady &&
+                  !ref.watch(isPremiumProvider) &&
+                  _bannerAd != null)
+                Container(
+                  width: _bannerAd!.size.width.toDouble(),
+                  height: _bannerAd!.size.height.toDouble(),
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: AdWidget(ad: _bannerAd!),
+                ),
             ],
           ),
         ),
@@ -118,7 +273,7 @@ class LeaderboardList extends StatelessWidget {
         if (snapshot.hasError) {
           return Center(
             child: Text(
-              'Could not load leaderboard',
+              AppLocalizations.of(context)!.couldNotLoadLeaderboard,
               style: TextStyle(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
@@ -131,7 +286,7 @@ class LeaderboardList extends StatelessWidget {
         if (scores.isEmpty) {
           return Center(
             child: Text(
-              'No scores yet!',
+              AppLocalizations.of(context)!.noScoresYet,
               style: TextStyle(
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),

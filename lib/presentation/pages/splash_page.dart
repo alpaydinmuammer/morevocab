@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../l10n/app_localizations.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/exceptions/app_exceptions.dart';
 import '../../core/constants/app_constants.dart';
@@ -222,7 +223,13 @@ class _SplashPageState extends ConsumerState<SplashPage>
     try {
       // Start notification initialization in background (don't await)
       // Firebase is already initialized in main.dart
-      unawaited(NotificationService().initialize());
+      final l10n = AppLocalizations.of(context);
+      unawaited(
+        NotificationService().initialize(
+          autoReminderTitle: l10n?.autoReminderTitle,
+          autoReminderBody: l10n?.autoReminderBody,
+        ),
+      );
 
       // Initialize word repository
       final repository = ref.read(wordRepositoryProvider);

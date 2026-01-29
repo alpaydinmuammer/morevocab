@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 import '../../domain/models/challenge_model.dart';
 import 'arcade_provider.dart';
 import 'pet_provider.dart';
@@ -37,8 +38,6 @@ class ChallengesState {
 /// Notifier for managing daily challenges
 class ChallengesNotifier extends StateNotifier<ChallengesState> {
   final Ref ref;
-  static const _lastResetKey = 'challenges_last_reset';
-  static const _completedPrefix = 'challenge_completed_';
 
   ChallengesNotifier(this.ref)
     : super(ChallengesState(lastResetDate: DateTime.now())) {
@@ -50,16 +49,16 @@ class ChallengesNotifier extends StateNotifier<ChallengesState> {
     final today = DateTime.now();
     final todayKey = '${today.year}-${today.month}-${today.day}';
 
-    final lastResetStr = prefs.getString(_lastResetKey);
+    final lastResetStr = prefs.getString(StorageKeys.challengesLastReset);
     final needsReset = lastResetStr != todayKey;
 
     if (needsReset) {
       // Clear old completed challenges
-      final keys = prefs.getKeys().where((k) => k.startsWith(_completedPrefix));
+      final keys = prefs.getKeys().where((k) => k.startsWith(StorageKeys.challengeCompletedPrefix));
       for (final key in keys) {
         await prefs.remove(key);
       }
-      await prefs.setString(_lastResetKey, todayKey);
+      await prefs.setString(StorageKeys.challengesLastReset, todayKey);
     }
 
     // Generate today's challenges
@@ -69,7 +68,7 @@ class ChallengesNotifier extends StateNotifier<ChallengesState> {
     final updatedChallenges = <Challenge>[];
     for (final challenge in challenges) {
       final isCompleted =
-          prefs.getBool('$_completedPrefix${challenge.id}') ?? false;
+          prefs.getBool('${StorageKeys.challengeCompletedPrefix}${challenge.id}') ?? false;
 
       // Get current progress from arcade state
       int progress = 0;
@@ -131,7 +130,7 @@ class ChallengesNotifier extends StateNotifier<ChallengesState> {
 
       if (shouldComplete && !challenge.isCompleted) {
         // Mark as completed
-        await prefs.setBool('$_completedPrefix${challenge.id}', true);
+        await prefs.setBool('${StorageKeys.challengeCompletedPrefix}${challenge.id}', true);
 
         // Award XP
         ref.read(petProvider.notifier).addExperience(challenge.xpReward);

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 
 /// State of the user's activity streak
 class StreakState {
@@ -66,11 +67,9 @@ class StreakNotifier extends StateNotifier<StreakState> {
     _init();
   }
 
-  static const _storageKey = 'user_streak_data';
-
   Future<void> _init() async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonStr = prefs.getString(_storageKey);
+    final jsonStr = prefs.getString(StorageKeys.streakData);
 
     if (jsonStr != null) {
       try {
@@ -145,7 +144,7 @@ class StreakNotifier extends StateNotifier<StreakState> {
 
   Future<void> _saveToStorage(StreakState data) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_storageKey, jsonEncode(data.toJson()));
+    await prefs.setString(StorageKeys.streakData, jsonEncode(data.toJson()));
   }
 
   /// Reset streak for testing purposes

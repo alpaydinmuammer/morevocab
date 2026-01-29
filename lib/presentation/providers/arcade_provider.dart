@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 
 /// Enum for game types
 enum ArcadeGameType { wordChain, anagram, wordBuilder, emojiPuzzle, oddOneOut }
@@ -41,10 +42,6 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
     _loadState();
   }
 
-  static const _scorePrefix = 'arcade_highscore_';
-  static const _levelPrefix = 'arcade_level_';
-  static const _progressPrefix = 'arcade_progress_';
-
   Future<void> _loadState() async {
     final prefs = await SharedPreferences.getInstance();
     final scores = <ArcadeGameType, int>{};
@@ -52,10 +49,10 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
     final progress = <ArcadeGameType, List<String>>{};
 
     for (final game in ArcadeGameType.values) {
-      scores[game] = prefs.getInt('$_scorePrefix${game.name}') ?? 0;
-      levels[game] = prefs.getInt('$_levelPrefix${game.name}') ?? 0;
+      scores[game] = prefs.getInt('${StorageKeys.arcadeHighscorePrefix}${game.name}') ?? 0;
+      levels[game] = prefs.getInt('${StorageKeys.arcadeLevelPrefix}${game.name}') ?? 0;
       progress[game] =
-          prefs.getStringList('$_progressPrefix${game.name}') ?? [];
+          prefs.getStringList('${StorageKeys.arcadeProgressPrefix}${game.name}') ?? [];
     }
 
     state = ArcadeState(
@@ -69,7 +66,7 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
     final currentHigh = state.getScore(game);
     if (score > currentHigh) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('$_scorePrefix${game.name}', score);
+      await prefs.setInt('${StorageKeys.arcadeHighscorePrefix}${game.name}', score);
 
       final newScores = Map<ArcadeGameType, int>.from(state.scores);
       newScores[game] = score;
@@ -87,7 +84,7 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
 
     // 1. Update LeveL
     if (level > currentLevel) {
-      await prefs.setInt('$_levelPrefix${game.name}', level);
+      await prefs.setInt('${StorageKeys.arcadeLevelPrefix}${game.name}', level);
       final newLevels = Map<ArcadeGameType, int>.from(state.levelProgress);
       newLevels[game] = level;
       // We will perform the copyWith at the end combine changes
@@ -96,7 +93,7 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
 
     // 2. Clear Progress (New level started or completed)
     // When leveling up, the "found words" for the old level are irrelevant.
-    await prefs.remove('$_progressPrefix${game.name}');
+    await prefs.remove('${StorageKeys.arcadeProgressPrefix}${game.name}');
     final newProgress = Map<ArcadeGameType, List<String>>.from(
       state.currentLevelWords,
     );
@@ -109,7 +106,7 @@ class ArcadeStateNotifier extends StateNotifier<ArcadeState> {
     List<String> words,
   ) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('$_progressPrefix${game.name}', words);
+    await prefs.setStringList('${StorageKeys.arcadeProgressPrefix}${game.name}', words);
 
     final newProgress = Map<ArcadeGameType, List<String>>.from(
       state.currentLevelWords,

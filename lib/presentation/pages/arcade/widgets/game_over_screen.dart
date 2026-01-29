@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../widgets/premium_background.dart';
+import '../../../providers/subscription_provider.dart';
 import '../../../../core/services/leaderboard_service.dart';
+import '../../../../core/services/ad_service.dart';
 import 'leaderboard_screen.dart';
 
-class GameOverScreen extends StatefulWidget {
+class GameOverScreen extends ConsumerStatefulWidget {
   final String gameId;
   final int score;
   final int? highScore;
@@ -30,16 +33,21 @@ class GameOverScreen extends StatefulWidget {
   });
 
   @override
-  State<GameOverScreen> createState() => _GameOverScreenState();
+  ConsumerState<GameOverScreen> createState() => _GameOverScreenState();
 }
 
-class _GameOverScreenState extends State<GameOverScreen> {
+class _GameOverScreenState extends ConsumerState<GameOverScreen> {
   @override
   void initState() {
     super.initState();
-    // Submit score to leaderboard only for Word Chain
+    // Submit score to leaderboard only for Word Chain (premium users only)
     if (widget.gameId == 'wordChain') {
-      LeaderboardService().updateScore(widget.gameId, widget.score);
+      final isPremium = ref.read(isPremiumProvider);
+      LeaderboardService().updateScore(
+        widget.gameId,
+        widget.score,
+        isPremium: isPremium,
+      );
     }
   }
 
@@ -129,7 +137,7 @@ class _GameOverScreenState extends State<GameOverScreen> {
                         color: Colors.amber.withValues(alpha: 0.5),
                       ),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
@@ -139,7 +147,7 @@ class _GameOverScreenState extends State<GameOverScreen> {
                         ),
                         SizedBox(width: 8),
                         Text(
-                          'NEW HIGH SCORE!',
+                          l10n.newHighScore,
                           style: TextStyle(
                             color: Colors.amber,
                             fontWeight: FontWeight.bold,
@@ -269,7 +277,7 @@ class _GameOverScreenState extends State<GameOverScreen> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'LEADERBOARD',
+                            l10n.leaderboardTitle,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               letterSpacing: 1.2,
@@ -288,7 +296,16 @@ class _GameOverScreenState extends State<GameOverScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: widget.onPlayAgain,
+                    onPressed: () {
+                      final isPremium = ref.read(isPremiumProvider);
+                      if (!isPremium) {
+                        AdService().showInterstitial(
+                          onAdDismissed: widget.onPlayAgain,
+                        );
+                      } else {
+                        widget.onPlayAgain();
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: widget.accentColor,
                       foregroundColor: Colors.white,
@@ -319,12 +336,21 @@ class _GameOverScreenState extends State<GameOverScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed:
-                        widget.onBackToHome ??
-                        () {
-                          Navigator.pop(context); // Pop end screen
-                          context.pop(); // Pop game screen
-                        },
+                    onPressed: () {
+                      final callback =
+                          widget.onBackToHome ??
+                          () {
+                            Navigator.pop(context); // Pop end screen
+                            context.pop(); // Pop game screen
+                          };
+
+                      final isPremium = ref.read(isPremiumProvider);
+                      if (!isPremium) {
+                        AdService().showInterstitial(onAdDismissed: callback);
+                      } else {
+                        callback();
+                      }
+                    },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(

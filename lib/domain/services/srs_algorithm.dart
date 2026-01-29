@@ -1,24 +1,14 @@
+import '../../core/constants/srs_constants.dart';
+
 /// Spaced Repetition System (SRS) Algorithm Service
 ///
 /// Implements a hybrid SRS + Leitner box system for optimal vocabulary learning.
 /// Based on the principle that words should be reviewed at increasing intervals
 /// as they become more familiar.
 class SrsAlgorithm {
-  /// Review intervals in days for each SRS level
-  /// Level 0: New word / Wrong answer - review immediately
-  /// Level 1: 1 day
-  /// Level 2: 3 days
-  /// Level 3: 7 days (1 week)
-  /// Level 4: 14 days (2 weeks)
-  /// Level 5: 30 days (1 month)
-  /// Level 6+: Mastered - 60 days
-  static const List<int> intervals = [0, 1, 3, 7, 14, 30, 60];
-
-  /// Maximum SRS level (mastered)
-  static const int maxLevel = 6;
-
   /// Calculate the next review date based on SRS level
   static DateTime calculateNextReview(int srsLevel) {
+    final intervals = SrsConstants.reviewIntervalDays;
     final days = srsLevel >= intervals.length
         ? intervals.last
         : intervals[srsLevel];
@@ -30,7 +20,7 @@ class SrsAlgorithm {
   /// Wrong: reset to 0
   static int getNewLevel(int currentLevel, bool isCorrect) {
     if (isCorrect) {
-      return (currentLevel + 1).clamp(0, maxLevel);
+      return (currentLevel + 1).clamp(0, SrsConstants.maxLevel);
     } else {
       return 0; // Reset to beginning on wrong answer
     }
@@ -45,7 +35,7 @@ class SrsAlgorithm {
 
   /// Check if a word is considered mastered
   static bool isMastered(int srsLevel) {
-    return srsLevel >= maxLevel;
+    return srsLevel >= SrsConstants.maxLevel;
   }
 
   /// Get a human-readable description of the SRS level

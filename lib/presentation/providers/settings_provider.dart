@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 
 class SettingsState {
   final ThemeMode themeMode;
@@ -44,30 +45,22 @@ class SettingsState {
 
 /// Settings notifier for managing app settings
 class SettingsNotifier extends StateNotifier<SettingsState> {
-  static const String _localeKey = 'locale';
-  static const String _themeModeKey = 'theme_mode';
-  static const String _ttsRateKey = 'tts_rate';
-  static const String _ttsVolumeKey = 'tts_volume';
-  static const String _ttsPitchKey = 'tts_pitch';
-  static const String _userNameKey = 'user_name';
-  static const String _hasSeenOnboardingKey = 'has_seen_onboarding';
-
   SettingsNotifier() : super(const SettingsState()) {
     _loadSettings();
   }
 
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
-    final themeModeIndex = prefs.getInt(_themeModeKey) ?? 0;
-    final localeCode = prefs.getString(_localeKey);
-    final userName = prefs.getString(_userNameKey) ?? '';
-    final hasSeenOnboarding = prefs.getBool(_hasSeenOnboardingKey) ?? false;
+    final themeModeIndex = prefs.getInt(StorageKeys.themeMode) ?? 0;
+    final localeCode = prefs.getString(StorageKeys.locale);
+    final userName = prefs.getString(StorageKeys.userName) ?? '';
+    final hasSeenOnboarding = prefs.getBool(StorageKeys.hasSeenOnboarding) ?? false;
 
     state = SettingsState(
       themeMode: ThemeMode.values[themeModeIndex],
-      ttsRate: prefs.getDouble(_ttsRateKey) ?? 0.5,
-      ttsVolume: prefs.getDouble(_ttsVolumeKey) ?? 1.0,
-      ttsPitch: prefs.getDouble(_ttsPitchKey) ?? 1.0,
+      ttsRate: prefs.getDouble(StorageKeys.ttsRate) ?? 0.5,
+      ttsVolume: prefs.getDouble(StorageKeys.ttsVolume) ?? 1.0,
+      ttsPitch: prefs.getDouble(StorageKeys.ttsPitch) ?? 1.0,
       locale: localeCode != null ? Locale(localeCode) : const Locale('tr'),
       userName: userName,
       hasSeenOnboarding: hasSeenOnboarding,
@@ -76,43 +69,43 @@ class SettingsNotifier extends StateNotifier<SettingsState> {
 
   Future<void> setThemeMode(ThemeMode mode) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_themeModeKey, mode.index);
+    await prefs.setInt(StorageKeys.themeMode, mode.index);
     state = state.copyWith(themeMode: mode);
   }
 
   Future<void> setLocale(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_localeKey, locale.languageCode);
+    await prefs.setString(StorageKeys.locale, locale.languageCode);
     state = state.copyWith(locale: locale);
   }
 
   Future<void> setTtsRate(double rate) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble(_ttsRateKey, rate);
+    await prefs.setDouble(StorageKeys.ttsRate, rate);
     state = state.copyWith(ttsRate: rate);
   }
 
   Future<void> setTtsVolume(double volume) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble(_ttsVolumeKey, volume);
+    await prefs.setDouble(StorageKeys.ttsVolume, volume);
     state = state.copyWith(ttsVolume: volume);
   }
 
   Future<void> setTtsPitch(double pitch) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble(_ttsPitchKey, pitch);
+    await prefs.setDouble(StorageKeys.ttsPitch, pitch);
     state = state.copyWith(ttsPitch: pitch);
   }
 
   Future<void> setUserName(String name) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_userNameKey, name);
+    await prefs.setString(StorageKeys.userName, name);
     state = state.copyWith(userName: name);
   }
 
   Future<void> setHasSeenOnboarding(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_hasSeenOnboardingKey, value);
+    await prefs.setBool(StorageKeys.hasSeenOnboarding, value);
     state = state.copyWith(hasSeenOnboarding: value);
   }
 }

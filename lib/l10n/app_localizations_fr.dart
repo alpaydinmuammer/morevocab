@@ -126,6 +126,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get soundSettings => 'Paramètres Sonores';
 
   @override
+  String get soundEffects => 'Ses Efektleri';
+
+  @override
+  String get soundEffectsDesc => 'Eylemler ve geri bildirimler için ses çal';
+
+  @override
   String get speed => 'Vitesse';
 
   @override
@@ -886,4 +892,177 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get daysAgo => 'gün önce';
+
+  @override
+  String get leaderboardTitle => 'LİDER TABLOSU';
+
+  @override
+  String get topPlayers => 'EN İYİ OYUNCULAR';
+
+  @override
+  String get couldNotLoadLeaderboard => 'Lider tablosu yüklenemedi';
+
+  @override
+  String get noScoresYet => 'Henüz skor yok!';
+
+  @override
+  String get newHighScore => 'YENİ REKOR!';
+
+  @override
+  String get totalQuestions => 'Toplam Soru';
+
+  @override
+  String get oddOneOutQuestion => 'Hangisi gruba uymuyor?';
+
+  @override
+  String get autoReminderTitle => 'Bugün kelime çalıştın mı?';
+
+  @override
+  String get autoReminderBody => 'Sadece 5 dakika ayır, fark yaratır!';
+
+  @override
+  String get wordChainTitle => 'KELİME ZİNCİRİ';
+
+  @override
+  String get leaderboardPremiumWarning =>
+      'Sadece Premium üyeler liderlik tablosunda yer alabilir. Sıralamaya girmek için Premium\'a geç!';
+
+  @override
+  String get joinPremium => 'Premium\'a Geç';
+
+  @override
+  String get subscription => 'Abonelik';
+
+  @override
+  String get premiumMember => 'Premium Üye';
+
+  @override
+  String get active => 'Aktif';
+
+  @override
+  String get manageSubscription => 'Aboneliği Yönet';
+
+  @override
+  String get unlockPremium => 'Premium\'u Aç';
+
+  @override
+  String get premiumDescription =>
+      'Reklamsız, sınırsız senkronizasyon, lider tablosu';
+
+  @override
+  String get upgradeNow => 'Şimdi Yükselt';
+
+  @override
+  String get restorePurchases => 'Satın Almaları Geri Yükle';
+
+  @override
+  String get restoreSuccess => 'Satın almalar başarıyla geri yüklendi';
+
+  @override
+  String get restoreNoPurchases => 'Geri yüklenecek satın alma yok';
+
+  @override
+  String get paywallTitle => 'More Vocab Premium';
+
+  @override
+  String get paywallSubtitle =>
+      'Sınırsız senkronizasyon, lider tablosu ve reklamsız deneyimin kilidini aç.';
+
+  @override
+  String get paywallWhatsIncluded => 'NELER DAHİL';
+
+  @override
+  String get featureNoAdsTitle => 'Reklamsız';
+
+  @override
+  String get featureNoAdsSubtitle =>
+      'Sıfır reklamla tam odaklanma deneyimi yaşa.';
+
+  @override
+  String get featureSyncTitle => 'Sınırsız Senkronizasyon';
+
+  @override
+  String get featureSyncSubtitle =>
+      'İlerlemelerini kaydet ve tüm cihazlarında senkronize et.';
+
+  @override
+  String get featureLeaderboardTitle => 'Lider Tablosu';
+
+  @override
+  String get featureLeaderboardSubtitle =>
+      'Diğerleriyle yarış ve sıralamada yüksel.';
+
+  @override
+  String get paywallMonthly => 'Aylık';
+
+  @override
+  String get paywallAnnual => 'Yıllık';
+
+  @override
+  String get paywallLifetime => 'Ömür Boyu';
+
+  @override
+  String get paywallBestValue => 'EN İYİ FİYAT';
+
+  @override
+  String get paywallNoSubscriptions => 'Abonelik bulunamadı';
+
+  @override
+  String get paywallContinue => 'Devam Et';
+
+  @override
+  String get paywallRestore => 'Satın Almaları Geri Yükle';
+
+  @override
+  String get paywallRestoreSuccess => 'Satın alımlar başarıyla geri yüklendi!';
+
+  @override
+  String get paywallRestoreNoPurchases =>
+      'Geri yüklenecek satın alım bulunamadı.';
+
+  @override
+  String paywallRestoreFailed(String error) {
+    return 'Geri yükleme başarısız: $error';
+  }
+
+  @override
+  String paywallPurchaseFailed(String error) {
+    return 'Satın alma başarısız veya iptal edildi: $error';
+  }
+
+  @override
+  String get imageCache => 'Görsel Önbelleği';
+
+  @override
+  String get clearCache => 'Önbelleği Temizle';
+
+  @override
+  String get clearCacheConfirm =>
+      'Bu işlem tüm indirilen görselleri silecek. İhtiyaç duyulduğunda tekrar indirilecekler.';
+
+  @override
+  String get cacheCleared => 'Önbellek başarıyla temizlendi';
+
+  @override
+  String get noCachedImages => 'Önbelleğe alınmış görsel yok';
+
+  @override
+  String cachedDecksCount(int count) {
+    return '$count deste önbelleğe alındı';
+  }
+
+  @override
+  String get clear => 'Temizle';
+
+  @override
+  String get downloadImages => 'Görselleri İndir';
+
+  @override
+  String get downloading => 'İndiriliyor...';
+
+  @override
+  String get downloaded => 'İndirildi';
+
+  @override
+  String get downloadFailed => 'İndirme başarısız';
 }

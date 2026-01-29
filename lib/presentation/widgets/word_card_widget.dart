@@ -1,11 +1,17 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/services/cloud_image_service.dart';
+import '../../core/services/sound_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../../domain/models/word_card.dart';
 import '../../domain/models/word_deck.dart';
 import '../../core/theme/app_theme.dart';
 import '../../presentation/providers/settings_provider.dart';
+import '../../presentation/providers/sound_provider.dart';
 
 import 'strategy_text_renderer.dart';
 import 'paper_background.dart';
@@ -55,6 +61,9 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
   }
 
   void _toggleCard() {
+    // Play card flip sound
+    ref.playSound(SoundEffect.cardFlip);
+
     if (_showMeaning) {
       _flipController.reverse();
     } else {
@@ -78,8 +87,9 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
       child: ListenableBuilder(
         listenable: _flipAnimation,
         builder: (context, child) {
+          // Card flips at halfway point (0.5 = 50% of animation)
           final isBack = _flipAnimation.value > 0.5;
-          final rotationValue = _flipAnimation.value * 3.14159;
+          final rotationValue = _flipAnimation.value * math.pi;
 
           return Transform(
             alignment: Alignment.center,
@@ -171,31 +181,8 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
           borderRadius: BorderRadius.circular(24),
           child: Stack(
             children: [
-              // Background image - supports local assets and network images
-              if (widget.wordCard.hasLocalAsset)
-                Positioned.fill(
-                  child: Image.asset(
-                    widget.wordCard.localAsset!,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stack) =>
-                        Container(color: AppTheme.secondaryColor),
-                  ),
-                )
-              else if (widget.wordCard.imageUrl != null)
-                Positioned.fill(
-                  child: CachedNetworkImage(
-                    imageUrl: widget.wordCard.imageUrl!,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: AppTheme.secondaryColor,
-                      child: const Center(
-                        child: CircularProgressIndicator(color: Colors.white),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        Container(color: AppTheme.secondaryColor),
-                  ),
-                ),
+              // Background image - supports CDN, local assets, and network images
+              _buildWordImage(),
               // Gradient overlay - stronger at bottom for text readability
               if (hasImage)
                 Positioned.fill(
@@ -314,7 +301,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
     return RepaintBoundary(
       child: Transform(
         alignment: Alignment.center,
-        transform: Matrix4.identity()..rotateY(3.14159),
+        transform: Matrix4.identity()..rotateY(math.pi), // Flip 180 degrees
         child: isStrategy
             ? PaperBackground(
                 child: Center(
@@ -371,7 +358,8 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
               widget.wordCard.word,
               style: theme.textTheme.headlineMedium?.copyWith(
                 color: isStrategy
-                    ? const Color(0xFF2C3E50) // Ink color for strategy
+                    ? ColorPalette
+                          .inkColor // Ink color for strategy
                     : theme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: isStrategy ? 24 : null,
@@ -385,7 +373,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
             height: 4,
             decoration: BoxDecoration(
               color: isStrategy
-                  ? const Color(0xFF2C3E50).withValues(alpha: 0.3)
+                  ? ColorPalette.inkColor.withValues(alpha: 0.3)
                   : AppTheme.secondaryColor,
               borderRadius: BorderRadius.circular(2),
             ),
@@ -399,7 +387,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
             style: isStrategy
                 ? theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF2C3E50),
+                    color: ColorPalette.inkColor,
                     fontSize: 22,
                   )
                 : theme.textTheme.headlineSmall?.copyWith(
@@ -443,7 +431,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
                             Text(
                               AppLocalizations.of(context)!.examples,
                               style: theme.textTheme.titleMedium?.copyWith(
-                                color: const Color(0xFF2C3E50),
+                                color: ColorPalette.inkColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -474,7 +462,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
                                     style: theme.textTheme.titleMedium
                                         ?.copyWith(
                                           height: 1.4,
-                                          color: const Color(0xFF2C3E50),
+                                          color: ColorPalette.inkColor,
                                           fontSize: 16,
                                         ),
                                   ),
@@ -501,6 +489,50 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
                           textAlign: TextAlign.center,
                         ),
                       ],
+                      if (widget.wordCard.synonyms != null &&
+                          widget.wordCard.synonyms!.isNotEmpty) ...[
+                        const SizedBox(height: 16),
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: widget.wordCard.synonyms!.map((synonym) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isStrategy
+                                    ? Colors.black.withValues(alpha: 0.05)
+                                    : theme.colorScheme.tertiary.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: isStrategy
+                                      ? Colors.black.withValues(alpha: 0.1)
+                                      : theme.colorScheme.tertiary.withValues(
+                                          alpha: 0.3,
+                                        ),
+                                ),
+                              ),
+                              child: Text(
+                                synonym,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: isStrategy
+                                      ? ColorPalette.inkColor.withValues(
+                                          alpha: 0.7,
+                                        )
+                                      : theme.colorScheme.tertiary,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -513,7 +545,7 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
             AppLocalizations.of(context)!.tapToReturn,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: isStrategy
-                  ? const Color(0xFF2C3E50).withValues(alpha: 0.4)
+                  ? ColorPalette.inkColor.withValues(alpha: 0.4)
                   : theme.colorScheme.onSurface.withValues(alpha: 0.3),
             ),
           ),
@@ -550,5 +582,55 @@ class _WordCardWidgetState extends ConsumerState<WordCardWidget>
         }),
       ),
     );
+  }
+
+  /// Build word image from CDN with caching
+  /// Images are served from Cloudflare R2 CDN, no local assets bundled
+  Widget _buildWordImage() {
+    final cloudService = CloudImageService();
+    final cdnUrl = cloudService.getImageUrl(
+      widget.wordCard.localAsset,
+      widget.wordCard.imageUrl,
+    );
+
+    if (cdnUrl != null) {
+      return Positioned.fill(
+        child: CachedNetworkImage(
+          imageUrl: cdnUrl,
+          fit: BoxFit.cover,
+          cacheManager: cloudService.cacheManager,
+          // Smooth gradient placeholder instead of spinner
+          placeholder: (context, url) => Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppTheme.primaryColor.withValues(alpha: 0.3),
+                  AppTheme.secondaryColor,
+                ],
+              ),
+            ),
+          ),
+          fadeInDuration: const Duration(milliseconds: 300),
+          fadeOutDuration: const Duration(milliseconds: 100),
+          errorWidget: (context, url, error) => Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppTheme.primaryColor.withValues(alpha: 0.2),
+                  AppTheme.secondaryColor,
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    // No image URL available - show gradient background
+    return const SizedBox.shrink();
   }
 }

@@ -57,6 +57,13 @@ dependencies:
   firebase_messaging: ^15.2.10
   flutter_local_notifications: ^20.0.0
   timezone: ^0.10.1
+  flutter_timezone: ^3.0.1
+  purchases_flutter: ^9.10.7
+  purchases_ui_flutter: ^9.10.7
+  google_mobile_ads: ^7.0.0
+  flutter_dotenv: ^6.0.0
+  flutter_cache_manager: ^3.4.1
+  audioplayers: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,12 +75,9 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/images/words/mixed/
-    - assets/images/words/yds_ydt/
-    - assets/images/words/beginner/
-    - assets/images/words/survival/
-    - assets/images/words/phrasal_verbs/
-    - assets/images/words/idioms/
+    - .env
+    # Word images are now served from CDN (Cloudflare R2)
+    # Removed: assets/images/words/mixed/, yds_ydt/, beginner/, survival/, phrasal_verbs/, idioms/
     - assets/animations/pets/
     - assets/data/
     - assets/images/pets/
@@ -81,6 +85,7 @@ flutter:
     - assets/images/onboarding slides/
     - assets/images/arcade/
     - assets/images/decks/
+    - assets/sounds/
 
 flutter_launcher_icons:
   android: true

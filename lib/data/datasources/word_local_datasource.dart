@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/constants/storage_keys.dart';
 import '../../domain/models/word_card.dart';
 import '../../domain/models/word_deck.dart';
 import '../../core/exceptions/app_exceptions.dart';
@@ -17,9 +18,6 @@ List<dynamic> _parseJsonList(String jsonString) {
 /// Uses dependency injection for better testability.
 class WordLocalDatasource {
   WordLocalDatasource({SharedPreferences? prefs}) : _prefs = prefs;
-
-  static const String _progressKey = 'word_progress';
-  static const String _customWordsKey = 'custom_words_data';
 
   final List<WordCard> _words = [];
   SharedPreferences? _prefs;
@@ -133,7 +131,7 @@ class WordLocalDatasource {
   Future<void> _loadCustomWords() async {
     if (_prefs == null) return;
 
-    final String? customWordsJson = _prefs!.getString(_customWordsKey);
+    final String? customWordsJson = _prefs!.getString(StorageKeys.customWordsData);
     if (customWordsJson == null || customWordsJson.isEmpty) return;
 
     try {
@@ -195,21 +193,21 @@ class WordLocalDatasource {
       customWords.map((e) => e.toJson()).toList(),
     );
 
-    await _prefs!.setString(_customWordsKey, jsonString);
+    await _prefs!.setString(StorageKeys.customWordsData, jsonString);
   }
 
   /// Clean up progress map for a deleted word
   Future<void> _cleanProgressForDeletedWord(int id) async {
     if (_prefs == null) return;
 
-    final String? progressJson = _prefs!.getString(_progressKey);
+    final String? progressJson = _prefs!.getString(StorageKeys.wordProgress);
     if (progressJson == null) return;
 
     try {
       final Map<String, dynamic> progressMap = json.decode(progressJson);
       if (progressMap.containsKey(id.toString())) {
         progressMap.remove(id.toString());
-        await _prefs!.setString(_progressKey, json.encode(progressMap));
+        await _prefs!.setString(StorageKeys.wordProgress, json.encode(progressMap));
       }
     } catch (e) {
       debugPrint('Error cleaning progress: $e');
@@ -229,7 +227,7 @@ class WordLocalDatasource {
   Future<void> _loadProgress() async {
     if (_prefs == null) return;
 
-    final String? progressJson = _prefs!.getString(_progressKey);
+    final String? progressJson = _prefs!.getString(StorageKeys.wordProgress);
     if (progressJson == null) return;
 
     try {
@@ -308,7 +306,7 @@ class WordLocalDatasource {
     }
 
     try {
-      await _prefs!.setString(_progressKey, json.encode(progressMap));
+      await _prefs!.setString(StorageKeys.wordProgress, json.encode(progressMap));
       // debugPrint('Progress auto-saved successfully.');
     } catch (e) {
       debugPrint('Error auto-saving progress: $e');
@@ -451,7 +449,7 @@ class WordLocalDatasource {
       );
     }
     if (_prefs != null) {
-      await _prefs!.remove(_progressKey);
+      await _prefs!.remove(StorageKeys.wordProgress);
     }
   }
 }

@@ -1,3 +1,4 @@
+import '../../core/constants/srs_constants.dart';
 import '../services/srs_algorithm.dart';
 import 'word_deck.dart';
 
@@ -8,6 +9,7 @@ class WordCard {
   final String word;
   final Map<String, String> meanings;
   final String? exampleSentence;
+  final List<String>? synonyms;
   final String? imageUrl;
   final String? localAsset;
   final WordDeck deck;
@@ -28,6 +30,7 @@ class WordCard {
     required this.word,
     required this.meanings,
     this.exampleSentence,
+    this.synonyms,
     this.imageUrl,
     this.localAsset,
     this.deck = WordDeck.mixed,
@@ -48,6 +51,9 @@ class WordCard {
       word: json['word'] as String,
       meanings: Map<String, String>.from(json['meanings'] as Map),
       exampleSentence: json['exampleSentence'] as String?,
+      synonyms: (json['synonyms'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       imageUrl: json['imageUrl'] as String?,
       localAsset: json['localAsset'] as String?,
       difficulty: json['difficulty'] as int,
@@ -77,6 +83,7 @@ class WordCard {
       'word': word,
       'meanings': meanings,
       'exampleSentence': exampleSentence,
+      'synonyms': synonyms,
       'imageUrl': imageUrl,
       'localAsset': localAsset,
       'difficulty': difficulty,
@@ -118,7 +125,7 @@ class WordCard {
   /// Mark this word as known (correct answer) - returns new instance with updated SRS
   WordCard markAsKnown() {
     final newSrsLevel = SrsAlgorithm.getNewLevel(srsLevel, true);
-    final isMasteredNow = newSrsLevel >= SrsAlgorithm.maxLevel;
+    final isMasteredNow = newSrsLevel >= SrsConstants.maxLevel;
 
     return copyWith(
       srsLevel: newSrsLevel,
@@ -149,6 +156,7 @@ class WordCard {
     String? word,
     Map<String, String>? meanings,
     String? exampleSentence,
+    List<String>? synonyms,
     String? imageUrl,
     String? localAsset,
     WordDeck? deck,
@@ -167,6 +175,7 @@ class WordCard {
       word: word ?? this.word,
       meanings: meanings ?? this.meanings,
       exampleSentence: exampleSentence ?? this.exampleSentence,
+      synonyms: synonyms ?? this.synonyms,
       imageUrl: imageUrl ?? this.imageUrl,
       localAsset: localAsset ?? this.localAsset,
       deck: deck ?? this.deck,

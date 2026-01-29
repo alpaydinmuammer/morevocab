@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import '../../core/services/sound_service.dart';
 import '../../domain/models/word_deck.dart';
 import '../../domain/models/pet_model.dart';
 import '../providers/word_providers.dart';
 import '../providers/pet_provider.dart';
 import '../providers/streak_provider.dart';
 import '../providers/error_log_provider.dart';
+import '../providers/sound_provider.dart';
 import '../widgets/word_card_widget.dart';
 import '../widgets/swipe_background_feedback.dart';
 import '../widgets/premium_background.dart';
@@ -405,6 +407,9 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
     final currentWord = studyState.words[previousIndex];
 
     if (direction == CardSwiperDirection.right) {
+      // Play correct sound
+      ref.playSound(SoundEffect.correct);
+
       notifier.markCurrentAsKnown();
 
       // Add XP for correct answer (silently, no overlay)
@@ -416,6 +421,9 @@ class _WordSwipePageState extends ConsumerState<WordSwipePage> {
       // Remove X mark or word from error log on correct answer
       ref.read(errorLogProvider.notifier).removeMarkOrWord(currentWord.word);
     } else if (direction == CardSwiperDirection.left) {
+      // Play wrong sound
+      ref.playSound(SoundEffect.wrong);
+
       notifier.markCurrentForReview();
 
       // Add word to error log on wrong answer

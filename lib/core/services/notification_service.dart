@@ -4,9 +4,12 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
+import '../constants/notification_constants.dart';
+import '../constants/storage_keys.dart';
 
 /// Background message handler - must be a top-level function
 @pragma('vm:entry-point')
@@ -27,37 +30,39 @@ class NotificationService {
   // Prevent duplicate stream subscriptions
   bool _isInitialized = false;
 
-  static const String _notificationsEnabledKey = 'notifications_enabled';
-  static const String _dailyReminderEnabledKey = 'daily_reminder_enabled';
-  static const String _dailyReminderHourKey = 'daily_reminder_hour';
-  static const String _dailyReminderMinuteKey = 'daily_reminder_minute';
-
-  // Notification IDs
-  static const int _userDailyReminderId = 0;
-  static const int _autoDailyReminderId = 1;
-
-  // Default auto reminder time (20:00 / 8 PM)
-  static const int _autoReminderHour = 20;
-  static const int _autoReminderMinute = 0;
-
   // Notification channel for Android
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
-    'more_vocab_channel',
-    'More Vocab Notifications',
-    description: 'Vocabulary learning reminders and updates',
+    NotificationConstants.channelId,
+    NotificationConstants.channelName,
+    description: NotificationConstants.channelDescription,
     importance: Importance.high,
     playSound: true,
     enableVibration: true,
   );
 
   /// Initialize the notification service
-  Future<void> initialize() async {
+  Future<void> initialize({
+    String? autoReminderTitle,
+    String? autoReminderBody,
+  }) async {
     // Prevent duplicate initialization (and duplicate stream subscriptions)
     if (_isInitialized) return;
     _isInitialized = true;
 
-    // Initialize timezone
+    // Initialize timezone database
     tz_data.initializeTimeZones();
+
+    // Set the local timezone based on device settings
+    // This is CRITICAL for scheduled notifications to work correctly
+    try {
+      final timezoneName = await FlutterTimezone.getLocalTimezone();
+      tz.setLocalLocation(tz.getLocation(timezoneName));
+      debugPrint('Timezone set to: $timezoneName');
+    } catch (e) {
+      // Fallback: use UTC offset to find approximate timezone
+      debugPrint('Failed to get timezone, using fallback: $e');
+      _setTimezoneFromOffset();
+    }
 
     // Set up background message handler
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
@@ -101,12 +106,15 @@ class NotificationService {
     debugPrint('FCM Token: $token');
 
     // Schedule automatic daily reminder (always active)
-    await scheduleAutoDailyReminder();
+    await scheduleAutoDailyReminder(
+      title: autoReminderTitle,
+      body: autoReminderBody,
+    );
   }
 
   /// Schedule automatic daily reminder that runs regardless of user settings
   /// This ensures users get at least one reminder per day
-  Future<void> scheduleAutoDailyReminder() async {
+  Future<void> scheduleAutoDailyReminder({String? title, String? body}) async {
     // Check if notifications are completely disabled
     final notificationsEnabled = await areNotificationsEnabled();
     if (!notificationsEnabled) {
@@ -115,17 +123,19 @@ class NotificationService {
     }
 
     // Cancel existing auto reminder
-    await _localNotifications.cancel(id: _autoDailyReminderId);
+    await _localNotifications.cancel(
+      id: NotificationConstants.autoDailyReminderId,
+    );
 
     // Schedule automatic daily reminder at default time
     try {
       await _localNotifications.zonedSchedule(
-        id: _autoDailyReminderId,
-        title: 'Bugün kelime çalıştın mı?',
-        body: 'Sadece 5 dakika ayır, fark yaratır!',
+        id: NotificationConstants.autoDailyReminderId,
+        title: title ?? 'Have you studied words today?',
+        body: body ?? 'Just 5 minutes make a difference!',
         scheduledDate: _nextInstanceOfTime(
-          _autoReminderHour,
-          _autoReminderMinute,
+          NotificationConstants.defaultReminderHour,
+          NotificationConstants.defaultReminderMinute,
         ),
         notificationDetails: NotificationDetails(
           android: AndroidNotificationDetails(
@@ -150,7 +160,7 @@ class NotificationService {
     }
 
     debugPrint(
-      'Auto daily reminder scheduled for $_autoReminderHour:$_autoReminderMinute',
+      'Auto daily reminder scheduled for ${NotificationConstants.defaultReminderHour}:${NotificationConstants.defaultReminderMinute}',
     );
   }
 
@@ -335,7 +345,7 @@ class NotificationService {
     // Schedule new user daily reminder
     try {
       await _localNotifications.zonedSchedule(
-        id: _userDailyReminderId,
+        id: NotificationConstants.userDailyReminderId,
         title: title,
         body: body,
         scheduledDate: _nextInstanceOfTime(hour, minute),
@@ -363,6 +373,35 @@ class NotificationService {
     debugPrint('Daily reminder scheduled for $hour:$minute');
   }
 
+  /// Set timezone from UTC offset as fallback
+  void _setTimezoneFromOffset() {
+    final now = DateTime.now();
+    final offset = now.timeZoneOffset;
+
+    // Find a timezone that matches the offset
+    // Turkey is UTC+3, so default to Istanbul for Turkish users
+    String timezoneName;
+    if (offset.inHours == 3) {
+      timezoneName = 'Europe/Istanbul';
+    } else if (offset.inHours == 0) {
+      timezoneName = 'UTC';
+    } else if (offset.inHours == 1) {
+      timezoneName = 'Europe/London';
+    } else if (offset.inHours == 2) {
+      timezoneName = 'Europe/Berlin';
+    } else {
+      // Default to UTC if unknown
+      timezoneName = 'UTC';
+    }
+
+    try {
+      tz.setLocalLocation(tz.getLocation(timezoneName));
+      debugPrint('Timezone fallback set to: $timezoneName');
+    } catch (e) {
+      debugPrint('Timezone fallback also failed: $e');
+    }
+  }
+
   /// Get the next instance of the specified time
   tz.TZDateTime _nextInstanceOfTime(int hour, int minute) {
     final now = tz.TZDateTime.now(tz.local);
@@ -379,18 +418,25 @@ class NotificationService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
+    debugPrint(
+      'Scheduled notification for: $scheduledDate (local: ${tz.local})',
+    );
     return scheduledDate;
   }
 
   /// Cancel user-configured daily reminder
   Future<void> cancelDailyReminder() async {
-    await _localNotifications.cancel(id: _userDailyReminderId);
+    await _localNotifications.cancel(
+      id: NotificationConstants.userDailyReminderId,
+    );
     debugPrint('User daily reminder cancelled');
   }
 
   /// Cancel auto daily reminder
   Future<void> cancelAutoDailyReminder() async {
-    await _localNotifications.cancel(id: _autoDailyReminderId);
+    await _localNotifications.cancel(
+      id: NotificationConstants.autoDailyReminderId,
+    );
     debugPrint('Auto daily reminder cancelled');
   }
 
@@ -405,13 +451,13 @@ class NotificationService {
   /// Check if notifications are enabled
   Future<bool> areNotificationsEnabled() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_notificationsEnabledKey) ?? true;
+    return prefs.getBool(StorageKeys.notificationsEnabled) ?? true;
   }
 
   /// Set notifications enabled/disabled
   Future<void> setNotificationsEnabled(bool enabled) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_notificationsEnabledKey, enabled);
+    await prefs.setBool(StorageKeys.notificationsEnabled, enabled);
 
     if (!enabled) {
       await cancelAllNotifications();
@@ -424,13 +470,13 @@ class NotificationService {
   /// Check if daily reminder is enabled
   Future<bool> isDailyReminderEnabled() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_dailyReminderEnabledKey) ?? false;
+    return prefs.getBool(StorageKeys.dailyReminderEnabled) ?? false;
   }
 
   /// Set daily reminder enabled/disabled
   Future<void> setDailyReminderEnabled(bool enabled) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_dailyReminderEnabledKey, enabled);
+    await prefs.setBool(StorageKeys.dailyReminderEnabled, enabled);
 
     if (!enabled) {
       await cancelDailyReminder();
@@ -440,15 +486,16 @@ class NotificationService {
   /// Get daily reminder time
   Future<({int hour, int minute})> getDailyReminderTime() async {
     final prefs = await SharedPreferences.getInstance();
-    final hour = prefs.getInt(_dailyReminderHourKey) ?? 20; // Default 8 PM
-    final minute = prefs.getInt(_dailyReminderMinuteKey) ?? 0;
+    final hour =
+        prefs.getInt(StorageKeys.dailyReminderHour) ?? 20; // Default 8 PM
+    final minute = prefs.getInt(StorageKeys.dailyReminderMinute) ?? 0;
     return (hour: hour, minute: minute);
   }
 
   /// Set daily reminder time
   Future<void> setDailyReminderTime(int hour, int minute) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_dailyReminderHourKey, hour);
-    await prefs.setInt(_dailyReminderMinuteKey, minute);
+    await prefs.setInt(StorageKeys.dailyReminderHour, hour);
+    await prefs.setInt(StorageKeys.dailyReminderMinute, minute);
   }
 }
