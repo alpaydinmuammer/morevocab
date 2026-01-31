@@ -249,14 +249,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      sha256: "3e0141505477fd8ad55d6eb4e7776d3fe8430be8e497ccb1521370c3f21a3e2b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.8"
   fake_async:
     dependency: transitive
     description:
@@ -517,14 +509,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.3+1"
-  google_mobile_ads:
-    dependency: "direct main"
-    description:
-      name: google_mobile_ads
-      sha256: f35e040875bb54e8a3455bcffed3b4ac9e9263fbf7751b9fd1ae7f30793faee8
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -813,22 +797,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  purchases_flutter:
-    dependency: "direct main"
-    description:
-      name: purchases_flutter
-      sha256: "682ddb80213bf1f9c214aca23becf004fb81120196d9b53966743ca044606690"
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.10.7"
-  purchases_ui_flutter:
-    dependency: "direct main"
-    description:
-      name: purchases_ui_flutter
-      sha256: fff5d12e32929d0d2efe02886ef8183dd25fcc05bda0fdab5b028003047d6da5
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.10.7"
   riverpod:
     dependency: transitive
     description:
@@ -1154,38 +1122,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  webview_flutter:
-    dependency: transitive
-    description:
-      name: webview_flutter
-      sha256: a3da219916aba44947d3a5478b1927876a09781174b5a2b67fa5be0555154bf9
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.13.1"
-  webview_flutter_android:
-    dependency: transitive
-    description:
-      name: webview_flutter_android
-      sha256: eeeb3fcd5f0ff9f8446c9f4bbc18a99b809e40297528a3395597d03aafb9f510
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.10.11"
-  webview_flutter_platform_interface:
-    dependency: transitive
-    description:
-      name: webview_flutter_platform_interface
-      sha256: "63d26ee3aca7256a83ccb576a50272edd7cfc80573a4305caa98985feb493ee0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.14.0"
-  webview_flutter_wkwebview:
-    dependency: transitive
-    description:
-      name: webview_flutter_wkwebview
-      sha256: e49f378ed066efb13fc36186bbe0bd2425630d4ea0dbc71a18fdd0e4d8ed8ebc
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.23.5"
   xdg_directories:
     dependency: transitive
     description:

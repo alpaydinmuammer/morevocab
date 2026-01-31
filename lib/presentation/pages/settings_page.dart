@@ -5,7 +5,6 @@ import '../../core/constants/app_constants.dart';
 import '../../core/services/cloud_sync_service.dart';
 import '../../core/services/notification_service.dart';
 import '../../core/services/sound_service.dart';
-import '../../core/services/subscription_service.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/datasources/firebase_auth_datasource.dart';
 import '../../l10n/app_localizations.dart';
@@ -1366,7 +1365,6 @@ class _SubscriptionSettings extends ConsumerWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
     final subscriptionState = ref.watch(subscriptionProvider);
-    final subscriptionService = SubscriptionService();
 
     if (subscriptionState.isLoading) {
       return const Padding(
@@ -1437,9 +1435,9 @@ class _SubscriptionSettings extends ConsumerWidget {
               color: theme.colorScheme.onSurface.withValues(alpha: 0.4),
             ),
             onTap: () async {
-              await subscriptionService.presentCustomerCenter();
-              // Refresh after customer center closes
-              ref.read(subscriptionProvider.notifier).refresh();
+              // RevenueCat disabled for initial release
+              // await subscriptionService.presentCustomerCenter();
+              // ref.read(subscriptionProvider.notifier).refresh();
             },
           ),
         ],

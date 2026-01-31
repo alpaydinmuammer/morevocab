@@ -10,9 +10,6 @@ import '../../providers/streak_provider.dart';
 import '../../widgets/premium_background.dart';
 import '../../widgets/badges_modal.dart';
 import 'widgets/arcade_leaderboard_screen.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../../core/services/ad_service.dart';
-import '../../providers/subscription_provider.dart';
 
 /// Arcade mode hub page displaying all available mini-games
 class ArcadeHubPage extends ConsumerStatefulWidget {
@@ -23,41 +20,13 @@ class ArcadeHubPage extends ConsumerStatefulWidget {
 }
 
 class _ArcadeHubPageState extends ConsumerState<ArcadeHubPage> {
-  BannerAd? _bannerAd;
-  bool _isBannerAdReady = false;
-
   @override
   void initState() {
     super.initState();
     // Check for newly unlocked badges after first frame
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkBadges();
-      _loadBannerAd();
     });
-  }
-
-  void _loadBannerAd() {
-    // Only load if not premium (checked inside the method or caller)
-    // We defer checking premium to build/loading time or check provider here
-    // But ref.read is safe in post frame callback
-    final isPremium = ref.read(isPremiumProvider);
-    if (isPremium) return;
-
-    _bannerAd = AdService().createBannerAd(
-      onAdLoaded: (ad) {
-        if (mounted) {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        }
-      },
-    )..load();
-  }
-
-  @override
-  void dispose() {
-    _bannerAd?.dispose();
-    super.dispose();
   }
 
   Future<void> _checkBadges() async {
@@ -222,16 +191,7 @@ class _ArcadeHubPageState extends ConsumerState<ArcadeHubPage> {
                 ),
               ),
 
-              // Banner Ad
-              if (_isBannerAdReady &&
-                  !ref.watch(isPremiumProvider) &&
-                  _bannerAd != null)
-                Container(
-                  width: _bannerAd!.size.width.toDouble(),
-                  height: _bannerAd!.size.height.toDouble(),
-                  alignment: Alignment.center,
-                  child: AdWidget(ad: _bannerAd!),
-                ),
+              // Banner Ad removed for initial release
             ],
           ),
         ),

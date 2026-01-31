@@ -4,59 +4,15 @@ import '../../../../l10n/app_localizations.dart';
 import 'leaderboard_screen.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../../../../core/services/ad_service.dart';
-import '../../../providers/subscription_provider.dart';
-import '../../paywall_page.dart';
 
-class ArcadeLeaderboardScreen extends ConsumerStatefulWidget {
+class ArcadeLeaderboardScreen extends ConsumerWidget {
   const ArcadeLeaderboardScreen({super.key});
 
   @override
-  ConsumerState<ArcadeLeaderboardScreen> createState() =>
-      _ArcadeLeaderboardScreenState();
-}
-
-class _ArcadeLeaderboardScreenState
-    extends ConsumerState<ArcadeLeaderboardScreen> {
-  BannerAd? _bannerAd;
-  bool _isBannerAdReady = false;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadBannerAd();
-    });
-  }
-
-  void _loadBannerAd() {
-    final isPremium = ref.read(isPremiumProvider);
-    if (isPremium) return;
-
-    _bannerAd = AdService().createBannerAd(
-      onAdLoaded: (ad) {
-        if (mounted) {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        }
-      },
-    )..load();
-  }
-
-  @override
-  void dispose() {
-    _bannerAd?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context)!;
-    final isPremium = ref.watch(isPremiumProvider);
 
     return Scaffold(
       body: PremiumBackground(
@@ -127,111 +83,12 @@ class _ArcadeLeaderboardScreenState
                       ),
                     ),
 
-                    // Premium Warning Banner (Floating in Center)
-                    if (!isPremium)
-                      Center(
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 48),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 16,
-                          ),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.amber.shade700,
-                                Colors.amber.shade900,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.2),
-                                blurRadius: 16,
-                                offset: const Offset(0, 8),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withValues(alpha: 0.2),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.lock_rounded,
-                                  color: Colors.white,
-                                  size: 24,
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              Text(
-                                l10n.leaderboardPremiumWarning,
-                                textAlign: TextAlign.center,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  height: 1.2,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PaywallPage(),
-                                      ),
-                                    );
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: Colors.amber.shade900,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 10,
-                                    ),
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    l10n.joinPremium.toUpperCase(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    // Premium Warning Banner removed for initial release
                   ],
                 ),
               ),
 
-              // Banner Ad
-              if (_isBannerAdReady &&
-                  !ref.watch(isPremiumProvider) &&
-                  _bannerAd != null)
-                Container(
-                  width: _bannerAd!.size.width.toDouble(),
-                  height: _bannerAd!.size.height.toDouble(),
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: AdWidget(ad: _bannerAd!),
-                ),
+              // Banner Ad removed for initial release
             ],
           ),
         ),

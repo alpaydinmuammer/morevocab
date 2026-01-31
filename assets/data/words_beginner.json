@@ -9,7 +9,12 @@
         "exampleSentence": "Hello! How are you?",
         "localAsset": "assets/images/words/beginner/word_hello_1768513437800.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "hi",
+            "greetings",
+            "hey"
+        ]
     },
     {
         "id": 2002,
@@ -21,7 +26,12 @@
         "exampleSentence": "Goodbye! See you tomorrow.",
         "localAsset": "assets/images/words/beginner/word_goodbye_1768513451339.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "bye",
+            "farewell",
+            "see ya"
+        ]
     },
     {
         "id": 2003,
@@ -33,7 +43,11 @@
         "exampleSentence": "Please help me.",
         "localAsset": "assets/images/words/beginner/word_please_1768513465694.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "kindly",
+            "if you would"
+        ]
     },
     {
         "id": 2004,
@@ -45,7 +59,11 @@
         "exampleSentence": "Thank you for your help!",
         "localAsset": "assets/images/words/beginner/word_thankyou_1768513480132.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "thanks",
+            "appreciate it"
+        ]
     },
     {
         "id": 2005,
@@ -57,7 +75,12 @@
         "exampleSentence": "Yes, I understand.",
         "localAsset": "assets/images/words/beginner/word_yes_1768513493920.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "yeah",
+            "sure",
+            "ok"
+        ]
     },
     {
         "id": 2006,
@@ -69,7 +92,12 @@
         "exampleSentence": "No, thank you.",
         "localAsset": "assets/images/words/beginner/word_no_1768513523066.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "nope",
+            "nah",
+            "negative"
+        ]
     },
     {
         "id": 2007,
@@ -81,7 +109,11 @@
         "exampleSentence": "Can I have some water?",
         "localAsset": "assets/images/words/beginner/word_water_1768513539015.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "h2o",
+            "aqua"
+        ]
     },
     {
         "id": 2008,
@@ -93,7 +125,12 @@
         "exampleSentence": "The food here is delicious.",
         "localAsset": "assets/images/words/beginner/word_food_1768513555057.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "meal",
+            "dish",
+            "grub"
+        ]
     },
     {
         "id": 2009,
@@ -105,7 +142,12 @@
         "exampleSentence": "I need help!",
         "localAsset": "assets/images/words/beginner/word_help_1768513569799.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "aid",
+            "assist",
+            "support"
+        ]
     },
     {
         "id": 2010,
@@ -117,7 +159,12 @@
         "exampleSentence": "She is my best friend.",
         "localAsset": "assets/images/words/beginner/word_friend_1768513585527.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "pal",
+            "buddy",
+            "mate"
+        ]
     },
     {
         "id": 2011,
@@ -129,7 +176,12 @@
         "exampleSentence": "I am so happy today!",
         "localAsset": "assets/images/words/beginner/word_happy_1768581620671.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "glad",
+            "joyful",
+            "cheerful"
+        ]
     },
     {
         "id": 2012,
@@ -141,7 +193,12 @@
         "exampleSentence": "She looks sad today.",
         "localAsset": "assets/images/words/beginner/word_sad_1768581634867.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "unhappy",
+            "sorrowful",
+            "gloomy"
+        ]
     },
     {
         "id": 2013,
@@ -153,7 +210,12 @@
         "exampleSentence": "This is a good book.",
         "localAsset": "assets/images/words/beginner/word_good_1768581649125.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "fine",
+            "great",
+            "nice"
+        ]
     },
     {
         "id": 2014,
@@ -165,7 +227,12 @@
         "exampleSentence": "The weather is bad today.",
         "localAsset": "assets/images/words/beginner/word_bad_1768581665855.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "poor",
+            "terrible",
+            "awful"
+        ]
     },
     {
         "id": 2015,
@@ -177,7 +244,12 @@
         "exampleSentence": "I love my family.",
         "localAsset": "assets/images/words/beginner/word_love_1768581679884.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "adore",
+            "cherish",
+            "care for"
+        ]
     },
     {
         "id": 2016,
@@ -189,7 +261,12 @@
         "exampleSentence": "Please sit on the chair.",
         "localAsset": "assets/images/words/beginner/word_chair_1768735181536.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "seat",
+            "stool",
+            "bench"
+        ]
     },
     {
         "id": 2017,
@@ -201,7 +278,11 @@
         "exampleSentence": "Put the book on the table.",
         "localAsset": "assets/images/words/beginner/word_table_1768735195407.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "desk",
+            "counter"
+        ]
     },
     {
         "id": 2018,
@@ -213,7 +294,12 @@
         "exampleSentence": "Open the door, please.",
         "localAsset": "assets/images/words/beginner/word_door_1768735208855.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "entry",
+            "gate",
+            "exit"
+        ]
     },
     {
         "id": 2019,
@@ -225,7 +311,11 @@
         "exampleSentence": "Look out the window.",
         "localAsset": "assets/images/words/beginner/word_window_1768735223004.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "pane",
+            "casement"
+        ]
     },
     {
         "id": 2020,
@@ -237,7 +327,12 @@
         "exampleSentence": "I use a computer for work.",
         "localAsset": "assets/images/words/beginner/word_computer_1768735237139.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "pc",
+            "laptop",
+            "machine"
+        ]
     },
     {
         "id": 2021,
@@ -249,7 +344,12 @@
         "exampleSentence": "Can I use your phone?",
         "localAsset": "assets/images/words/beginner/word_phone_1768735263794.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "mobile",
+            "cell",
+            "telephone"
+        ]
     },
     {
         "id": 2022,
@@ -261,7 +361,12 @@
         "exampleSentence": "Where is my bag?",
         "localAsset": "assets/images/words/beginner/word_bag_1768735279010.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "sack",
+            "pouch",
+            "tote"
+        ]
     },
     {
         "id": 2023,
@@ -273,7 +378,12 @@
         "exampleSentence": "I lost my shoe.",
         "localAsset": "assets/images/words/beginner/word_shoe_1768735297290.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "boot",
+            "sneaker",
+            "footwear"
+        ]
     },
     {
         "id": 2024,
@@ -285,7 +395,11 @@
         "exampleSentence": "He is wearing a hat.",
         "localAsset": "assets/images/words/beginner/word_hat_1768735311623.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "cap",
+            "bonnet"
+        ]
     },
     {
         "id": 2025,
@@ -297,7 +411,12 @@
         "exampleSentence": "I am reading a book.",
         "localAsset": "assets/images/words/beginner/word_book.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "volume",
+            "tome",
+            "text"
+        ]
     },
     {
         "id": 2026,
@@ -309,7 +428,11 @@
         "exampleSentence": "Can I borrow your pen?",
         "localAsset": "assets/images/words/beginner/word_pen.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "ballpoint",
+            "marker"
+        ]
     },
     {
         "id": 2027,
@@ -321,7 +444,11 @@
         "exampleSentence": "The cat is sleeping.",
         "localAsset": "assets/images/words/beginner/word_cat.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "kitty",
+            "feline"
+        ]
     },
     {
         "id": 2028,
@@ -333,7 +460,12 @@
         "exampleSentence": "The dog is barking.",
         "localAsset": "assets/images/words/beginner/word_dog.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "puppy",
+            "canine",
+            "pooch"
+        ]
     },
     {
         "id": 2029,
@@ -345,7 +477,12 @@
         "exampleSentence": "He drives a red car.",
         "localAsset": "assets/images/words/beginner/word_car.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "auto",
+            "vehicle",
+            "ride"
+        ]
     },
     {
         "id": 2030,
@@ -357,7 +494,12 @@
         "exampleSentence": "This is my house.",
         "localAsset": "assets/images/words/beginner/word_house.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "home",
+            "residence",
+            "dwelling"
+        ]
     },
     {
         "id": 2031,
@@ -369,7 +511,11 @@
         "exampleSentence": "The tree is very tall.",
         "localAsset": "assets/images/words/beginner/word_tree.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "plant",
+            "sapling"
+        ]
     },
     {
         "id": 2032,
@@ -381,7 +527,11 @@
         "exampleSentence": "The sun is shining bright.",
         "localAsset": "assets/images/words/beginner/word_sun.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "star",
+            "daylight"
+        ]
     },
     {
         "id": 2033,
@@ -393,7 +543,11 @@
         "exampleSentence": "Look at the moon tonight.",
         "localAsset": "assets/images/words/beginner/word_moon.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "satellite",
+            "crescent"
+        ]
     },
     {
         "id": 2034,
@@ -405,7 +559,11 @@
         "exampleSentence": "I go to school every day.",
         "localAsset": "assets/images/words/beginner/word_school.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "academy",
+            "institute"
+        ]
     },
     {
         "id": 2035,
@@ -417,7 +575,12 @@
         "exampleSentence": "My teacher is very kind.",
         "localAsset": "assets/images/words/beginner/word_teacher.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "educator",
+            "instructor",
+            "tutor"
+        ]
     },
     {
         "id": 2036,
@@ -429,7 +592,12 @@
         "exampleSentence": "She is a good student.",
         "localAsset": "assets/images/words/beginner/word_student.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "pupil",
+            "learner",
+            "scholar"
+        ]
     },
     {
         "id": 2037,
@@ -441,7 +609,12 @@
         "exampleSentence": "I love my family.",
         "localAsset": "assets/images/words/beginner/word_family.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "relatives",
+            "kin",
+            "household"
+        ]
     },
     {
         "id": 2038,
@@ -453,7 +626,12 @@
         "exampleSentence": "My mother cooks delicious food.",
         "localAsset": "assets/images/words/beginner/word_mother.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "mom",
+            "mum",
+            "mommy"
+        ]
     },
     {
         "id": 2039,
@@ -465,7 +643,12 @@
         "exampleSentence": "My father works hard.",
         "localAsset": "assets/images/words/beginner/word_father.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "dad",
+            "papa",
+            "daddy"
+        ]
     },
     {
         "id": 2040,
@@ -477,7 +660,12 @@
         "exampleSentence": "The apple is red.",
         "localAsset": "assets/images/words/beginner/word_red_1769428300001.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "crimson",
+            "scarlet",
+            "ruby"
+        ]
     },
     {
         "id": 2041,
@@ -489,7 +677,12 @@
         "exampleSentence": "The sky is blue.",
         "localAsset": "assets/images/words/beginner/word_blue_1769428300002.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "azure",
+            "cobalt",
+            "indigo"
+        ]
     },
     {
         "id": 2042,
@@ -501,7 +694,12 @@
         "exampleSentence": "The grass is green.",
         "localAsset": "assets/images/words/beginner/word_green_1769428300003.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "emerald",
+            "olive",
+            "lime"
+        ]
     },
     {
         "id": 2043,
@@ -513,7 +711,12 @@
         "exampleSentence": "The lemon is yellow.",
         "localAsset": "assets/images/words/beginner/word_yellow_1769428300004.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "amber",
+            "gold",
+            "lemon"
+        ]
     },
     {
         "id": 2044,
@@ -525,7 +728,11 @@
         "exampleSentence": "Nod your head.",
         "localAsset": "assets/images/words/beginner/word_head_1769428300005.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "skull",
+            "noggin"
+        ]
     },
     {
         "id": 2045,
@@ -537,7 +744,11 @@
         "exampleSentence": "Clap your hands.",
         "localAsset": "assets/images/words/beginner/word_hand_1769428300006.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "palm",
+            "fist"
+        ]
     },
     {
         "id": 2046,
@@ -549,7 +760,11 @@
         "exampleSentence": "Close your eyes.",
         "localAsset": "assets/images/words/beginner/word_eye_1769428300007.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "optic",
+            "peeper"
+        ]
     },
     {
         "id": 2047,
@@ -561,7 +776,11 @@
         "exampleSentence": "Open your mouth.",
         "localAsset": "assets/images/words/beginner/word_mouth_1769442867989.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "lips",
+            "jaws"
+        ]
     },
     {
         "id": 2048,
@@ -573,7 +792,11 @@
         "exampleSentence": "Have a nice day!",
         "localAsset": "assets/images/words/beginner/word_day_1769442885567.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "daytime",
+            "daylight"
+        ]
     },
     {
         "id": 2049,
@@ -585,7 +808,11 @@
         "exampleSentence": "Good night.",
         "localAsset": "assets/images/words/beginner/word_night_1769442905465.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "evening",
+            "dark"
+        ]
     },
     {
         "id": 2050,
@@ -597,7 +824,12 @@
         "exampleSentence": "I like to eat pizza.",
         "localAsset": "assets/images/words/beginner/word_eat_1769442923950.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "consume",
+            "devour",
+            "dine"
+        ]
     },
     {
         "id": 2051,
@@ -609,7 +841,12 @@
         "exampleSentence": "I drink water.",
         "localAsset": "assets/images/words/beginner/word_drink_1769442944560.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "sip",
+            "gulp",
+            "swallow"
+        ]
     },
     {
         "id": 2052,
@@ -621,7 +858,12 @@
         "exampleSentence": "I sleep at night.",
         "localAsset": "assets/images/words/beginner/word_sleep_1769442984987.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "rest",
+            "snooze",
+            "doze"
+        ]
     },
     {
         "id": 2053,
@@ -633,7 +875,12 @@
         "exampleSentence": "I run in the park.",
         "localAsset": "assets/images/words/beginner/word_run_1769443003997.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "jog",
+            "sprint",
+            "dash"
+        ]
     },
     {
         "id": 2054,
@@ -645,7 +892,12 @@
         "exampleSentence": "I walk to school.",
         "localAsset": "assets/images/words/beginner/word_walk_1769443022093.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "stroll",
+            "hike",
+            "march"
+        ]
     },
     {
         "id": 2055,
@@ -657,7 +909,12 @@
         "exampleSentence": "The elephant is big.",
         "localAsset": "assets/images/words/beginner/word_big_1769443039706.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "large",
+            "huge",
+            "giant"
+        ]
     },
     {
         "id": 2056,
@@ -669,7 +926,12 @@
         "exampleSentence": "The mouse is small.",
         "localAsset": "assets/images/words/beginner/word_small_1769443057302.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "little",
+            "tiny",
+            "mini"
+        ]
     },
     {
         "id": 2057,
@@ -681,7 +943,12 @@
         "exampleSentence": "The coffee is hot.",
         "localAsset": "assets/images/words/beginner/word_hot_1769443073848.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "warm",
+            "boiling",
+            "scorching"
+        ]
     },
     {
         "id": 2058,
@@ -693,7 +960,12 @@
         "exampleSentence": "Ice cream is cold.",
         "localAsset": "assets/images/words/beginner/word_cold_1769443092899.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "cool",
+            "freezing",
+            "chilly"
+        ]
     },
     {
         "id": 2059,
@@ -705,7 +977,12 @@
         "exampleSentence": "I have an umbrella for the rain.",
         "localAsset": "assets/images/words/beginner/word_rain_1769443141878.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "drizzle",
+            "shower",
+            "pour"
+        ]
     },
     {
         "id": 2060,
@@ -717,7 +994,11 @@
         "exampleSentence": "Snow is white and cold.",
         "localAsset": "assets/images/words/beginner/word_snow_1769443159310.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "flakes",
+            "blizzard"
+        ]
     },
     {
         "id": 2061,
@@ -729,7 +1010,11 @@
         "exampleSentence": "The bird sings.",
         "localAsset": "assets/images/words/beginner/word_bird_1769443179723.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "fowl",
+            "avian"
+        ]
     },
     {
         "id": 2062,
@@ -741,7 +1026,10 @@
         "exampleSentence": "Fish swim in the sea.",
         "localAsset": "assets/images/words/beginner/word_fish_1769443197097.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "marine life"
+        ]
     },
     {
         "id": 2063,
@@ -753,7 +1041,12 @@
         "exampleSentence": "Do not play in the street.",
         "localAsset": "assets/images/words/beginner/word_street_1769443215414.png",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "road",
+            "way",
+            "avenue"
+        ]
     },
     {
         "id": 2064,
@@ -763,9 +1056,13 @@
             "en": "An area for recreation"
         },
         "exampleSentence": "Let's go to the park.",
-        "localAsset": "assets/images/words/beginner/word_park.webp",
+        "localAsset": "assets/images/words/beginner/word_park_1769599145669.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "garden",
+            "playground"
+        ]
     },
     {
         "id": 2065,
@@ -775,9 +1072,14 @@
             "en": "Used to buy things"
         },
         "exampleSentence": "I need money to buy this.",
-        "localAsset": "assets/images/words/beginner/word_money.webp",
+        "localAsset": "assets/images/words/beginner/word_money_1769599171140.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "cash",
+            "funds",
+            "currency"
+        ]
     },
     {
         "id": 2066,
@@ -787,9 +1089,13 @@
             "en": "White liquid from cows"
         },
         "exampleSentence": "I drink milk for breakfast.",
-        "localAsset": "assets/images/words/beginner/word_milk.webp",
+        "localAsset": "assets/images/words/beginner/word_milk_1769599189204.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "dairy",
+            "cream"
+        ]
     },
     {
         "id": 2067,
@@ -799,9 +1105,13 @@
             "en": "A hot drink made from leaves"
         },
         "exampleSentence": "Would you like some tea?",
-        "localAsset": "assets/images/words/beginner/word_tea.webp",
+        "localAsset": "assets/images/words/beginner/word_tea_1769599213071.webp",
         "difficulty": 1,
-        "deck": "beginner"
+        "deck": "beginner",
+        "synonyms": [
+            "brew",
+            "infusion"
+        ]
     },
     {
         "id": 2068,
@@ -811,7 +1121,7 @@
             "en": "A dark caffeine drink"
         },
         "exampleSentence": "I drink coffee in the morning.",
-        "localAsset": "assets/images/words/beginner/word_coffee.webp",
+        "localAsset": "assets/images/words/beginner/word_coffee_1769599231255.webp",
         "difficulty": 1,
         "deck": "beginner"
     },
@@ -823,7 +1133,7 @@
             "en": "Baked food made from flour"
         },
         "exampleSentence": "I eat bread and butter.",
-        "localAsset": "assets/images/words/beginner/word_bread.webp",
+        "localAsset": "assets/images/words/beginner/word_bread_1769599252112.webp",
         "difficulty": 1,
         "deck": "beginner"
     },

@@ -9,8 +9,6 @@ import 'l10n/app_localizations.dart';
 import 'core/theme/app_theme.dart';
 import 'core/constants/app_constants.dart';
 import 'core/router/app_router.dart';
-import 'core/services/subscription_service.dart';
-import 'core/services/ad_service.dart';
 import 'core/services/cloud_image_service.dart';
 import 'core/services/sound_service.dart';
 import 'presentation/providers/settings_provider.dart';
@@ -30,12 +28,6 @@ void main() async {
 
   // Initialize Firebase BEFORE router (required for auth state stream)
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // Initialize RevenueCat SDK for subscriptions
-  await SubscriptionService().initialize();
-
-  // Initialize AdMob SDK
-  await AdService().init();
 
   // Initialize Cloud Image Service for CDN caching
   await CloudImageService().initialize();
