@@ -277,44 +277,58 @@ class _SplashPageState extends ConsumerState<SplashPage>
   }
 
   void _navigateBasedOnAuthState() {
-    final authState = ref.read(authStateProvider);
-    final isGuest = ref.read(guestModeProvider);
+    // TODO: Re-enable auth check after initial release
+    // Login/Premium features disabled for initial App Store submission
+    // final authState = ref.read(authStateProvider);
+    // final isGuest = ref.read(guestModeProvider);
     final settings = ref.read(settingsProvider);
 
-    authState.when(
-      data: (state) async {
-        final isAuthenticated = state is AuthAuthenticated;
-        final canAccess = isAuthenticated || isGuest;
+    // For initial release: skip auth, go directly to onboarding or home
+    if (!mounted) return;
 
-        if (!canAccess) {
-          // Not logged in -> go to auth
-          if (mounted) context.go('/auth');
-        } else {
-          // If authenticated (not guest), sync data from cloud
-          if (isAuthenticated) {
-            await _performCloudSync();
-          }
+    if (!settings.hasSeenOnboarding) {
+      // First time -> go to onboarding
+      context.go('/onboarding');
+    } else {
+      // Returning user -> go to home
+      context.go('/');
+    }
 
-          if (!mounted) return;
-
-          if (!settings.hasSeenOnboarding) {
-            // First time -> go to onboarding
-            context.go('/onboarding');
-          } else {
-            // Returning user -> go to home
-            context.go('/');
-          }
-        }
-      },
-      loading: () {
-        // Auth still loading, go to auth page
-        context.go('/auth');
-      },
-      error: (_, _) {
-        // On error, go to auth page
-        context.go('/auth');
-      },
-    );
+    // Original auth-based navigation (disabled for initial release):
+    // authState.when(
+    //   data: (state) async {
+    //     final isAuthenticated = state is AuthAuthenticated;
+    //     final canAccess = isAuthenticated || isGuest;
+    //
+    //     if (!canAccess) {
+    //       // Not logged in -> go to auth
+    //       if (mounted) context.go('/auth');
+    //     } else {
+    //       // If authenticated (not guest), sync data from cloud
+    //       if (isAuthenticated) {
+    //         await _performCloudSync();
+    //       }
+    //
+    //       if (!mounted) return;
+    //
+    //       if (!settings.hasSeenOnboarding) {
+    //         // First time -> go to onboarding
+    //         context.go('/onboarding');
+    //       } else {
+    //         // Returning user -> go to home
+    //         context.go('/');
+    //       }
+    //     }
+    //   },
+    //   loading: () {
+    //     // Auth still loading, go to auth page
+    //     context.go('/auth');
+    //   },
+    //   error: (_, _) {
+    //     // On error, go to auth page
+    //     context.go('/auth');
+    //   },
+    // );
   }
 
   /// Perform cloud sync for returning authenticated users

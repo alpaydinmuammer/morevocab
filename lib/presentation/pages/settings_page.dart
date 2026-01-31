@@ -69,18 +69,19 @@ class SettingsPage extends ConsumerWidget {
               child: _buildLanguageSelector(context, ref, settings.locale),
             ),
 
-            // Subscription section
-            const SizedBox(height: AppConstants.spacingXXXL),
-            _buildSectionHeader(
-              context,
-              AppLocalizations.of(context)!.subscription,
-              Icons.workspace_premium_rounded,
-            ),
-            _buildGlassCard(
-              context,
-              padding: EdgeInsets.zero,
-              child: const _SubscriptionSettings(),
-            ),
+            // TODO: Re-enable subscription section after initial release
+            // Subscription section (disabled for App Store submission)
+            // const SizedBox(height: AppConstants.spacingXXXL),
+            // _buildSectionHeader(
+            //   context,
+            //   AppLocalizations.of(context)!.subscription,
+            //   Icons.workspace_premium_rounded,
+            // ),
+            // _buildGlassCard(
+            //   context,
+            //   padding: EdgeInsets.zero,
+            //   child: const _SubscriptionSettings(),
+            // ),
 
             const SizedBox(height: AppConstants.spacingXXXL),
             _buildSectionHeader(
@@ -151,24 +152,25 @@ class SettingsPage extends ConsumerWidget {
               child: const _SoundSettings(),
             ),
 
+            // TODO: Re-enable cloud sync and auth sections after initial release
             // Cloud Sync section - only show for authenticated users
-            if (ref.watch(isAuthenticatedProvider)) ...[
-              const SizedBox(height: AppConstants.spacingXXXL),
-              _buildSectionHeader(
-                context,
-                AppLocalizations.of(context)!.cloudSync,
-                Icons.cloud_sync_outlined,
-              ),
-              _buildGlassCard(
-                context,
-                padding: EdgeInsets.zero,
-                child: const _CloudSyncSettings(),
-              ),
-            ],
+            // if (ref.watch(isAuthenticatedProvider)) ...[
+            //   const SizedBox(height: AppConstants.spacingXXXL),
+            //   _buildSectionHeader(
+            //     context,
+            //     AppLocalizations.of(context)!.cloudSync,
+            //     Icons.cloud_sync_outlined,
+            //   ),
+            //   _buildGlassCard(
+            //     context,
+            //     padding: EdgeInsets.zero,
+            //     child: const _CloudSyncSettings(),
+            //   ),
+            // ],
 
-            const SizedBox(height: AppConstants.spacingXXXL),
+            // const SizedBox(height: AppConstants.spacingXXXL),
             // Show Sign In for guests, Sign Out for authenticated users
-            _buildAuthSection(context, ref),
+            // _buildAuthSection(context, ref),
             const SizedBox(height: AppConstants.spacingHuge),
           ],
         ),

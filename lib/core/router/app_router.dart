@@ -39,41 +39,37 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       if (isOnSplash) return null;
 
       // Read current state (not watch - we don't want to rebuild router)
-      final authState = ref.read(authStateProvider);
-      final isGuest = ref.read(guestModeProvider);
+      // final authState = ref.read(authStateProvider);
+      // final isGuest = ref.read(guestModeProvider);
       final settings = ref.read(settingsProvider);
 
+      // TODO: Re-enable auth after initial release
+      // Login/Premium features disabled for initial App Store submission
       // Check auth state
-      final isAuthenticated =
-          authState.whenData((state) {
-            return state is AuthAuthenticated;
-          }).valueOrNull ??
-          false;
+      // final isAuthenticated =
+      //     authState.whenData((state) {
+      //       return state is AuthAuthenticated;
+      //     }).valueOrNull ??
+      //     false;
+      // final isLoading = authState.isLoading;
+      // if (isLoading) return null;
+      // final canAccess = isAuthenticated || isGuest;
 
-      final isLoading = authState.isLoading;
+      // For initial release: treat everyone as having access (guest mode)
+      const canAccess = true;
 
-      // Don't redirect while loading
-      if (isLoading) return null;
-
-      // User can access app if authenticated OR in guest mode
-      final canAccess = isAuthenticated || isGuest;
-
-      // Not authenticated/guest and not on auth/onboarding -> go to auth
-      if (!canAccess && !isOnAuth && !isOnOnboarding) {
-        return '/auth';
+      // Skip auth page - redirect to home or onboarding
+      if (isOnAuth) {
+        final hasSeenOnboarding = settings.hasSeenOnboarding;
+        return hasSeenOnboarding ? '/' : '/onboarding';
       }
 
       // Check onboarding state
       final hasSeenOnboarding = settings.hasSeenOnboarding;
 
-      // Authenticated but hasn't seen onboarding -> show onboarding
-      if (canAccess && !hasSeenOnboarding && !isOnOnboarding && !isOnAuth) {
+      // Hasn't seen onboarding -> show onboarding
+      if (canAccess && !hasSeenOnboarding && !isOnOnboarding) {
         return '/onboarding';
-      }
-
-      // Has seen onboarding and on auth page -> go to home
-      if (canAccess && hasSeenOnboarding && isOnAuth) {
-        return '/';
       }
 
       // Has seen onboarding and on onboarding page -> go to home
